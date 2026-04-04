@@ -459,7 +459,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   .modal{width:calc(100% - 32px);max-width:460px;}
 
   /* Bottom tab bar */
-  .mobile-tabs{display:flex;position:fixed;bottom:0;left:0;right:0;height:60px;background:#fff;border-top:0.5px solid #d1d1cf;z-index:100;padding-bottom:env(safe-area-inset-bottom);}
+  .mobile-tabs{display:flex;position:fixed;bottom:0;left:0;right:0;height:60px;background:#fff;border-top:0.5px solid #d1d1cf;z-index:100;padding-bottom:env(safe-area-inset-bottom);-webkit-transform:translateZ(0);transform:translateZ(0);will-change:transform;}
+  .task-list,.los-view,.constitution-view,.insights-view,.autotasks-view,.progress-view,.habit-list{padding-bottom:calc(60px + env(safe-area-inset-bottom) + 16px) !important;}
   .mobile-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;border:none;background:none;font-family:inherit;padding:6px 0;-webkit-tap-highlight-color:transparent;}
   .mobile-tab-icon{font-size:22px;line-height:1;}
   .mobile-tab-label{font-size:10px;color:#888780;font-weight:500;}
