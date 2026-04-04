@@ -392,8 +392,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   .xp-banner-cats{display:none;}
   .xp-banner-goals{display:none;}
 
-  /* Sync bar — hide on mobile */
-  .sync-bar{display:none;}
+  /* Sync bar — compact on mobile */
+  .sync-bar{padding:3px 12px;}
+  .brief-btn{display:none;}
+  .setup-btn{display:none;}
+  .sync-btn{display:none;}
 
   /* Topbar */
   .topbar{padding:8px 14px;}
@@ -613,6 +616,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="sync-dot" id="sync-dot"></div>
       <span class="sync-label" id="sync-label">Not connected</span>
       <button class="sync-btn" onclick="forcSync()">Sync</button>
+      <button class="migrate-btn" id="migrate-btn" onclick="migrateLocalData()" style="font-size:11px;padding:2px 9px;background:#D85A30;color:#fff;border:none;border-radius:5px;cursor:pointer;font-family:inherit;font-weight:500;display:none;">⬆ Migrate local data</button>
       <button class="brief-btn" onclick="openBrief()">Brief Claude</button>
       <button class="setup-btn" onclick="openSetup()">⚙</button>
     </div>
@@ -2168,7 +2172,7 @@ function render(){
       html+=`<div class="section-divider"></div><div class="section-label">Everything else</div>`;
       const wc=renderAreaCol('work',rest.filter(t=>t.area==='work'));
       const lc=renderAreaCol('life',rest.filter(t=>t.area==='life'));
-      html+=`<div class="two-col">${wc.html}${lc.html}</div>`;
+      html+=`<div class="two-col">${lc.html}${wc.html}</div>`;
       dragTargets.push({id:wc.id,area:'work'},{id:lc.id,area:'life'});
       const br=rest.filter(t=>t.area==='buy');
       if(br.length){const bc=renderAreaCol('buy',br);html+=`<div style="padding:0 10px 8px">${bc.html}</div>`;dragTargets.push({id:bc.id,area:'buy'});}
@@ -2226,7 +2230,7 @@ document.getElementById('task-list').addEventListener('click', function(e){
 });
 
 backfillCategories();
-if(SCRIPT_URL){loadFromSheets();}else{render();}
+if(SCRIPT_URL){loadFromSheets().then(()=>checkMigrationNeeded());}else{render();checkMigrationNeeded();}
 
 // ── MOBILE TAB BAR ──
 function mobileTab(tab) {
@@ -2336,6 +2340,30 @@ setView = function(v) {
     }
   }
 };
+
+
+// ── ONE-TIME LOCAL DATA MIGRATION ──
+function checkMigrationNeeded() {
+  const migrated = localStorage.getItem('los_migrated_v1');
+  if (migrated) return;
+  // Check if there's meaningful local data (habits with logs)
+  const localHabits = JSON.parse(localStorage.getItem('los_habits') || 'null');
+  if (localHabits && localHabits.some(h => h.log && h.log.length > 0)) {
+    document.getElementById('migrate-btn').style.display = 'inline-block';
+  }
+}
+
+async function migrateLocalData() {
+  if (!confirm('This will push your local habits and all data to Google Sheets, overwriting what is there. Continue?')) return;
+  const btn = document.getElementById('migrate-btn');
+  btn.textContent = '⬆ Migrating…';
+  btn.disabled = true;
+  // Force push everything currently in memory (which was loaded from localStorage on startup)
+  await pushToSheets();
+  localStorage.setItem('los_migrated_v1', new Date().toISOString());
+  btn.style.display = 'none';
+  alert('Done! All your local data has been pushed to Google Sheets. From now on all devices will stay in sync automatically.');
+}
 
 </script>
 </body>
