@@ -2347,10 +2347,10 @@ function toggleMoreDrawer() {
       @keyframes drawerUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
       .more-drawer-handle{width:36px;height:4px;background:#d1d1cf;border-radius:2px;margin:0 auto 16px;}
       .more-drawer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
-      .more-drawer-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:16px 8px;border-radius:12px;border:0.5px solid #e8e8e4;background:#f5f5f3;cursor:pointer;font-family:inherit;color:#2c2c2a;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;-webkit-tap-highlight-color:transparent;}
+      .more-drawer-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:14px 6px;border-radius:12px;border:0.5px solid #e8e8e4;background:#f5f5f3;cursor:pointer;font-family:inherit;color:#2c2c2a;-webkit-tap-highlight-color:transparent;font-size:7px;}
       .more-drawer-item:active{background:#e8e8e4;}
-      .more-drawer-item span{font-size:8px;letter-spacing:0.06em;text-transform:uppercase;}
-      .more-drawer-item > *:first-child{font-size:18px;line-height:1;}
+      .more-drawer-item span{font-size:7px !important;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;display:block;}
+      .more-drawer-item > *:first-child{font-size:16px !important;line-height:1;display:block;}
     `;
     document.head.appendChild(style);
   }
