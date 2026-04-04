@@ -1433,6 +1433,11 @@ function saveTask(){
   let _cat=manualCat||groupCat||(area==='work'&&isDefaultGuess?'work':guessed);
   tasks.push({id:nextId++,text,area,group:groupId,urgent:document.getElementById('new-task-urgent').checked,done:false,note:'',category:_cat,createdAt:now,updatedAt:now,completedAt:null});
   input.value='';persist();render();
+  // On mobile, close the add form and return to task list
+  if (window.innerWidth <= 768) {
+    const f = document.getElementById('add-form');
+    if (f) f.classList.remove('show');
+  }
 }
 function toggle(id,e){
   e.stopPropagation();const t=tasks.find(t=>t.id===id);if(!t)return;
