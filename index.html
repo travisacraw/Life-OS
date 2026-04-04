@@ -972,13 +972,17 @@ async function pushToSupabase(){
 async function pushToSheetsBackup(){
   if(!SCRIPT_URL) return;
   try{
-    const base=SCRIPT_URL+'?token='+encodeURIComponent(SECRET_TOKEN);
-    const p1=encodeURIComponent(JSON.stringify({tasks,groups,los}));
-    const p2=encodeURIComponent(JSON.stringify({habits,constitution,autoTasks,insights}));
-    await Promise.all([
-      fetch(base+'&save=tasks&data='+p1,{mode:'no-cors'}),
-      fetch(base+'&save=habits&data='+p2,{mode:'no-cors'})
-    ]);
+    await fetch(SCRIPT_URL,{
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        token:SECRET_TOKEN,
+        tasks,groups,los,
+        habits,constitution,
+        autoTasks,insights
+      })
+    });
   }catch(e){console.log('Sheets backup failed (non-critical):',e.message);}
 }
 
