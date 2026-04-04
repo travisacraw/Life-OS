@@ -940,9 +940,16 @@ async function pushToSheets(){
   if(!SCRIPT_URL) return;
   setSyncStatus('syncing','Saving…');
   try{
-    const payload=JSON.stringify({token:SECRET_TOKEN,tasks,groups,los,constitution,habits,autoTasks,insights});
-    await fetch(SCRIPT_URL+'?data='+encodeURIComponent(payload),{method:'POST',mode:'no-cors'});
-    setSyncStatus('ok','Saved '+new Date().toLocaleTimeString());
+    const res=await fetch(SCRIPT_URL,{
+      method:'POST',
+      body:JSON.stringify({token:SECRET_TOKEN,tasks,groups,los,constitution,habits,autoTasks,insights})
+    });
+    const data=await res.json();
+    if(data.ok){
+      setSyncStatus('ok','Saved '+new Date().toLocaleTimeString());
+    } else {
+      setSyncStatus('error','Save failed: '+(data.error||'unknown'));
+    }
   }catch(e){setSyncStatus('error','Save failed');}
 }
 function schedulePush(){clearTimeout(syncTimer);syncTimer=setTimeout(pushToSheets,1500);}
