@@ -939,17 +939,20 @@ async function pushToSheets(){
   if(!SCRIPT_URL) return;
   setSyncStatus('syncing','Saving…');
   try{
-    // Send tasks/groups/los via one request, habits/constitution/insights via another
-    // Both use GET with encoded payload to avoid CORS issues
     const base=SCRIPT_URL+'?token='+encodeURIComponent(SECRET_TOKEN);
     const p1=encodeURIComponent(JSON.stringify({tasks,groups,los}));
     const p2=encodeURIComponent(JSON.stringify({habits,constitution,autoTasks,insights}));
-    await Promise.all([
-      fetch(base+'&save=tasks&data='+p1),
-      fetch(base+'&save=habits&data='+p2)
+    const [r1,r2]=await Promise.all([
+      fetch(base+'&save=tasks&data='+p1).then(r=>r.json()),
+      fetch(base+'&save=habits&data='+p2).then(r=>r.json())
     ]);
-    setSyncStatus('ok','Saved '+new Date().toLocaleTimeString());
-  }catch(e){setSyncStatus('error','Save failed');}
+    if(r1.ok&&r2.ok){
+      setSyncStatus('ok','Saved '+new Date().toLocaleTimeString());
+    } else {
+      setSyncStatus('error','Sync error: '+(r1.error||r2.error||'unknown'));
+      console.error('Sync r1:',r1,'r2:',r2);
+    }
+  }catch(e){setSyncStatus('error','Save failed');console.error('Push error:',e);}
 }
 function schedulePush(){clearTimeout(syncTimer);syncTimer=setTimeout(pushToSheets,1500);}
 function forcSync(){loadFromSheets();}
