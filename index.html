@@ -694,6 +694,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 <script>
 // ── CONFIG ──
+// ── SUPABASE CONFIG ──
+const SUPABASE_URL = 'https://rjuizecfypondtneirwh.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_1wYT3FKXTlJlgjbH1TSOmg_uufdu17Q';
+const SUPABASE_TABLE = 'life_os_data';
+// Keep Google Sheets for backup
 let SCRIPT_URL   = localStorage.getItem('v8_url')   || 'https://script.google.com/macros/s/AKfycbxSD3KopheNmMZC5h-Kb6OXdjtWJ66X7jsqVvGEhpKfwFZ0vZuq48gtION_7-7cjHWN/exec';
 let SECRET_TOKEN = localStorage.getItem('v8_token') || '9144006008';
 
@@ -910,19 +915,23 @@ function persist(){
 
 // ── SYNC ──
 function setSyncStatus(s,m){document.getElementById('sync-dot').className='sync-dot '+s;document.getElementById('sync-label').textContent=m;}
-async function loadFromSheets(){
-  if(!SCRIPT_URL) return;
+
+// ── SUPABASE SYNC ──
+async function loadFromSupabase(){
   setSyncStatus('syncing','Loading…');
   try{
-    const res=await fetch(`${SCRIPT_URL}?token=${encodeURIComponent(SECRET_TOKEN)}`);
-    const data=await res.json();
-    if(data.error) throw new Error(data.error);
+    const res=await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}?id=eq.main&select=*`,{
+      headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}
+    });
+    const rows=await res.json();
+    if(!rows||!rows.length) throw new Error('no data');
+    const data=rows[0];
     if(data.tasks&&data.tasks.length>0){
       tasks=data.tasks; groups=data.groups||DEFAULT_GROUPS;
       los=data.los||JSON.parse(JSON.stringify(DEFAULT_LOS));
       if(data.constitution) constitution=data.constitution;
       if(data.habits){ habits=data.habits; nextHabitId=Math.max(9,...habits.map(h=>parseInt((h.id||'h0').replace(/\D/g,''))||0))+1; }
-      if(data.autoTasks) autoTasks=data.autoTasks;
+      if(data.auto_tasks) autoTasks=data.auto_tasks;
       if(data.insights) insights=data.insights;
       nextId=Math.max(0,...tasks.map(t=>t.id||0))+1;
       nextGid=Math.max(0,...groups.map(g=>parseInt((g.id||'0').replace(/\D/g,''))||0))+1;
@@ -933,25 +942,48 @@ async function loadFromSheets(){
     checkAutoTasks();
     backfillCategories();
     render();
-  }catch(e){setSyncStatus('error','Offline');}
+  }catch(e){setSyncStatus('error','Offline');console.error('Supabase load error:',e);}
 }
-async function pushToSheets(){
-  if(!SCRIPT_URL) return;
+
+async function pushToSupabase(){
   setSyncStatus('syncing','Saving…');
+  try{
+    const res=await fetch(`${SUPABASE_URL}/rest/v1/${SUPABASE_TABLE}?id=eq.main`,{
+      method:'PATCH',
+      headers:{
+        'apikey':SUPABASE_KEY,
+        'Authorization':'Bearer '+SUPABASE_KEY,
+        'Content-Type':'application/json',
+        'Prefer':'return=minimal'
+      },
+      body:JSON.stringify({
+        tasks,groups,los,constitution,habits,
+        auto_tasks:autoTasks,insights,
+        updated_at:new Date().toISOString()
+      })
+    });
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    setSyncStatus('ok','Saved '+new Date().toLocaleTimeString());
+    // Also push to Google Sheets in background as backup
+    pushToSheetsBackup();
+  }catch(e){setSyncStatus('error','Save failed');console.error('Supabase save error:',e);}
+}
+
+async function pushToSheetsBackup(){
+  if(!SCRIPT_URL) return;
   try{
     const base=SCRIPT_URL+'?token='+encodeURIComponent(SECRET_TOKEN);
     const p1=encodeURIComponent(JSON.stringify({tasks,groups,los}));
     const p2=encodeURIComponent(JSON.stringify({habits,constitution,autoTasks,insights}));
-    // no-cors required — Google Apps Script blocks cross-origin reads
     await Promise.all([
       fetch(base+'&save=tasks&data='+p1,{mode:'no-cors'}),
       fetch(base+'&save=habits&data='+p2,{mode:'no-cors'})
     ]);
-    setSyncStatus('ok','Saved '+new Date().toLocaleTimeString());
-  }catch(e){setSyncStatus('error','Save failed');console.error('Push error:',e);}
+  }catch(e){console.log('Sheets backup failed (non-critical):',e.message);}
 }
-function schedulePush(){clearTimeout(syncTimer);syncTimer=setTimeout(pushToSheets,1500);}
-function forcSync(){loadFromSheets();}
+
+function schedulePush(){clearTimeout(syncTimer);syncTimer=setTimeout(pushToSupabase,1500);}
+function forcSync(){loadFromSupabase();}
 
 // ── SETUP ──
 function openSetup(){document.getElementById('setup-url').value=SCRIPT_URL;document.getElementById('setup-token').value=SECRET_TOKEN;document.getElementById('setup-overlay').classList.add('show');}
@@ -962,7 +994,7 @@ function saveSetup(){
   if(!url)return;
   SCRIPT_URL=url;SECRET_TOKEN=tok;
   localStorage.setItem('v8_url',url);localStorage.setItem('v8_token',tok);
-  closeSetup();loadFromSheets();
+  closeSetup();loadFromSupabase();
 }
 
 // ── AUTO TASKS ──
@@ -2236,7 +2268,7 @@ document.getElementById('task-list').addEventListener('click', function(e){
 });
 
 backfillCategories();
-if(SCRIPT_URL){loadFromSheets();}else{render();}
+loadFromSupabase();
 
 // ── MOBILE TAB BAR ──
 function mobileTab(tab) {
