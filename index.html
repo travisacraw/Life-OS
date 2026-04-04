@@ -616,7 +616,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="sync-dot" id="sync-dot"></div>
       <span class="sync-label" id="sync-label">Not connected</span>
       <button class="sync-btn" onclick="forcSync()">Sync</button>
-      <button class="migrate-btn" id="migrate-btn" onclick="migrateLocalData()" style="font-size:11px;padding:2px 9px;background:#D85A30;color:#fff;border:none;border-radius:5px;cursor:pointer;font-family:inherit;font-weight:500;display:none;">⬆ Migrate local data</button>
       <button class="brief-btn" onclick="openBrief()">Brief Claude</button>
       <button class="setup-btn" onclick="openSetup()">⚙</button>
     </div>
@@ -940,10 +939,15 @@ async function pushToSheets(){
   if(!SCRIPT_URL) return;
   setSyncStatus('syncing','Saving…');
   try{
-    const form=new FormData();
-    form.append('token',SECRET_TOKEN);
-    form.append('payload',JSON.stringify({tasks,groups,los,constitution,habits,autoTasks,insights}));
-    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body:form});
+    // Send tasks/groups/los via one request, habits/constitution/insights via another
+    // Both use GET with encoded payload to avoid CORS issues
+    const base=SCRIPT_URL+'?token='+encodeURIComponent(SECRET_TOKEN);
+    const p1=encodeURIComponent(JSON.stringify({tasks,groups,los}));
+    const p2=encodeURIComponent(JSON.stringify({habits,constitution,autoTasks,insights}));
+    await Promise.all([
+      fetch(base+'&save=tasks&data='+p1),
+      fetch(base+'&save=habits&data='+p2)
+    ]);
     setSyncStatus('ok','Saved '+new Date().toLocaleTimeString());
   }catch(e){setSyncStatus('error','Save failed');}
 }
@@ -2233,7 +2237,7 @@ document.getElementById('task-list').addEventListener('click', function(e){
 });
 
 backfillCategories();
-if(SCRIPT_URL){loadFromSheets().then(()=>checkMigrationNeeded());}else{render();checkMigrationNeeded();}
+if(SCRIPT_URL){loadFromSheets();}else{render();}
 
 // ── MOBILE TAB BAR ──
 function mobileTab(tab) {
@@ -2345,28 +2349,6 @@ setView = function(v) {
 };
 
 
-// ── ONE-TIME LOCAL DATA MIGRATION ──
-function checkMigrationNeeded() {
-  const migrated = localStorage.getItem('los_migrated_v1');
-  if (migrated) return;
-  // Check if there's meaningful local data (habits with logs)
-  const localHabits = JSON.parse(localStorage.getItem('los_habits') || 'null');
-  if (localHabits && localHabits.some(h => h.log && h.log.length > 0)) {
-    document.getElementById('migrate-btn').style.display = 'inline-block';
-  }
-}
-
-async function migrateLocalData() {
-  if (!confirm('This will push your local habits and all data to Google Sheets, overwriting what is there. Continue?')) return;
-  const btn = document.getElementById('migrate-btn');
-  btn.textContent = '⬆ Migrating…';
-  btn.disabled = true;
-  // Force push everything currently in memory (which was loaded from localStorage on startup)
-  await pushToSheets();
-  localStorage.setItem('los_migrated_v1', new Date().toISOString());
-  btn.style.display = 'none';
-  alert('Done! All your local data has been pushed to Google Sheets. From now on all devices will stay in sync automatically.');
-}
 
 </script>
 </body>
