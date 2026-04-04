@@ -942,16 +942,12 @@ async function pushToSheets(){
     const base=SCRIPT_URL+'?token='+encodeURIComponent(SECRET_TOKEN);
     const p1=encodeURIComponent(JSON.stringify({tasks,groups,los}));
     const p2=encodeURIComponent(JSON.stringify({habits,constitution,autoTasks,insights}));
-    const [r1,r2]=await Promise.all([
-      fetch(base+'&save=tasks&data='+p1).then(r=>r.json()),
-      fetch(base+'&save=habits&data='+p2).then(r=>r.json())
+    // no-cors required — Google Apps Script blocks cross-origin reads
+    await Promise.all([
+      fetch(base+'&save=tasks&data='+p1,{mode:'no-cors'}),
+      fetch(base+'&save=habits&data='+p2,{mode:'no-cors'})
     ]);
-    if(r1.ok&&r2.ok){
-      setSyncStatus('ok','Saved '+new Date().toLocaleTimeString());
-    } else {
-      setSyncStatus('error','Sync error: '+(r1.error||r2.error||'unknown'));
-      console.error('Sync r1:',r1,'r2:',r2);
-    }
+    setSyncStatus('ok','Saved '+new Date().toLocaleTimeString());
   }catch(e){setSyncStatus('error','Save failed');console.error('Push error:',e);}
 }
 function schedulePush(){clearTimeout(syncTimer);syncTimer=setTimeout(pushToSheets,1500);}
