@@ -47,6 +47,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* SIDEBAR */
 .sidebar{width:196px;border-right:0.5px solid #d1d1cf;background:#f5f5f3;display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;}
+#life-os-nav{display:flex;flex-direction:column;flex:1;}
+#work-os-nav{display:flex;flex-direction:column;flex:1;}
 .sidebar-brand{padding:12px 14px 8px;border-bottom:0.5px solid #d1d1cf;}
 .sidebar-brand-name{font-size:15px;font-weight:600;color:#2c2c2a;letter-spacing:-0.01em;}
 .sidebar-brand-sub{font-size:10px;color:#888780;letter-spacing:0.06em;text-transform:uppercase;margin-top:1px;}
@@ -56,6 +58,66 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .nav-item.active{background:#fff;color:#2c2c2a;border-left-color:#7F77DD;font-weight:500;}
 .nav-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .nav-divider{height:0.5px;background:#d1d1cf;margin:4px 14px;}
+
+/* OS SWITCHER CHIP */
+.os-switcher{margin:auto 12px 10px;padding:8px 12px;border-radius:10px;border:0.5px solid #d1d1cf;background:#fff;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.15s;flex-shrink:0;}
+.os-switcher:hover{background:#f0eeff;border-color:#7F77DD;}
+.os-switcher-icon{font-size:14px;line-height:1;}
+.os-switcher-label{font-size:11px;font-weight:500;color:#5f5e5a;flex:1;}
+.os-switcher-arrow{font-size:10px;color:#b4b2a9;}
+.os-switcher.work-mode{background:#EAF3DE;border-color:#639922;}
+.os-switcher.work-mode:hover{background:#d8eccc;}
+.os-switcher.work-mode .os-switcher-label{color:#3B6D11;}
+
+/* WORK OS SIDEBAR */
+.sidebar-brand.work{background:linear-gradient(135deg,#EAF3DE,#E6F1FB);}
+.sidebar-brand.work .sidebar-brand-name{color:#1D6B3A;}
+.sidebar-brand.work .sidebar-brand-sub{color:#3B6D11;}
+.nav-item.work-nav.active{border-left-color:#1D9E75;}
+
+/* WORK OS DASHBOARD */
+.wos-dashboard{flex:1;overflow-y:auto;padding:0 0 16px;}
+.wos-action-row{display:flex;gap:8px;padding:14px 18px 10px;}
+.wos-action-btn{flex:1;padding:9px 6px;font-size:11px;font-weight:500;border-radius:9px;border:0.5px solid #d1d1cf;background:#fff;color:#2c2c2a;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all 0.15s;}
+.wos-action-btn:hover{background:#f0eeff;border-color:#7F77DD;color:#534AB7;}
+.wos-action-btn-icon{font-size:16px;line-height:1;}
+.wos-section-header{padding:10px 18px 6px;font-size:10px;font-weight:500;color:#888780;letter-spacing:0.08em;text-transform:uppercase;display:flex;align-items:center;gap:6px;}
+.wos-section-header::after{content:'';flex:1;height:0.5px;background:#e8e8e4;margin-left:8px;}
+.wos-empty{padding:24px 18px;text-align:center;color:#b4b2a9;font-size:13px;}
+
+/* PROJECT CARDS */
+.wos-project-card{margin:0 14px 8px;border:0.5px solid #d1d1cf;border-radius:10px;padding:12px 14px;background:#fff;cursor:pointer;transition:all 0.15s;}
+.wos-project-card:hover{border-color:#7F77DD;background:#faf9ff;}
+.wos-project-card-top{display:flex;align-items:flex-start;gap:8px;}
+.wos-project-card-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px;background:#1D9E75;}
+.wos-project-card-name{font-size:13px;font-weight:500;color:#2c2c2a;flex:1;line-height:1.4;}
+.wos-project-card-meta{font-size:11px;color:#888780;margin-top:4px;display:flex;gap:10px;}
+.wos-project-card-status{font-size:10px;padding:2px 7px;border-radius:6px;font-weight:500;}
+.wos-project-card-status.active{background:#EAF3DE;color:#3B6D11;}
+.wos-project-card-status.completed{background:#F1EFE8;color:#5F5E5A;}
+.wos-project-card-status.on-hold{background:#FAEEDA;color:#854F0B;}
+
+/* NEW PROJECT MODAL */
+.wos-modal-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.35);z-index:40;align-items:center;justify-content:center;border-radius:12px;}
+.wos-modal-overlay.show{display:flex;}
+.wos-modal{background:#fff;border-radius:14px;border:0.5px solid #d1d1cf;padding:22px;width:400px;max-width:90%;display:flex;flex-direction:column;gap:14px;box-shadow:0 4px 32px rgba(0,0,0,0.14);}
+.wos-modal h3{font-size:15px;font-weight:500;color:#2c2c2a;margin:0;}
+.wos-modal-row{display:flex;flex-direction:column;gap:4px;}
+.wos-modal-label{font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;}
+.wos-modal-input{padding:8px 10px;font-size:13px;border:0.5px solid #b4b2a9;border-radius:8px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;}
+.wos-modal-input:focus{outline:none;border-color:#1D9E75;background:#fff;}
+.wos-modal-preview{background:#f5f5f3;border-radius:8px;padding:10px 12px;font-size:11px;color:#5f5e5a;font-family:monospace;line-height:1.7;min-height:36px;}
+.wos-modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:2px;}
+.wos-modal-cancel{padding:8px 16px;font-size:12px;border-radius:8px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;}
+.wos-modal-save{padding:8px 18px;font-size:12px;border-radius:8px;border:none;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;font-weight:500;}
+.wos-modal-save:hover{background:#0F6E56;}
+
+/* CONTACT / VENDOR CARDS */
+.wos-contact-card{margin:0 14px 6px;border:0.5px solid #d1d1cf;border-radius:9px;padding:10px 12px;background:#fff;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:10px;}
+.wos-contact-card:hover{border-color:#7F77DD;background:#faf9ff;}
+.wos-contact-avatar{width:30px;height:30px;border-radius:50%;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#534AB7;flex-shrink:0;}
+.wos-contact-name{font-size:13px;font-weight:500;color:#2c2c2a;}
+.wos-contact-meta{font-size:11px;color:#888780;margin-top:1px;}
 
 /* MAIN */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
@@ -586,30 +648,117 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 
   <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="sidebar-brand"><div class="sidebar-brand-name">Life OS</div><div class="sidebar-brand-sub">Your operating system</div></div>
-    <div class="sidebar-header">Tasks</div>
-    <div class="nav-item active" onclick="setView('all')" id="nav-all"><div class="nav-dot" style="background:#7F77DD"></div>All tasks</div>
-    <div class="nav-item" onclick="setView('urgent')" id="nav-urgent"><div class="nav-dot" style="background:#D85A30"></div>Urgent</div>
-    <div class="nav-item" onclick="setView('work')" id="nav-work"><div class="nav-dot" style="background:#378ADD"></div>Work</div>
-    <div class="nav-item" onclick="setView('life')" id="nav-life"><div class="nav-dot" style="background:#639922"></div>Life</div>
-    <div class="nav-item" onclick="setView('buy')" id="nav-buy"><div class="nav-dot" style="background:#BA7517"></div>Buy</div>
-    <div class="nav-item" onclick="setView('done')" id="nav-done"><div class="nav-dot" style="background:#888780"></div>Done</div>
-    <div class="nav-divider"></div>
-    <div class="sidebar-header">Daily</div>
-    <div class="nav-item" onclick="setView('habits')" id="nav-habits"><div class="nav-dot" style="background:#FF8C42"></div>Habits</div>
-    <div class="nav-divider"></div>
-    <div class="sidebar-header">Context</div>
-    <div class="nav-item" onclick="setView('goals')" id="nav-goals"><div class="nav-dot" style="background:#7F77DD"></div>Goals</div>
-    <div class="nav-item" onclick="setView('projects')" id="nav-projects"><div class="nav-dot" style="background:#378ADD"></div>Projects</div>
-    <div class="nav-item" onclick="setView('opportunities')" id="nav-opportunities"><div class="nav-dot" style="background:#1D9E75"></div>Opportunities</div>
-    <div class="nav-item" onclick="setView('thoughts')" id="nav-thoughts"><div class="nav-dot" style="background:#888780"></div>Thoughts</div>
-    <div class="nav-item" onclick="setView('constitution')" id="nav-constitution"><div class="nav-dot" style="background:#D85A30"></div>Constitution</div>
-    <div class="nav-item" onclick="setView('insights')" id="nav-insights"><div class="nav-dot" style="background:#FFB300"></div>Claude Insights</div>
-    <div class="nav-divider"></div>
-    <div class="sidebar-header">System</div>
-    <div class="nav-item" onclick="setView('autotasks')" id="nav-autotasks"><div class="nav-dot" style="background:#1D9E75"></div>Auto Tasks</div>
-    <div class="nav-item" onclick="setView('progress')" id="nav-progress"><div class="nav-dot" style="background:#FFB300"></div>Progress</div>
+  <div class="sidebar" id="sidebar">
+
+    <!-- LIFE OS NAV -->
+    <div id="life-os-nav">
+      <div class="sidebar-brand"><div class="sidebar-brand-name">Life OS</div><div class="sidebar-brand-sub">Your operating system</div></div>
+      <div class="sidebar-header">Tasks</div>
+      <div class="nav-item active" onclick="setView('all')" id="nav-all"><div class="nav-dot" style="background:#7F77DD"></div>All tasks</div>
+      <div class="nav-item" onclick="setView('urgent')" id="nav-urgent"><div class="nav-dot" style="background:#D85A30"></div>Urgent</div>
+      <div class="nav-item" onclick="setView('work')" id="nav-work"><div class="nav-dot" style="background:#378ADD"></div>Work</div>
+      <div class="nav-item" onclick="setView('life')" id="nav-life"><div class="nav-dot" style="background:#639922"></div>Life</div>
+      <div class="nav-item" onclick="setView('buy')" id="nav-buy"><div class="nav-dot" style="background:#BA7517"></div>Buy</div>
+      <div class="nav-item" onclick="setView('done')" id="nav-done"><div class="nav-dot" style="background:#888780"></div>Done</div>
+      <div class="nav-divider"></div>
+      <div class="sidebar-header">Daily</div>
+      <div class="nav-item" onclick="setView('habits')" id="nav-habits"><div class="nav-dot" style="background:#FF8C42"></div>Habits</div>
+      <div class="nav-divider"></div>
+      <div class="sidebar-header">Context</div>
+      <div class="nav-item" onclick="setView('goals')" id="nav-goals"><div class="nav-dot" style="background:#7F77DD"></div>Goals</div>
+      <div class="nav-item" onclick="setView('projects')" id="nav-projects"><div class="nav-dot" style="background:#378ADD"></div>Projects</div>
+      <div class="nav-item" onclick="setView('opportunities')" id="nav-opportunities"><div class="nav-dot" style="background:#1D9E75"></div>Opportunities</div>
+      <div class="nav-item" onclick="setView('thoughts')" id="nav-thoughts"><div class="nav-dot" style="background:#888780"></div>Thoughts</div>
+      <div class="nav-item" onclick="setView('constitution')" id="nav-constitution"><div class="nav-dot" style="background:#D85A30"></div>Constitution</div>
+      <div class="nav-item" onclick="setView('insights')" id="nav-insights"><div class="nav-dot" style="background:#FFB300"></div>Claude Insights</div>
+      <div class="nav-divider"></div>
+      <div class="sidebar-header">System</div>
+      <div class="nav-item" onclick="setView('autotasks')" id="nav-autotasks"><div class="nav-dot" style="background:#1D9E75"></div>Auto Tasks</div>
+      <div class="nav-item" onclick="setView('progress')" id="nav-progress"><div class="nav-dot" style="background:#FFB300"></div>Progress</div>
+      <div style="flex:1"></div>
+      <div class="os-switcher" onclick="switchToWorkOS()">
+        <span class="os-switcher-icon">🏹</span>
+        <span class="os-switcher-label">Work OS</span>
+        <span class="os-switcher-arrow">›</span>
+      </div>
+    </div>
+
+    <!-- WORK OS NAV -->
+    <div id="work-os-nav" style="display:none;flex-direction:column;flex:1;">
+      <div class="sidebar-brand work"><div class="sidebar-brand-name">Work OS</div><div class="sidebar-brand-sub">Projects & clients</div></div>
+      <div class="sidebar-header">Overview</div>
+      <div class="nav-item work-nav active" onclick="setWorkView('wos-dashboard')" id="nav-wos-dashboard"><div class="nav-dot" style="background:#1D9E75"></div>Dashboard</div>
+      <div class="nav-divider"></div>
+      <div class="sidebar-header">Projects</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-projects')" id="nav-wos-projects"><div class="nav-dot" style="background:#378ADD"></div>All Projects</div>
+      <div class="nav-item work-nav" onclick="openNewProjectModal()" id="nav-wos-new-project" style="color:#1D9E75;font-weight:500;"><div class="nav-dot" style="background:#1D9E75"></div>+ New Project</div>
+      <div class="nav-divider"></div>
+      <div class="sidebar-header">People</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-contacts')" id="nav-wos-contacts"><div class="nav-dot" style="background:#7F77DD"></div>Contacts</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-network')" id="nav-wos-network"><div class="nav-dot" style="background:#D4537E"></div>Network</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-vendors')" id="nav-wos-vendors"><div class="nav-dot" style="background:#BA7517"></div>Vendors & Talent</div>
+      <div style="flex:1"></div>
+      <div class="os-switcher work-mode" onclick="switchToLifeOS()">
+        <span class="os-switcher-icon">🌿</span>
+        <span class="os-switcher-label">Life OS</span>
+        <span class="os-switcher-arrow">›</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NEW PROJECT MODAL -->
+  <div class="wos-modal-overlay" id="wos-new-project-overlay">
+    <div class="wos-modal">
+      <h3>🏹 New Project</h3>
+      <div class="wos-modal-row">
+        <div class="wos-modal-label">Production Company</div>
+        <input class="wos-modal-input" id="wos-company" placeholder="e.g. Radical Media" oninput="updateProjectPreview()"/>
+      </div>
+      <div class="wos-modal-row">
+        <div class="wos-modal-label">Client</div>
+        <input class="wos-modal-input" id="wos-client" placeholder="e.g. Meta" oninput="updateProjectPreview()"/>
+      </div>
+      <div class="wos-modal-row">
+        <div class="wos-modal-label">Project Name</div>
+        <input class="wos-modal-input" id="wos-project-name" placeholder="e.g. 5th Ave Store" oninput="updateProjectPreview()"/>
+      </div>
+      <div class="wos-modal-row">
+        <div class="wos-modal-label">Folder preview</div>
+        <div class="wos-modal-preview" id="wos-folder-preview">Fill in the fields above…</div>
+      </div>
+      <div class="wos-modal-actions">
+        <button class="wos-modal-cancel" onclick="closeNewProjectModal()">Cancel</button>
+        <button class="wos-modal-save" onclick="saveNewProject()">Create Project</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW CONTACT MODAL -->
+  <div class="wos-modal-overlay" id="wos-new-contact-overlay">
+    <div class="wos-modal">
+      <h3>👤 New Contact</h3>
+      <div class="wos-modal-row">
+        <div class="wos-modal-label">Name</div>
+        <input class="wos-modal-input" id="wos-contact-name" placeholder="Full name"/>
+      </div>
+      <div class="wos-modal-row">
+        <div class="wos-modal-label">Company</div>
+        <input class="wos-modal-input" id="wos-contact-company" placeholder="Company or production house"/>
+      </div>
+      <div class="wos-modal-row">
+        <div class="wos-modal-label">Role</div>
+        <input class="wos-modal-input" id="wos-contact-role" placeholder="e.g. Executive Producer"/>
+      </div>
+      <div class="wos-modal-row">
+        <div class="wos-modal-label">Email</div>
+        <input class="wos-modal-input" id="wos-contact-email" placeholder="email@company.com" type="email"/>
+      </div>
+      <div class="wos-modal-actions">
+        <button class="wos-modal-cancel" onclick="closeContactModal()">Cancel</button>
+        <button class="wos-modal-save" onclick="saveNewContact()">Save Contact</button>
+      </div>
+    </div>
   </div>
 
   <div class="main">
@@ -935,9 +1084,16 @@ async function loadFromSupabase(){
       if(data.auto_tasks) autoTasks=data.auto_tasks;
       if(data.insights) insights=data.insights;
       if(data.xp_epoch){ localStorage.setItem(XP_EPOCH_KEY, data.xp_epoch); }
+      // Work OS data
+      if(data.wos_projects){ workProjects=data.wos_projects; }
+      if(data.wos_contacts){ workContacts=data.wos_contacts; }
+      if(data.wos_vendors){  workVendors=data.wos_vendors; }
+      nextWorkId=Math.max(0,...[...workProjects,...workContacts,...workVendors].map(x=>parseInt(x.id||0)||0))+1;
+      // constitution_last_reviewed synced from Supabase, mirrored to localStorage for fast reads
+      if(data.constitution_last_reviewed){ localStorage.setItem('constitution_last_reviewed', data.constitution_last_reviewed); }
       nextId=Math.max(0,...tasks.map(t=>t.id||0))+1;
       nextGid=Math.max(0,...groups.map(g=>parseInt((g.id||'0').replace(/\D/g,''))||0))+1;
-      Object.keys(localStorage).filter(k=>k.startsWith('los_')).forEach(k=>localStorage.removeItem(k));
+      // Removed: localStorage.removeItem loop — was a migration artifact that broke the offline cache
       persist();
     }
     setSyncStatus('ok','Synced '+new Date().toLocaleTimeString());
@@ -962,6 +1118,10 @@ async function pushToSupabase(){
         tasks,groups,los,constitution,habits,
         auto_tasks:autoTasks,insights,
         xp_epoch:localStorage.getItem(XP_EPOCH_KEY)||XP_EPOCH,
+        wos_projects:workProjects,
+        wos_contacts:workContacts,
+        wos_vendors:workVendors,
+        constitution_last_reviewed:localStorage.getItem('constitution_last_reviewed')||null,
         updated_at:new Date().toISOString()
       })
     });
@@ -1653,7 +1813,14 @@ function losStarsHTML(section,entryId,val){let html=`<div class="los-stars" id="
 function addConstitutionEntry(){const section=prompt('Section (e.g. Identity, Values, Career, Principles):');if(!section||!section.trim())return;const text=prompt('Entry text:');if(!text||!text.trim())return;constitution.push({id:'c'+(nextConstitutionId++),section:section.trim(),text:text.trim(),createdAt:ts()});persist();render();}
 function editConstitutionEntry(id){const e=constitution.find(c=>c.id===id);if(!e)return;const text=prompt('Edit:',e.text);if(text!==null&&text.trim()){e.text=text.trim();persist();render();}}
 function deleteConstitutionEntry(id){if(!confirm('Remove this entry?'))return;constitution=constitution.filter(c=>c.id!==id);persist();render();}
-function markConstitutionReviewed(){localStorage.setItem('constitution_last_reviewed',ts());tasks=tasks.filter(t=>t.text!=='Review your Constitution'||t.done);persist();render();alert('Constitution marked as reviewed. Next review reminder in 30 days.');}
+function markConstitutionReviewed(){
+  const now=ts();
+  localStorage.setItem('constitution_last_reviewed',now); // fast local read
+  tasks=tasks.filter(t=>t.text!=='Review your Constitution'||t.done);
+  persist(); // triggers Supabase push which now includes constitution_last_reviewed
+  render();
+  alert('Constitution marked as reviewed. Next review reminder in 30 days.');
+}
 
 // ── INSIGHTS ──
 function addInsight(text,importance=3){insights.push({id:'i'+(nextInsightId++),text,importance,status:'pending',createdAt:ts()});persist();render();}
@@ -2389,6 +2556,304 @@ setView = function(v) {
       if (el) el.classList.add('active');
     }
   }
+};
+
+// ── WORK OS ──
+
+// Work OS state — starts empty; hydrated from Supabase on loadFromSupabase()
+let workOSMode = false;
+let workView = 'wos-dashboard';
+let workProjects = [];
+let workContacts  = [];
+let workVendors   = [];
+let nextWorkId = 1;
+
+function persistWork() {
+  // Work OS data is included in pushToSupabase — just trigger the main sync pipeline
+  persist();
+}
+
+// ── OS SWITCHING ──
+function switchToWorkOS() {
+  workOSMode = true;
+  document.getElementById('life-os-nav').style.display = 'none';
+  const wNav = document.getElementById('work-os-nav');
+  wNav.style.display = 'flex';
+  setWorkView('wos-dashboard');
+}
+
+function switchToLifeOS() {
+  workOSMode = false;
+  document.getElementById('work-os-nav').style.display = 'none';
+  document.getElementById('life-os-nav').style.display = 'block';
+  setView('all');
+}
+
+// ── WORK VIEWS ──
+function setWorkView(v) {
+  workView = v;
+  document.querySelectorAll('.nav-item.work-nav').forEach(el => el.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + v);
+  if (navEl) navEl.classList.add('active');
+
+  // Update topbar
+  const titles = {
+    'wos-dashboard': 'Work OS',
+    'wos-projects':  'All Projects',
+    'wos-contacts':  'Contacts',
+    'wos-network':   'Network',
+    'wos-vendors':   'Vendors & Talent',
+  };
+  document.getElementById('view-title').textContent = titles[v] || v;
+  document.getElementById('main-add-btn').style.display = 'none';
+  document.getElementById('add-form').classList.remove('show');
+  document.getElementById('detail-panel').classList.add('hidden');
+
+  renderWorkView();
+}
+
+function renderWorkView() {
+  const list = document.getElementById('task-list');
+  if (workView === 'wos-dashboard')  { renderWOSDashboard(list); return; }
+  if (workView === 'wos-projects')   { renderWOSProjects(list);  return; }
+  if (workView === 'wos-contacts')   { renderWOSPeople(list, 'contacts');  return; }
+  if (workView === 'wos-network')    { renderWOSPeople(list, 'network');   return; }
+  if (workView === 'wos-vendors')    { renderWOSPeople(list, 'vendors');   return; }
+}
+
+// ── DASHBOARD ──
+function renderWOSDashboard(el) {
+  const recentProjects = [...workProjects]
+    .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 6);
+
+  el.innerHTML = `
+    <div class="wos-dashboard">
+      <div class="wos-action-row">
+        <button class="wos-action-btn" onclick="openNewProjectModal()">
+          <span class="wos-action-btn-icon">🏹</span>
+          <span>New Project</span>
+        </button>
+        <button class="wos-action-btn" onclick="openNewClientModal()">
+          <span class="wos-action-btn-icon">🏢</span>
+          <span>New Client</span>
+        </button>
+        <button class="wos-action-btn" onclick="openContactModal()">
+          <span class="wos-action-btn-icon">👤</span>
+          <span>New Contact</span>
+        </button>
+      </div>
+
+      <div class="wos-section-header">Recent Projects</div>
+      ${recentProjects.length === 0
+        ? `<div class="wos-empty">No projects yet — hit New Project to start.</div>`
+        : recentProjects.map(p => projectCard(p)).join('')
+      }
+    </div>
+  `;
+}
+
+function projectCard(p) {
+  const statusClass = (p.status || 'active').replace(' ','-').toLowerCase();
+  const statusLabel = p.status || 'Active';
+  const dateStr = p.createdAt ? new Date(p.createdAt).toLocaleDateString('en-US',{month:'short',year:'numeric'}) : '';
+  return `
+    <div class="wos-project-card" onclick="openProjectDetail(${p.id})">
+      <div class="wos-project-card-top">
+        <div class="wos-project-card-dot"></div>
+        <div class="wos-project-card-name">${p.projectName}</div>
+        <div class="wos-project-card-status ${statusClass}">${statusLabel}</div>
+      </div>
+      <div class="wos-project-card-meta">
+        <span>${p.company}</span>
+        <span>›</span>
+        <span>${p.client}</span>
+        ${dateStr ? `<span style="margin-left:auto">${dateStr}</span>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+// ── PROJECTS VIEW ──
+function renderWOSProjects(el) {
+  const sorted = [...workProjects].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+  el.innerHTML = `
+    <div class="wos-dashboard">
+      <div style="padding:12px 18px 4px;display:flex;justify-content:flex-end;">
+        <button class="add-btn" onclick="openNewProjectModal()">+ New Project</button>
+      </div>
+      <div class="wos-section-header">All Projects</div>
+      ${sorted.length === 0
+        ? `<div class="wos-empty">No projects yet.</div>`
+        : sorted.map(p => projectCard(p)).join('')
+      }
+    </div>
+  `;
+}
+
+// ── PEOPLE VIEWS ──
+function renderWOSPeople(el, type) {
+  const data = type === 'vendors' ? workVendors : workContacts;
+  const filtered = type === 'network'
+    ? data.filter(c => c.type === 'network')
+    : type === 'contacts'
+    ? data.filter(c => c.type !== 'network' && c.type !== 'vendor')
+    : workVendors;
+
+  const label = type === 'vendors' ? 'Vendor / Talent' : type === 'network' ? 'Network' : 'Contact';
+
+  el.innerHTML = `
+    <div class="wos-dashboard">
+      <div style="padding:12px 18px 4px;display:flex;justify-content:flex-end;">
+        <button class="add-btn" onclick="openContactModal('${type}')">+ Add ${label}</button>
+      </div>
+      <div class="wos-section-header">${label}s</div>
+      ${filtered.length === 0
+        ? `<div class="wos-empty">No ${label.toLowerCase()}s yet.</div>`
+        : filtered.map(c => contactCard(c)).join('')
+      }
+    </div>
+  `;
+}
+
+function contactCard(c) {
+  const initials = (c.name || '?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+  return `
+    <div class="wos-contact-card">
+      <div class="wos-contact-avatar">${initials}</div>
+      <div style="flex:1;min-width:0;">
+        <div class="wos-contact-name">${c.name}</div>
+        <div class="wos-contact-meta">${[c.role, c.company].filter(Boolean).join(' · ')}</div>
+      </div>
+      ${c.email ? `<div style="font-size:10px;color:#b4b2a9;">${c.email}</div>` : ''}
+    </div>
+  `;
+}
+
+// ── NEW PROJECT MODAL ──
+function openNewProjectModal() {
+  document.getElementById('wos-company').value = '';
+  document.getElementById('wos-client').value = '';
+  document.getElementById('wos-project-name').value = '';
+  document.getElementById('wos-folder-preview').textContent = 'Fill in the fields above…';
+  document.getElementById('wos-new-project-overlay').classList.add('show');
+  setTimeout(() => document.getElementById('wos-company').focus(), 80);
+}
+
+function closeNewProjectModal() {
+  document.getElementById('wos-new-project-overlay').classList.remove('show');
+}
+
+function updateProjectPreview() {
+  const company = document.getElementById('wos-company').value.trim();
+  const client  = document.getElementById('wos-client').value.trim();
+  const project = document.getElementById('wos-project-name').value.trim();
+  const date    = new Date().toISOString().slice(0,7); // YYYY-MM
+
+  const clean = s => s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_\-]/g,'');
+
+  if (!company && !client && !project) {
+    document.getElementById('wos-folder-preview').textContent = 'Fill in the fields above…';
+    return;
+  }
+
+  const lines = [
+    `🏹 Jobs/`,
+    company ? `  ${clean(company)}/` : `  <Company>/`,
+    `    Contracts & Invoices/`,
+    `    General Docs/`,
+    client  ? `    ${clean(client)}/` : `    <Client>/`,
+    project ? `      ${date}_${clean(project)}/` : `      YYYY-MM_<Project>/`,
+    `        00_Admin/`,
+    `        01_Creative/`,
+    `        02_Design/`,
+    `        03_Production/`,
+    `        04_Photos & Video/`,
+  ];
+  document.getElementById('wos-folder-preview').textContent = lines.join('\n');
+}
+
+function saveNewProject() {
+  const company = document.getElementById('wos-company').value.trim();
+  const client  = document.getElementById('wos-client').value.trim();
+  const project = document.getElementById('wos-project-name').value.trim();
+  if (!company || !client || !project) {
+    alert('Please fill in all three fields.');
+    return;
+  }
+  const date = new Date().toISOString().slice(0,7);
+  const clean = s => s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_\-]/g,'');
+  const folderName = `${date}_${clean(project)}`;
+
+  workProjects.push({
+    id: nextWorkId++,
+    company, client,
+    projectName: project,
+    folderName,
+    status: 'Active',
+    createdAt: new Date().toISOString(),
+    notes: '',
+  });
+  persistWork();
+  closeNewProjectModal();
+
+  // Switch to Work OS and show projects
+  if (!workOSMode) switchToWorkOS();
+  setWorkView('wos-dashboard');
+}
+
+// ── NEW CLIENT MODAL (reuses contact modal with type=client) ──
+function openNewClientModal() { openContactModal('client'); }
+
+// ── CONTACT MODAL ──
+function openContactModal(type) {
+  document.getElementById('wos-contact-name').value = '';
+  document.getElementById('wos-contact-company').value = '';
+  document.getElementById('wos-contact-role').value = '';
+  document.getElementById('wos-contact-email').value = '';
+  // Store type for save
+  document.getElementById('wos-new-contact-overlay').dataset.type = type || 'contact';
+  const titles = { client:'New Client', vendor:'New Vendor / Talent', network:'New Network Contact', contact:'New Contact' };
+  document.querySelector('#wos-new-contact-overlay h3').textContent = '👤 ' + (titles[type] || 'New Contact');
+  document.getElementById('wos-new-contact-overlay').classList.add('show');
+  setTimeout(() => document.getElementById('wos-contact-name').focus(), 80);
+}
+
+function closeContactModal() {
+  document.getElementById('wos-new-contact-overlay').classList.remove('show');
+}
+
+function saveNewContact() {
+  const name    = document.getElementById('wos-contact-name').value.trim();
+  const company = document.getElementById('wos-contact-company').value.trim();
+  const role    = document.getElementById('wos-contact-role').value.trim();
+  const email   = document.getElementById('wos-contact-email').value.trim();
+  const type    = document.getElementById('wos-new-contact-overlay').dataset.type || 'contact';
+  if (!name) { alert('Name is required.'); return; }
+
+  const entry = { id: nextWorkId++, name, company, role, email, type, createdAt: new Date().toISOString() };
+
+  if (type === 'vendor') { workVendors.push(entry); }
+  else { workContacts.push(entry); }
+
+  persistWork();
+  closeContactModal();
+  if (workOSMode) renderWorkView();
+}
+
+// ── PROJECT DETAIL (stub — expands later) ──
+function openProjectDetail(id) {
+  const p = workProjects.find(x => x.id === id);
+  if (!p) return;
+  // For now just show a simple alert — full detail panel coming in next phase
+  alert(`${p.projectName}\n${p.company} › ${p.client}\nStatus: ${p.status}\nCreated: ${new Date(p.createdAt).toLocaleDateString()}`);
+}
+
+// Patch render() to handle work views
+const _origRender = render;
+render = function() {
+  if (workOSMode) { renderWorkView(); return; }
+  _origRender();
 };
 
 
