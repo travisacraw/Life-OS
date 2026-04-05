@@ -934,6 +934,7 @@ async function loadFromSupabase(){
       if(data.habits){ habits=data.habits; nextHabitId=Math.max(9,...habits.map(h=>parseInt((h.id||'h0').replace(/\D/g,''))||0))+1; }
       if(data.auto_tasks) autoTasks=data.auto_tasks;
       if(data.insights) insights=data.insights;
+      if(data.xp_epoch){ localStorage.setItem(XP_EPOCH_KEY, data.xp_epoch); }
       nextId=Math.max(0,...tasks.map(t=>t.id||0))+1;
       nextGid=Math.max(0,...groups.map(g=>parseInt((g.id||'0').replace(/\D/g,''))||0))+1;
       Object.keys(localStorage).filter(k=>k.startsWith('los_')).forEach(k=>localStorage.removeItem(k));
@@ -960,6 +961,7 @@ async function pushToSupabase(){
       body:JSON.stringify({
         tasks,groups,los,constitution,habits,
         auto_tasks:autoTasks,insights,
+        xp_epoch:localStorage.getItem(XP_EPOCH_KEY)||XP_EPOCH,
         updated_at:new Date().toISOString()
       })
     });
