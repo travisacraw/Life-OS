@@ -1889,7 +1889,7 @@ function renderXPBanner(){
 
   document.getElementById('xp-banner').innerHTML=`
     <div class="xp-banner-left">
-      <span class="xp-banner-level">${level.name}</span>
+      <span class="xp-banner-level" onclick="setView('all')" style="cursor:pointer;">${level.name}</span>
       <span class="xp-banner-pts">Level ${level.index} · ${xpInLevel}/${xpToNext} XP to next</span>
     </div>
     <div class="xp-banner-center">
