@@ -3534,7 +3534,7 @@ function renderWOSDetail(p){
       : `<button class="wos-detail-btn primary" onclick="createOutreachFromDetail()">+ Outreach</button>
          <button class="wos-detail-btn" onclick="startWOSEdit()" style="flex:0.6;">Edit</button>
          <button class="wos-detail-btn" onclick="toggleRadarFromDetail()" id="wos-radar-btn" style="flex:0.6;${p.on_radar?'background:#EEEDFE;color:#534AB7;border-color:#AFA9EC;':''}">${p.on_radar?'On radar ✓':'On radar'}</button>
-         <button class="wos-detail-btn" onclick="deleteWOSPerson('${p.id}','${(p.name||'').replace(/'/g,\"\\\\'\"')}')" style="flex:0.5;border-color:#F0997B;color:#993C1D;" onmouseover="this.style.background='#FAECE7'" onmouseout="this.style.background='#fff'">Delete</button>`;
+         <button class="wos-detail-btn" onclick="deleteWOSPerson('${p.id}')" style="flex:0.5;border-color:#F0997B;color:#993C1D;" onmouseover="this.style.background='#FAECE7'" onmouseout="this.style.background='#fff'">Delete</button>`;
   }
 
   const body = document.getElementById('wos-detail-body');
@@ -3758,7 +3758,9 @@ async function saveWOSEdit(){
   showXPFlash('Saved');
 }
 
-async function deleteWOSPerson(id, name){
+async function deleteWOSPerson(id){
+  const p = wosPeople.find(x=>x.id===id);
+  const name = cleanName(p?.name||'this person');
   if(!confirm(`Delete ${name}? This cannot be undone.`)) return;
   await fetch(`${SUPABASE_URL}/rest/v1/work_os_people?id=eq.${id}`,{
     method:'DELETE',
