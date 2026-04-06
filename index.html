@@ -817,28 +817,136 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 
   <!-- NEW CONTACT MODAL -->
-  <div class="wos-modal-overlay" id="wos-new-contact-overlay">
-    <div class="wos-modal">
-      <h3>👤 New Contact</h3>
-      <div class="wos-modal-row">
-        <div class="wos-modal-label">Name</div>
-        <input class="wos-modal-input" id="wos-contact-name" placeholder="Full name"/>
+  <div class="wos-modal-overlay" id="wos-new-contact-overlay" style="align-items:flex-start;padding:20px;overflow-y:auto;">
+    <div class="wos-modal" style="width:480px;max-height:90vh;overflow-y:auto;">
+      <h3>New contact</h3>
+
+      <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:0.5px solid #e8e8e4;">Identity</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div class="wos-modal-row" style="grid-column:1/-1;">
+          <div class="wos-modal-label">Name <span style="color:#E24B4A;">*</span></div>
+          <input class="wos-modal-input" id="nc-name" placeholder="Full name"/>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Company</div>
+          <input class="wos-modal-input" id="nc-company" placeholder="Current company or Freelance"/>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Former company</div>
+          <input class="wos-modal-input" id="nc-former" placeholder="ex. Monks, ex. Tool..."/>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Email</div>
+          <input class="wos-modal-input" id="nc-email" type="email" placeholder="email@company.com"/>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Phone</div>
+          <input class="wos-modal-input" id="nc-phone" placeholder="Optional"/>
+        </div>
       </div>
-      <div class="wos-modal-row">
-        <div class="wos-modal-label">Company</div>
-        <input class="wos-modal-input" id="wos-contact-company" placeholder="Company or production house"/>
+
+      <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:0.5px solid #e8e8e4;">Location</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Region</div>
+          <select class="wos-modal-input" id="nc-region">
+            <option value="">—</option>
+            <option>US</option><option>EU</option><option>APAC</option><option>LATAM</option><option>MENA</option>
+          </select>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">State / Country</div>
+          <input class="wos-modal-input" id="nc-location" placeholder="NY, CA, UK..."/>
+        </div>
       </div>
-      <div class="wos-modal-row">
-        <div class="wos-modal-label">Role</div>
-        <input class="wos-modal-input" id="wos-contact-role" placeholder="e.g. Executive Producer"/>
+
+      <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:0.5px solid #e8e8e4;">Professional</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Kind</div>
+          <select class="wos-modal-input" id="nc-kind">
+            <option value="">—</option>
+            <option>PROD</option><option>BIZ</option><option>CREATIVE</option><option>DESIGN</option>
+            <option>TECH</option><option>EVENTS</option><option>AV</option><option>FILM</option>
+            <option>STUDIO</option><option>Scenic</option><option>OTHER</option>
+          </select>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Role</div>
+          <input class="wos-modal-input" id="nc-role" placeholder="e.g. Creative Director"/>
+        </div>
       </div>
-      <div class="wos-modal-row">
-        <div class="wos-modal-label">Email</div>
-        <input class="wos-modal-input" id="wos-contact-email" placeholder="email@company.com" type="email"/>
+
+      <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:0.5px solid #e8e8e4;">Relationship</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Relationship strength</div>
+          <select class="wos-modal-input" id="nc-relationship">
+            <option value="">—</option>
+            <option>Inner circle</option><option>Contact</option><option>Known</option><option>Cold</option>
+          </select>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Known from</div>
+          <input class="wos-modal-input" id="nc-known-from" placeholder="Project, person, event..."/>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Referred by</div>
+          <input class="wos-modal-input" id="nc-referred" placeholder="Who introduced you"/>
+        </div>
+        <div class="wos-modal-row" style="display:flex;align-items:center;gap:8px;padding-top:18px;">
+          <input type="checkbox" id="nc-hiring" style="width:14px;height:14px;cursor:pointer;accent-color:#534AB7;"/>
+          <label for="nc-hiring" style="font-size:12px;color:#2c2c2a;cursor:pointer;">Hiring decision maker</label>
+        </div>
       </div>
+
+      <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:0.5px solid #e8e8e4;">Talent</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div class="wos-modal-row" style="display:flex;align-items:center;gap:8px;padding-top:4px;">
+          <input type="checkbox" id="nc-talent" style="width:14px;height:14px;cursor:pointer;accent-color:#1D9E75;" onchange="document.getElementById('nc-talent-fields').style.display=this.checked?'grid':'none'"/>
+          <label for="nc-talent" style="font-size:12px;color:#2c2c2a;cursor:pointer;">This person is talent</label>
+        </div>
+      </div>
+      <div id="nc-talent-fields" style="display:none;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Work knowledge</div>
+          <select class="wos-modal-input" id="nc-work-knowledge">
+            <option value="">—</option>
+            <option>Worked with</option><option>Spoken</option><option>Portfolio only</option>
+          </select>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Quality</div>
+          <select class="wos-modal-input" id="nc-quality">
+            <option value="">—</option>
+            <option>Exceptional</option><option>Solid</option><option>Promising</option>
+          </select>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Personal warmth</div>
+          <select class="wos-modal-input" id="nc-warmth">
+            <option value="">—</option>
+            <option>Love working with</option><option>Good</option><option>Neutral</option><option>Avoid</option>
+          </select>
+        </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Freelance status</div>
+          <select class="wos-modal-input" id="nc-freelance">
+            <option value="">—</option>
+            <option>Currently freelance</option><option>Has freelanced</option>
+            <option>Staff only</option><option>Unknown</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:0.5px solid #e8e8e4;">Notes</div>
+      <div class="wos-modal-row" style="margin-bottom:12px;">
+        <textarea class="wos-modal-input" id="nc-notes" rows="3" placeholder="Anything worth remembering..." style="resize:vertical;min-height:60px;"></textarea>
+      </div>
+
       <div class="wos-modal-actions">
         <button class="wos-modal-cancel" onclick="closeContactModal()">Cancel</button>
-        <button class="wos-modal-save" onclick="saveNewContact()">Save Contact</button>
+        <button class="wos-modal-save" onclick="saveNewContact()">Save contact</button>
       </div>
     </div>
   </div>
@@ -2914,38 +3022,98 @@ function openNewClientModal() { openContactModal('client'); }
 
 // ── CONTACT MODAL ──
 function openContactModal(type) {
-  document.getElementById('wos-contact-name').value = '';
-  document.getElementById('wos-contact-company').value = '';
-  document.getElementById('wos-contact-role').value = '';
-  document.getElementById('wos-contact-email').value = '';
-  // Store type for save
-  document.getElementById('wos-new-contact-overlay').dataset.type = type || 'contact';
-  const titles = { client:'New Client', vendor:'New Vendor / Talent', network:'New Network Contact', contact:'New Contact' };
-  document.querySelector('#wos-new-contact-overlay h3').textContent = '👤 ' + (titles[type] || 'New Contact');
+  // Reset all fields
+  ['nc-name','nc-company','nc-former','nc-email','nc-phone','nc-location',
+   'nc-role','nc-known-from','nc-referred','nc-notes'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  ['nc-region','nc-kind','nc-relationship','nc-work-knowledge','nc-quality','nc-warmth','nc-freelance'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  const talentCb = document.getElementById('nc-talent');
+  if(talentCb){ talentCb.checked = false; }
+  const hiringCb = document.getElementById('nc-hiring');
+  if(hiringCb){ hiringCb.checked = false; }
+  const talentFields = document.getElementById('nc-talent-fields');
+  if(talentFields){ talentFields.style.display = 'none'; }
+
   document.getElementById('wos-new-contact-overlay').classList.add('show');
-  setTimeout(() => document.getElementById('wos-contact-name').focus(), 80);
+  setTimeout(() => document.getElementById('nc-name').focus(), 80);
 }
 
 function closeContactModal() {
   document.getElementById('wos-new-contact-overlay').classList.remove('show');
 }
 
-function saveNewContact() {
-  const name    = document.getElementById('wos-contact-name').value.trim();
-  const company = document.getElementById('wos-contact-company').value.trim();
-  const role    = document.getElementById('wos-contact-role').value.trim();
-  const email   = document.getElementById('wos-contact-email').value.trim();
-  const type    = document.getElementById('wos-new-contact-overlay').dataset.type || 'contact';
-  if (!name) { alert('Name is required.'); return; }
+async function saveNewContact() {
+  const gv = id => document.getElementById(id)?.value?.trim()||null;
+  const gc = id => document.getElementById(id)?.checked||false;
 
-  const entry = { id: nextWorkId++, name, company, role, email, type, createdAt: new Date().toISOString() };
+  const name = gv('nc-name');
+  if(!name){ alert('Name is required.'); return; }
 
-  if (type === 'vendor') { workVendors.push(entry); }
-  else { workContacts.push(entry); }
+  const person = {
+    name,
+    company:           gv('nc-company'),
+    former_company:    gv('nc-former'),
+    email:             gv('nc-email'),
+    phone:             gv('nc-phone'),
+    region:            gv('nc-region'),
+    location:          gv('nc-location'),
+    kind:              gv('nc-kind'),
+    role:              gv('nc-role'),
+    known_from:        gv('nc-known-from'),
+    referred_by:       gv('nc-referred'),
+    relationship:      gv('nc-relationship'),
+    hiring_decision_maker: gc('nc-hiring'),
+    talent:            gc('nc-talent'),
+    work_knowledge:    gv('nc-work-knowledge'),
+    quality:           gv('nc-quality'),
+    warmth:            gv('nc-warmth'),
+    freelance_status:  gv('nc-freelance'),
+    notes:             document.getElementById('nc-notes')?.value?.trim()||null,
+    on_radar:          false,
+    radar_score:       0,
+    created_at:        new Date().toISOString(),
+  };
 
-  persistWork();
-  closeContactModal();
-  if (workOSMode) renderWorkView();
+  const saveBtn = document.querySelector('#wos-new-contact-overlay .wos-modal-save');
+  if(saveBtn){ saveBtn.disabled = true; saveBtn.textContent = 'Saving...'; }
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/work_os_people`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify(person)
+    });
+    const saved = await res.json();
+    // Add to local cache
+    if(Array.isArray(saved) && saved[0]) wosPeople.push(saved[0]);
+    else wosPeopleLoaded = false;
+
+    closeContactModal();
+    showXPFlash('Contact saved — ' + name);
+
+    // If currently in People or Talent view, refresh
+    if(workView === 'wos-people' || workView === 'wos-talent'){
+      if(!wosPeopleLoaded) await loadWOSPeople();
+      filterWOSPeople();
+      // Open the new record in detail panel
+      const newPerson = wosPeople.find(p=>p.name===name&&p.email===(person.email||null));
+      if(newPerson) openWOSPersonDetail(newPerson.id);
+    }
+  } catch(e) {
+    alert('Error saving contact: ' + e.message);
+  } finally {
+    if(saveBtn){ saveBtn.disabled = false; saveBtn.textContent = 'Save contact'; }
+  }
 }
 
 // ── PROJECT DETAIL (stub — expands later) ──
