@@ -3530,11 +3530,11 @@ function renderWOSDetail(p){
   if(actions){
     actions.innerHTML = wosEditMode
       ? `<button class="wos-detail-btn" onclick="cancelWOSEdit()">Cancel</button>
-         <button class="wos-detail-btn primary" onclick="saveWOSEdit()">Save</button>`
+         <button class="wos-detail-btn primary" onclick="saveWOSEdit()">Save</button>
+         <button class="wos-detail-btn" onclick="deleteWOSPerson('${p.id}')" style="border-color:#F0997B;color:#993C1D;" onmouseover="this.style.background='#FAECE7'" onmouseout="this.style.background='#fff'">Delete</button>`
       : `<button class="wos-detail-btn primary" onclick="createOutreachFromDetail()">+ Outreach</button>
          <button class="wos-detail-btn" onclick="startWOSEdit()" style="flex:0.6;">Edit</button>
-         <button class="wos-detail-btn" onclick="toggleRadarFromDetail()" id="wos-radar-btn" style="flex:0.6;${p.on_radar?'background:#EEEDFE;color:#534AB7;border-color:#AFA9EC;':''}">${p.on_radar?'On radar ✓':'On radar'}</button>
-         <button class="wos-detail-btn" onclick="deleteWOSPerson('${p.id}')" style="flex:0.5;border-color:#F0997B;color:#993C1D;" onmouseover="this.style.background='#FAECE7'" onmouseout="this.style.background='#fff'">Delete</button>`;
+         <button class="wos-detail-btn" onclick="toggleRadarFromDetail()" id="wos-radar-btn" style="flex:0.6;${p.on_radar?'background:#EEEDFE;color:#534AB7;border-color:#AFA9EC;':''}">${p.on_radar?'On radar ✓':'On radar'}</button>`;
   }
 
   const body = document.getElementById('wos-detail-body');
