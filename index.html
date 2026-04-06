@@ -160,6 +160,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wos-ptab.active{color:#3C3489;border-bottom-color:#534AB7;}
 .wos-ptab-count{display:inline-flex;align-items:center;justify-content:center;min-width:15px;height:15px;border-radius:8px;background:#EEEDFE;color:#534AB7;font-size:9px;font-weight:500;margin-left:3px;padding:0 3px;}
 .wos-loading{padding:24px;text-align:center;color:#888780;font-size:13px;}
+.wos-cleanup-group{margin:0 14px 16px;}
+.wos-cleanup-group-header{font-size:10px;font-weight:500;color:#888780;letter-spacing:0.08em;text-transform:uppercase;padding:8px 0 6px;display:flex;align-items:center;gap:6px;border-bottom:0.5px solid #e8e8e4;margin-bottom:6px;}
+.wos-cleanup-count{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;border-radius:9px;font-size:9px;font-weight:500;padding:0 5px;}
+.wos-cleanup-card{border:0.5px solid #d1d1cf;border-radius:8px;background:#fff;padding:9px 12px;margin-bottom:5px;cursor:pointer;transition:all 0.1s;display:flex;align-items:flex-start;gap:10px;}
+.wos-cleanup-card:hover{border-color:#b4b2a9;background:#f5f5f3;}
+.wos-cleanup-card.selected{border-color:#534AB7;background:#faf9ff;}
+.wos-cleanup-issue{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:500;white-space:nowrap;flex-shrink:0;margin-top:1px;}
+.issue-error{background:#FCEBEB;color:#A32D2D;}
+.issue-warn{background:#FAEEDA;color:#854F0B;}
+.issue-info{background:#EEEDFE;color:#534AB7;}
+.wos-cleanup-main{flex:1;min-width:0;}
+.wos-cleanup-name{font-size:13px;font-weight:500;color:#2c2c2a;}
+.wos-cleanup-detail{font-size:11px;color:#888780;margin-top:1px;}
+.wos-cleanup-empty{padding:32px 18px;text-align:center;color:#1D9E75;font-size:13px;}
+.wos-cleanup-actions{padding:10px 14px;border-top:0.5px solid #d1d1cf;display:flex;gap:6px;flex-shrink:0;}
+.wos-cleanup-dismiss{flex:1;padding:6px;font-size:11px;border-radius:7px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;}
+.wos-cleanup-dismiss:hover{background:#EAF3DE;border-color:#1D9E75;color:#0F6E56;}
 .wos-empty-state{padding:32px 18px;text-align:center;color:#b4b2a9;font-size:13px;}
 .wos-pipeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:0 14px 16px;}
 .wos-pipe-col{border:0.5px solid #d1d1cf;border-radius:10px;background:#f5f5f3;padding:10px;}
@@ -2846,6 +2863,7 @@ function setWorkView(v) {
     'wos-talent':    'Talent',
     'wos-people':    'People',
     'wos-outreach':  'Outreach',
+    'wos-cleanup':   'Data Cleanup',
   };
   document.getElementById('view-title').textContent = titles[v] || v;
   document.getElementById('main-add-btn').style.display = 'none';
@@ -2856,7 +2874,7 @@ function setWorkView(v) {
   const wosDetail = document.getElementById('wos-detail-panel');
   if (wosDetail) {
     wosDetail.classList.add('hidden');
-    if (v === 'wos-people' || v === 'wos-talent' || v === 'wos-network') {
+    if (['wos-people','wos-talent','wos-network','wos-cleanup'].includes(v)) {
       wosDetail.style.display = '';
     } else {
       wosDetail.style.display = 'none';
@@ -2874,6 +2892,7 @@ function renderWorkView() {
   if (workView === 'wos-talent')     { renderWOSPeopleView(list, 'talent');  return; }
   if (workView === 'wos-people')     { renderWOSPeopleView(list, 'all');     return; }
   if (workView === 'wos-outreach')   { renderWOSOutreachView(list);          return; }
+  if (workView === 'wos-cleanup')    { renderWOSCleanup(list);               return; }
 }
 
 // ── DASHBOARD ──
@@ -2889,13 +2908,13 @@ function renderWOSDashboard(el) {
           <span class="wos-action-btn-icon">🏹</span>
           <span>New Project</span>
         </button>
-        <button class="wos-action-btn" onclick="openNewClientModal()">
-          <span class="wos-action-btn-icon">🏢</span>
-          <span>New Client</span>
-        </button>
         <button class="wos-action-btn" onclick="openContactModal()">
           <span class="wos-action-btn-icon">👤</span>
           <span>New Contact</span>
+        </button>
+        <button class="wos-action-btn" onclick="setWorkView('wos-cleanup')" id="wos-cleanup-btn">
+          <span class="wos-action-btn-icon">🔍</span>
+          <span>Clean up</span>
         </button>
       </div>
 
@@ -3931,6 +3950,174 @@ function handleSpecialtyKey(e, containerId){
 
 function getSpecialtyTags(containerId){
   return [...wosEditingSpecialties];
+}
+
+
+
+// ── DATA CLEANUP SCANNER ──
+
+const ROLE_LIKE_COMPANY = ['EP','CD','ECD','PM','MD','CEO','COO','CFO','DD','AD','PA',
+  'Head of Prod','Creative Director','Producer','Director','Founder','Recruiter',
+  'Exp Producer','Exp Prod','Event Prod','Creative Tech','Tech Dir','Strategist',
+  'Account Director','Program Manager','Shop Director'];
+
+function scanWOSPeople(){
+  const issues = [];
+  const nameMap = {};
+
+  wosPeople.forEach(p => {
+    if(p.review_dismissed) return;
+    const flags = [];
+    const name = cleanName(p.name||'').toLowerCase().trim();
+
+    // High confidence
+    if((p.name||'').includes('=HYPERLINK'))
+      flags.push({type:'error', msg:'Name contains spreadsheet formula'});
+
+    if(!p.kind)
+      flags.push({type:'error', msg:'No Kind set'});
+
+    const company = (p.company||'').toLowerCase();
+    if(company.includes('freelance') && p.freelance_status !== 'Currently freelance')
+      flags.push({type:'error', msg:'Company says "Freelance" but status not set'});
+
+    // Duplicate detection
+    if(nameMap[name]){
+      flags.push({type:'error', msg:`Possible duplicate of ${cleanName(nameMap[name].name)}`});
+      // Also flag the first one if not already flagged
+      const first = issues.find(i => i.id === nameMap[name].id);
+      if(first && !first.flags.find(f => f.msg.includes('duplicate'))){
+        first.flags.unshift({type:'error', msg:`Possible duplicate of ${cleanName(p.name)}`});
+      }
+    } else {
+      nameMap[name] = p;
+    }
+
+    // Medium confidence
+    const companyVal = (p.company||'').trim();
+    if(companyVal && ROLE_LIKE_COMPANY.some(r => r.toLowerCase() === companyVal.toLowerCase()))
+      flags.push({type:'warn', msg:`Company "${companyVal}" looks like a role`});
+
+    if(!p.email && !p.phone && !p.known_from)
+      flags.push({type:'warn', msg:'No email, phone, or known_from — very little data'});
+
+    const kf = (p.known_from||'');
+    if(!p.known_from_is_former && /ex[\.\s]/i.test(kf))
+      flags.push({type:'warn', msg:'Known from contains "ex." — should ex checkbox be set?'});
+
+    if(p.relationship === 'Inner circle' && !p.email && !p.phone)
+      flags.push({type:'warn', msg:'Inner circle but no contact info'});
+
+    // Info
+    if(!p.relationship)
+      flags.push({type:'info', msg:'No relationship strength set'});
+
+    if(p.talent && !p.work_knowledge)
+      flags.push({type:'info', msg:'Talent but no work knowledge set'});
+
+    if(flags.length > 0){
+      issues.push({ id: p.id, name: cleanName(p.name)||'—', company: p.company||'', flags });
+    }
+  });
+
+  return issues;
+}
+
+async function renderWOSCleanup(el){
+  el.innerHTML = `<div class="wos-loading">Scanning records...</div>`;
+  await loadWOSPeople();
+
+  const issues = scanWOSPeople();
+
+  if(issues.length === 0){
+    el.innerHTML = `<div class="wos-cleanup-empty">✓ No issues found — your data looks clean!</div>`;
+    return;
+  }
+
+  // Group by issue type
+  const errors = issues.filter(i => i.flags.some(f => f.type === 'error'));
+  const warns  = issues.filter(i => !i.flags.some(f => f.type === 'error') && i.flags.some(f => f.type === 'warn'));
+  const infos  = issues.filter(i => i.flags.every(f => f.type === 'info'));
+
+  function groupHtml(label, items, countBg, countColor){
+    if(!items.length) return '';
+    return `<div class="wos-cleanup-group">
+      <div class="wos-cleanup-group-header">
+        ${label}
+        <span class="wos-cleanup-count" style="background:${countBg};color:${countColor};">${items.length}</span>
+      </div>
+      ${items.map(issue => {
+        const topFlag = issue.flags[0];
+        const issueClass = topFlag.type === 'error' ? 'issue-error' : topFlag.type === 'warn' ? 'issue-warn' : 'issue-info';
+        const allMsgs = issue.flags.map(f => f.msg).join(' · ');
+        return `<div class="wos-cleanup-card" id="cleanup-${issue.id}" onclick="openCleanupRecord('${issue.id}')">
+          <span class="wos-cleanup-issue ${issueClass}">${topFlag.msg}</span>
+          <div class="wos-cleanup-main">
+            <div class="wos-cleanup-name">${issue.name}</div>
+            <div class="wos-cleanup-detail">${issue.company}${issue.flags.length > 1 ? ` · +${issue.flags.length-1} more` : ''}</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }
+
+  el.innerHTML = `
+    <div class="wos-people-wrap" style="padding-top:10px;">
+      <div style="font-size:11px;color:#888780;margin-bottom:14px;padding:0 2px;">
+        Found ${issues.length} records with potential issues. Click any to review.
+      </div>
+      ${groupHtml('Fix these', errors, '#FCEBEB', '#A32D2D')}
+      ${groupHtml('Worth reviewing', warns, '#FAEEDA', '#854F0B')}
+      ${groupHtml('Consider filling in', infos, '#EEEDFE', '#534AB7')}
+    </div>`;
+}
+
+function openCleanupRecord(id){
+  // Highlight selected card
+  document.querySelectorAll('.wos-cleanup-card').forEach(c => c.classList.remove('selected'));
+  const card = document.getElementById('cleanup-'+id);
+  if(card) card.classList.add('selected');
+
+  // Open in detail panel with dismiss button
+  openWOSPersonDetail(id);
+
+  // Replace the detail actions with cleanup-specific ones
+  const actions = document.querySelector('.wos-detail-actions');
+  if(actions){
+    const issue = scanWOSPeople().find(i => i.id === id);
+    const msgs = issue ? issue.flags.map(f =>
+      `<div style="font-size:10px;padding:3px 7px;border-radius:5px;margin-bottom:3px;background:${f.type==='error'?'#FCEBEB':f.type==='warn'?'#FAEEDA':'#EEEDFE'};color:${f.type==='error'?'#A32D2D':f.type==='warn'?'#854F0B':'#534AB7'};">${f.msg}</div>`
+    ).join('') : '';
+    actions.innerHTML = `
+      <div style="width:100%;">
+        <div style="margin-bottom:8px;">${msgs}</div>
+        <div style="display:flex;gap:6px;">
+          <button class="wos-detail-btn primary" onclick="startWOSEdit()" style="flex:1;">Edit</button>
+          <button class="wos-cleanup-dismiss" onclick="dismissCleanupRecord('${id}')">Looks good</button>
+        </div>
+      </div>`;
+  }
+}
+
+async function dismissCleanupRecord(id){
+  // Mark as dismissed in Supabase
+  await fetch(`${SUPABASE_URL}/rest/v1/work_os_people?id=eq.${id}`,{
+    method:'PATCH',
+    headers:{
+      'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,
+      'Content-Type':'application/json','Prefer':'return=minimal'
+    },
+    body: JSON.stringify({review_dismissed: true})
+  });
+  // Update local cache
+  const p = wosPeople.find(x=>x.id===id);
+  if(p) p.review_dismissed = true;
+
+  // Remove card from view
+  const card = document.getElementById('cleanup-'+id);
+  if(card){ card.style.opacity='0'; card.style.transition='opacity 0.3s'; setTimeout(()=>card.remove(),300); }
+  closeWOSDetail();
+  showXPFlash('Dismissed');
 }
 
 </script>
