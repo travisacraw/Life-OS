@@ -828,12 +828,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <input class="wos-modal-input" id="nc-name" placeholder="Full name"/>
         </div>
         <div class="wos-modal-row">
-          <div class="wos-modal-label">Company</div>
-          <input class="wos-modal-input" id="nc-company" placeholder="Current company or Freelance"/>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+            <div class="wos-modal-label">Company</div>
+            <label style="display:flex;align-items:center;gap:4px;font-size:10px;color:#5f5e5a;cursor:pointer;">
+              <input type="checkbox" id="nc-is-freelance" style="width:12px;height:12px;accent-color:#1D9E75;cursor:pointer;"/>
+              Freelance
+            </label>
+          </div>
+          <input class="wos-modal-input" id="nc-company" placeholder="Company name (leave blank if freelance)"/>
         </div>
-        <div class="wos-modal-row">
-          <div class="wos-modal-label">Former company</div>
-          <input class="wos-modal-input" id="nc-former" placeholder="ex. Monks, ex. Tool..."/>
+        <div class="wos-modal-row" style="grid-column:1/-1;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+            <div class="wos-modal-label">Known from</div>
+            <label style="display:flex;align-items:center;gap:4px;font-size:10px;color:#5f5e5a;cursor:pointer;">
+              <input type="checkbox" id="nc-known-from-ex" style="width:12px;height:12px;accent-color:#534AB7;cursor:pointer;"/>
+              ex (former company)
+            </label>
+          </div>
+          <input class="wos-modal-input" id="nc-known-from" placeholder="Project, person, company..."/>
         </div>
         <div class="wos-modal-row">
           <div class="wos-modal-label">Email</div>
@@ -3065,6 +3077,7 @@ async function saveNewContact() {
     kind:              gv('nc-kind'),
     role:              gv('nc-role'),
     known_from:        gv('nc-known-from'),
+    known_from_is_former: gc('nc-known-from-ex'),
     referred_by:       gv('nc-referred'),
     relationship:      gv('nc-relationship'),
     hiring_decision_maker: gc('nc-hiring'),
@@ -3072,7 +3085,7 @@ async function saveNewContact() {
     work_knowledge:    gv('nc-work-knowledge'),
     quality:           gv('nc-quality'),
     warmth:            gv('nc-warmth'),
-    freelance_status:  gv('nc-freelance'),
+    freelance_status:  gc('nc-is-freelance') ? 'Currently freelance' : gv('nc-freelance'),
     notes:             document.getElementById('nc-notes')?.value?.trim()||null,
     on_radar:          false,
     radar_score:       0,
@@ -3341,20 +3354,27 @@ function wosPersonRow(p){
   const radarHtml = p.on_radar
     ? `<div class="wos-radar-dot" title="On radar"></div>`
     : `<div class="wos-radar-spacer"></div>`;
-  const knownHtml = p.known_from ? `<span class="wos-known-from"> · via ${p.known_from}</span>` : '';
+  const isFreelance = p.freelance_status === 'Currently freelance';
+  const companyStr = isFreelance ? 'Freelance' : (p.company||'');
+  const knownStr = p.known_from
+    ? (p.known_from_is_former ? ` · ex. ${p.known_from}` : ` · via ${p.known_from}`)
+    : '';
+  const subline = [companyStr, p.role].filter(Boolean).join(' · ') + knownStr;
   const hiringHtml = p.hiring_decision_maker ? `<span class="wos-badge-hires">Hires</span>` : '';
+  const talentHtml = p.talent ? `<span class="wos-badge" style="background:#E1F5EE;color:#0F6E56;">Talent</span>` : '';
   const selected = p.id === wosSelectedPersonId ? 'border-color:#534AB7;' : '';
   return `<div class="wos-person-row" style="${selected}" onclick="openWOSPersonDetail('${p.id}')">
     <div class="wos-row-left">
       ${radarHtml}
-      <div class="wos-avatar" style="background:${bg};color:${fg};">${wosInitials(cleanName(p.name))}</div>
+      <div class="wos-avatar" style="background:${bg};color:${fg};">${wosInitials(displayName)}</div>
     </div>
     <div class="wos-person-main">
-      <div class="wos-person-name">${cleanName(p.name)||'—'}</div>
-      <div class="wos-person-sub">${p.company||''}${p.role?' · '+p.role:''}${knownHtml}</div>
+      <div class="wos-person-name">${displayName||'—'}</div>
+      <div class="wos-person-sub">${subline}</div>
     </div>
     <div class="wos-person-right">
       ${hiringHtml}
+      ${talentHtml}
       <span class="${kindClass}">${p.kind||'—'}</span>
       <div class="wos-rel-dot ${relDot}" title="${p.relationship||''}"></div>
     </div>
@@ -3422,12 +3442,23 @@ function renderWOSReadView(p, body){
   const row = (k,v) => (v!==null&&v!==undefined&&v!=='') ? `<div class="wos-detail-row"><span class="dk">${k}</span><span class="dv">${v}</span></div>` : '';
   const section = (label) => `<div class="wos-detail-section">${label}</div>`;
   const name = cleanName(p.name)||'—';
+  const freelanceChip = p.freelance_status==='Currently freelance'
+    ? `<span style="display:inline-block;padding:1px 7px;border-radius:10px;background:#F1EFE8;color:#5F5E5A;font-size:10px;font-weight:500;margin-right:4px;">Freelance</span>` : '';
+  const knownFromLabel = p.known_from
+    ? (p.known_from_is_former ? `ex. ${p.known_from}` : `via ${p.known_from}`) : '';
+  const subline = [
+    p.freelance_status==='Currently freelance' ? null : p.company,
+    p.role,
+    knownFromLabel
+  ].filter(Boolean).join(' · ');
+
+  document.getElementById('wos-detail-name').textContent = name;
+  document.getElementById('wos-detail-company').innerHTML = freelanceChip + (subline||'');
+
   body.innerHTML = `
     ${section('Identity')}
-    ${row('Name', name !== (p.name||'') ? `${name} <span style="font-size:9px;color:#E24B4A;font-weight:400;">(fixed)</span>` : '')}
     ${row('Email', p.email ? `<a href="mailto:${p.email}" style="color:#185FA5;">${p.email}</a>` : '')}
     ${row('Phone', p.phone)}
-    ${row('Former company', p.former_company)}
     ${section('Location')}
     ${row('Region', p.region)}
     ${row('Location', p.location)}
@@ -3437,7 +3468,7 @@ function renderWOSReadView(p, body){
     ${row('Specialty', Array.isArray(p.specialty) ? p.specialty.join(', ') : p.specialty)}
     ${section('Relationship')}
     ${row('Strength', p.relationship)}
-    ${row('Known from', p.known_from)}
+    ${row('Known from', p.known_from ? (p.known_from_is_former ? `ex. ${p.known_from}` : p.known_from) : null)}
     ${row('Referred by', p.referred_by)}
     ${row('Hiring DM', p.hiring_decision_maker ? 'Yes' : null)}
     ${p.talent ? `${section('Talent')}
@@ -3455,6 +3486,20 @@ function renderWOSEditForm(p, body){
     <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:7px;">
       <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.06em;text-transform:uppercase;">${label}</div>
       <input id="wos-edit-${id}" type="${type}" value="${(val||'').toString().replace(/"/g,'&quot;')}"
+        style="padding:5px 8px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:6px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;width:100%;"
+        onfocus="this.style.borderColor='#534AB7';this.style.background='#fff'"
+        onblur="this.style.borderColor='#b4b2a9';this.style.background='#f5f5f3'"/>
+    </div>`;
+  const fieldWithCheckbox = (label, id, val, cbId, cbVal, cbLabel) => `
+    <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:7px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.06em;text-transform:uppercase;">${label}</div>
+        <label style="display:flex;align-items:center;gap:4px;font-size:10px;color:#5f5e5a;cursor:pointer;">
+          <input type="checkbox" id="wos-edit-${cbId}" ${cbVal?'checked':''} style="width:12px;height:12px;accent-color:#534AB7;cursor:pointer;"/>
+          ${cbLabel}
+        </label>
+      </div>
+      <input id="wos-edit-${id}" type="text" value="${(val||'').toString().replace(/"/g,'&quot;')}"
         style="padding:5px 8px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:6px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;width:100%;"
         onfocus="this.style.borderColor='#534AB7';this.style.background='#fff'"
         onblur="this.style.borderColor='#b4b2a9';this.style.background='#f5f5f3'"/>
@@ -3493,14 +3538,14 @@ function renderWOSEditForm(p, body){
     <div style="font-size:11px;color:#888780;margin-bottom:10px;">Edit record — hit Save when done.</div>
     ${field('Name','name', name)}
     ${field('Company','company', p.company)}
-    ${field('Former company','former_company', p.former_company)}
+    ${checkbox('Currently freelance','is_freelance', p.freelance_status==='Currently freelance')}
     ${field('Email','email', p.email, 'email')}
     ${field('Phone','phone', p.phone)}
     ${select('Region','region', p.region, REGIONS)}
     ${field('Location (state/country)','location', p.location)}
     ${select('Kind','kind', p.kind, KINDS)}
     ${field('Role','role', p.role)}
-    ${field('Known from','known_from', p.known_from)}
+    ${fieldWithCheckbox('Known from','known_from', p.known_from, 'known_from_is_former', p.known_from_is_former, 'ex (former company)')}
     ${field('Referred by','referred_by', p.referred_by)}
     ${select('Relationship','relationship', p.relationship, RELS)}
     ${checkbox('Talent','talent', p.talent)}
@@ -3508,7 +3553,6 @@ function renderWOSEditForm(p, body){
     ${select('Work knowledge','work_knowledge', p.work_knowledge, WORK_K)}
     ${select('Quality','quality', p.quality, QUALITY)}
     ${select('Warmth','warmth', p.warmth, WARMTH)}
-    ${select('Freelance status','freelance_status', p.freelance_status, FREELANCE)}
     ${textarea('Notes','notes', p.notes)}
   `;
 }
@@ -3537,7 +3581,6 @@ async function saveWOSEdit(){
     id: p.id,
     name: gv('name'),
     company: gv('company'),
-    former_company: gv('former_company'),
     email: gv('email'),
     phone: gv('phone'),
     region: gv('region'),
@@ -3545,6 +3588,7 @@ async function saveWOSEdit(){
     kind: gv('kind'),
     role: gv('role'),
     known_from: gv('known_from'),
+    known_from_is_former: gc('known_from_is_former'),
     referred_by: gv('referred_by'),
     relationship: gv('relationship'),
     talent: gc('talent'),
@@ -3552,7 +3596,7 @@ async function saveWOSEdit(){
     work_knowledge: gv('work_knowledge'),
     quality: gv('quality'),
     warmth: gv('warmth'),
-    freelance_status: gv('freelance_status'),
+    freelance_status: gc('is_freelance') ? 'Currently freelance' : (p.freelance_status === 'Currently freelance' ? 'Has freelanced' : p.freelance_status),
     notes: g('notes')?.value?.trim()||null,
   };
 
