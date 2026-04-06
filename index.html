@@ -67,23 +67,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .os-switcher-arrow{font-size:11px;opacity:0.4;}
 
 /* Life OS switcher (shown inside Work OS nav) */
-.os-switcher.to-life{background:linear-gradient(135deg,#EEEDFE,#E6F1FB);border-color:#b5b0e8;}
-.os-switcher.to-life .os-switcher-label{color:#3C3489;}
-.os-switcher.to-life .os-switcher-arrow{color:#3C3489;}
+.os-switcher.to-life{background:linear-gradient(135deg,#EAF3DE,#E6F1FB);border-color:#8fc87a;}
+.os-switcher.to-life .os-switcher-label{color:#1D6B3A;}
+.os-switcher.to-life .os-switcher-arrow{color:#1D6B3A;}
 
 /* Work OS switcher (shown inside Life OS nav) */
-.os-switcher.to-work{background:linear-gradient(135deg,#EAF3DE,#E6F1FB);border-color:#8fc87a;}
-.os-switcher.to-work .os-switcher-label{color:#1D6B3A;}
-.os-switcher.to-work .os-switcher-arrow{color:#1D6B3A;}
+.os-switcher.to-work{background:linear-gradient(135deg,#EEEDFE,#E6F1FB);border-color:#b5b0e8;}
+.os-switcher.to-work .os-switcher-label{color:#3C3489;}
+.os-switcher.to-work .os-switcher-arrow{color:#3C3489;}
 
 /* SIDEBAR BRANDS */
 .sidebar-brand{padding:12px 14px 10px;border-bottom:0.5px solid #d1d1cf;}
-.sidebar-brand.life{background:linear-gradient(135deg,#EEEDFE,#E6F1FB);}
-.sidebar-brand.life .sidebar-brand-name{color:#3C3489;}
-.sidebar-brand.life .sidebar-brand-sub{color:#534AB7;}
-.sidebar-brand.work{background:linear-gradient(135deg,#EAF3DE,#E6F1FB);}
-.sidebar-brand.work .sidebar-brand-name{color:#1D6B3A;}
-.sidebar-brand.work .sidebar-brand-sub{color:#3B6D11;}
+.sidebar-brand.life{background:linear-gradient(135deg,#EAF3DE,#E6F1FB);}
+.sidebar-brand.life .sidebar-brand-name{color:#1D6B3A;}
+.sidebar-brand.life .sidebar-brand-sub{color:#3B6D11;}
+.sidebar-brand.work{background:linear-gradient(135deg,#EEEDFE,#E6F1FB);}
+.sidebar-brand.work .sidebar-brand-name{color:#3C3489;}
+.sidebar-brand.work .sidebar-brand-sub{color:#534AB7;}
 
 /* WORK OS DASHBOARD */
 .wos-dashboard{flex:1;overflow-y:auto;padding:0 0 16px;}
@@ -121,6 +121,74 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wos-modal-cancel{padding:8px 16px;font-size:12px;border-radius:8px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;}
 .wos-modal-save{padding:8px 18px;font-size:12px;border-radius:8px;border:none;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;font-weight:500;}
 .wos-modal-save:hover{background:#0F6E56;}
+
+/* ── WORK OS PEOPLE ── */
+.wos-people-wrap{padding:0 14px 16px;}
+.wos-search-row{display:flex;gap:8px;margin-bottom:10px;}
+.wos-search-input{flex:1;padding:7px 11px;font-size:13px;border:0.5px solid #b4b2a9;border-radius:8px;background:#fff;color:#2c2c2a;font-family:inherit;}
+.wos-search-input:focus{outline:none;border-color:#534AB7;}
+.wos-filters{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
+.wos-filter-sel{padding:3px 9px;font-size:11px;border:0.5px solid #b4b2a9;border-radius:20px;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;}
+.wos-filter-sel:focus{outline:none;border-color:#534AB7;}
+.wos-filter-pill{padding:3px 9px;font-size:11px;border:0.5px solid #b4b2a9;border-radius:20px;background:#fff;color:#5f5e5a;cursor:pointer;white-space:nowrap;transition:all 0.1s;}
+.wos-filter-pill:hover{border-color:#534AB7;color:#534AB7;}
+.wos-filter-pill.active{background:#EEEDFE;border-color:#AFA9EC;color:#3C3489;}
+.wos-legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;padding:6px 9px;background:#f5f5f3;border-radius:7px;}
+.wos-legend-item{display:flex;align-items:center;gap:4px;font-size:10px;color:#5f5e5a;}
+.wos-rel-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.wos-radar-dot{width:7px;height:7px;border-radius:50%;background:#7F77DD;flex-shrink:0;}
+.wos-radar-spacer{width:7px;flex-shrink:0;}
+.dot-inner-circle{background:#1D9E75;} .dot-contact-rel{background:#378ADD;} .dot-known-rel{background:#EF9F27;} .dot-cold-rel{background:#D3D1C7;}
+.wos-results-meta{font-size:11px;color:#888780;margin-bottom:6px;}
+.wos-person-row{display:flex;align-items:center;gap:9px;padding:7px 10px;border:0.5px solid #d1d1cf;border-radius:8px;background:#fff;margin-bottom:4px;cursor:pointer;transition:all 0.1s;}
+.wos-person-row:hover{border-color:#b4b2a9;background:#f5f5f3;}
+.wos-row-left{display:flex;align-items:center;gap:7px;flex-shrink:0;}
+.wos-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;flex-shrink:0;}
+.wos-person-main{flex:1;min-width:0;}
+.wos-person-name{font-size:13px;font-weight:500;color:#2c2c2a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wos-person-sub{font-size:11px;color:#5f5e5a;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wos-known-from{font-size:10px;color:#888780;font-style:italic;}
+.wos-person-right{display:flex;gap:6px;align-items:center;flex-shrink:0;}
+.wos-badge{font-size:10px;padding:2px 6px;border-radius:5px;white-space:nowrap;font-weight:500;}
+.wos-badge-PROD{background:#E1F5EE;color:#0F6E56;} .wos-badge-BIZ{background:#E6F1FB;color:#185FA5;} .wos-badge-CREATIVE{background:#FAECE7;color:#993C1D;}
+.wos-badge-DESIGN{background:#FAEEDA;color:#854F0B;} .wos-badge-TECH{background:#F1EFE8;color:#5F5E5A;} .wos-badge-other{background:#EEEDFE;color:#534AB7;}
+.wos-badge-hires{font-size:10px;padding:2px 6px;border-radius:5px;background:#FAEEDA;color:#854F0B;}
+.wos-people-tabs{display:flex;border-bottom:0.5px solid #d1d1cf;margin-bottom:12px;}
+.wos-ptab{padding:7px 14px;font-size:12px;font-weight:500;color:#5f5e5a;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.1s;}
+.wos-ptab.active{color:#3C3489;border-bottom-color:#534AB7;}
+.wos-ptab-count{display:inline-flex;align-items:center;justify-content:center;min-width:15px;height:15px;border-radius:8px;background:#EEEDFE;color:#534AB7;font-size:9px;font-weight:500;margin-left:3px;padding:0 3px;}
+.wos-loading{padding:24px;text-align:center;color:#888780;font-size:13px;}
+.wos-empty-state{padding:32px 18px;text-align:center;color:#b4b2a9;font-size:13px;}
+.wos-pipeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:0 14px 16px;}
+.wos-pipe-col{border:0.5px solid #d1d1cf;border-radius:10px;background:#f5f5f3;padding:10px;}
+.wos-pipe-header{font-size:10px;font-weight:500;color:#5f5e5a;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
+.wos-pipe-card{background:#fff;border:0.5px solid #d1d1cf;border-radius:7px;padding:8px 10px;margin-bottom:5px;cursor:pointer;transition:border-color 0.1s;}
+.wos-pipe-card:hover{border-color:#b4b2a9;}
+.wos-pipe-card.wos-active-card{border-left:2px solid #1D9E75;border-radius:0 7px 7px 0;}
+.wos-pipe-name{font-size:12px;font-weight:500;color:#2c2c2a;}
+.wos-pipe-intent{font-size:11px;color:#5f5e5a;margin-top:2px;}
+.wos-pipe-age{font-size:10px;margin-top:4px;}
+.wos-age-fresh{color:#1D9E75;} .wos-age-mid{color:#BA7517;} .wos-age-stale{color:#E24B4A;}
+.wos-pipe-add{width:100%;padding:6px;font-size:11px;border:0.5px dashed #b4b2a9;border-radius:7px;background:transparent;color:#888780;cursor:pointer;font-family:inherit;margin-top:4px;transition:all 0.1s;}
+.wos-pipe-add:hover{border-color:#534AB7;color:#534AB7;background:#EEEDFE;}
+.wos-detail{width:252px;border-left:0.5px solid #d1d1cf;background:#fff;display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;}
+.wos-detail.hidden{display:none;}
+.wos-detail-header{padding:10px 12px 8px;border-bottom:0.5px solid #d1d1cf;display:flex;align-items:flex-start;gap:7px;}
+.wos-detail-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;}
+.wos-detail-name{font-size:13px;font-weight:500;color:#2c2c2a;flex:1;line-height:1.3;}
+.wos-detail-company{font-size:11px;color:#5f5e5a;margin-top:2px;}
+.wos-detail-close{font-size:15px;color:#888780;cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;}
+.wos-detail-close:hover{color:#2c2c2a;}
+.wos-detail-body{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:6px;}
+.wos-detail-section{font-size:10px;font-weight:500;color:#888780;letter-spacing:0.06em;text-transform:uppercase;margin-top:6px;margin-bottom:2px;}
+.wos-detail-row{display:flex;justify-content:space-between;font-size:11px;padding:2px 0;gap:8px;}
+.wos-detail-row .dk{color:#888780;flex-shrink:0;} .wos-detail-row .dv{color:#2c2c2a;font-weight:500;text-align:right;}
+.wos-detail-note{font-size:11px;color:#5f5e5a;line-height:1.5;background:#f5f5f3;border-radius:6px;padding:7px 9px;}
+.wos-detail-actions{padding:8px 12px;border-top:0.5px solid #d1d1cf;display:flex;gap:6px;flex-shrink:0;}
+.wos-detail-btn{flex:1;padding:5px;font-size:11px;border-radius:7px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;transition:all 0.1s;}
+.wos-detail-btn:hover{background:#f5f5f3;}
+.wos-detail-btn.primary{background:#1D9E75;border-color:#1D9E75;color:#fff;}
+.wos-detail-btn.primary:hover{background:#0F6E56;}
 
 /* CONTACT / VENDOR CARDS */
 .wos-contact-card{margin:0 14px 6px;border:0.5px solid #d1d1cf;border-radius:9px;padding:10px 12px;background:#fff;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:10px;}
@@ -706,9 +774,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="nav-item work-nav" onclick="openNewProjectModal()" id="nav-wos-new-project" style="color:#1D9E75;font-weight:500;"><div class="nav-dot" style="background:#1D9E75"></div>+ New Project</div>
       <div class="nav-divider"></div>
       <div class="sidebar-header">People</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-contacts')" id="nav-wos-contacts"><div class="nav-dot" style="background:#7F77DD"></div>Contacts</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-network')" id="nav-wos-network"><div class="nav-dot" style="background:#D4537E"></div>Network</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-vendors')" id="nav-wos-vendors"><div class="nav-dot" style="background:#BA7517"></div>Vendors & Talent</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-people')" id="nav-wos-people"><div class="nav-dot" style="background:#7F77DD"></div>People</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-talent')" id="nav-wos-talent"><div class="nav-dot" style="background:#1D9E75"></div>Talent</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-outreach')" id="nav-wos-outreach"><div class="nav-dot" style="background:#D4537E"></div>Outreach</div>
       <div style="flex:1"></div>
       <div class="os-switcher to-life" onclick="switchToLifeOS()">
           <div style="flex:1">
@@ -799,6 +867,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="body-area">
       <div class="task-list" id="task-list"></div>
+      <div class="wos-detail hidden" id="wos-detail-panel" style="display:none;">
+        <div class="wos-detail-header">
+          <div class="wos-detail-avatar" id="wos-detail-avatar"></div>
+          <div style="flex:1;min-width:0;">
+            <div class="wos-detail-name" id="wos-detail-name"></div>
+            <div class="wos-detail-company" id="wos-detail-company"></div>
+          </div>
+          <div class="wos-detail-close" onclick="closeWOSDetail()">×</div>
+        </div>
+        <div class="wos-detail-body" id="wos-detail-body"></div>
+        <div class="wos-detail-actions">
+          <button class="wos-detail-btn primary" id="wos-outreach-btn" onclick="createOutreachFromDetail()">+ Outreach</button>
+          <button class="wos-detail-btn" onclick="toggleRadarFromDetail()">On radar</button>
+        </div>
+      </div>
       <div class="detail-panel hidden" id="detail-panel">
         <div class="detail-header">
           <div class="detail-title" id="detail-title"></div>
@@ -2610,18 +2693,28 @@ function setWorkView(v) {
   const navEl = document.getElementById('nav-' + v);
   if (navEl) navEl.classList.add('active');
 
-  // Update topbar
   const titles = {
     'wos-dashboard': 'Work OS',
     'wos-projects':  'All Projects',
-    'wos-contacts':  'Contacts',
-    'wos-network':   'Network',
-    'wos-vendors':   'Vendors & Talent',
+    'wos-people':    'People',
+    'wos-talent':    'Talent',
+    'wos-outreach':  'Outreach',
   };
   document.getElementById('view-title').textContent = titles[v] || v;
   document.getElementById('main-add-btn').style.display = 'none';
   document.getElementById('add-form').classList.remove('show');
   document.getElementById('detail-panel').classList.add('hidden');
+
+  // Show/hide wos detail panel
+  const wosDetail = document.getElementById('wos-detail-panel');
+  if (wosDetail) {
+    wosDetail.classList.add('hidden');
+    if (v === 'wos-people' || v === 'wos-talent') {
+      wosDetail.style.display = '';
+    } else {
+      wosDetail.style.display = 'none';
+    }
+  }
 
   renderWorkView();
 }
@@ -2630,9 +2723,9 @@ function renderWorkView() {
   const list = document.getElementById('task-list');
   if (workView === 'wos-dashboard')  { renderWOSDashboard(list); return; }
   if (workView === 'wos-projects')   { renderWOSProjects(list);  return; }
-  if (workView === 'wos-contacts')   { renderWOSPeople(list, 'contacts');  return; }
-  if (workView === 'wos-network')    { renderWOSPeople(list, 'network');   return; }
-  if (workView === 'wos-vendors')    { renderWOSPeople(list, 'vendors');   return; }
+  if (workView === 'wos-people')     { renderWOSPeopleView(list, 'all');    return; }
+  if (workView === 'wos-talent')     { renderWOSPeopleView(list, 'talent'); return; }
+  if (workView === 'wos-outreach')   { renderWOSOutreachView(list);         return; }
 }
 
 // ── DASHBOARD ──
@@ -2871,6 +2964,558 @@ render = function() {
 };
 
 
+
+
+
+// ── WORK OS PEOPLE ──
+
+let wosPeople = [];
+let wosOutreach = [];
+let wosPeopleLoaded = false;
+let wosActiveFilters = new Set();
+let wosCurrentPeopleTab = 'all';
+let wosSelectedPersonId = null;
+
+const WOS_AVATAR_COLORS = [
+  ['#EEEDFE','#534AB7'],['#E1F5EE','#0F6E56'],['#E6F1FB','#185FA5'],
+  ['#FAECE7','#993C1D'],['#FAEEDA','#854F0B'],['#F1EFE8','#5F5E5A'],
+  ['#FBEAF0','#993556'],['#E1F5EE','#085041'],
+];
+const WOS_REL_DOTS = {
+  'Inner circle':'dot-inner-circle',
+  'Contact':'dot-contact-rel',
+  'Known':'dot-known-rel',
+  'Cold':'dot-cold-rel',
+};
+
+function wosInitials(name){ return (name||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
+function wosAvatarColor(name){ const i=(name||'').charCodeAt(0)%WOS_AVATAR_COLORS.length; return WOS_AVATAR_COLORS[i]; }
+function wosBadgeClass(kind){ return `wos-badge-${kind||'other'}`; }
+
+// ── SUPABASE PEOPLE CRUD ──
+async function loadWOSPeople(){
+  if(wosPeopleLoaded) return;
+  try{
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/work_os_people?select=*&order=name.asc&limit=1000`,{
+      headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}
+    });
+    wosPeople = await res.json();
+    if(!Array.isArray(wosPeople)) wosPeople = [];
+    wosPeopleLoaded = true;
+    // Load outreach too
+    const res2 = await fetch(`${SUPABASE_URL}/rest/v1/work_os_outreach?select=*&order=created_at.desc`,{
+      headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}
+    });
+    wosOutreach = await res2.json();
+    if(!Array.isArray(wosOutreach)) wosOutreach = [];
+  }catch(e){ console.error('WOS people load error:',e); wosPeople=[]; wosOutreach=[]; }
+}
+
+async function saveWOSPerson(person){
+  const isNew = !person.id;
+  const url = isNew
+    ? `${SUPABASE_URL}/rest/v1/work_os_people`
+    : `${SUPABASE_URL}/rest/v1/work_os_people?id=eq.${person.id}`;
+  const method = isNew ? 'POST' : 'PATCH';
+  person.updated_at = new Date().toISOString();
+  await fetch(url,{
+    method,
+    headers:{
+      'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,
+      'Content-Type':'application/json','Prefer':'return=representation'
+    },
+    body: JSON.stringify(person)
+  });
+  wosPeopleLoaded = false; // force reload
+}
+
+async function saveWOSOutreach(outreach){
+  const isNew = !outreach.id;
+  const url = isNew
+    ? `${SUPABASE_URL}/rest/v1/work_os_outreach`
+    : `${SUPABASE_URL}/rest/v1/work_os_outreach?id=eq.${outreach.id}`;
+  outreach.updated_at = new Date().toISOString();
+  await fetch(url,{
+    method: isNew ? 'POST' : 'PATCH',
+    headers:{
+      'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,
+      'Content-Type':'application/json','Prefer':'return=representation'
+    },
+    body: JSON.stringify(outreach)
+  });
+  wosPeopleLoaded = false;
+}
+
+// ── PEOPLE VIEW ──
+async function renderWOSPeopleView(el, mode){
+  el.innerHTML = `<div class="wos-loading">Loading people...</div>`;
+  await loadWOSPeople();
+
+  const talentCount = wosPeople.filter(p=>p.talent).length;
+  const tabs = mode === 'talent'
+    ? `<div class="wos-ptab" onclick="switchToWOSPeopleMode('all',this)">People <span class="wos-ptab-count">${wosPeople.length}</span></div>
+       <div class="wos-ptab active">Talent <span class="wos-ptab-count">${talentCount}</span></div>`
+    : `<div class="wos-ptab active">People <span class="wos-ptab-count">${wosPeople.length}</span></div>
+       <div class="wos-ptab" onclick="switchToWOSPeopleMode('talent',this)">Talent <span class="wos-ptab-count">${talentCount}</span></div>`;
+
+  const kindOpts = ['PROD','BIZ','CREATIVE','DESIGN','TECH','EVENTS','AV','FILM','STUDIO','OTHER']
+    .map(k=>`<option value="${k}">${k}</option>`).join('');
+
+  el.innerHTML = `
+    <div class="wos-people-wrap">
+      <div class="wos-people-tabs" id="wos-people-tabs">${tabs}</div>
+      <div class="wos-search-row">
+        <input class="wos-search-input" id="wos-people-search" placeholder="Search name, company, role..." oninput="filterWOSPeople()"/>
+      </div>
+      <div class="wos-filters">
+        <select class="wos-filter-sel" id="wos-f-kind" onchange="filterWOSPeople()">
+          <option value="">All kinds</option>${kindOpts}
+        </select>
+        <select class="wos-filter-sel" id="wos-f-region" onchange="filterWOSPeople()">
+          <option value="">All regions</option>
+          <option>East Coast</option><option>West Coast</option><option>Central</option>
+          <option>US</option><option>EU</option><option>APAC</option><option>LATAM</option><option>MENA</option>
+        </select>
+        <select class="wos-filter-sel" id="wos-f-rel" onchange="filterWOSPeople()">
+          <option value="">All relationships</option>
+          <option>Inner circle</option><option>Contact</option><option>Known</option><option>Cold</option>
+        </select>
+        ${mode==='talent'?`
+        <select class="wos-filter-sel" id="wos-f-work" onchange="filterWOSPeople()">
+          <option value="">All work knowledge</option>
+          <option>Worked with</option><option>Spoken</option><option>Portfolio only</option>
+        </select>
+        <select class="wos-filter-sel" id="wos-f-quality" onchange="filterWOSPeople()">
+          <option value="">Any quality</option>
+          <option>Exceptional</option><option>Solid</option><option>Promising</option>
+        </select>
+        `:''}
+        <div class="wos-filter-pill" onclick="wosToggleFilter(this,'hiring')" data-filter="hiring">Hiring decision makers</div>
+        <div class="wos-filter-pill" onclick="wosToggleFilter(this,'radar')" data-filter="radar">On radar</div>
+        ${mode==='talent'?`<div class="wos-filter-pill" onclick="wosToggleFilter(this,'freelance')" data-filter="freelance">Freelance</div>`:''}
+      </div>
+      <div class="wos-legend">
+        <div class="wos-legend-item"><div class="wos-rel-dot dot-inner-circle"></div> Inner circle</div>
+        <div class="wos-legend-item"><div class="wos-rel-dot dot-contact-rel"></div> Contact</div>
+        <div class="wos-legend-item"><div class="wos-rel-dot dot-known-rel"></div> Known</div>
+        <div class="wos-legend-item"><div class="wos-rel-dot dot-cold-rel"></div> Cold</div>
+        <div class="wos-legend-item" style="margin-left:6px;padding-left:10px;border-left:0.5px solid #d1d1cf;">
+          <div class="wos-radar-dot"></div> On radar
+        </div>
+      </div>
+      <div class="wos-results-meta" id="wos-results-meta"></div>
+      <div id="wos-people-list"></div>
+    </div>
+  `;
+  wosCurrentPeopleTab = mode;
+  wosActiveFilters.clear();
+  filterWOSPeople();
+}
+
+function switchToWOSPeopleMode(mode){
+  workView = mode === 'talent' ? 'wos-talent' : 'wos-people';
+  document.querySelectorAll('.nav-item.work-nav').forEach(el=>el.classList.remove('active'));
+  const navEl = document.getElementById('nav-wos-'+workView.replace('wos-',''));
+  if(navEl) navEl.classList.add('active');
+  renderWOSPeopleView(document.getElementById('task-list'), mode);
+}
+
+function filterWOSPeople(){
+  const q = (document.getElementById('wos-people-search')?.value||'').toLowerCase();
+  const kind = document.getElementById('wos-f-kind')?.value||'';
+  const region = document.getElementById('wos-f-region')?.value||'';
+  const rel = document.getElementById('wos-f-rel')?.value||'';
+  const work = document.getElementById('wos-f-work')?.value||'';
+  const quality = document.getElementById('wos-f-quality')?.value||'';
+
+  const US_EAST = ['NY','NJ','CT','MA','PA','DC','MD','VA','NC','SC','GA','FL','ME','NH','VT','RI','DE'];
+  const US_WEST = ['CA','WA','OR','NV','AZ','HI','AK'];
+  const US_CENTRAL = ['TX','IL','CO','MN','WI','MO','IA','KS','NE','SD','ND','WY','MT','ID','UT','NM','OK','AR','LA','MS','AL','TN','KY','IN','OH','MI'];
+
+  function matchRegion(p, r){
+    if(!r) return true;
+    const loc = (p.location||'').toUpperCase();
+    if(r==='East Coast') return US_EAST.includes(loc);
+    if(r==='West Coast') return US_WEST.includes(loc);
+    if(r==='Central') return US_CENTRAL.includes(loc);
+    return (p.region||'') === r;
+  }
+
+  let pool = wosCurrentPeopleTab === 'talent' ? wosPeople.filter(p=>p.talent) : wosPeople;
+
+  const results = pool.filter(p=>{
+    if(q && !`${p.name||''} ${p.company||''} ${p.role||''} ${p.former_company||''}`.toLowerCase().includes(q)) return false;
+    if(kind && (p.kind||'')!==kind) return false;
+    if(!matchRegion(p, region)) return false;
+    if(rel && (p.relationship||'')!==rel) return false;
+    if(work && (p.work_knowledge||'')!==work) return false;
+    if(quality && (p.quality||'')!==quality) return false;
+    if(wosActiveFilters.has('hiring') && !p.hiring_decision_maker) return false;
+    if(wosActiveFilters.has('radar') && !p.on_radar) return false;
+    if(wosActiveFilters.has('freelance') && p.freelance_status !== 'Currently freelance') return false;
+    return true;
+  });
+
+  const listEl = document.getElementById('wos-people-list');
+  const metaEl = document.getElementById('wos-results-meta');
+  if(!listEl) return;
+  listEl.innerHTML = results.length === 0
+    ? `<div class="wos-empty-state">No results — try adjusting your filters.</div>`
+    : results.map(p=>wosPersonRow(p)).join('');
+  if(metaEl) metaEl.textContent = `Showing ${results.length} of ${pool.length}`;
+}
+
+function wosPersonRow(p){
+  const displayName = cleanName(p.name)||'';
+  const [bg,fg] = wosAvatarColor(displayName);
+  const kindClass = `wos-badge wos-badge-${p.kind||'other'}`;
+  const relDot = WOS_REL_DOTS[p.relationship||''] || 'dot-cold-rel';
+  const radarHtml = p.on_radar
+    ? `<div class="wos-radar-dot" title="On radar"></div>`
+    : `<div class="wos-radar-spacer"></div>`;
+  const knownHtml = p.known_from ? `<span class="wos-known-from"> · via ${p.known_from}</span>` : '';
+  const hiringHtml = p.hiring_decision_maker ? `<span class="wos-badge-hires">Hires</span>` : '';
+  const selected = p.id === wosSelectedPersonId ? 'border-color:#534AB7;' : '';
+  return `<div class="wos-person-row" style="${selected}" onclick="openWOSPersonDetail('${p.id}')">
+    <div class="wos-row-left">
+      ${radarHtml}
+      <div class="wos-avatar" style="background:${bg};color:${fg};">${wosInitials(cleanName(p.name))}</div>
+    </div>
+    <div class="wos-person-main">
+      <div class="wos-person-name">${cleanName(p.name)||'—'}</div>
+      <div class="wos-person-sub">${p.company||''}${p.role?' · '+p.role:''}${knownHtml}</div>
+    </div>
+    <div class="wos-person-right">
+      ${hiringHtml}
+      <span class="${kindClass}">${p.kind||'—'}</span>
+      <div class="wos-rel-dot ${relDot}" title="${p.relationship||''}"></div>
+    </div>
+  </div>`;
+}
+
+function wosToggleFilter(el, key){
+  if(wosActiveFilters.has(key)){ wosActiveFilters.delete(key); el.classList.remove('active'); }
+  else { wosActiveFilters.add(key); el.classList.add('active'); }
+  filterWOSPeople();
+}
+
+// ── PERSON DETAIL ──
+// ── HYPERLINK CLEANUP ──
+function cleanName(s){
+  if(!s) return s;
+  // Strip =HYPERLINK("url","Name") formula artifacts
+  const m = String(s).match(/=HYPERLINK\([^,]+,\s*"([^"]+)"\s*\)/i);
+  return m ? m[1] : s;
+}
+
+let wosEditMode = false;
+
+function openWOSPersonDetail(id){
+  const p = wosPeople.find(x=>x.id===id);
+  if(!p) return;
+  wosSelectedPersonId = id;
+  wosEditMode = false;
+  renderWOSDetail(p);
+  filterWOSPeople();
+}
+
+function renderWOSDetail(p){
+  const panel = document.getElementById('wos-detail-panel');
+  if(!panel) return;
+  panel.classList.remove('hidden');
+
+  const name = cleanName(p.name)||'—';
+  const [bg,fg] = wosAvatarColor(name);
+  document.getElementById('wos-detail-avatar').style.cssText = `background:${bg};color:${fg};width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;`;
+  document.getElementById('wos-detail-avatar').textContent = wosInitials(name);
+  document.getElementById('wos-detail-name').textContent = name;
+  document.getElementById('wos-detail-company').textContent = [p.company, p.role].filter(Boolean).join(' · ');
+
+  // Update action buttons
+  const actions = document.querySelector('.wos-detail-actions');
+  if(actions){
+    actions.innerHTML = wosEditMode
+      ? `<button class="wos-detail-btn" onclick="cancelWOSEdit()">Cancel</button>
+         <button class="wos-detail-btn primary" onclick="saveWOSEdit()">Save</button>`
+      : `<button class="wos-detail-btn primary" onclick="createOutreachFromDetail()">+ Outreach</button>
+         <button class="wos-detail-btn" onclick="startWOSEdit()" style="flex:0.6;">Edit</button>
+         <button class="wos-detail-btn" onclick="toggleRadarFromDetail()" id="wos-radar-btn" style="flex:0.6;${p.on_radar?'background:#EEEDFE;color:#534AB7;border-color:#AFA9EC;':''}">${p.on_radar?'On radar ✓':'On radar'}</button>`;
+  }
+
+  const body = document.getElementById('wos-detail-body');
+  if(wosEditMode){
+    renderWOSEditForm(p, body);
+  } else {
+    renderWOSReadView(p, body);
+  }
+}
+
+function renderWOSReadView(p, body){
+  const row = (k,v) => (v!==null&&v!==undefined&&v!=='') ? `<div class="wos-detail-row"><span class="dk">${k}</span><span class="dv">${v}</span></div>` : '';
+  const section = (label) => `<div class="wos-detail-section">${label}</div>`;
+  const name = cleanName(p.name)||'—';
+  body.innerHTML = `
+    ${section('Identity')}
+    ${row('Name', name !== (p.name||'') ? `${name} <span style="font-size:9px;color:#E24B4A;font-weight:400;">(fixed)</span>` : '')}
+    ${row('Email', p.email ? `<a href="mailto:${p.email}" style="color:#185FA5;">${p.email}</a>` : '')}
+    ${row('Phone', p.phone)}
+    ${row('Former company', p.former_company)}
+    ${section('Location')}
+    ${row('Region', p.region)}
+    ${row('Location', p.location)}
+    ${section('Professional')}
+    ${row('Kind', p.kind)}
+    ${row('Role', p.role)}
+    ${row('Specialty', Array.isArray(p.specialty) ? p.specialty.join(', ') : p.specialty)}
+    ${section('Relationship')}
+    ${row('Strength', p.relationship)}
+    ${row('Known from', p.known_from)}
+    ${row('Referred by', p.referred_by)}
+    ${row('Hiring DM', p.hiring_decision_maker ? 'Yes' : null)}
+    ${p.talent ? `${section('Talent')}
+    ${row('Work knowledge', p.work_knowledge)}
+    ${row('Quality', p.quality)}
+    ${row('Warmth', p.warmth)}
+    ${row('Freelance', p.freelance_status)}` : ''}
+    ${p.notes ? `${section('Notes')}<div class="wos-detail-note">${p.notes}</div>` : ''}
+  `;
+}
+
+function renderWOSEditForm(p, body){
+  const name = cleanName(p.name)||'';
+  const field = (label, id, val, type='text') => `
+    <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:7px;">
+      <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.06em;text-transform:uppercase;">${label}</div>
+      <input id="wos-edit-${id}" type="${type}" value="${(val||'').toString().replace(/"/g,'&quot;')}"
+        style="padding:5px 8px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:6px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;width:100%;"
+        onfocus="this.style.borderColor='#534AB7';this.style.background='#fff'"
+        onblur="this.style.borderColor='#b4b2a9';this.style.background='#f5f5f3'"/>
+    </div>`;
+  const select = (label, id, val, opts) => `
+    <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:7px;">
+      <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.06em;text-transform:uppercase;">${label}</div>
+      <select id="wos-edit-${id}" style="padding:5px 8px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:6px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;width:100%;">
+        <option value="">—</option>
+        ${opts.map(o=>`<option value="${o}" ${val===o?'selected':''}>${o}</option>`).join('')}
+      </select>
+    </div>`;
+  const checkbox = (label, id, val) => `
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px;">
+      <input type="checkbox" id="wos-edit-${id}" ${val?'checked':''} style="width:14px;height:14px;cursor:pointer;accent-color:#534AB7;"/>
+      <div style="font-size:12px;color:#2c2c2a;">${label}</div>
+    </div>`;
+  const textarea = (label, id, val) => `
+    <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:7px;">
+      <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.06em;text-transform:uppercase;">${label}</div>
+      <textarea id="wos-edit-${id}" rows="3"
+        style="padding:5px 8px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:6px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;width:100%;resize:vertical;"
+        onfocus="this.style.borderColor='#534AB7';this.style.background='#fff'"
+        onblur="this.style.borderColor='#b4b2a9';this.style.background='#f5f5f3'">${(p.notes||'').replace(/</g,'&lt;')}</textarea>
+    </div>`;
+
+  const KINDS = ['PROD','BIZ','CREATIVE','DESIGN','TECH','EVENTS','AV','FILM','STUDIO','Scenic','OTHER'];
+  const REGIONS = ['US','EU','APAC','LATAM','MENA'];
+  const RELS = ['Inner circle','Contact','Known','Cold'];
+  const WORK_K = ['Worked with','Spoken','Portfolio only'];
+  const QUALITY = ['Exceptional','Solid','Promising'];
+  const WARMTH = ['Love working with','Good','Neutral','Avoid'];
+  const FREELANCE = ['Currently freelance','Has freelanced','Staff only','Unknown'];
+
+  body.innerHTML = `
+    <div style="font-size:11px;color:#888780;margin-bottom:10px;">Edit record — hit Save when done.</div>
+    ${field('Name','name', name)}
+    ${field('Company','company', p.company)}
+    ${field('Former company','former_company', p.former_company)}
+    ${field('Email','email', p.email, 'email')}
+    ${field('Phone','phone', p.phone)}
+    ${select('Region','region', p.region, REGIONS)}
+    ${field('Location (state/country)','location', p.location)}
+    ${select('Kind','kind', p.kind, KINDS)}
+    ${field('Role','role', p.role)}
+    ${field('Known from','known_from', p.known_from)}
+    ${field('Referred by','referred_by', p.referred_by)}
+    ${select('Relationship','relationship', p.relationship, RELS)}
+    ${checkbox('Talent','talent', p.talent)}
+    ${checkbox('Hiring decision maker','hiring_decision_maker', p.hiring_decision_maker)}
+    ${select('Work knowledge','work_knowledge', p.work_knowledge, WORK_K)}
+    ${select('Quality','quality', p.quality, QUALITY)}
+    ${select('Warmth','warmth', p.warmth, WARMTH)}
+    ${select('Freelance status','freelance_status', p.freelance_status, FREELANCE)}
+    ${textarea('Notes','notes', p.notes)}
+  `;
+}
+
+function startWOSEdit(){
+  wosEditMode = true;
+  const p = wosPeople.find(x=>x.id===wosSelectedPersonId);
+  if(p) renderWOSDetail(p);
+}
+
+function cancelWOSEdit(){
+  wosEditMode = false;
+  const p = wosPeople.find(x=>x.id===wosSelectedPersonId);
+  if(p) renderWOSDetail(p);
+}
+
+async function saveWOSEdit(){
+  const p = wosPeople.find(x=>x.id===wosSelectedPersonId);
+  if(!p) return;
+
+  const g = id => document.getElementById('wos-edit-'+id);
+  const gv = id => g(id)?.value?.trim()||null;
+  const gc = id => g(id)?.checked||false;
+
+  const updates = {
+    id: p.id,
+    name: gv('name'),
+    company: gv('company'),
+    former_company: gv('former_company'),
+    email: gv('email'),
+    phone: gv('phone'),
+    region: gv('region'),
+    location: gv('location'),
+    kind: gv('kind'),
+    role: gv('role'),
+    known_from: gv('known_from'),
+    referred_by: gv('referred_by'),
+    relationship: gv('relationship'),
+    talent: gc('talent'),
+    hiring_decision_maker: gc('hiring_decision_maker'),
+    work_knowledge: gv('work_knowledge'),
+    quality: gv('quality'),
+    warmth: gv('warmth'),
+    freelance_status: gv('freelance_status'),
+    notes: g('notes')?.value?.trim()||null,
+  };
+
+  // Update local cache
+  Object.assign(p, updates);
+
+  // Save to Supabase
+  await saveWOSPerson(updates);
+
+  wosEditMode = false;
+  wosPeopleLoaded = false;
+  await loadWOSPeople();
+  renderWOSDetail(wosPeople.find(x=>x.id===wosSelectedPersonId)||p);
+  filterWOSPeople();
+  showXPFlash('Saved');
+}
+
+function closeWOSDetail(){
+  wosSelectedPersonId = null;
+  wosEditMode = false;
+  const panel = document.getElementById('wos-detail-panel');
+  if(panel) panel.classList.add('hidden');
+  filterWOSPeople();
+}
+
+async function toggleRadarFromDetail(){
+  const p = wosPeople.find(x=>x.id===wosSelectedPersonId);
+  if(!p) return;
+  p.on_radar = !p.on_radar;
+  await saveWOSPerson({id:p.id, on_radar:p.on_radar});
+  wosPeopleLoaded = false;
+  await loadWOSPeople();
+  const updated = wosPeople.find(x=>x.id===wosSelectedPersonId);
+  if(updated) renderWOSDetail(updated);
+  filterWOSPeople();
+}
+
+async function createOutreachFromDetail(){
+  const p = wosPeople.find(x=>x.id===wosSelectedPersonId);
+  if(!p) return;
+  const intent = prompt(`Outreach intent for ${cleanName(p.name)}:`, '');
+  if(!intent || !intent.trim()) return;
+  await saveWOSOutreach({
+    person_id: p.id,
+    person_name: cleanName(p.name),
+    company: p.company||'',
+    intent: intent.trim(),
+    status: 'to_reach_out',
+    created_at: new Date().toISOString(),
+  });
+  wosPeopleLoaded = false;
+  showXPFlash('Outreach created for '+cleanName(p.name));
+}
+
+// ── OUTREACH VIEW ──
+async function renderWOSOutreachView(el){
+  el.innerHTML = `<div class="wos-loading">Loading outreach...</div>`;
+  await loadWOSPeople();
+
+  const byStatus = {to_reach_out:[], active:[], logged:[]};
+  wosOutreach.forEach(o=>{
+    const s = o.status||'to_reach_out';
+    if(byStatus[s]) byStatus[s].push(o); else byStatus.logged.push(o);
+  });
+
+  function ageClass(dateStr){
+    const days = Math.floor((Date.now()-new Date(dateStr).getTime())/86400000);
+    return days<=7?'wos-age-fresh':days<=21?'wos-age-mid':'wos-age-stale';
+  }
+  function ageLabel(dateStr){
+    const days = Math.floor((Date.now()-new Date(dateStr).getTime())/86400000);
+    return days===0?'Today':days===1?'Yesterday':days+' days ago';
+  }
+
+  function pipeCol(title, items, status){
+    const cards = items.length===0
+      ? `<div style="font-size:11px;color:#b4b2a9;text-align:center;padding:8px 0;">Empty</div>`
+      : items.map(o=>`
+        <div class="wos-pipe-card ${status==='active'?'wos-active-card':''}" onclick="openWOSOutreachCard('${o.id}')">
+          <div class="wos-pipe-name">${o.person_name||'—'}</div>
+          <div class="wos-pipe-intent">${o.intent||''}</div>
+          <div class="wos-pipe-age ${ageClass(o.created_at)}">${ageLabel(o.created_at)}</div>
+        </div>`).join('');
+    return `<div class="wos-pipe-col">
+      <div class="wos-pipe-header">${title} <span style="font-weight:400;font-size:10px;text-transform:none;letter-spacing:0;color:#888780;">${items.length}</span></div>
+      ${cards}
+      ${status==='to_reach_out'?`<button class="wos-pipe-add" onclick="openNewOutreachModal()">+ Add</button>`:''}
+    </div>`;
+  }
+
+  el.innerHTML = `<div class="wos-pipeline">
+    ${pipeCol('To reach out', byStatus.to_reach_out, 'to_reach_out')}
+    ${pipeCol('Active', byStatus.active, 'active')}
+    ${pipeCol('Logged', byStatus.logged, 'logged')}
+  </div>`;
+}
+
+function openWOSOutreachCard(id){
+  const o = wosOutreach.find(x=>x.id===id);
+  if(!o) return;
+  const actions = ['to_reach_out','active','logged'].filter(s=>s!==o.status);
+  const choice = confirm(`${o.person_name} — ${o.intent}
+
+Move to: ${actions[0].replace(/_/g,' ')}?`);
+  if(choice){
+    o.status = actions[0];
+    saveWOSOutreach({id:o.id, status:o.status}).then(()=>{
+      wosPeopleLoaded=false;
+      renderWOSOutreachView(document.getElementById('task-list'));
+    });
+  }
+}
+
+async function openNewOutreachModal(){
+  const name = prompt('Person name:','');
+  if(!name||!name.trim()) return;
+  const intent = prompt('Intent / reason to reach out:','');
+  if(!intent||!intent.trim()) return;
+  const person = wosPeople.find(p=>(p.name||'').toLowerCase().includes(name.toLowerCase()));
+  await saveWOSOutreach({
+    person_id: person?.id||null,
+    person_name: name.trim(),
+    company: person?.company||'',
+    intent: intent.trim(),
+    status:'to_reach_out',
+    created_at: new Date().toISOString(),
+  });
+  wosPeopleLoaded=false;
+  await loadWOSPeople();
+  renderWOSOutreachView(document.getElementById('task-list'));
+}
 
 </script>
 </body>
