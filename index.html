@@ -3424,11 +3424,21 @@ function filterWOSPeople(){
     return true;
   });
 
-  // Sort: network = score desc (on-radar first within tier), talent+people = alpha
+  // Sort: network = score desc, talent = kind then freelance first, people = alpha
   if(wosCurrentPeopleTab === 'network'){
     results.sort((a,b) => {
       const sd = wosScore(b) - wosScore(a);
       if(sd !== 0) return sd;
+      return (cleanName(a.name)||'').localeCompare(cleanName(b.name)||'');
+    });
+  } else if(wosCurrentPeopleTab === 'talent'){
+    results.sort((a,b) => {
+      const ka = (a.kind||'ZZZ'), kb = (b.kind||'ZZZ');
+      if(ka !== kb) return ka.localeCompare(kb);
+      // Within same kind, freelancers first
+      const af = a.freelance_status === 'Currently freelance' ? 0 : 1;
+      const bf = b.freelance_status === 'Currently freelance' ? 0 : 1;
+      if(af !== bf) return af - bf;
       return (cleanName(a.name)||'').localeCompare(cleanName(b.name)||'');
     });
   } else {
