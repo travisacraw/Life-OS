@@ -7,6 +7,9 @@
 <meta name="apple-mobile-web-app-title" content="Life OS">
 <meta name="theme-color" content="#7F77DD">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Life OS</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -885,6 +888,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <div class="wos-modal-label">Phone</div>
           <input class="wos-modal-input" id="nc-phone" placeholder="Optional"/>
         </div>
+        <div class="wos-modal-row">
+          <div class="wos-modal-label">Website / Portfolio</div>
+          <input class="wos-modal-input" id="nc-website" placeholder="robinbrown.studio"/>
+        </div>
       </div>
 
       <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:0.5px solid #e8e8e4;">Location</div>
@@ -1037,6 +1044,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <div class="wos-detail-name" id="wos-detail-name"></div>
             <div class="wos-detail-company" id="wos-detail-company"></div>
           </div>
+          <div id="wos-detail-website-icon" style="display:none;cursor:pointer;padding:2px 4px;border-radius:5px;font-size:14px;line-height:1;" title="Open website / portfolio" onclick="openWOSWebsite()">📖</div>
           <div class="wos-detail-close" onclick="closeWOSDetail()">×</div>
         </div>
         <div class="wos-detail-body" id="wos-detail-body"></div>
@@ -3139,6 +3147,7 @@ async function saveNewContact() {
     warmth:            gv('nc-warmth'),
     freelance_status:  gc('nc-is-freelance') ? 'Currently freelance' : gv('nc-freelance'),
     notes:             document.getElementById('nc-notes')?.value?.trim()||null,
+    website:           gv('nc-website'),
     on_radar:          false,
     radar_score:       0,
     created_at:        new Date().toISOString(),
@@ -3551,9 +3560,22 @@ function renderWOSReadView(p, body){
   document.getElementById('wos-detail-name').textContent = name;
   document.getElementById('wos-detail-company').innerHTML = freelanceChip + (subline||'');
 
+  // Show website icon if record has one
+  const websiteIcon = document.getElementById('wos-detail-website-icon');
+  if(websiteIcon){
+    if(p.website){
+      websiteIcon.style.display = 'block';
+      websiteIcon.dataset.url = p.website.startsWith('http') ? p.website : 'https://'+p.website;
+    } else {
+      websiteIcon.style.display = 'none';
+      websiteIcon.dataset.url = '';
+    }
+  }
+
   body.innerHTML = `
     ${section('Identity')}
     ${row('Email', p.email ? `<a href="mailto:${p.email}" style="color:#185FA5;">${p.email}</a>` : '')}
+    ${row('Website', p.website ? `<a href="${p.website.startsWith('http')?p.website:'https://'+p.website}" target="_blank" style="color:#185FA5;">${p.website.replace(/^https?:\/\//,'')}</a>` : '')}
     ${row('Phone', p.phone)}
     ${section('Location')}
     ${row('Region', p.region)}
@@ -3637,6 +3659,7 @@ function renderWOSEditForm(p, body){
     ${checkbox('Currently freelance','is_freelance', p.freelance_status==='Currently freelance')}
     ${field('Email','email', p.email, 'email')}
     ${field('Phone','phone', p.phone)}
+    ${field('Website','website', p.website)}
     ${select('Region','region', p.region, REGIONS)}
     ${field('Location (state/country)','location', p.location)}
     <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:7px;">
@@ -3714,6 +3737,7 @@ async function saveWOSEdit(){
     quality: gv('quality'),
     warmth: gv('warmth'),
     freelance_status: gc('is_freelance') ? 'Currently freelance' : (p.freelance_status === 'Currently freelance' ? 'Has freelanced' : p.freelance_status),
+    website: gv('website'),
     notes: g('notes')?.value?.trim()||null,
     specialty: getSpecialtyTags('wos-edit-specialty-wrap'),
   };
@@ -3730,6 +3754,12 @@ async function saveWOSEdit(){
   const updated = wosPeople.find(x=>x.id===savedId);
   if(updated) renderWOSDetail(updated);
   showXPFlash('Saved');
+}
+
+function openWOSWebsite(){
+  const icon = document.getElementById('wos-detail-website-icon');
+  const url = icon?.dataset?.url;
+  if(url) window.open(url, '_blank');
 }
 
 function closeWOSDetail(){
