@@ -152,6 +152,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wos-badge{font-size:10px;padding:2px 6px;border-radius:5px;white-space:nowrap;font-weight:500;}
 .wos-badge-PROD{background:#E1F5EE;color:#0F6E56;} .wos-badge-BIZ{background:#E6F1FB;color:#185FA5;} .wos-badge-CREATIVE{background:#FAECE7;color:#993C1D;}
 .wos-badge-DESIGN{background:#FAEEDA;color:#854F0B;} .wos-badge-TECH{background:#F1EFE8;color:#5F5E5A;} .wos-badge-other{background:#EEEDFE;color:#534AB7;}
+.wos-badge-FILM{background:#FBEAF0;color:#993556;} .wos-badge-EVENTS{background:#E1F5EE;color:#085041;} .wos-badge-AV{background:#E6F1FB;color:#0C447C;}
+.wos-badge-STUDIO{background:#EEEDFE;color:#3C3489;} .wos-badge-SCENIC{background:#FAEEDA;color:#633806;} .wos-badge-Scenic{background:#FAEEDA;color:#633806;} .wos-badge-OTHER{background:#F1EFE8;color:#444441;}
 .wos-badge-hires{font-size:10px;padding:2px 6px;border-radius:5px;background:#FAEEDA;color:#854F0B;}
 .wos-people-tabs{display:flex;border-bottom:0.5px solid #d1d1cf;margin-bottom:12px;}
 .wos-ptab{padding:7px 14px;font-size:12px;font-weight:500;color:#5f5e5a;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.1s;}
@@ -169,6 +171,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wos-pipe-intent{font-size:11px;color:#5f5e5a;margin-top:2px;}
 .wos-pipe-age{font-size:10px;margin-top:4px;}
 .wos-age-fresh{color:#1D9E75;} .wos-age-mid{color:#BA7517;} .wos-age-stale{color:#E24B4A;}
+.wos-specialty-wrap{position:relative;}
+.wos-specialty-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
+.wos-specialty-tag{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;background:#F1EFE8;color:#444441;border-radius:10px;font-size:10px;font-weight:500;}
+.wos-specialty-tag-x{cursor:pointer;opacity:0.5;font-size:11px;line-height:1;}
+.wos-specialty-tag-x:hover{opacity:1;}
+.wos-specialty-input{width:100%;padding:5px 8px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:6px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;}
+.wos-specialty-input:focus{outline:none;border-color:#534AB7;background:#fff;}
+.wos-specialty-dropdown{position:absolute;top:100%;left:0;right:0;background:#fff;border:0.5px solid #b4b2a9;border-radius:6px;z-index:50;max-height:160px;overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,0.08);}
+.wos-specialty-opt{padding:6px 10px;font-size:12px;color:#2c2c2a;cursor:pointer;}
+.wos-specialty-opt:hover{background:#EEEDFE;color:#534AB7;}
 .wos-pipe-add{width:100%;padding:6px;font-size:11px;border:0.5px dashed #b4b2a9;border-radius:7px;background:transparent;color:#888780;cursor:pointer;font-family:inherit;margin-top:4px;transition:all 0.1s;}
 .wos-pipe-add:hover{border-color:#534AB7;color:#534AB7;background:#EEEDFE;}
 .wos-detail{width:252px;border-left:0.5px solid #d1d1cf;background:#fff;display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;}
@@ -774,9 +786,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="nav-item work-nav" onclick="openNewProjectModal()" id="nav-wos-new-project" style="color:#1D9E75;font-weight:500;"><div class="nav-dot" style="background:#1D9E75"></div>+ New Project</div>
       <div class="nav-divider"></div>
       <div class="sidebar-header">People</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-people')" id="nav-wos-people"><div class="nav-dot" style="background:#7F77DD"></div>People</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-network')" id="nav-wos-network"><div class="nav-dot" style="background:#D4537E"></div>Network</div>
       <div class="nav-item work-nav" onclick="setWorkView('wos-talent')" id="nav-wos-talent"><div class="nav-dot" style="background:#1D9E75"></div>Talent</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-outreach')" id="nav-wos-outreach"><div class="nav-dot" style="background:#D4537E"></div>Outreach</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-people')" id="nav-wos-people"><div class="nav-dot" style="background:#7F77DD"></div>People</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-outreach')" id="nav-wos-outreach"><div class="nav-dot" style="background:#BA7517"></div>Outreach</div>
       <div style="flex:1"></div>
       <div class="os-switcher to-life" onclick="switchToLifeOS()">
           <div style="flex:1">
@@ -886,6 +899,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="wos-modal-row">
           <div class="wos-modal-label">Role</div>
           <input class="wos-modal-input" id="nc-role" placeholder="e.g. Creative Director"/>
+        </div>
+        <div class="wos-modal-row" style="grid-column:1/-1;">
+          <div class="wos-modal-label">Specialties</div>
+          <div id="nc-specialty-wrap"></div>
         </div>
       </div>
 
@@ -2816,8 +2833,9 @@ function setWorkView(v) {
   const titles = {
     'wos-dashboard': 'Work OS',
     'wos-projects':  'All Projects',
-    'wos-people':    'People',
+    'wos-network':   'Network',
     'wos-talent':    'Talent',
+    'wos-people':    'People',
     'wos-outreach':  'Outreach',
   };
   document.getElementById('view-title').textContent = titles[v] || v;
@@ -2829,7 +2847,7 @@ function setWorkView(v) {
   const wosDetail = document.getElementById('wos-detail-panel');
   if (wosDetail) {
     wosDetail.classList.add('hidden');
-    if (v === 'wos-people' || v === 'wos-talent') {
+    if (v === 'wos-people' || v === 'wos-talent' || v === 'wos-network') {
       wosDetail.style.display = '';
     } else {
       wosDetail.style.display = 'none';
@@ -2843,9 +2861,10 @@ function renderWorkView() {
   const list = document.getElementById('task-list');
   if (workView === 'wos-dashboard')  { renderWOSDashboard(list); return; }
   if (workView === 'wos-projects')   { renderWOSProjects(list);  return; }
-  if (workView === 'wos-people')     { renderWOSPeopleView(list, 'all');    return; }
-  if (workView === 'wos-talent')     { renderWOSPeopleView(list, 'talent'); return; }
-  if (workView === 'wos-outreach')   { renderWOSOutreachView(list);         return; }
+  if (workView === 'wos-network')    { renderWOSPeopleView(list, 'network'); return; }
+  if (workView === 'wos-talent')     { renderWOSPeopleView(list, 'talent');  return; }
+  if (workView === 'wos-people')     { renderWOSPeopleView(list, 'all');     return; }
+  if (workView === 'wos-outreach')   { renderWOSOutreachView(list);          return; }
 }
 
 // ── DASHBOARD ──
@@ -3052,7 +3071,11 @@ function openContactModal(type) {
   if(talentFields){ talentFields.style.display = 'none'; }
 
   document.getElementById('wos-new-contact-overlay').classList.add('show');
-  setTimeout(() => document.getElementById('nc-name').focus(), 80);
+  setTimeout(() => {
+    document.getElementById('nc-name').focus();
+    initSpecialtyPool();
+    renderSpecialtyEditor('nc-specialty-wrap', []);
+  }, 80);
 }
 
 function closeContactModal() {
@@ -3078,6 +3101,7 @@ async function saveNewContact() {
     role:              gv('nc-role'),
     known_from:        gv('nc-known-from'),
     known_from_is_former: gc('nc-known-from-ex'),
+    specialty: getSpecialtyTags('nc-specialty-wrap'),
     referred_by:       gv('nc-referred'),
     relationship:      gv('nc-relationship'),
     hiring_decision_maker: gc('nc-hiring'),
@@ -3154,7 +3178,7 @@ let wosPeople = [];
 let wosOutreach = [];
 let wosPeopleLoaded = false;
 let wosActiveFilters = new Set();
-let wosCurrentPeopleTab = 'all';
+let wosCurrentPeopleTab = 'network';
 let wosSelectedPersonId = null;
 
 const WOS_AVATAR_COLORS = [
@@ -3228,16 +3252,27 @@ async function saveWOSOutreach(outreach){
 }
 
 // ── PEOPLE VIEW ──
+function wosScore(p){
+  const relScore = {'Inner circle':40,'Contact':25,'Known':10,'Cold':2}[p.relationship||'Cold']||2;
+  const radarBonus = p.on_radar ? 20 : 0;
+  const hiringBonus = p.hiring_decision_maker ? 10 : 0;
+  return relScore + radarBonus + hiringBonus;
+}
+
 async function renderWOSPeopleView(el, mode){
   el.innerHTML = `<div class="wos-loading">Loading people...</div>`;
   await loadWOSPeople();
 
   const talentCount = wosPeople.filter(p=>p.talent).length;
-  const tabs = mode === 'talent'
-    ? `<div class="wos-ptab" onclick="switchToWOSPeopleMode('all',this)">People <span class="wos-ptab-count">${wosPeople.length}</span></div>
-       <div class="wos-ptab active">Talent <span class="wos-ptab-count">${talentCount}</span></div>`
-    : `<div class="wos-ptab active">People <span class="wos-ptab-count">${wosPeople.length}</span></div>
-       <div class="wos-ptab" onclick="switchToWOSPeopleMode('talent',this)">Talent <span class="wos-ptab-count">${talentCount}</span></div>`;
+  const networkCount = wosPeople.length;
+
+  const tabMode = (m, label, count) =>
+    `<div class="wos-ptab ${mode===m?'active':''}" onclick="switchToWOSPeopleMode('${m}')">${label} <span class="wos-ptab-count">${count}</span></div>`;
+
+  const tabs = `
+    ${tabMode('network','Network', networkCount)}
+    ${tabMode('talent','Talent', talentCount)}
+    ${tabMode('all','People', wosPeople.length)}`;
 
   const kindOpts = ['PROD','BIZ','CREATIVE','DESIGN','TECH','EVENTS','AV','FILM','STUDIO','OTHER']
     .map(k=>`<option value="${k}">${k}</option>`).join('');
@@ -3274,6 +3309,11 @@ async function renderWOSPeopleView(el, mode){
         <div class="wos-filter-pill" onclick="wosToggleFilter(this,'hiring')" data-filter="hiring">Hiring decision makers</div>
         <div class="wos-filter-pill" onclick="wosToggleFilter(this,'radar')" data-filter="radar">On radar</div>
         ${mode==='talent'?`<div class="wos-filter-pill" onclick="wosToggleFilter(this,'freelance')" data-filter="freelance">Freelance</div>`:''}
+        <div style="position:relative;display:inline-block;">
+          <input class="wos-filter-sel" id="wos-f-specialty" placeholder="Specialty..." style="width:120px;"
+            oninput="filterWOSPeople()" list="wos-specialty-list"/>
+          <datalist id="wos-specialty-list">${wosSpecialtyPool.map(s=>`<option value="${s}">`).join('')}</datalist>
+        </div>
       </div>
       <div class="wos-legend">
         <div class="wos-legend-item"><div class="wos-rel-dot dot-inner-circle"></div> Inner circle</div>
@@ -3288,16 +3328,18 @@ async function renderWOSPeopleView(el, mode){
       <div id="wos-people-list"></div>
     </div>
   `;
-  wosCurrentPeopleTab = mode;
+  wosCurrentPeopleTab = mode || 'network';
   wosActiveFilters.clear();
   filterWOSPeople();
 }
 
 function switchToWOSPeopleMode(mode){
-  workView = mode === 'talent' ? 'wos-talent' : 'wos-people';
+  const viewMap = {network:'wos-network', talent:'wos-talent', all:'wos-people'};
+  workView = viewMap[mode] || 'wos-network';
   document.querySelectorAll('.nav-item.work-nav').forEach(el=>el.classList.remove('active'));
-  const navEl = document.getElementById('nav-wos-'+workView.replace('wos-',''));
+  const navEl = document.getElementById('nav-'+workView);
   if(navEl) navEl.classList.add('active');
+  wosCurrentPeopleTab = mode;
   renderWOSPeopleView(document.getElementById('task-list'), mode);
 }
 
@@ -3322,7 +3364,9 @@ function filterWOSPeople(){
     return (p.region||'') === r;
   }
 
-  let pool = wosCurrentPeopleTab === 'talent' ? wosPeople.filter(p=>p.talent) : wosPeople;
+  let pool = wosCurrentPeopleTab === 'talent'
+    ? wosPeople.filter(p=>p.talent)
+    : wosPeople;
 
   const results = pool.filter(p=>{
     if(q && !`${p.name||''} ${p.company||''} ${p.role||''} ${p.former_company||''}`.toLowerCase().includes(q)) return false;
@@ -3331,22 +3375,40 @@ function filterWOSPeople(){
     if(rel && (p.relationship||'')!==rel) return false;
     if(work && (p.work_knowledge||'')!==work) return false;
     if(quality && (p.quality||'')!==quality) return false;
+    const specFilter = document.getElementById('wos-f-specialty')?.value?.trim()||'';
+    if(specFilter){
+      const specs = Array.isArray(p.specialty) ? p.specialty : (p.specialty ? [p.specialty] : []);
+      const roleMatch = (p.role||'').toLowerCase().includes(specFilter.toLowerCase());
+      const specMatch = specs.some(s => s.toLowerCase().includes(specFilter.toLowerCase()));
+      if(!roleMatch && !specMatch) return false;
+    }
     if(wosActiveFilters.has('hiring') && !p.hiring_decision_maker) return false;
     if(wosActiveFilters.has('radar') && !p.on_radar) return false;
     if(wosActiveFilters.has('freelance') && p.freelance_status !== 'Currently freelance') return false;
     return true;
   });
 
+  // Sort: network = score desc (on-radar first within tier), talent+people = alpha
+  if(wosCurrentPeopleTab === 'network'){
+    results.sort((a,b) => {
+      const sd = wosScore(b) - wosScore(a);
+      if(sd !== 0) return sd;
+      return (cleanName(a.name)||'').localeCompare(cleanName(b.name)||'');
+    });
+  } else {
+    results.sort((a,b) => (cleanName(a.name)||'').localeCompare(cleanName(b.name)||''));
+  }
+
   const listEl = document.getElementById('wos-people-list');
   const metaEl = document.getElementById('wos-results-meta');
   if(!listEl) return;
   listEl.innerHTML = results.length === 0
     ? `<div class="wos-empty-state">No results — try adjusting your filters.</div>`
-    : results.map(p=>wosPersonRow(p)).join('');
+    : results.map(p=>wosPersonRow(p, wosCurrentPeopleTab)).join('');
   if(metaEl) metaEl.textContent = `Showing ${results.length} of ${pool.length}`;
 }
 
-function wosPersonRow(p){
+function wosPersonRow(p, mode){
   const displayName = cleanName(p.name)||'';
   const [bg,fg] = wosAvatarColor(displayName);
   const kindClass = `wos-badge wos-badge-${p.kind||'other'}`;
@@ -3355,13 +3417,19 @@ function wosPersonRow(p){
     ? `<div class="wos-radar-dot" title="On radar"></div>`
     : `<div class="wos-radar-spacer"></div>`;
   const isFreelance = p.freelance_status === 'Currently freelance';
-  const companyStr = isFreelance ? 'Freelance' : (p.company||'');
+  const companyStr = isFreelance ? '' : (p.company||'');
   const knownStr = p.known_from
     ? (p.known_from_is_former ? ` · ex. ${p.known_from}` : ` · via ${p.known_from}`)
     : '';
   const subline = [companyStr, p.role].filter(Boolean).join(' · ') + knownStr;
   const hiringHtml = p.hiring_decision_maker ? `<span class="wos-badge-hires">Hires</span>` : '';
-  const talentHtml = p.talent ? `<span class="wos-badge" style="background:#E1F5EE;color:#0F6E56;">Talent</span>` : '';
+
+  // Badge logic depends on view mode
+  const freelanceHtml = (mode === 'talent' && isFreelance)
+    ? `<span class="wos-badge" style="background:#F1EFE8;color:#5F5E5A;">Freelance</span>` : '';
+  const talentHtml = (mode !== 'talent' && p.talent)
+    ? `<span class="wos-badge" style="background:#E1F5EE;color:#0F6E56;">Talent</span>` : '';
+
   const selected = p.id === wosSelectedPersonId ? 'border-color:#534AB7;' : '';
   return `<div class="wos-person-row" style="${selected}" onclick="openWOSPersonDetail('${p.id}')">
     <div class="wos-row-left">
@@ -3374,6 +3442,7 @@ function wosPersonRow(p){
     </div>
     <div class="wos-person-right">
       ${hiringHtml}
+      ${freelanceHtml}
       ${talentHtml}
       <span class="${kindClass}">${p.kind||'—'}</span>
       <div class="wos-rel-dot ${relDot}" title="${p.relationship||''}"></div>
@@ -3465,7 +3534,7 @@ function renderWOSReadView(p, body){
     ${section('Professional')}
     ${row('Kind', p.kind)}
     ${row('Role', p.role)}
-    ${row('Specialty', Array.isArray(p.specialty) ? p.specialty.join(', ') : p.specialty)}
+    ${(Array.isArray(p.specialty)&&p.specialty.length)||(p.specialty) ? `<div style="margin-top:3px;display:flex;flex-wrap:wrap;gap:3px;">${(Array.isArray(p.specialty)?p.specialty:[p.specialty]).filter(Boolean).map(s=>`<span style="display:inline-flex;padding:2px 7px;background:#F1EFE8;color:#444441;border-radius:10px;font-size:10px;font-weight:500;">${s}</span>`).join('')}</div>` : ''}
     ${section('Relationship')}
     ${row('Strength', p.relationship)}
     ${row('Known from', p.known_from ? (p.known_from_is_former ? `ex. ${p.known_from}` : p.known_from) : null)}
@@ -3545,6 +3614,10 @@ function renderWOSEditForm(p, body){
     ${field('Location (state/country)','location', p.location)}
     ${select('Kind','kind', p.kind, KINDS)}
     ${field('Role','role', p.role)}
+    <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:7px;">
+      <div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.06em;text-transform:uppercase;">Specialties</div>
+      <div id="wos-edit-specialty-wrap"></div>
+    </div>
     ${fieldWithCheckbox('Known from','known_from', p.known_from, 'known_from_is_former', p.known_from_is_former, 'ex (former company)')}
     ${field('Referred by','referred_by', p.referred_by)}
     ${select('Relationship','relationship', p.relationship, RELS)}
@@ -3560,7 +3633,11 @@ function renderWOSEditForm(p, body){
 function startWOSEdit(){
   wosEditMode = true;
   const p = wosPeople.find(x=>x.id===wosSelectedPersonId);
-  if(p) renderWOSDetail(p);
+  if(p){
+    renderWOSDetail(p);
+    initSpecialtyPool();
+    setTimeout(()=>renderSpecialtyEditor('wos-edit-specialty-wrap', p.specialty), 50);
+  }
 }
 
 function cancelWOSEdit(){
@@ -3598,6 +3675,7 @@ async function saveWOSEdit(){
     warmth: gv('warmth'),
     freelance_status: gc('is_freelance') ? 'Currently freelance' : (p.freelance_status === 'Currently freelance' ? 'Has freelanced' : p.freelance_status),
     notes: g('notes')?.value?.trim()||null,
+    specialty: getSpecialtyTags('wos-edit-specialty-wrap'),
   };
 
   // Update local cache
@@ -3727,6 +3805,114 @@ async function openNewOutreachModal(){
   wosPeopleLoaded=false;
   await loadWOSPeople();
   renderWOSOutreachView(document.getElementById('task-list'));
+}
+
+
+
+// ── SPECIALTIES ──
+
+// Seed list from existing role data — grows as users add more
+const WOS_SPECIALTY_SEEDS = [
+  'CD','ECD','Creative Director','Head of Prod','Producer','EP','Exp Producer',
+  'Event Prod','Creative Tech','Tech Dir','Director','PM','Program Manager',
+  '3D Artist','3D Design','3D Exp Design','Motion Design','Digital Artist',
+  'LED','Broadcast','Set Decoration','Locations','Scenic','Fabrication',
+  'Lighting','AV','Sound','Video','Photography','Videography',
+  'Biz Dev','Strategy','Strategist','Accounts','Account Director',
+  'Recruiter','HR','Founder','CEO','MD','COO','CFO',
+  'AR','VR','XR','AI','Real-time','Unreal','TouchDesigner',
+  'Projection Mapping','Interactive','Immersive','Experiential',
+  'Brand','Identity','Graphic Design','Web Design','UX',
+  'Architecture','Interior Design','Exhibit Design','Environmental Design',
+  'Shop Director','Fabricator','Carpenter','Metal','Props',
+  'Stage Manager','Production Manager','Logistics','Operations',
+  'Writer','Copywriter','Content','Editorial','Social Media',
+  'Film','Cinematography','Editing','Post Production','Color',
+  'Music','Composer','Sound Design',
+];
+
+let wosSpecialtyPool = [...WOS_SPECIALTY_SEEDS];
+let wosEditingSpecialties = [];
+
+function initSpecialtyPool(){
+  // Pull all existing specialties from loaded people records
+  wosPeople.forEach(p => {
+    const specs = Array.isArray(p.specialty) ? p.specialty : (p.specialty ? [p.specialty] : []);
+    specs.forEach(s => {
+      if(s && !wosSpecialtyPool.includes(s)) wosSpecialtyPool.push(s);
+    });
+  });
+}
+
+function renderSpecialtyEditor(containerId, currentSpecs){
+  const specs = Array.isArray(currentSpecs) ? [...currentSpecs] : (currentSpecs ? [currentSpecs] : []);
+  wosEditingSpecialties = [...specs];
+  const el = document.getElementById(containerId);
+  if(!el) return;
+  el.innerHTML = `
+    <div class="wos-specialty-tags" id="spec-tags-${containerId}">
+      ${specs.map((s,i) => `<span class="wos-specialty-tag">${s}<span class="wos-specialty-tag-x" onclick="removeSpecialtyTag('${containerId}',${i})">×</span></span>`).join('')}
+    </div>
+    <div class="wos-specialty-wrap">
+      <input class="wos-specialty-input" id="spec-input-${containerId}" placeholder="Add specialty..."
+        oninput="showSpecialtyDropdown('${containerId}', this.value)"
+        onkeydown="handleSpecialtyKey(event, '${containerId}')"
+        onblur="setTimeout(()=>hideSpecialtyDropdown('${containerId}'),150)"/>
+      <div class="wos-specialty-dropdown" id="spec-drop-${containerId}" style="display:none;"></div>
+    </div>`;
+}
+
+function showSpecialtyDropdown(containerId, query){
+  const drop = document.getElementById('spec-drop-'+containerId);
+  if(!drop) return;
+  const q = query.toLowerCase().trim();
+  if(!q){ drop.style.display='none'; return; }
+  const matches = wosSpecialtyPool
+    .filter(s => s.toLowerCase().includes(q) && !wosEditingSpecialties.includes(s))
+    .slice(0,8);
+  if(matches.length === 0 && query.trim()){
+    drop.innerHTML = `<div class="wos-specialty-opt" onclick="addSpecialtyTag('${containerId}','${query.trim()}')">+ Add "${query.trim()}"</div>`;
+  } else {
+    drop.innerHTML = matches.map(s =>
+      `<div class="wos-specialty-opt" onclick="addSpecialtyTag('${containerId}','${s}')">${s}</div>`
+    ).join('');
+  }
+  drop.style.display = matches.length > 0 || query.trim() ? 'block' : 'none';
+}
+
+function hideSpecialtyDropdown(containerId){
+  const drop = document.getElementById('spec-drop-'+containerId);
+  if(drop) drop.style.display='none';
+}
+
+function addSpecialtyTag(containerId, value){
+  const v = value.trim();
+  if(!v || wosEditingSpecialties.includes(v)) return;
+  wosEditingSpecialties.push(v);
+  if(!wosSpecialtyPool.includes(v)) wosSpecialtyPool.push(v);
+  const input = document.getElementById('spec-input-'+containerId);
+  if(input) input.value = '';
+  hideSpecialtyDropdown(containerId);
+  renderSpecialtyEditor(containerId, wosEditingSpecialties);
+  // Re-focus
+  setTimeout(()=>{ const i=document.getElementById('spec-input-'+containerId); if(i) i.focus(); }, 50);
+}
+
+function removeSpecialtyTag(containerId, idx){
+  wosEditingSpecialties.splice(idx, 1);
+  renderSpecialtyEditor(containerId, wosEditingSpecialties);
+}
+
+function handleSpecialtyKey(e, containerId){
+  if(e.key === 'Enter' || e.key === ','){
+    e.preventDefault();
+    const input = document.getElementById('spec-input-'+containerId);
+    if(input && input.value.trim()) addSpecialtyTag(containerId, input.value);
+  }
+}
+
+function getSpecialtyTags(containerId){
+  return [...wosEditingSpecialties];
 }
 
 </script>
