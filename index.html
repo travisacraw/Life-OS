@@ -4790,95 +4790,95 @@ function extractAppUrl(note) {
   return match ? match[0] : null;
 }
 
-function renderWOSApplications(el) {
-  const appTasks = getApplicationTasks();
+function togglePassedSection(el) {
+  el.nextElementSibling.classList.toggle('open');
+  el.classList.toggle('open');
+}
 
-  // Group by status
-  const byStatus = {};
-  APP_STATUSES.forEach(s => byStatus[s.id] = []);
-  appTasks.forEach(t => {
-    const s = getAppStatus(t);
+function renderWOSApplications(el) {
+  var appTasks = getApplicationTasks();
+
+  var byStatus = {};
+  APP_STATUSES.forEach(function(s) { byStatus[s.id] = []; });
+  appTasks.forEach(function(t) {
+    var s = getAppStatus(t);
     if (byStatus[s]) byStatus[s].push(t);
     else byStatus['applied'].push(t);
   });
 
-  const totalOpen = appTasks.filter(t => !t.done || ['offer','interviewing','heard_back'].includes(getAppStatus(t))).length;
-  const totalActive = appTasks.filter(t => !['passed'].includes(getAppStatus(t))).length;
-
   function appCard(t) {
-    const status = APP_STATUSES.find(s => s.id === getAppStatus(t));
-    const url = extractAppUrl(t.note);
-    const company = extractAppCompany(t.text);
-    const age = ageDays(t.createdAt);
-    const isStale = age > 14 && !['offer','passed'].includes(getAppStatus(t));
-    const isDone = t.done;
+    var status = getAppStatus(t);
+    var url = extractAppUrl(t.note);
+    var company = extractAppCompany(t.text);
+    var age = ageDays(t.createdAt);
+    var isStale = age > 14 && status !== 'offer' && status !== 'passed';
+    var isDone = t.done;
 
-    return `<div class="app-card${isDone ? ' app-card-done' : ''}" onclick="switchToLifeOS();setTimeout(()=>{selectTask(${t.id});},80)">
-      <div class="app-card-top">
-        <div class="app-card-company">${company}</div>
-        ${url ? `<a class="app-card-link" href="${url}" target="_blank" onclick="event.stopPropagation()" title="Open posting">↗</a>` : ''}
-      </div>
-      ${t.text !== company ? `<div class="app-card-role">${t.text}</div>` : ''}
-      <div class="app-card-meta">
-        <span class="${isStale ? 'app-age-stale' : 'app-age'}">${age}d ago</span>
-        ${isDone ? '<span class="app-done-badge">✓ done</span>' : ''}
-      </div>
-      <div class="app-status-pills">
-        ${APP_STATUSES.map(s => `<button class="app-status-pill${getAppStatus(t) === s.id ? ' active' : ''}"
-          style="${getAppStatus(t) === s.id ? `background:${s.bg};color:${s.color};border-color:${s.color}40;` : ''}"
-          onclick="event.stopPropagation();setAppStatus(${t.id},'${s.id}')"
-          title="${s.label}">${s.label}</button>`).join('')}
-      </div>
-    </div>`;
+    var linkHtml = url
+      ? '<a class="app-card-link" href="' + url + '" target="_blank" onclick="event.stopPropagation()">↗</a>'
+      : '';
+    var roleHtml = (t.text !== company)
+      ? '<div class="app-card-role">' + t.text + '</div>'
+      : '';
+    var doneHtml = isDone ? '<span class="app-done-badge">✓ done</span>' : '';
+
+    var pillsHtml = APP_STATUSES.map(function(s) {
+      var isActive = status === s.id;
+      var styleStr = isActive ? 'background:' + s.bg + ';color:' + s.color + ';border-color:' + s.color + '40;' : '';
+      return '<button class="app-status-pill' + (isActive ? ' active' : '') + '" style="' + styleStr + '" onclick="event.stopPropagation();setAppStatus(' + t.id + ',\'' + s.id + '\')">' + s.label + '</button>';
+    }).join('');
+
+    return '<div class="app-card' + (isDone ? ' app-card-done' : '') + '" onclick="switchToLifeOS();setTimeout(function(){selectTask(' + t.id + ');},80)">'
+      + '<div class="app-card-top"><div class="app-card-company">' + company + '</div>' + linkHtml + '</div>'
+      + roleHtml
+      + '<div class="app-card-meta"><span class="' + (isStale ? 'app-age-stale' : 'app-age') + '">' + age + 'd ago</span>' + doneHtml + '</div>'
+      + '<div class="app-status-pills">' + pillsHtml + '</div>'
+      + '</div>';
   }
 
-  // Summary row
-  const summaryHtml = `<div class="app-summary-row">
-    <div class="app-summary-stat"><span class="app-summary-num">${appTasks.length}</span><span class="app-summary-label">total</span></div>
-    <div class="app-summary-stat"><span class="app-summary-num" style="color:#534AB7">${byStatus['applied'].length}</span><span class="app-summary-label">applied</span></div>
-    <div class="app-summary-stat"><span class="app-summary-num" style="color:#185FA5">${byStatus['heard_back'].length}</span><span class="app-summary-label">heard back</span></div>
-    <div class="app-summary-stat"><span class="app-summary-num" style="color:#BA7517">${byStatus['interviewing'].length}</span><span class="app-summary-label">interviewing</span></div>
-    <div class="app-summary-stat"><span class="app-summary-num" style="color:#1D9E75">${byStatus['offer'].length}</span><span class="app-summary-label">offers</span></div>
-  </div>`;
+  var summaryHtml = '<div class="app-summary-row">'
+    + '<div class="app-summary-stat"><span class="app-summary-num">' + appTasks.length + '</span><span class="app-summary-label">total</span></div>'
+    + '<div class="app-summary-stat"><span class="app-summary-num" style="color:#534AB7">' + byStatus['applied'].length + '</span><span class="app-summary-label">applied</span></div>'
+    + '<div class="app-summary-stat"><span class="app-summary-num" style="color:#185FA5">' + byStatus['heard_back'].length + '</span><span class="app-summary-label">heard back</span></div>'
+    + '<div class="app-summary-stat"><span class="app-summary-num" style="color:#BA7517">' + byStatus['interviewing'].length + '</span><span class="app-summary-label">interviewing</span></div>'
+    + '<div class="app-summary-stat"><span class="app-summary-num" style="color:#1D9E75">' + byStatus['offer'].length + '</span><span class="app-summary-label">offers</span></div>'
+    + '</div>';
 
-  // Columns — skip "passed" from main view, show it collapsed at bottom
-  const activeCols = APP_STATUSES.filter(s => s.id !== 'passed');
-  const passedTasks = byStatus['passed'];
+  var activeCols = APP_STATUSES.filter(function(s) { return s.id !== 'passed'; });
+  var passedTasks = byStatus['passed'];
 
-  const colsHtml = activeCols.map(s => {
-    const colTasks = byStatus[s.id];
-    return `<div class="app-col">
-      <div class="app-col-header" style="color:${s.color};">
-        <span>${s.label}</span>
-        <span class="app-col-count" style="background:${s.bg};color:${s.color};">${colTasks.length}</span>
-      </div>
-      ${colTasks.length === 0
-        ? `<div class="app-col-empty">—</div>`
-        : colTasks.map(t => appCard(t)).join('')}
-    </div>`;
+  var colsHtml = activeCols.map(function(s) {
+    var colTasks = byStatus[s.id];
+    var cardsHtml = colTasks.length === 0
+      ? '<div class="app-col-empty">—</div>'
+      : colTasks.map(appCard).join('');
+    return '<div class="app-col">'
+      + '<div class="app-col-header" style="color:' + s.color + ';">'
+      + '<span>' + s.label + '</span>'
+      + '<span class="app-col-count" style="background:' + s.bg + ';color:' + s.color + ';">' + colTasks.length + '</span>'
+      + '</div>' + cardsHtml + '</div>';
   }).join('');
 
-  const passedHtml = passedTasks.length ? `
-    <div class="app-passed-section">
-      <div class="app-passed-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.classList.toggle('open')">
-        <span>Passed / Not moving forward (${passedTasks.length})</span>
-        <span class="app-passed-arrow">›</span>
-      </div>
-      <div class="app-passed-list">${passedTasks.map(t => appCard(t)).join('')}</div>
-    </div>` : '';
+  var passedHtml = '';
+  if (passedTasks.length) {
+    passedHtml = '<div class="app-passed-section">'
+      + '<div class="app-passed-toggle" onclick="togglePassedSection(this)">'
+      + '<span>Passed / Not moving forward (' + passedTasks.length + ')</span>'
+      + '<span class="app-passed-arrow">›</span></div>'
+      + '<div class="app-passed-list">' + passedTasks.map(appCard).join('') + '</div>'
+      + '</div>';
+  }
 
-  const emptyHtml = appTasks.length === 0 ? `
-    <div class="wos-empty" style="padding:40px 20px;">
-      No job applications yet.<br>
-      <span style="font-size:12px;color:#b4b2a9;">Tasks starting with "Apply", "Applying", "Applied", or "Application" will appear here automatically.</span>
-    </div>` : '';
+  var emptyHtml = appTasks.length === 0
+    ? '<div class="wos-empty" style="padding:40px 20px;">No job applications yet.<br><span style="font-size:12px;color:#b4b2a9;">Tasks with "Apply", "Applied", or "Application" appear here automatically.</span></div>'
+    : '';
 
-  el.innerHTML = `<div class="app-view">
-    ${summaryHtml}
-    ${emptyHtml}
-    ${appTasks.length > 0 ? `<div class="app-cols">${colsHtml}</div>` : ''}
-    ${passedHtml}
-  </div>`;
+  el.innerHTML = '<div class="app-view">'
+    + summaryHtml
+    + emptyHtml
+    + (appTasks.length > 0 ? '<div class="app-cols">' + colsHtml + '</div>' : '')
+    + passedHtml
+    + '</div>';
 }
 
 async function dismissCleanupRecord(id){
