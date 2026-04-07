@@ -99,7 +99,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wos-section-header::after{content:'';flex:1;height:0.5px;background:#e8e8e4;margin-left:8px;}
 .wos-empty{padding:24px 18px;text-align:center;color:#b4b2a9;font-size:13px;}
 
-/* PROJECT CARDS */
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
 .wos-project-card{margin:0 14px 8px;border:0.5px solid #d1d1cf;border-radius:10px;padding:12px 14px;background:#fff;cursor:pointer;transition:all 0.15s;}
 .wos-project-card:hover{border-color:#7F77DD;background:#faf9ff;}
 .wos-project-card-top{display:flex;align-items:flex-start;gap:8px;}
@@ -230,8 +231,127 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wos-contact-name{font-size:13px;font-weight:500;color:#2c2c2a;}
 .wos-contact-meta{font-size:11px;color:#888780;margin-top:1px;}
 
-/* MAIN */
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
+/* ── JOB APPLICATIONS VIEW ── */
+.app-view{display:flex;flex-direction:column;gap:0;padding-bottom:20px;}
+.app-summary-row{display:flex;gap:0;padding:12px 18px 10px;border-bottom:0.5px solid #e8e8e4;}
+.app-summary-stat{display:flex;flex-direction:column;align-items:center;gap:1px;flex:1;}
+.app-summary-num{font-size:20px;font-weight:600;color:#2c2c2a;line-height:1.2;}
+.app-summary-label{font-size:9px;color:#888780;text-transform:uppercase;letter-spacing:0.07em;}
+.app-cols{display:flex;gap:0;padding:0;overflow-x:auto;flex:1;border-bottom:0.5px solid #e8e8e4;}
+.app-col{flex:1;min-width:140px;border-right:0.5px solid #e8e8e4;padding:10px 10px 16px;}
+.app-col:last-child{border-right:none;}
+.app-col-header{display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;padding-bottom:6px;border-bottom:0.5px solid #e8e8e4;}
+.app-col-count{font-size:9px;font-weight:600;padding:1px 5px;border-radius:8px;}
+.app-col-empty{font-size:12px;color:#d1d1cf;text-align:center;padding:12px 0;}
+.app-card{border:0.5px solid #d1d1cf;border-radius:8px;padding:9px 10px;background:#fff;margin-bottom:6px;cursor:pointer;transition:all 0.12s;}
+.app-card:hover{border-color:#7F77DD;background:#faf9ff;}
+.app-card.app-card-done{opacity:0.6;}
+.app-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;}
+.app-card-company{font-size:13px;font-weight:500;color:#2c2c2a;line-height:1.3;flex:1;}
+.app-card-role{font-size:10px;color:#888780;margin-top:1px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.app-card-link{font-size:11px;color:#7F77DD;text-decoration:none;flex-shrink:0;padding:1px 3px;border-radius:3px;line-height:1;}
+.app-card-link:hover{background:#EEEDFE;}
+.app-card-meta{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.app-age{font-size:10px;color:#888780;}
+.app-age-stale{font-size:10px;color:#E24B4A;}
+.app-done-badge{font-size:9px;color:#1D9E75;background:#E1F5EE;padding:1px 5px;border-radius:6px;}
+.app-status-pills{display:flex;flex-wrap:wrap;gap:3px;}
+.app-status-pill{font-size:9px;padding:2px 6px;border-radius:8px;border:0.5px solid #d1d1cf;background:#fff;color:#888780;cursor:pointer;font-family:inherit;transition:all 0.1s;line-height:1.4;}
+.app-status-pill:hover{border-color:#7F77DD;color:#534AB7;}
+.app-status-pill.active{font-weight:600;}
+.app-passed-section{padding:10px 14px 0;}
+.app-passed-toggle{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#888780;cursor:pointer;padding:8px 4px;border-top:0.5px solid #e8e8e4;user-select:none;}
+.app-passed-toggle:hover{color:#5f5e5a;}
+.app-passed-arrow{transition:transform 0.2s;display:inline-block;}
+.app-passed-toggle.open .app-passed-arrow{transform:rotate(90deg);}
+.app-passed-list{display:none;padding-top:8px;}
+.app-passed-list.open{display:block;}
+
+/* ── AI FEATURE VIEWS ── */
+.ai-feature-view{display:flex;flex-direction:column;min-height:100%;}
+.ai-feature-header{padding:18px 20px 16px;display:flex;flex-direction:column;gap:4px;border-bottom:0.5px solid #d1d1cf;}
+.ai-feature-icon{font-size:22px;line-height:1;margin-bottom:2px;}
+.ai-feature-title{font-size:16px;font-weight:600;letter-spacing:-0.02em;}
+.ai-feature-subtitle{font-size:12px;color:#5f5e5a;line-height:1.4;}
+.ai-feature-body{padding:16px 18px;display:flex;flex-direction:column;gap:12px;flex:1;}
+.ai-feature-prompt-box{display:flex;flex-direction:column;gap:8px;}
+.ai-feature-prompt-label{font-size:11px;font-weight:500;color:#5f5e5a;letter-spacing:0.02em;}
+.ai-feature-textarea{width:100%;padding:8px 10px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:8px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;resize:vertical;line-height:1.5;}
+.ai-feature-textarea:focus{outline:none;border-color:#7F77DD;background:#fff;}
+.ai-range-pills{display:flex;gap:6px;flex-wrap:wrap;}
+.ai-range-pill{padding:4px 12px;font-size:11px;border:0.5px solid #b4b2a9;border-radius:20px;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;transition:all 0.1s;}
+.ai-range-pill:hover{border-color:#7F77DD;color:#534AB7;}
+.ai-range-pill.active{background:#EEEDFE;border-color:#AFA9EC;color:#3C3489;font-weight:500;}
+.ai-run-btn{padding:10px 18px;font-size:13px;font-weight:500;border:none;border-radius:9px;color:#fff;cursor:pointer;font-family:inherit;transition:all 0.15s;margin-top:4px;letter-spacing:0.01em;}
+.ai-run-btn:hover{opacity:0.88;transform:translateY(-1px);}
+.ai-run-again-btn{padding:8px 16px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:8px;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;margin-top:8px;width:100%;}
+.ai-run-again-btn:hover{background:#f5f5f3;}
+.ai-loading-state{display:flex;flex-direction:column;align-items:center;gap:12px;padding:40px 20px;text-align:center;}
+.ai-loading-spinner{width:28px;height:28px;border:2.5px solid #e8e8e4;border-top-color:#7F77DD;border-radius:50%;animation:spinAI 0.8s linear infinite;}
+@keyframes spinAI{to{transform:rotate(360deg)}}
+.ai-loading-text{font-size:13px;color:#5f5e5a;font-weight:500;}
+.ai-loading-sub{font-size:11px;color:#888780;}
+.ai-error{padding:14px;background:#FCEBEB;border-radius:8px;font-size:12px;color:#A32D2D;line-height:1.5;}
+.ai-result-card{border:0.5px solid #e8e8e4;border-radius:10px;padding:14px 16px;background:#fff;}
+.ai-result-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.ai-result-badge{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:500;}
+.ai-result-date{font-size:10px;color:#888780;}
+.ai-result-body{font-size:13px;color:#2c2c2a;line-height:1.6;}
+.ai-section-header{font-size:12px;font-weight:600;color:#2c2c2a;text-transform:uppercase;letter-spacing:0.06em;margin:14px 0 6px;padding-top:10px;border-top:0.5px solid #e8e8e4;}
+.ai-section-header:first-child{margin-top:0;padding-top:0;border-top:none;}
+.ai-bullet{padding:2px 0 2px 8px;color:#5f5e5a;font-size:12px;}
+.ai-para-break{height:8px;}
+.ai-coach-note{background:linear-gradient(135deg,#EEEDFE,#f0eeff);border:0.5px solid #AFA9EC;border-radius:10px;padding:12px 14px;font-size:12px;color:#3C3489;line-height:1.6;display:flex;gap:10px;align-items:flex-start;}
+.ai-coach-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+
+/* ── PRIORITIZER ── */
+.priority-list{display:flex;flex-direction:column;gap:8px;}
+.priority-card{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border:0.5px solid #d1d1cf;border-radius:9px;background:#fff;cursor:pointer;transition:all 0.12s;}
+.priority-card:hover{border-color:#1D9E75;background:#f8fffc;}
+.priority-rank{font-size:18px;font-weight:700;color:#d1d1cf;min-width:22px;text-align:center;line-height:1.4;flex-shrink:0;}
+.priority-card:nth-child(1) .priority-rank{color:#1D9E75;}
+.priority-card:nth-child(2) .priority-rank{color:#378ADD;}
+.priority-card:nth-child(3) .priority-rank{color:#7F77DD;}
+.priority-card-main{flex:1;min-width:0;}
+.priority-card-top{display:flex;align-items:center;gap:6px;margin-bottom:4px;justify-content:space-between;}
+.priority-badge{font-size:9px;padding:1px 7px;border-radius:8px;font-weight:600;letter-spacing:0.04em;}
+.priority-score{font-size:10px;font-weight:600;color:#888780;background:#f5f5f3;padding:1px 6px;border-radius:6px;}
+.priority-task-text{font-size:13px;font-weight:500;color:#2c2c2a;line-height:1.35;margin-bottom:4px;}
+.priority-why{font-size:11px;color:#5f5e5a;line-height:1.45;margin-bottom:6px;}
+.priority-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:10px;color:#888780;}
+.priority-skip-section{margin-top:8px;padding:12px 14px;background:#f5f5f3;border-radius:9px;border:0.5px solid #e8e8e4;}
+.priority-skip-title{font-size:10px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;}
+.priority-skip-item{font-size:12px;color:#888780;padding:2px 0;line-height:1.4;}
+
+/* ── RESUME OPTIMIZER ── */
+.resume-smart-btn{width:100%;margin-top:10px;padding:9px 14px;font-size:12px;font-weight:500;border:none;border-radius:9px;background:linear-gradient(135deg,#534AB7,#7F77DD);color:#fff;cursor:pointer;font-family:inherit;letter-spacing:0.01em;transition:all 0.15s;}
+.resume-smart-btn:hover{opacity:0.88;transform:translateY(-1px);}
+.resume-modal{background:#fff;border-radius:14px;border:0.5px solid #d1d1cf;width:580px;max-width:95%;max-height:88vh;overflow-y:auto;display:flex;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,0.16);}
+.resume-modal-header{padding:18px 20px 14px;border-bottom:0.5px solid #d1d1cf;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:sticky;top:0;background:#fff;z-index:1;border-radius:14px 14px 0 0;}
+.resume-modal-title{font-size:15px;font-weight:600;color:#2c2c2a;letter-spacing:-0.01em;}
+.resume-modal-subtitle{font-size:12px;color:#888780;margin-top:2px;}
+.resume-close-btn{background:none;border:none;font-size:16px;cursor:pointer;color:#888780;padding:2px 6px;border-radius:5px;line-height:1;flex-shrink:0;}
+.resume-close-btn:hover{background:#f5f5f3;}
+.resume-modal-body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:10px;}
+.resume-section-label{font-size:10px;font-weight:500;color:#5f5e5a;text-transform:uppercase;letter-spacing:0.07em;}
+.resume-paste-hint{font-size:11px;color:#888780;margin-top:2px;margin-bottom:4px;}
+.resume-textarea{width:100%;padding:8px 10px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:8px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;resize:vertical;line-height:1.5;}
+.resume-textarea:focus{outline:none;border-color:#534AB7;background:#fff;}
+.resume-url-found{font-size:12px;color:#1D9E75;background:#E1F5EE;padding:7px 10px;border-radius:7px;}
+.resume-url-missing{font-size:12px;color:#854F0B;background:#FAEEDA;padding:7px 10px;border-radius:7px;}
+.resume-run-btn{padding:11px 18px;font-size:13px;font-weight:500;border:none;border-radius:9px;background:linear-gradient(135deg,#534AB7,#7F77DD);color:#fff;cursor:pointer;font-family:inherit;margin-top:4px;letter-spacing:0.01em;transition:all 0.15s;}
+.resume-run-btn:hover{opacity:0.88;}
+.resume-result-tabs{display:flex;border-bottom:0.5px solid #d1d1cf;margin-bottom:14px;gap:0;}
+.resume-tab{padding:8px 14px;font-size:12px;font-weight:500;color:#5f5e5a;cursor:pointer;border:none;background:none;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.1s;}
+.resume-tab:hover{color:#2c2c2a;}
+.resume-tab.active{color:#534AB7;border-bottom-color:#534AB7;}
+.resume-tab-content{display:none;}
+.resume-tab-content.active{display:block;}
+.resume-output{font-size:12px;color:#2c2c2a;line-height:1.7;white-space:pre-wrap;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f3;padding:14px;border-radius:8px;max-height:360px;overflow-y:auto;}
+.resume-changes-list{font-size:12px;color:#2c2c2a;line-height:1.7;background:#E1F5EE;padding:14px;border-radius:8px;}
+.resume-copy-btn{margin-top:8px;width:100%;padding:8px;font-size:12px;font-weight:500;border:0.5px solid #534AB7;border-radius:8px;background:#EEEDFE;color:#534AB7;cursor:pointer;font-family:inherit;}
+.resume-copy-btn:hover{background:#534AB7;color:#fff;}
+
 .sync-bar{padding:3px 14px;background:#f5f5f3;border-bottom:0.5px solid #d1d1cf;display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:#888780;flex-shrink:0;transition:background 0.3s;}
 .sync-dot.ok{background:#639922;} .sync-dot.error{background:#E24B4A;} .sync-dot.syncing{background:#7F77DD;animation:pulse 1s ease-in-out infinite;}
@@ -782,6 +902,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="nav-item" onclick="setView('thoughts')" id="nav-thoughts"><div class="nav-dot" style="background:#888780"></div>Thoughts</div>
       <div class="nav-item" onclick="setView('constitution')" id="nav-constitution"><div class="nav-dot" style="background:#D85A30"></div>Constitution</div>
       <div class="nav-item" onclick="setView('insights')" id="nav-insights"><div class="nav-dot" style="background:#FFB300"></div>Claude Insights</div>
+      <div class="nav-item" onclick="setView('weekly-review')" id="nav-weekly-review"><div class="nav-dot" style="background:#D4537E"></div>Weekly Review</div>
+      <div class="nav-item" onclick="setView('prioritizer')" id="nav-prioritizer"><div class="nav-dot" style="background:#1D9E75"></div>AI Prioritizer</div>
       <div class="nav-divider"></div>
       <div class="sidebar-header">System</div>
       <div class="nav-item" onclick="setView('autotasks')" id="nav-autotasks"><div class="nav-dot" style="background:#1D9E75"></div>Auto Tasks</div>
@@ -811,6 +933,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="nav-item work-nav" onclick="setWorkView('wos-talent')" id="nav-wos-talent"><div class="nav-dot" style="background:#1D9E75"></div>Talent</div>
       <div class="nav-item work-nav" onclick="setWorkView('wos-people')" id="nav-wos-people"><div class="nav-dot" style="background:#7F77DD"></div>People</div>
       <div class="nav-item work-nav" onclick="setWorkView('wos-outreach')" id="nav-wos-outreach"><div class="nav-dot" style="background:#BA7517"></div>Outreach</div>
+      <div class="nav-divider"></div>
+      <div class="sidebar-header">Career</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-applications')" id="nav-wos-applications"><div class="nav-dot" style="background:#7F77DD"></div>Applications</div>
       <div style="flex:1"></div>
       <div class="os-switcher to-life" onclick="switchToLifeOS()">
           <div style="flex:1">
@@ -1198,7 +1323,7 @@ const LOS_SECTIONS = {
   opportunities: {label:'Opportunities', subtitle:'Things worth exploring.',                             color:'#1D9E75', placeholder:'Add an opportunity...'},
   thoughts:      {label:'Thoughts',      subtitle:'Raw thinking, observations.',                         color:'#888780', placeholder:'Add a thought...'},
 };
-const LOS_VIEWS = ['goals','projects','opportunities','thoughts','constitution','insights'];
+const LOS_VIEWS = ['goals','projects','opportunities','thoughts','constitution','insights','weekly-review','prioritizer'];
 const SPECIAL_VIEWS = ['habits','progress','autotasks'];
 const isLosView = v => LOS_VIEWS.includes(v);
 const isSpecialView = v => SPECIAL_VIEWS.includes(v);
@@ -1812,7 +1937,7 @@ function setView(v){
   const titles={all:'All tasks',urgent:'Urgent',work:'Work',life:'Life',buy:'Buy',done:'Completed',
     habits:'Habits',goals:'Goals',projects:'Projects',opportunities:'Opportunities',
     thoughts:'Thoughts',constitution:'Constitution',insights:'Claude Insights',
-    autotasks:'Auto Tasks',progress:'Progress'};
+    autotasks:'Auto Tasks',progress:'Progress','weekly-review':'Weekly Review','prioritizer':'AI Prioritizer'};
   document.getElementById('view-title').textContent=titles[v]||v;
   const addBtn=document.getElementById('main-add-btn');
   const addForm=document.getElementById('add-form');
@@ -1907,7 +2032,9 @@ function selectTask(id){
     ${t.completedAt?`<div class="detail-meta-row"><span class="k">Completed</span><span class="v">${fmtDate(t.completedAt)}</span></div>`:''}
     <div class="detail-meta-row"><span class="k">Age</span><span class="v">${ageDays(t.createdAt)} days</span></div>
     <div class="detail-meta-row"><span class="k">XP value</span><span class="v">${taskXP(t)||'—'}</span></div>
-  </div>`;
+  </div>
+  ${isJobApplicationTask(t)?`<button class="resume-smart-btn" onclick="openResumeOptimizer(${t.id})">✦ Optimize Resume for This Role</button>`:''}`;
+
   refreshStars();render();
 }
 function populateDetailGroup(area,cur){
@@ -2640,6 +2767,17 @@ function render(){
   if(view==='insights'){tl.innerHTML=renderInsightsView();sb.innerHTML='';return;}
   if(view==='autotasks'){tl.innerHTML=renderAutoTasksView();sb.innerHTML='';return;}
   if(view==='progress'){tl.innerHTML=renderProgressView();sb.innerHTML='';return;}
+  if(view==='weekly-review'){
+    // Only re-render if not currently showing a result or loading
+    const existing = document.getElementById('weekly-review-result');
+    if(!existing || existing.style.display==='none') renderWeeklyReviewView();
+    sb.innerHTML='';return;
+  }
+  if(view==='prioritizer'){
+    const existing = document.getElementById('prioritizer-result');
+    if(!existing || existing.style.display==='none') renderPrioritizerView();
+    sb.innerHTML='';return;
+  }
   if(isLosView(view)){dp.classList.add('hidden');tl.innerHTML=renderLosView(view);sb.innerHTML='';return;}
 
   let html='';let dragTargets=[];
@@ -2769,6 +2907,8 @@ function toggleMoreDrawer() {
           <button class="more-drawer-item" onclick="mobileNav('thoughts')">💭<span>Thoughts</span></button>
           <button class="more-drawer-item" onclick="mobileNav('constitution')">📜<span>Identity</span></button>
           <button class="more-drawer-item" onclick="mobileNav('insights')">✨<span>Insights</span></button>
+          <button class="more-drawer-item" onclick="mobileNav('weekly-review')">📊<span>Review</span></button>
+          <button class="more-drawer-item" onclick="mobileNav('prioritizer')">⚡<span>Prioritize</span></button>
           <button class="more-drawer-item" onclick="openBrief();closeMoreDrawer()">📋<span>Brief</span></button>
         </div>
       </div>
@@ -2873,6 +3013,7 @@ function setWorkView(v) {
     'wos-people':    'People',
     'wos-outreach':  'Outreach',
     'wos-cleanup':   'Data Cleanup',
+    'wos-applications': 'Job Applications',
   };
   document.getElementById('view-title').textContent = titles[v] || v;
   document.getElementById('main-add-btn').style.display = 'none';
@@ -2902,6 +3043,7 @@ function renderWorkView() {
   if (workView === 'wos-people')     { renderWOSPeopleView(list, 'all');     return; }
   if (workView === 'wos-outreach')   { renderWOSOutreachView(list);          return; }
   if (workView === 'wos-cleanup')    { renderWOSCleanup(list);               return; }
+  if (workView === 'wos-applications') { renderWOSApplications(list);         return; }
 }
 
 // ── DASHBOARD ──
@@ -2909,6 +3051,22 @@ function renderWOSDashboard(el) {
   const recentProjects = [...workProjects]
     .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 6);
+
+  const appTasks = getApplicationTasks();
+  const activeApps = appTasks.filter(t => !['passed'].includes(getAppStatus(t)));
+  const interviewing = appTasks.filter(t => getAppStatus(t) === 'interviewing').length;
+  const offers = appTasks.filter(t => getAppStatus(t) === 'offer').length;
+
+  const appBadge = activeApps.length > 0 ? `
+    <div class="wos-section-header" style="margin-top:4px;">Job Applications</div>
+    <div style="margin:0 14px 12px;padding:10px 13px;border:0.5px solid #d1d1cf;border-radius:9px;background:#fff;cursor:pointer;display:flex;align-items:center;gap:12px;" onclick="setWorkView('wos-applications')">
+      <div style="flex:1;display:flex;gap:14px;">
+        <div style="text-align:center;"><div style="font-size:16px;font-weight:600;color:#534AB7;">${activeApps.length}</div><div style="font-size:9px;color:#888780;text-transform:uppercase;letter-spacing:0.06em;">active</div></div>
+        ${interviewing > 0 ? `<div style="text-align:center;"><div style="font-size:16px;font-weight:600;color:#BA7517;">${interviewing}</div><div style="font-size:9px;color:#888780;text-transform:uppercase;letter-spacing:0.06em;">interviewing</div></div>` : ''}
+        ${offers > 0 ? `<div style="text-align:center;"><div style="font-size:16px;font-weight:600;color:#1D9E75;">${offers}</div><div style="font-size:9px;color:#888780;text-transform:uppercase;letter-spacing:0.06em;">offers</div></div>` : ''}
+      </div>
+      <span style="font-size:12px;color:#7F77DD;font-weight:500;">View all ›</span>
+    </div>` : '';
 
   el.innerHTML = `
     <div class="wos-dashboard">
@@ -2927,6 +3085,7 @@ function renderWOSDashboard(el) {
         </button>
       </div>
 
+      ${appBadge}
       <div class="wos-section-header">Recent Projects</div>
       ${recentProjects.length === 0
         ? `<div class="wos-empty">No projects yet — hit New Project to start.</div>`
@@ -4153,6 +4312,573 @@ function openCleanupRecord(id){
         </div>
       </div>`;
   }
+}
+
+// ── WEEKLY REVIEW ──
+function renderWeeklyReviewView(){
+  const el = document.getElementById('task-list');
+  el.innerHTML = `<div class="ai-feature-view">
+    <div class="ai-feature-header" style="background:linear-gradient(135deg,#FBEAF0,#FFF0F8);">
+      <div class="ai-feature-icon">📊</div>
+      <div class="ai-feature-title" style="color:#993556;">Weekly Review</div>
+      <div class="ai-feature-subtitle">Claude analyzes your week — wins, patterns, and what to drop.</div>
+    </div>
+    <div class="ai-feature-body" id="weekly-review-body">
+      <div class="ai-feature-prompt-box">
+        <div class="ai-feature-prompt-label">What range should Claude review?</div>
+        <div class="ai-range-pills" id="weekly-range-pills">
+          <button class="ai-range-pill active" onclick="selectWeeklyRange(7,this)">Last 7 days</button>
+          <button class="ai-range-pill" onclick="selectWeeklyRange(14,this)">Last 14 days</button>
+          <button class="ai-range-pill" onclick="selectWeeklyRange(30,this)">Last 30 days</button>
+        </div>
+        <div class="ai-feature-prompt-label" style="margin-top:12px;">Anything specific you want Claude to focus on? <span style="color:#b4b2a9;">(optional)</span></div>
+        <textarea id="weekly-focus-input" class="ai-feature-textarea" placeholder="e.g. I want to understand if I'm making progress on career goals, or why I keep avoiding financial tasks..." rows="3"></textarea>
+        <button class="ai-run-btn" style="background:#D4537E;" onclick="runWeeklyReview()">✦ Generate Weekly Review</button>
+      </div>
+      <div id="weekly-review-result" style="display:none;"></div>
+    </div>
+  </div>`;
+}
+
+let _weeklyRangeDays = 7;
+function selectWeeklyRange(days, btn){
+  _weeklyRangeDays = days;
+  document.querySelectorAll('.ai-range-pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function runWeeklyReview(){
+  const focus = document.getElementById('weekly-focus-input')?.value?.trim() || '';
+  const days = _weeklyRangeDays;
+  const cutoff = new Date(Date.now() - days * 86400000);
+
+  // Build review data
+  const recentDone = tasks.filter(t => t.done && t.completedAt && new Date(t.completedAt) >= cutoff);
+  const recentCreated = tasks.filter(t => new Date(t.createdAt) >= cutoff);
+  const openTasks = tasks.filter(t => !t.done && !t.awaiting);
+  const awaitingTasks = tasks.filter(t => !t.done && t.awaiting);
+  const habitLogs = habits.map(h => ({
+    name: h.name, emoji: h.emoji, category: h.category,
+    logsInRange: (h.log||[]).filter(l => new Date(l.date) >= cutoff).length,
+    streak: getHabitStreak(h)
+  })).filter(h => h.logsInRange > 0);
+
+  // Category breakdown
+  const catCounts = {};
+  recentDone.forEach(t => { catCounts[t.category||'maintenance'] = (catCounts[t.category||'maintenance']||0)+1; });
+
+  const snapshot = {
+    period: `Last ${days} days`,
+    completed: recentDone.map(t=>({text:t.text, category:t.category, area:t.area, group: (groups.find(g=>g.id===t.group)||{}).name||'', importance:t.importance, difficulty:t.difficulty})),
+    added: recentCreated.map(t=>({text:t.text, area:t.area, done:t.done})),
+    open: openTasks.slice(0,20).map(t=>({text:t.text, area:t.area, category:t.category, age:ageDays(t.createdAt), urgent:t.urgent})),
+    awaiting: awaitingTasks.map(t=>({text:t.text, daysSince: t.awaitingSince?Math.floor((Date.now()-new Date(t.awaitingSince))/86400000):0})),
+    habits: habitLogs,
+    categoryBreakdown: catCounts,
+    goals: (los.goals||[]).map(g=>g.text),
+    constitution: constitution.map(c=>({section:c.section, text:c.text})),
+    userFocus: focus || null
+  };
+
+  const resultEl = document.getElementById('weekly-review-result');
+  const promptBox = document.querySelector('.ai-feature-prompt-box');
+  resultEl.style.display = 'block';
+  resultEl.innerHTML = `<div class="ai-loading-state"><div class="ai-loading-spinner"></div><div class="ai-loading-text">Analyzing your week...</div></div>`;
+  promptBox.style.display = 'none';
+
+  try {
+    const systemPrompt = `You are a thoughtful life coach and productivity analyst embedded in the user's Life OS. You have deep context about who they are from their Constitution. Be direct, honest, and warm — not generic. Speak like a trusted advisor who knows them well. Use emoji sparingly but meaningfully. Format with clean sections using these exact headers (no markdown code blocks):
+
+**WINS THIS WEEK** 
+**PATTERNS I NOTICE**
+**WHAT YOU'RE AVOIDING**  
+**CATEGORY HEALTH**
+**RECOMMENDATION FOR NEXT WEEK**
+**ONE HONEST OBSERVATION**
+
+Be specific, cite actual tasks by name, connect observations to their stated goals and constitution. Keep total response under 500 words — punchy, not exhaustive.`;
+
+    const userMsg = `Here is my Life OS data for a Weekly Review.\n\n${JSON.stringify(snapshot, null, 2)}${focus ? `\n\nI especially want to focus on: ${focus}` : ''}`;
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{role:'user', content: userMsg}]
+      })
+    });
+    const data = await response.json();
+    const text = data.content?.[0]?.text || 'No response received.';
+
+    // Render formatted result
+    const html = formatAIResponse(text);
+    resultEl.innerHTML = `
+      <div class="ai-result-card" style="border-color:#D4537E20;background:linear-gradient(135deg,#FBEAF008,#fff);">
+        <div class="ai-result-header">
+          <span class="ai-result-badge" style="background:#FBEAF0;color:#993556;">📊 ${days}-Day Review</span>
+          <span class="ai-result-date">${new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span>
+        </div>
+        <div class="ai-result-body">${html}</div>
+      </div>
+      <button class="ai-run-again-btn" onclick="renderWeeklyReviewView();setView('weekly-review')">↺ New Review</button>`;
+  } catch(e) {
+    resultEl.innerHTML = `<div class="ai-error">Error generating review. Please try again.<br><small>${e.message}</small></div>`;
+    promptBox.style.display = 'block';
+  }
+}
+
+// ── AI PRIORITIZER ──
+function renderPrioritizerView(){
+  const el = document.getElementById('task-list');
+  el.innerHTML = `<div class="ai-feature-view">
+    <div class="ai-feature-header" style="background:linear-gradient(135deg,#E1F5EE,#E6F1FB);">
+      <div class="ai-feature-icon">⚡</div>
+      <div class="ai-feature-title" style="color:#0F6E56;">AI Prioritizer</div>
+      <div class="ai-feature-subtitle">Claude scores and ranks your open tasks based on your goals, energy, and context.</div>
+    </div>
+    <div class="ai-feature-body" id="prioritizer-body">
+      <div class="ai-feature-prompt-box">
+        <div class="ai-feature-prompt-label">What area should Claude prioritize?</div>
+        <div class="ai-range-pills" id="priority-area-pills">
+          <button class="ai-range-pill active" onclick="selectPriorityArea('all',this)">All tasks</button>
+          <button class="ai-range-pill" onclick="selectPriorityArea('work',this)">Work only</button>
+          <button class="ai-range-pill" onclick="selectPriorityArea('life',this)">Life only</button>
+        </div>
+        <div class="ai-feature-prompt-label" style="margin-top:12px;">What's your context right now? <span style="color:#b4b2a9;">(optional)</span></div>
+        <textarea id="priority-context-input" class="ai-feature-textarea" placeholder="e.g. I have 2 focused hours this morning, feeling good energy, want to make a dent on career stuff..." rows="3"></textarea>
+        <button class="ai-run-btn" style="background:#1D9E75;" onclick="runPrioritizer()">⚡ Prioritize My Tasks</button>
+      </div>
+      <div id="prioritizer-result" style="display:none;"></div>
+    </div>
+  </div>`;
+}
+
+let _priorityArea = 'all';
+function selectPriorityArea(area, btn){
+  _priorityArea = area;
+  document.querySelectorAll('#priority-area-pills .ai-range-pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function runPrioritizer(){
+  const context = document.getElementById('priority-context-input')?.value?.trim() || '';
+  const area = _priorityArea;
+
+  let openTasks = tasks.filter(t => !t.done && !t.awaiting);
+  if(area !== 'all') openTasks = openTasks.filter(t => t.area === area);
+
+  const tasksWithMeta = openTasks.map(t => ({
+    id: t.id,
+    text: t.text,
+    area: t.area,
+    category: t.category,
+    urgent: t.urgent,
+    importance: t.importance || 3,
+    difficulty: t.difficulty || null,
+    emotionalDifficulty: t.emotionalDifficulty || null,
+    ageDays: ageDays(t.createdAt),
+    group: (groups.find(g=>g.id===t.group)||{}).name || '',
+    note: t.note ? t.note.slice(0,100) : ''
+  }));
+
+  const snapshot = {
+    tasks: tasksWithMeta,
+    goals: (los.goals||[]).map(g=>g.text),
+    constitution: constitution.map(c=>({section:c.section, text:c.text})),
+    userContext: context || null,
+    currentTime: new Date().toLocaleString('en-US',{weekday:'long', hour:'numeric', minute:'2-digit'})
+  };
+
+  const resultEl = document.getElementById('prioritizer-result');
+  const promptBox = document.querySelector('.ai-feature-prompt-box');
+  resultEl.style.display = 'block';
+  resultEl.innerHTML = `<div class="ai-loading-state"><div class="ai-loading-spinner"></div><div class="ai-loading-text">Scoring and ranking tasks...</div></div>`;
+  promptBox.style.display = 'none';
+
+  try {
+    const systemPrompt = `You are an expert productivity coach embedded in the user's Life OS. You know their constitution, goals, and current open tasks. Your job is to score and rank their tasks right now.
+
+Return a JSON object ONLY — no markdown fences, no preamble, no explanation outside the JSON:
+{
+  "topTasks": [
+    {
+      "id": <task id number>,
+      "text": "<task text>",
+      "score": <1-100>,
+      "why": "<1-2 sentence punchy reason — be specific, reference their goals>",
+      "energy": "high|medium|low",
+      "timeEstimate": "<e.g. 15min, 1hr, unclear>",
+      "badge": "<one word label e.g. 'URGENT', 'QUICK WIN', 'STRATEGIC', 'BLOCKING', 'LONG OVERDUE', 'MOMENTUM'>"
+    }
+  ],
+  "skipThese": ["<task text>", ...],
+  "coachNote": "<2-3 sentence honest observation about their task list and what it says about where they are right now>"
+}
+
+Return the top 8 tasks by score. For skipThese, list 2-3 tasks that seem lower value or can wait. Score based on: urgency, importance, goal alignment, age (older = slightly higher), emotional/actual difficulty (high difficulty + high importance = do it now).`;
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{role:'user', content: JSON.stringify(snapshot)}]
+      })
+    });
+    const data = await response.json();
+    let text = data.content?.[0]?.text || '{}';
+    text = text.replace(/```json|```/g,'').trim();
+    let parsed;
+    try { parsed = JSON.parse(text); } catch(e){ throw new Error('Could not parse AI response'); }
+
+    const topTasks = parsed.topTasks || [];
+    const skipThese = parsed.skipThese || [];
+    const coachNote = parsed.coachNote || '';
+
+    const badgeColors = {
+      'URGENT':'#FAECE7:#993C1D','QUICK WIN':'#E1F5EE:#0F6E56','STRATEGIC':'#EEEDFE:#534AB7',
+      'BLOCKING':'#FCEBEB:#A32D2D','LONG OVERDUE':'#FFF3F0:#993C1D','MOMENTUM':'#EAF3DE:#3B6D11',
+      'DEFAULT':'#F1EFE8:#5F5E5A'
+    };
+    function badgeStyle(badge){
+      const key = Object.keys(badgeColors).find(k=>badge?.toUpperCase().includes(k))||'DEFAULT';
+      const [bg,color] = badgeColors[key].split(':');
+      return `background:${bg};color:${color}`;
+    }
+    const energyIcon = e => e==='high'?'🔥':e==='medium'?'⚡':'🌿';
+
+    const taskCards = topTasks.map((t,i) => {
+      const originalTask = tasks.find(x=>x.id===t.id);
+      return `<div class="priority-card" onclick="selectTask(${t.id});setView('all')">
+        <div class="priority-rank">${i+1}</div>
+        <div class="priority-card-main">
+          <div class="priority-card-top">
+            <span class="priority-badge" style="${badgeStyle(t.badge)}">${t.badge||'TASK'}</span>
+            <span class="priority-score" title="AI priority score">${t.score}</span>
+          </div>
+          <div class="priority-task-text">${t.text}</div>
+          <div class="priority-why">${t.why}</div>
+          <div class="priority-meta">
+            <span>${energyIcon(t.energy)} ${t.energy} energy</span>
+            <span>⏱ ${t.timeEstimate}</span>
+            ${originalTask?.area?`<span class="area-badge badge-${originalTask.area}">${originalTask.area}</span>`:''}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    const skipHtml = skipThese.length ? `
+      <div class="priority-skip-section">
+        <div class="priority-skip-title">Consider skipping or deferring</div>
+        ${skipThese.map(t=>`<div class="priority-skip-item">→ ${t}</div>`).join('')}
+      </div>` : '';
+
+    const coachHtml = coachNote ? `<div class="ai-coach-note"><span class="ai-coach-icon">🧠</span>${coachNote}</div>` : '';
+
+    resultEl.innerHTML = `
+      ${coachHtml}
+      <div class="priority-list">${taskCards}</div>
+      ${skipHtml}
+      <button class="ai-run-again-btn" onclick="renderPrioritizerView();setView('prioritizer')">↺ Re-Prioritize</button>`;
+  } catch(e) {
+    resultEl.innerHTML = `<div class="ai-error">Error prioritizing tasks. Please try again.<br><small>${e.message}</small></div>`;
+    promptBox.style.display = 'block';
+  }
+}
+
+// ── RESUME OPTIMIZER ──
+function isJobApplicationTask(t){
+  if(!t || t.done) return false;
+  const txt = (t.text||'').toLowerCase();
+  const applyPhrases = ['apply','applying','application','apply to','apply for','submit resume','send resume'];
+  return applyPhrases.some(p => txt.includes(p));
+}
+
+function extractUrlFromNote(note){
+  if(!note) return null;
+  const match = note.match(/https?:\/\/[^\s\n\r]+/);
+  return match ? match[0] : null;
+}
+
+async function openResumeOptimizer(taskId){
+  const t = tasks.find(x=>x.id===taskId);
+  if(!t) return;
+  const url = extractUrlFromNote(t.note);
+
+  // Build overlay
+  let overlayEl = document.getElementById('resume-optimizer-overlay');
+  if(!overlayEl){
+    overlayEl = document.createElement('div');
+    overlayEl.id = 'resume-optimizer-overlay';
+    overlayEl.className = 'overlay';
+    overlayEl.style.zIndex = '200';
+    overlayEl.innerHTML = `<div class="resume-modal" id="resume-modal-inner"></div>`;
+    document.querySelector('.app').appendChild(overlayEl);
+  }
+  overlayEl.classList.add('show');
+
+  const modal = document.getElementById('resume-modal-inner');
+  modal.innerHTML = `
+    <div class="resume-modal-header">
+      <div>
+        <div class="resume-modal-title">✦ Resume Optimizer</div>
+        <div class="resume-modal-subtitle">${t.text}</div>
+      </div>
+      <button class="resume-close-btn" onclick="closeResumeOptimizer()">✕</button>
+    </div>
+    <div class="resume-modal-body" id="resume-modal-body">
+      ${url ? `<div class="resume-url-found">🔗 Found URL: <a href="${url}" target="_blank" style="color:#534AB7;">${url.slice(0,60)}${url.length>60?'…':''}</a></div>` : `<div class="resume-url-missing">⚠️ No URL found in task note. Paste the job posting URL or text below.</div>`}
+      <div class="resume-section-label">Job posting URL or full job description text</div>
+      <textarea id="resume-job-input" class="resume-textarea" rows="5" placeholder="Paste the job URL or copy/paste the full job description here...">${url||''}</textarea>
+      <div class="resume-section-label" style="margin-top:12px;">Your current resume <span style="color:#E24B4A;">*</span></div>
+      <div class="resume-paste-hint">Paste your resume text below — Claude will optimize and rewrite it for this specific role.</div>
+      <textarea id="resume-base-input" class="resume-textarea" rows="10" placeholder="Paste your full resume here (plain text is fine)..."></textarea>
+      <div class="resume-section-label" style="margin-top:12px;">Anything to emphasize? <span style="color:#b4b2a9;">(optional)</span></div>
+      <textarea id="resume-emphasis-input" class="resume-textarea" rows="2" placeholder="e.g. Play up my CoreWeave project, downplay agency work, I want to pivot toward in-house creative..."></textarea>
+      <button class="resume-run-btn" onclick="runResumeOptimizer(${taskId})">✦ Optimize My Resume for This Role</button>
+    </div>`;
+}
+
+function closeResumeOptimizer(){
+  document.getElementById('resume-optimizer-overlay')?.classList.remove('show');
+}
+
+async function runResumeOptimizer(taskId){
+  const t = tasks.find(x=>x.id===taskId);
+  const jobInput = document.getElementById('resume-job-input')?.value?.trim();
+  const resumeBase = document.getElementById('resume-base-input')?.value?.trim();
+  const emphasis = document.getElementById('resume-emphasis-input')?.value?.trim();
+
+  if(!resumeBase){ alert('Please paste your resume first.'); return; }
+  if(!jobInput){ alert('Please add the job URL or description.'); return; }
+
+  const body = document.getElementById('resume-modal-body');
+  body.innerHTML = `<div class="ai-loading-state" style="padding:40px 20px;"><div class="ai-loading-spinner"></div><div class="ai-loading-text">Reading job posting and optimizing your resume...</div><div class="ai-loading-sub">This may take 15–20 seconds</div></div>`;
+
+  try {
+    const constitutionText = constitution.map(c=>`${c.section}: ${c.text}`).join('\n');
+
+    const systemPrompt = `You are an expert resume writer and career coach. You will optimize a resume specifically for a job posting, using ATS-friendly language while keeping the voice authentic. 
+
+Rules:
+- Mirror keywords and phrases from the job posting naturally
+- Rewrite bullet points to emphasize relevant experience  
+- Keep the person's actual experience — don't fabricate
+- Lead with the most relevant experience for this role
+- Use strong action verbs
+- Output the complete optimized resume ready to send
+- After the resume, add a section called "WHAT I CHANGED" with 4-6 specific bullet points explaining the key optimizations you made`;
+
+    const userMsg = `Here is context about me:\n${constitutionText}\n\n---\nJOB POSTING / URL:\n${jobInput}\n\n---\nMY CURRENT RESUME:\n${resumeBase}${emphasis ? `\n\n---\nEMPHASIS NOTES FROM ME:\n${emphasis}` : ''}`;
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 2000,
+        system: systemPrompt,
+        messages: [{role:'user', content: userMsg}]
+      })
+    });
+    const data = await response.json();
+    const text = data.content?.[0]?.text || 'No response.';
+
+    // Split at WHAT I CHANGED
+    const splitIdx = text.indexOf('WHAT I CHANGED');
+    const resumeText = splitIdx > -1 ? text.slice(0, splitIdx).trim() : text;
+    const changesText = splitIdx > -1 ? text.slice(splitIdx).trim() : '';
+
+    body.innerHTML = `
+      <div class="resume-result-tabs">
+        <button class="resume-tab active" onclick="switchResumeTab('resume',this)">Optimized Resume</button>
+        ${changesText ? `<button class="resume-tab" onclick="switchResumeTab('changes',this)">What Changed</button>` : ''}
+        <button class="resume-tab" onclick="switchResumeTab('raw',this)">Copy Text</button>
+      </div>
+      <div id="resume-tab-resume" class="resume-tab-content active">
+        <div class="resume-output">${resumeText.replace(/\n/g,'<br>')}</div>
+      </div>
+      ${changesText ? `<div id="resume-tab-changes" class="resume-tab-content">
+        <div class="resume-changes-list">${changesText.replace(/\n/g,'<br>')}</div>
+      </div>` : ''}
+      <div id="resume-tab-raw" class="resume-tab-content">
+        <textarea class="resume-textarea" style="height:300px;" readonly>${resumeText}</textarea>
+        <button class="resume-copy-btn" onclick="copyResumeText()">Copy to Clipboard</button>
+      </div>
+      <button class="ai-run-again-btn" style="margin-top:12px;" onclick="openResumeOptimizer(${taskId})">↺ Start Over</button>`;
+  } catch(e) {
+    body.innerHTML = `<div class="ai-error">Error optimizing resume. Please try again.<br><small>${e.message}</small></div><button class="ai-run-again-btn" onclick="openResumeOptimizer(${taskId})">↺ Try Again</button>`;
+  }
+}
+
+function switchResumeTab(tab, btn){
+  document.querySelectorAll('.resume-tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.resume-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('resume-tab-'+tab)?.classList.add('active');
+  btn.classList.add('active');
+}
+
+function copyResumeText(){
+  const ta = document.querySelector('#resume-tab-raw textarea');
+  if(!ta) return;
+  navigator.clipboard.writeText(ta.value).catch(()=>{ta.select();document.execCommand('copy');});
+  showXPFlash('Resume copied!');
+}
+
+// ── SHARED AI FORMAT HELPER ──
+function formatAIResponse(text){
+  return text
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    .replace(/^#{1,3}\s+(.+)$/gm, '<div class="ai-section-header">$1</div>')
+    .replace(/^[-•]\s+(.+)$/gm, '<div class="ai-bullet">• $1</div>')
+    .replace(/\n\n/g, '<div class="ai-para-break"></div>')
+    .replace(/\n/g, '<br>');
+}
+
+// ── JOB APPLICATIONS ──
+const APP_STATUSES = [
+  { id: 'applied',      label: 'Applied',       color: '#534AB7', bg: '#EEEDFE' },
+  { id: 'heard_back',   label: 'Heard Back',    color: '#185FA5', bg: '#E6F1FB' },
+  { id: 'interviewing', label: 'Interviewing',  color: '#BA7517', bg: '#FAEEDA' },
+  { id: 'offer',        label: 'Offer',         color: '#1D9E75', bg: '#E1F5EE' },
+  { id: 'passed',       label: 'Passed',        color: '#888780', bg: '#F1EFE8' },
+];
+
+function getApplicationTasks() {
+  const phrases = ['apply', 'applying', 'applied', 'application', 'submit resume', 'send resume'];
+  return tasks.filter(t => {
+    const txt = (t.text || '').toLowerCase();
+    return phrases.some(p => txt.includes(p));
+  });
+}
+
+function getAppStatus(t) {
+  return t.applicationStatus || 'applied';
+}
+
+function setAppStatus(taskId, status) {
+  const t = tasks.find(x => x.id === taskId);
+  if (!t) return;
+  t.applicationStatus = status;
+  t.updatedAt = ts();
+  persist();
+  renderWorkView();
+}
+
+function extractAppCompany(text) {
+  // Try to extract company name from task text like "Apply to DeepMind" or "Apply Waymo"
+  const cleaned = text
+    .replace(/^apply\s*(to|for|at|@)?\s*/i, '')
+    .replace(/^applied\s*(to|for|at|@)?\s*/i, '')
+    .replace(/^application\s*(to|for|at|@)?\s*/i, '')
+    .replace(/,.*$/, '')           // drop everything after comma
+    .replace(/\s*[-–—].*$/, '')    // drop everything after dash
+    .replace(/\s*(position|role|job|vp|director|manager|lead).*$/i, '')
+    .trim();
+  return cleaned || text;
+}
+
+function extractAppUrl(note) {
+  if (!note) return null;
+  const match = note.match(/https?:\/\/[^\s\n\r]+/);
+  return match ? match[0] : null;
+}
+
+function renderWOSApplications(el) {
+  const appTasks = getApplicationTasks();
+
+  // Group by status
+  const byStatus = {};
+  APP_STATUSES.forEach(s => byStatus[s.id] = []);
+  appTasks.forEach(t => {
+    const s = getAppStatus(t);
+    if (byStatus[s]) byStatus[s].push(t);
+    else byStatus['applied'].push(t);
+  });
+
+  const totalOpen = appTasks.filter(t => !t.done || ['offer','interviewing','heard_back'].includes(getAppStatus(t))).length;
+  const totalActive = appTasks.filter(t => !['passed'].includes(getAppStatus(t))).length;
+
+  function appCard(t) {
+    const status = APP_STATUSES.find(s => s.id === getAppStatus(t));
+    const url = extractAppUrl(t.note);
+    const company = extractAppCompany(t.text);
+    const age = ageDays(t.createdAt);
+    const isStale = age > 14 && !['offer','passed'].includes(getAppStatus(t));
+    const isDone = t.done;
+
+    return `<div class="app-card${isDone ? ' app-card-done' : ''}" onclick="switchToLifeOS();setTimeout(()=>{selectTask(${t.id});},80)">
+      <div class="app-card-top">
+        <div class="app-card-company">${company}</div>
+        ${url ? `<a class="app-card-link" href="${url}" target="_blank" onclick="event.stopPropagation()" title="Open posting">↗</a>` : ''}
+      </div>
+      ${t.text !== company ? `<div class="app-card-role">${t.text}</div>` : ''}
+      <div class="app-card-meta">
+        <span class="${isStale ? 'app-age-stale' : 'app-age'}">${age}d ago</span>
+        ${isDone ? '<span class="app-done-badge">✓ done</span>' : ''}
+      </div>
+      <div class="app-status-pills">
+        ${APP_STATUSES.map(s => `<button class="app-status-pill${getAppStatus(t) === s.id ? ' active' : ''}"
+          style="${getAppStatus(t) === s.id ? `background:${s.bg};color:${s.color};border-color:${s.color}40;` : ''}"
+          onclick="event.stopPropagation();setAppStatus(${t.id},'${s.id}')"
+          title="${s.label}">${s.label}</button>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Summary row
+  const summaryHtml = `<div class="app-summary-row">
+    <div class="app-summary-stat"><span class="app-summary-num">${appTasks.length}</span><span class="app-summary-label">total</span></div>
+    <div class="app-summary-stat"><span class="app-summary-num" style="color:#534AB7">${byStatus['applied'].length}</span><span class="app-summary-label">applied</span></div>
+    <div class="app-summary-stat"><span class="app-summary-num" style="color:#185FA5">${byStatus['heard_back'].length}</span><span class="app-summary-label">heard back</span></div>
+    <div class="app-summary-stat"><span class="app-summary-num" style="color:#BA7517">${byStatus['interviewing'].length}</span><span class="app-summary-label">interviewing</span></div>
+    <div class="app-summary-stat"><span class="app-summary-num" style="color:#1D9E75">${byStatus['offer'].length}</span><span class="app-summary-label">offers</span></div>
+  </div>`;
+
+  // Columns — skip "passed" from main view, show it collapsed at bottom
+  const activeCols = APP_STATUSES.filter(s => s.id !== 'passed');
+  const passedTasks = byStatus['passed'];
+
+  const colsHtml = activeCols.map(s => {
+    const colTasks = byStatus[s.id];
+    return `<div class="app-col">
+      <div class="app-col-header" style="color:${s.color};">
+        <span>${s.label}</span>
+        <span class="app-col-count" style="background:${s.bg};color:${s.color};">${colTasks.length}</span>
+      </div>
+      ${colTasks.length === 0
+        ? `<div class="app-col-empty">—</div>`
+        : colTasks.map(t => appCard(t)).join('')}
+    </div>`;
+  }).join('');
+
+  const passedHtml = passedTasks.length ? `
+    <div class="app-passed-section">
+      <div class="app-passed-toggle" onclick="this.nextElementSibling.classList.toggle('open');this.classList.toggle('open')">
+        <span>Passed / Not moving forward (${passedTasks.length})</span>
+        <span class="app-passed-arrow">›</span>
+      </div>
+      <div class="app-passed-list">${passedTasks.map(t => appCard(t)).join('')}</div>
+    </div>` : '';
+
+  const emptyHtml = appTasks.length === 0 ? `
+    <div class="wos-empty" style="padding:40px 20px;">
+      No job applications yet.<br>
+      <span style="font-size:12px;color:#b4b2a9;">Tasks starting with "Apply", "Applying", "Applied", or "Application" will appear here automatically.</span>
+    </div>` : '';
+
+  el.innerHTML = `<div class="app-view">
+    ${summaryHtml}
+    ${emptyHtml}
+    ${appTasks.length > 0 ? `<div class="app-cols">${colsHtml}</div>` : ''}
+    ${passedHtml}
+  </div>`;
 }
 
 async function dismissCleanupRecord(id){
