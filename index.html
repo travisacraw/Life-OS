@@ -231,6 +231,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wos-contact-name{font-size:13px;font-weight:500;color:#2c2c2a;}
 .wos-contact-meta{font-size:11px;color:#888780;margin-top:1px;}
 
+/* ── VENDOR VIEW ── */
+.vendor-view{display:flex;flex-direction:column;height:100%;}
+.vendor-toolbar{display:flex;gap:8px;align-items:center;padding:10px 14px;border-bottom:0.5px solid #e8e8e4;flex-shrink:0;}
+.vendor-list{overflow-y:auto;padding:8px 14px 16px;flex:1;}
+.vendor-card{border:0.5px solid #d1d1cf;border-radius:9px;padding:10px 12px;background:#fff;margin-bottom:6px;cursor:pointer;transition:all 0.12s;}
+.vendor-card:hover{border-color:#b4b2a9;background:#fafaf8;}
+.vendor-card.selected{border-color:#7F77DD;background:#faf9ff;}
+.vendor-card-top{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.vendor-cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.vendor-card-name{font-size:13px;font-weight:500;color:#2c2c2a;flex:1;}
+.vendor-rel-badge{font-size:10px;font-weight:500;flex-shrink:0;}
+.vendor-card-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding-left:16px;}
+.vendor-cat-pill{font-size:10px;font-weight:500;padding:1px 7px;border-radius:8px;white-space:nowrap;}
+.vendor-meta-item{font-size:10px;color:#888780;white-space:nowrap;}
+.vendor-person-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid #f5f5f3;cursor:pointer;}
+.vendor-person-row:hover{opacity:0.8;}
+.vendor-person-row:last-child{border-bottom:none;}
+.vendor-project-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:0.5px solid #f5f5f3;font-size:12px;color:#2c2c2a;}
+.vendor-project-row:last-child{border-bottom:none;}
+.vendor-project-name{flex:1;}
+.vendor-project-del{color:#b4b2a9;cursor:pointer;padding:0 4px;font-size:14px;line-height:1;}
+.vendor-project-del:hover{color:#E24B4A;}
+
 /* ── JOB APPLICATIONS VIEW ── */
 .app-view{display:flex;flex-direction:column;gap:0;padding-bottom:20px;}
 .app-summary-row{display:flex;gap:0;padding:12px 18px 10px;border-bottom:0.5px solid #e8e8e4;}
@@ -266,6 +289,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .app-passed-toggle.open .app-passed-arrow{transform:rotate(90deg);}
 .app-passed-list{display:none;padding-top:8px;}
 .app-passed-list.open{display:block;}
+
+/* ── VENDOR VIEW ── */
+.vendor-view{display:flex;flex-direction:column;height:100%;}
+.vendor-toolbar{display:flex;gap:6px;align-items:center;padding:10px 14px;border-bottom:0.5px solid #e8e8e4;flex-shrink:0;flex-wrap:wrap;}
+.vendor-count-bar{font-size:10px;color:#888780;padding:5px 14px;border-bottom:0.5px solid #f5f5f3;}
+.vendor-list{overflow-y:auto;padding:8px 14px 20px;}
+.vendor-card{border:0.5px solid #d1d1cf;border-radius:9px;padding:10px 12px;background:#fff;margin-bottom:6px;cursor:pointer;transition:border-color 0.12s,background 0.12s;}
+.vendor-card:hover{border-color:#b4b2a9;background:#fafaf8;}
+.vendor-card.selected{border-color:#7F77DD;background:#faf9ff;}
+.vendor-card-top{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap;}
+.vendor-card-name{font-size:13px;font-weight:500;color:#2c2c2a;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.vendor-type-badge{font-size:9px;font-weight:600;padding:1px 6px;border-radius:7px;flex-shrink:0;letter-spacing:0.04em;}
+.vendor-type-vendor{background:#FAEEDA;color:#854F0B;}
+.vendor-type-studio{background:#EEEDFE;color:#534AB7;}
+.vendor-recco-badge{font-size:10px;font-weight:500;padding:1px 7px;border-radius:8px;flex-shrink:0;}
+.vendor-card-sub{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-bottom:3px;}
+.vendor-kind-chip{font-size:10px;font-weight:600;color:#888780;background:#F1EFE8;padding:1px 6px;border-radius:6px;}
+.vendor-trust-chip{font-size:10px;padding:1px 6px;border-radius:6px;}
+.vendor-trust-unknown{background:#F1EFE8;color:#888780;}
+.vendor-trust-spoken{background:#E6F1FB;color:#185FA5;}
+.vendor-trust-known{background:#FAEEDA;color:#854F0B;}
+.vendor-trust-trusted{background:#E1F5EE;color:#0F6E56;}
+.vendor-loc-chip{font-size:10px;color:#888780;}
+.vendor-tag-row{display:flex;gap:3px;flex-wrap:wrap;margin-top:2px;}
+.vendor-area-tag{font-size:10px;background:#F1EFE8;color:#444441;padding:1px 7px;border-radius:8px;}
+.vendor-area-more{background:#e8e8e4;color:#888780;}
+.vendor-person-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:0.5px solid #f5f5f3;cursor:pointer;}
+.vendor-person-row:hover{opacity:0.8;}
+.vendor-person-row:last-child{border-bottom:none;}
+/* vm-tab */
+.vm-tab{padding:5px 14px;font-size:12px;font-weight:500;border:0.5px solid #d1d1cf;border-radius:7px;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;transition:all 0.1s;}
+.vm-tab:hover{border-color:#7F77DD;color:#534AB7;}
+.vm-tab-active{background:#EEEDFE;border-color:#AFA9EC;color:#3C3489;}
+/* new tag option highlight */
+.wos-specialty-opt-new{color:#1D9E75;font-weight:500;}
+.wos-specialty-opt-new:hover{background:#E1F5EE !important;}
 
 /* ── AI FEATURE VIEWS ── */
 .ai-feature-view{display:flex;flex-direction:column;min-height:100%;}
@@ -931,6 +990,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="sidebar-header">People</div>
       <div class="nav-item work-nav" onclick="setWorkView('wos-network')" id="nav-wos-network"><div class="nav-dot" style="background:#D4537E"></div>Network</div>
       <div class="nav-item work-nav" onclick="setWorkView('wos-talent')" id="nav-wos-talent"><div class="nav-dot" style="background:#1D9E75"></div>Talent</div>
+      <div class="nav-item work-nav" onclick="setWorkView('wos-vendors')" id="nav-wos-vendors"><div class="nav-dot" style="background:#BA7517"></div>Vendors</div>
       <div class="nav-item work-nav" onclick="setWorkView('wos-people')" id="nav-wos-people"><div class="nav-dot" style="background:#7F77DD"></div>People</div>
       <div class="nav-item work-nav" onclick="setWorkView('wos-outreach')" id="nav-wos-outreach"><div class="nav-dot" style="background:#BA7517"></div>Outreach</div>
       <div class="nav-divider"></div>
@@ -1482,6 +1542,7 @@ async function loadFromSupabase(){
       if(data.wos_projects){ workProjects=data.wos_projects; }
       if(data.wos_contacts){ workContacts=data.wos_contacts; }
       if(data.wos_vendors){  workVendors=data.wos_vendors; }
+      if(data.wos_os_vendors){ workOSVendors=data.wos_os_vendors; }
       nextWorkId=Math.max(0,...[...workProjects,...workContacts,...workVendors].map(x=>parseInt(x.id||0)||0))+1;
       // constitution_last_reviewed synced from Supabase, mirrored to localStorage for fast reads
       if(data.constitution_last_reviewed){ localStorage.setItem('constitution_last_reviewed', data.constitution_last_reviewed); }
@@ -1515,6 +1576,7 @@ async function pushToSupabase(){
         wos_projects:workProjects,
         wos_contacts:workContacts,
         wos_vendors:workVendors,
+        wos_os_vendors:workOSVendors,
         constitution_last_reviewed:localStorage.getItem('constitution_last_reviewed')||null,
         updated_at:new Date().toISOString()
       })
@@ -2975,6 +3037,8 @@ let workView = 'wos-dashboard';
 let workProjects = [];
 let workContacts  = [];
 let workVendors   = [];
+let workOSVendors = [];  // Company vendor records
+let wosVendorsLoaded = false;
 let nextWorkId = 1;
 
 function persistWork() {
@@ -3010,6 +3074,7 @@ function setWorkView(v) {
     'wos-projects':  'All Projects',
     'wos-network':   'Network',
     'wos-talent':    'Talent',
+    'wos-vendors':   'Vendors',
     'wos-people':    'People',
     'wos-outreach':  'Outreach',
     'wos-cleanup':   'Data Cleanup',
@@ -3024,7 +3089,7 @@ function setWorkView(v) {
   const wosDetail = document.getElementById('wos-detail-panel');
   if (wosDetail) {
     wosDetail.classList.add('hidden');
-    if (['wos-people','wos-talent','wos-network','wos-cleanup'].includes(v)) {
+    if (['wos-people','wos-talent','wos-network','wos-vendors','wos-cleanup'].includes(v)) {
       wosDetail.style.display = '';
     } else {
       wosDetail.style.display = 'none';
@@ -3040,6 +3105,7 @@ function renderWorkView() {
   if (workView === 'wos-projects')   { renderWOSProjects(list);  return; }
   if (workView === 'wos-network')    { renderWOSPeopleView(list, 'network'); return; }
   if (workView === 'wos-talent')     { renderWOSPeopleView(list, 'talent');  return; }
+  if (workView === 'wos-vendors')    { renderWOSVendorView(list);             return; }
   if (workView === 'wos-people')     { renderWOSPeopleView(list, 'all');     return; }
   if (workView === 'wos-outreach')   { renderWOSOutreachView(list);          return; }
   if (workView === 'wos-cleanup')    { renderWOSCleanup(list);               return; }
@@ -3054,6 +3120,7 @@ function renderWOSDashboard(el) {
 
   const appTasks = getApplicationTasks();
   const activeApps = appTasks.filter(t => !['passed'].includes(getAppStatus(t)));
+  const toApply = appTasks.filter(t => getAppStatus(t) === 'to_apply').length;
   const interviewing = appTasks.filter(t => getAppStatus(t) === 'interviewing').length;
   const offers = appTasks.filter(t => getAppStatus(t) === 'offer').length;
 
@@ -3062,6 +3129,7 @@ function renderWOSDashboard(el) {
     <div style="margin:0 14px 12px;padding:10px 13px;border:0.5px solid #d1d1cf;border-radius:9px;background:#fff;cursor:pointer;display:flex;align-items:center;gap:12px;" onclick="setWorkView('wos-applications')">
       <div style="flex:1;display:flex;gap:14px;">
         <div style="text-align:center;"><div style="font-size:16px;font-weight:600;color:#534AB7;">${activeApps.length}</div><div style="font-size:9px;color:#888780;text-transform:uppercase;letter-spacing:0.06em;">active</div></div>
+        ${toApply > 0 ? `<div style="text-align:center;"><div style="font-size:16px;font-weight:600;color:#888780;">${toApply}</div><div style="font-size:9px;color:#888780;text-transform:uppercase;letter-spacing:0.06em;">to apply</div></div>` : ''}
         ${interviewing > 0 ? `<div style="text-align:center;"><div style="font-size:16px;font-weight:600;color:#BA7517;">${interviewing}</div><div style="font-size:9px;color:#888780;text-transform:uppercase;letter-spacing:0.06em;">interviewing</div></div>` : ''}
         ${offers > 0 ? `<div style="text-align:center;"><div style="font-size:16px;font-weight:600;color:#1D9E75;">${offers}</div><div style="font-size:9px;color:#888780;text-transform:uppercase;letter-spacing:0.06em;">offers</div></div>` : ''}
       </div>
@@ -3729,7 +3797,7 @@ function renderWOSReadView(p, body){
   ].filter(Boolean).join(' · ');
 
   document.getElementById('wos-detail-name').textContent = name;
-  document.getElementById('wos-detail-company').innerHTML = freelanceChip + (subline||'');
+  document.getElementById('wos-detail-company').innerHTML = freelanceChip + (subline||'') + _vendorChipHtml(p);
 
   // Show website icon if record has one
   const websiteIcon = document.getElementById('wos-detail-website-icon');
@@ -4743,11 +4811,12 @@ function formatAIResponse(text){
 
 // ── JOB APPLICATIONS ──
 const APP_STATUSES = [
+  { id: 'to_apply',     label: 'To Apply',      color: '#888780', bg: '#F1EFE8' },
   { id: 'applied',      label: 'Applied',       color: '#534AB7', bg: '#EEEDFE' },
   { id: 'heard_back',   label: 'Heard Back',    color: '#185FA5', bg: '#E6F1FB' },
   { id: 'interviewing', label: 'Interviewing',  color: '#BA7517', bg: '#FAEEDA' },
   { id: 'offer',        label: 'Offer',         color: '#1D9E75', bg: '#E1F5EE' },
-  { id: 'passed',       label: 'Passed',        color: '#888780', bg: '#F1EFE8' },
+  { id: 'passed',       label: 'Passed',        color: '#D85A30', bg: '#FAECE7' },
 ];
 
 function getApplicationTasks() {
@@ -4759,13 +4828,21 @@ function getApplicationTasks() {
 }
 
 function getAppStatus(t) {
-  return t.applicationStatus || 'applied';
+  // If a status has been explicitly set, use it
+  if (t.applicationStatus) return t.applicationStatus;
+  // Otherwise derive from task done state: undone = still need to apply
+  return t.done ? 'applied' : 'to_apply';
 }
 
 function setAppStatus(taskId, status) {
   const t = tasks.find(x => x.id === taskId);
   if (!t) return;
   t.applicationStatus = status;
+  // Mark task done if moved past to_apply
+  if (status !== 'to_apply' && !t.done) {
+    t.done = true;
+    t.completedAt = t.completedAt || ts();
+  }
   t.updatedAt = ts();
   persist();
   renderWorkView();
@@ -4795,91 +4872,708 @@ function togglePassedSection(el) {
   el.classList.toggle('open');
 }
 
-function renderWOSApplications(el) {
-  var appTasks = getApplicationTasks();
+// ── VENDOR / STUDIO SYSTEM ──
 
-  var byStatus = {};
-  APP_STATUSES.forEach(function(s) { byStatus[s.id] = []; });
-  appTasks.forEach(function(t) {
-    var s = getAppStatus(t);
-    if (byStatus[s]) byStatus[s].push(t);
-    else byStatus['applied'].push(t);
+// ── TAG POOLS ──
+const VENDOR_AREA_SEEDS = [
+  'Fabrication','Props','Rentals','Set Design','Set Building','Inflatables',
+  'Giant Characters','Window Displays','Retail Design','Interiors','Trade Shows','Events',
+  'AV','LED','Lighting','Sound','Video','Rigging','Projection','AR','VR',
+  'Creative Tech','Systems Integration','Rental','Purchase','Custom',
+  'Print','Trade Show Graphics','SEG Prints','Signage',
+  'Event Production','Experiential','Exhibitions','Arch','Museum',
+  'Installation','Logistics','Permitting','Locations',
+  '3D Design','Graphic Design','Motion','Illustration','Digital Art','Photography','Film/Video',
+  'Staffing','Catering','Food Trucks','Merch','Partnerships',
+];
+const STUDIO_AREA_SEEDS = [
+  'Branding','Identity','Graphic Design','Motion','3D','Illustration',
+  'Digital Art','Photography','Film','Direction',
+  'Experiential','Immersive','Installation','Interactive',
+  'Projection Mapping','Realtime','Unreal','TouchDesigner',
+  'Creative Tech','AR','VR','XR','AI','Web','App','Software','Hardware',
+  'Content Production','Post Production','Sound Design','Music','Broadcast',
+  'Strategy','Consulting','Brand','Campaigns','Advertising','Social',
+];
+
+let vendorAreaPool     = [...VENDOR_AREA_SEEDS];
+let studioAreaPool     = [...STUDIO_AREA_SEEDS];
+let editingVendorAreas = [];
+let _pendingNewTag     = null;
+
+function getAreaPool(type) {
+  return type === 'studio' ? studioAreaPool : vendorAreaPool;
+}
+function initVendorAreaPool(type) {
+  const pool = getAreaPool(type);
+  workOSVendors.filter(v => v.type === type).forEach(v => {
+    (v.areas || []).forEach(a => { if (a && !pool.includes(a)) pool.push(a); });
   });
+}
 
-  function appCard(t) {
-    var status = getAppStatus(t);
-    var url = extractAppUrl(t.note);
-    var company = extractAppCompany(t.text);
-    var age = ageDays(t.createdAt);
-    var isStale = age > 14 && status !== 'offer' && status !== 'passed';
-    var isDone = t.done;
+// ── TAG EDITOR ──
+function renderVendorTagEditor(containerId, currentTags, type) {
+  editingVendorAreas = Array.isArray(currentTags) ? [...currentTags] : [];
+  _pendingNewTag = null;
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const tagsHtml = editingVendorAreas.map(function(t, i) {
+    return '<span class="wos-specialty-tag">' + t
+      + '<span class="wos-specialty-tag-x" onclick="removeVendorTag(\'' + containerId + '\',' + i + ',\'' + type + '\')">×</span></span>';
+  }).join('');
+  el.innerHTML =
+    '<div class="wos-specialty-tags">' + tagsHtml + '</div>'
+    + '<div class="wos-specialty-wrap">'
+    + '<input class="wos-specialty-input" id="vtag-input-' + containerId + '" placeholder="Add area..."'
+    + ' oninput="showVendorTagDrop(\'' + containerId + '\',this.value,\'' + type + '\')"'
+    + ' onkeydown="handleVendorTagKey(event,\'' + containerId + '\',\'' + type + '\')"'
+    + ' onblur="setTimeout(function(){hideVendorTagDrop(\'' + containerId + '\')},200)"/>'
+    + '<div class="wos-specialty-dropdown" id="vdrop-' + containerId + '" style="display:none;"></div>'
+    + '</div>'
+    + '<div id="vtag-confirm-' + containerId + '" style="display:none;align-items:center;gap:6px;padding:5px 0;"></div>';
+}
 
-    var linkHtml = url
-      ? '<a class="app-card-link" href="' + url + '" target="_blank" onclick="event.stopPropagation()">↗</a>'
-      : '';
-    var roleHtml = (t.text !== company)
-      ? '<div class="app-card-role">' + t.text + '</div>'
-      : '';
-    var doneHtml = isDone ? '<span class="app-done-badge">✓ done</span>' : '';
-
-    var pillsHtml = APP_STATUSES.map(function(s) {
-      var isActive = status === s.id;
-      var styleStr = isActive ? 'background:' + s.bg + ';color:' + s.color + ';border-color:' + s.color + '40;' : '';
-      return '<button class="app-status-pill' + (isActive ? ' active' : '') + '" style="' + styleStr + '" onclick="event.stopPropagation();setAppStatus(' + t.id + ',\'' + s.id + '\')">' + s.label + '</button>';
-    }).join('');
-
-    return '<div class="app-card' + (isDone ? ' app-card-done' : '') + '" onclick="switchToLifeOS();setTimeout(function(){selectTask(' + t.id + ');},80)">'
-      + '<div class="app-card-top"><div class="app-card-company">' + company + '</div>' + linkHtml + '</div>'
-      + roleHtml
-      + '<div class="app-card-meta"><span class="' + (isStale ? 'app-age-stale' : 'app-age') + '">' + age + 'd ago</span>' + doneHtml + '</div>'
-      + '<div class="app-status-pills">' + pillsHtml + '</div>'
-      + '</div>';
+function showVendorTagDrop(cid, query, type) {
+  const drop = document.getElementById('vdrop-' + cid);
+  if (!drop) return;
+  const q = query.toLowerCase().trim();
+  if (!q) { drop.style.display = 'none'; return; }
+  const pool = getAreaPool(type);
+  const matches = pool.filter(function(s) {
+    return s.toLowerCase().includes(q) && !editingVendorAreas.includes(s);
+  }).slice(0, 8);
+  const exactMatch = pool.some(function(s) { return s.toLowerCase() === q; });
+  var html = matches.map(function(s) {
+    return '<div class="wos-specialty-opt" onclick="addVendorTag(\'' + cid + '\',\'' + s.replace(/\\/g,'\\\\').replace(/'/g,"\\'") + '\',\'' + type + '\')">' + s + '</div>';
+  }).join('');
+  if (!exactMatch && query.trim()) {
+    html += '<div class="wos-specialty-opt wos-specialty-opt-new" onclick="promptVendorTag(\'' + cid + '\',\'' + query.trim().replace(/\\/g,'\\\\').replace(/'/g,"\\'") + '\',\'' + type + '\')">+ Create "' + query.trim() + '"</div>';
   }
+  drop.innerHTML = html;
+  drop.style.display = (matches.length > 0 || query.trim()) ? 'block' : 'none';
+}
+function hideVendorTagDrop(cid) {
+  var d = document.getElementById('vdrop-' + cid);
+  if (d) d.style.display = 'none';
+}
+function promptVendorTag(cid, value, type) {
+  hideVendorTagDrop(cid);
+  var input = document.getElementById('vtag-input-' + cid);
+  if (input) input.value = '';
+  _pendingNewTag = { cid: cid, value: value, type: type };
+  var confirmEl = document.getElementById('vtag-confirm-' + cid);
+  if (!confirmEl) return;
+  confirmEl.style.display = 'flex';
+  confirmEl.innerHTML =
+    '<span style="font-size:11px;color:#5f5e5a;">Add new tag: <strong>' + value + '</strong>?</span>'
+    + '<button onclick="confirmVendorTag(\'' + cid + '\')" style="padding:2px 10px;font-size:11px;border-radius:6px;border:none;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;">Add</button>'
+    + '<button onclick="cancelVendorTag(\'' + cid + '\')" style="padding:2px 8px;font-size:11px;border-radius:6px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;">Cancel</button>';
+}
+function confirmVendorTag(cid) {
+  if (!_pendingNewTag || _pendingNewTag.cid !== cid) return;
+  var pool = getAreaPool(_pendingNewTag.type);
+  if (!pool.includes(_pendingNewTag.value)) pool.push(_pendingNewTag.value);
+  addVendorTag(cid, _pendingNewTag.value, _pendingNewTag.type);
+  _pendingNewTag = null;
+  var confirmEl = document.getElementById('vtag-confirm-' + cid);
+  if (confirmEl) confirmEl.style.display = 'none';
+}
+function cancelVendorTag(cid) {
+  _pendingNewTag = null;
+  var confirmEl = document.getElementById('vtag-confirm-' + cid);
+  if (confirmEl) confirmEl.style.display = 'none';
+}
+function addVendorTag(cid, value, type) {
+  var v = value.trim();
+  if (!v || editingVendorAreas.includes(v)) return;
+  editingVendorAreas.push(v);
+  hideVendorTagDrop(cid);
+  renderVendorTagEditor(cid, editingVendorAreas, type);
+  setTimeout(function() {
+    var i = document.getElementById('vtag-input-' + cid);
+    if (i) i.focus();
+  }, 50);
+}
+function removeVendorTag(cid, idx, type) {
+  editingVendorAreas.splice(idx, 1);
+  renderVendorTagEditor(cid, editingVendorAreas, type);
+}
+function handleVendorTagKey(e, cid, type) {
+  if (e.key === 'Escape') hideVendorTagDrop(cid);
+  // intentionally no Enter-to-add — must use dropdown or confirm
+}
+function getVendorTags() { return [...editingVendorAreas]; }
 
-  var summaryHtml = '<div class="app-summary-row">'
-    + '<div class="app-summary-stat"><span class="app-summary-num">' + appTasks.length + '</span><span class="app-summary-label">total</span></div>'
-    + '<div class="app-summary-stat"><span class="app-summary-num" style="color:#534AB7">' + byStatus['applied'].length + '</span><span class="app-summary-label">applied</span></div>'
-    + '<div class="app-summary-stat"><span class="app-summary-num" style="color:#185FA5">' + byStatus['heard_back'].length + '</span><span class="app-summary-label">heard back</span></div>'
-    + '<div class="app-summary-stat"><span class="app-summary-num" style="color:#BA7517">' + byStatus['interviewing'].length + '</span><span class="app-summary-label">interviewing</span></div>'
-    + '<div class="app-summary-stat"><span class="app-summary-num" style="color:#1D9E75">' + byStatus['offer'].length + '</span><span class="app-summary-label">offers</span></div>'
-    + '</div>';
+// ── LOCATION NORMALIZATION ──
+const _US_EAST    = ['ME','NH','VT','MA','RI','CT','NY','NJ','PA','DE','MD','DC','VA','WV','NC','SC','GA','FL','KY','TN','AL','MS'];
+const _US_WEST    = ['CA','WA','OR','NV','AZ','HI','AK','ID','MT','WY','UT','CO','NM'];
+const _US_CENTRAL = ['TX','OK','KS','NE','SD','ND','MN','IA','MO','WI','IL','IN','MI','OH','AR','LA'];
+const _EU_COUNTRIES = ['UK','GB','FR','DE','NL','ES','IT','PT','BE','SE','NO','DK','FI','AT','CH','PL','GR','IE','CZ','HU','RO'];
+const _CITY_MAP = {
+  'SF':'CA','SAN FRANCISCO':'CA','LA':'CA','LOS ANGELES':'CA',
+  'NYC':'NY','NEW YORK':'NY','NEW YORK CITY':'NY','BROOKLYN':'NY',
+  'CHI':'IL','CHICAGO':'IL','AUSTIN':'TX','DALLAS':'TX','HOUSTON':'TX',
+  'MIAMI':'FL','BOSTON':'MA','PHILLY':'PA','PHILADELPHIA':'PA',
+  'SEATTLE':'WA','PORTLAND':'OR','DENVER':'CO','ATLANTA':'GA',
+  'NASHVILLE':'TN','DC':'DC','WASHINGTON':'DC','WASHINGTON DC':'DC',
+};
+function normalizeVendorLocation(raw) {
+  if (!raw) return { display: null, usRegion: null, globalRegion: null };
+  var up = raw.trim().toUpperCase().replace(/[.,]/g,'');
+  // City alias
+  if (_CITY_MAP[up]) {
+    var st = _CITY_MAP[up];
+    return { display: st, usRegion: _inferUSRegion(st), globalRegion: 'US' };
+  }
+  // US state
+  if (_US_EAST.includes(up) || _US_WEST.includes(up) || _US_CENTRAL.includes(up)) {
+    return { display: up, usRegion: _inferUSRegion(up), globalRegion: 'US' };
+  }
+  // MX/CAN
+  if (['MX','MEXICO','MEX','MEXICO CITY'].includes(up)) return { display: 'MX', usRegion: null, globalRegion: 'US' };
+  if (['CAN','CANADA','CA'].includes(up) && up !== 'CA') return { display: 'CAN', usRegion: null, globalRegion: 'US' };
+  // European
+  if (_EU_COUNTRIES.includes(up)) return { display: raw.trim(), usRegion: null, globalRegion: 'EMEA' };
+  return { display: raw.trim(), usRegion: null, globalRegion: 'GLOBAL' };
+}
+function _inferUSRegion(st) {
+  if (_US_EAST.includes(st))    return 'East Coast';
+  if (_US_WEST.includes(st))    return 'West Coast';
+  if (_US_CENTRAL.includes(st)) return 'Central';
+  return 'US';
+}
 
-  var activeCols = APP_STATUSES.filter(function(s) { return s.id !== 'passed'; });
-  var passedTasks = byStatus['passed'];
+// ── VENDOR CONSTANTS ──
+const VENDOR_KINDS_VENDOR = ['AV','DESIGN','EVENTS','FAB','FILM','OTHER','PRINT','PROD','TECH'];
+const VENDOR_KINDS_STUDIO = ['STUDIO'];
+const VENDOR_TRUST   = ['Unknown','Spoken','Known','Trusted'];
+const VENDOR_RECCO   = [
+  { id:'top',       label:'⭐️ Top tier',  color:'#BA7517', bg:'#FAEEDA' },
+  { id:'preferred', label:'💚 Preferred',  color:'#1D9E75', bg:'#E1F5EE' },
+  { id:'solid',     label:'🟢 Solid',      color:'#3B6D11', bg:'#EAF3DE' },
+  { id:'ok',        label:'🧡 OK',         color:'#D85A30', bg:'#FAECE7' },
+  { id:'cautious',  label:'🟨 Cautious',   color:'#888780', bg:'#F1EFE8' },
+];
+const VENDOR_PRICING  = ['Budget','Reasonable','Premium','Expensive'];
+const VENDOR_QUALITY  = ['Exceptional','Very Good','Good','Mixed','Poor'];
+const VENDOR_ENJOY    = ['Love it','Good','Neutral','Difficult','Avoid'];
 
-  var colsHtml = activeCols.map(function(s) {
-    var colTasks = byStatus[s.id];
-    var cardsHtml = colTasks.length === 0
-      ? '<div class="app-col-empty">—</div>'
-      : colTasks.map(appCard).join('');
-    return '<div class="app-col">'
-      + '<div class="app-col-header" style="color:' + s.color + ';">'
-      + '<span>' + s.label + '</span>'
-      + '<span class="app-col-count" style="background:' + s.bg + ';color:' + s.color + ';">' + colTasks.length + '</span>'
-      + '</div>' + cardsHtml + '</div>';
+// ── STATE ──
+let wosSelectedVendorId = null;
+
+// ── SUPABASE ──
+async function loadWOSVendors(force) {
+  if (wosVendorsLoaded && !force) return;
+  try {
+    var res = await fetch(SUPABASE_URL + '/rest/v1/work_os_vendors?select=*&order=name.asc&limit=1000', {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+    });
+    var data = await res.json();
+    workOSVendors = Array.isArray(data) ? data : [];
+    wosVendorsLoaded = true;
+    initVendorAreaPool('vendor');
+    initVendorAreaPool('studio');
+  } catch(e) {
+    console.error('Vendor load error:', e);
+    workOSVendors = [];
+  }
+}
+async function _saveVendorToSupabase(vendor) {
+  var isNew = !vendor.id;
+  var url = isNew
+    ? SUPABASE_URL + '/rest/v1/work_os_vendors'
+    : SUPABASE_URL + '/rest/v1/work_os_vendors?id=eq.' + vendor.id;
+  var res = await fetch(url, {
+    method: isNew ? 'POST' : 'PATCH',
+    headers: {
+      'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Content-Type': 'application/json',
+      'Prefer': isNew ? 'return=representation' : 'return=minimal'
+    },
+    body: JSON.stringify(vendor)
+  });
+  if (isNew) { var rows = await res.json(); return Array.isArray(rows) ? rows[0] : rows; }
+  return vendor;
+}
+async function deleteWOSVendorRecord(id) {
+  var v = workOSVendors.find(function(x) { return x.id === id; });
+  if (!confirm('Delete ' + (v ? v.name : 'this vendor') + '? Cannot be undone.')) return;
+  await fetch(SUPABASE_URL + '/rest/v1/work_os_vendors?id=eq.' + id, {
+    method: 'DELETE',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+  });
+  workOSVendors = workOSVendors.filter(function(x) { return x.id !== id; });
+  wosSelectedVendorId = null;
+  var panel = document.getElementById('wos-detail-panel');
+  if (panel) panel.classList.add('hidden');
+  renderWorkView();
+  showXPFlash('Deleted');
+}
+
+// ── VENDOR LIST VIEW ──
+async function renderWOSVendorView(el) {
+  el.innerHTML = '<div class="wos-loading">Loading vendors...</div>';
+  await loadWOSPeople();
+  await loadWOSVendors();
+  var panel = document.getElementById('wos-detail-panel');
+  if (panel) { panel.style.display = ''; panel.classList.add('hidden'); }
+  renderVendorList(el);
+}
+
+function renderVendorList(el) {
+  var q     = (document.getElementById('vl-search')     ? document.getElementById('vl-search').value     : '').toLowerCase();
+  var ftype = (document.getElementById('vl-type')       ? document.getElementById('vl-type').value       : '');
+  var fkind = (document.getElementById('vl-kind')       ? document.getElementById('vl-kind').value       : '');
+  var ftrust= (document.getElementById('vl-trust')      ? document.getElementById('vl-trust').value      : '');
+  var ftag  = (document.getElementById('vl-tag')        ? document.getElementById('vl-tag').value        : '').toLowerCase();
+  var fregion=(document.getElementById('vl-region')     ? document.getElementById('vl-region').value     : '');
+
+  var vendors = workOSVendors.filter(function(v) {
+    if (q && !(v.name + ' ' + (v.notes||'')).toLowerCase().includes(q)) return false;
+    if (ftype  && v.type  !== ftype)  return false;
+    if (fkind  && v.kind  !== fkind)  return false;
+    if (ftrust && v.trust !== ftrust) return false;
+    if (ftag   && !(v.areas||[]).some(function(a) { return a.toLowerCase().includes(ftag); })) return false;
+    if (fregion) {
+      var loc = normalizeVendorLocation(v.location);
+      var region = loc.usRegion || loc.globalRegion || '';
+      if (!region.toLowerCase().includes(fregion.toLowerCase())) return false;
+    }
+    return true;
+  });
+  vendors.sort(function(a,b) { return (a.name||'').localeCompare(b.name||''); });
+
+  var reccoMap = {};
+  VENDOR_RECCO.forEach(function(r) { reccoMap[r.id] = r; });
+
+  var cards = vendors.map(function(v) {
+    var recco = v.recommendation ? reccoMap[v.recommendation] : null;
+    var loc = normalizeVendorLocation(v.location);
+    var tagPills = (v.areas||[]).slice(0,3).map(function(a) {
+      return '<span class="vendor-area-tag">' + a + '</span>';
+    }).join('') + ((v.areas||[]).length > 3 ? '<span class="vendor-area-tag vendor-area-more">+' + ((v.areas||[]).length-3) + '</span>' : '');
+    var typeBadge = v.type === 'studio'
+      ? '<span class="vendor-type-badge vendor-type-studio">Studio</span>'
+      : '<span class="vendor-type-badge vendor-type-vendor">Vendor</span>';
+    return '<div class="vendor-card' + (wosSelectedVendorId === v.id ? ' selected' : '') + '" onclick="openVendorDetail(' + v.id + ')">'
+      + '<div class="vendor-card-top">'
+      + '<div class="vendor-card-name">' + (v.name||'—') + '</div>'
+      + typeBadge
+      + (recco ? '<span class="vendor-recco-badge" style="background:' + recco.bg + ';color:' + recco.color + ';">' + recco.label + '</span>' : '')
+      + '</div>'
+      + '<div class="vendor-card-sub">'
+      + (v.kind   ? '<span class="vendor-kind-chip">' + v.kind + '</span>' : '')
+      + (v.trust  ? '<span class="vendor-trust-chip vendor-trust-' + v.trust.toLowerCase() + '">' + v.trust + '</span>' : '')
+      + (loc.display ? '<span class="vendor-loc-chip">📍 ' + loc.display + '</span>' : '')
+      + '</div>'
+      + (tagPills ? '<div class="vendor-tag-row">' + tagPills + '</div>' : '')
+      + '</div>';
   }).join('');
 
-  var passedHtml = '';
-  if (passedTasks.length) {
-    passedHtml = '<div class="app-passed-section">'
-      + '<div class="app-passed-toggle" onclick="togglePassedSection(this)">'
-      + '<span>Passed / Not moving forward (' + passedTasks.length + ')</span>'
-      + '<span class="app-passed-arrow">›</span></div>'
-      + '<div class="app-passed-list">' + passedTasks.map(appCard).join('') + '</div>'
-      + '</div>';
-  }
+  var allKinds = VENDOR_KINDS_VENDOR.concat(VENDOR_KINDS_STUDIO);
+  var kindOpts = allKinds.map(function(k) {
+    return '<option value="' + k + '"' + (fkind===k?' selected':'') + '>' + k + '</option>';
+  }).join('');
 
-  var emptyHtml = appTasks.length === 0
-    ? '<div class="wos-empty" style="padding:40px 20px;">No job applications yet.<br><span style="font-size:12px;color:#b4b2a9;">Tasks with "Apply", "Applied", or "Application" appear here automatically.</span></div>'
-    : '';
-
-  el.innerHTML = '<div class="app-view">'
-    + summaryHtml
-    + emptyHtml
-    + (appTasks.length > 0 ? '<div class="app-cols">' + colsHtml + '</div>' : '')
-    + passedHtml
+  el.innerHTML = '<div class="vendor-view">'
+    + '<div class="vendor-toolbar">'
+    + '<input class="wos-search-input" id="vl-search" placeholder="Search vendors & studios..." oninput="renderVendorList(document.getElementById(\'task-list\'))" value="' + q.replace(/"/g,'&quot;') + '" style="flex:1;min-width:80px;"/>'
+    + '<select class="wos-filter-sel" id="vl-type" onchange="renderVendorList(document.getElementById(\'task-list\'))" style="width:86px;">'
+    + '<option value="">All</option>'
+    + '<option value="vendor"' + (ftype==='vendor'?' selected':'') + '>Vendors</option>'
+    + '<option value="studio"' + (ftype==='studio'?' selected':'') + '>Studios</option>'
+    + '</select>'
+    + '<select class="wos-filter-sel" id="vl-kind" onchange="renderVendorList(document.getElementById(\'task-list\'))" style="width:86px;">'
+    + '<option value="">Kind</option>' + kindOpts
+    + '</select>'
+    + '<select class="wos-filter-sel" id="vl-trust" onchange="renderVendorList(document.getElementById(\'task-list\'))" style="width:90px;">'
+    + '<option value="">Trust</option>'
+    + VENDOR_TRUST.map(function(t) { return '<option value="' + t + '"' + (ftrust===t?' selected':'') + '>' + t + '</option>'; }).join('')
+    + '</select>'
+    + '<select class="wos-filter-sel" id="vl-region" onchange="renderVendorList(document.getElementById(\'task-list\'))" style="width:108px;">'
+    + '<option value="">Region</option>'
+    + ['East Coast','West Coast','Central','US','EMEA','GLOBAL'].map(function(r) { return '<option value="' + r + '"' + (fregion===r?' selected':'') + '>' + r + '</option>'; }).join('')
+    + '</select>'
+    + '<input class="wos-filter-sel" id="vl-tag" placeholder="Area tag..." oninput="renderVendorList(document.getElementById(\'task-list\'))" value="' + ftag.replace(/"/g,'&quot;') + '" style="width:90px;"/>'
+    + '<button class="add-btn" onclick="openVendorModal(null)" style="white-space:nowrap;flex-shrink:0;">+ Add</button>'
+    + '</div>'
+    + '<div class="vendor-count-bar">' + vendors.length + (workOSVendors.length !== vendors.length ? ' of ' + workOSVendors.length : '') + ' result' + (vendors.length !== 1 ? 's' : '') + '</div>'
+    + (vendors.length === 0
+      ? '<div class="wos-empty" style="padding:40px 20px;">No vendors found.<br><span style="font-size:12px;color:#b4b2a9;">Use + Add to create your first vendor or studio.</span></div>'
+      : '<div class="vendor-list">' + cards + '</div>')
     + '</div>';
 }
+
+// ── VENDOR DETAIL ──
+function openVendorDetail(id) {
+  wosSelectedVendorId = id;
+  _renderVendorDetailPanel(id);
+  document.querySelectorAll('.vendor-card').forEach(function(c) {
+    c.classList.toggle('selected', c.onclick && c.onclick.toString().includes('(' + id + ')'));
+  });
+}
+
+function _renderVendorDetailPanel(id) {
+  var v = workOSVendors.find(function(x) { return x.id === id; });
+  if (!v) return;
+  var panel = document.getElementById('wos-detail-panel');
+  if (!panel) return;
+  panel.classList.remove('hidden');
+
+  var recco = v.recommendation ? VENDOR_RECCO.find(function(r) { return r.id === v.recommendation; }) : null;
+  var loc   = normalizeVendorLocation(v.location);
+
+  function sec(label) {
+    return '<div class="wos-detail-section">' + label + '</div>';
+  }
+  function row(k, val) {
+    if (!val) return '';
+    return '<div class="wos-detail-row"><span class="dk">' + k + '</span><span class="dv">' + val + '</span></div>';
+  }
+
+  var tagPills = (v.areas||[]).map(function(a) {
+    return '<span style="display:inline-flex;padding:2px 8px;background:#F1EFE8;color:#444441;border-radius:10px;font-size:10px;font-weight:500;margin:2px;">' + a + '</span>';
+  }).join('');
+
+  var linked = wosPeople.filter(function(p) { return p.vendor_id === v.id; });
+  var linkedHtml = linked.length > 0
+    ? linked.map(function(p) {
+        var initials = (p.name||'?').split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);
+        return '<div class="vendor-person-row" onclick="openWOSPersonDetail(\'' + p.id + '\')">'
+          + '<div style="width:24px;height:24px;border-radius:50%;background:#EEEDFE;color:#534AB7;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;flex-shrink:0;">' + initials + '</div>'
+          + '<div style="flex:1;min-width:0;">'
+          + '<div style="font-size:12px;font-weight:500;color:#2c2c2a;">' + (p.name||'') + '</div>'
+          + (p.role ? '<div style="font-size:10px;color:#888780;">' + p.role + '</div>' : '')
+          + '</div></div>';
+      }).join('')
+    : '<div style="font-size:11px;color:#b4b2a9;padding:3px 0;">No linked contacts</div>';
+
+  var websiteHtml = v.website
+    ? '<a href="' + (v.website.startsWith('http') ? v.website : 'https://'+v.website) + '" target="_blank" style="text-decoration:none;font-size:14px;padding:2px 4px;color:#2c2c2a;" title="Open website">↗</a>'
+    : '';
+
+  panel.innerHTML =
+    '<div class="wos-detail-header">'
+    + '<div style="flex:1;min-width:0;">'
+    + '<div class="wos-detail-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + (v.name||'—') + '</div>'
+    + '<div class="wos-detail-company">'
+    + (v.kind ? '<span style="font-size:10px;font-weight:600;color:#888780;">' + v.kind + '</span>' : '')
+    + (v.type === 'studio' ? '<span style="font-size:10px;color:#534AB7;margin-left:5px;">Studio</span>' : '')
+    + '</div>'
+    + '</div>'
+    + websiteHtml
+    + '<div class="wos-detail-close" onclick="closeVendorDetail()">×</div>'
+    + '</div>'
+    + '<div class="wos-detail-body">'
+    + (recco ? '<div style="display:inline-flex;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:500;background:' + recco.bg + ';color:' + recco.color + ';margin-bottom:8px;">' + recco.label + '</div>' : '')
+    + sec('Details')
+    + row('Trust', v.trust)
+    + row('Location', loc.display || v.location)
+    + row('Region', loc.usRegion || loc.globalRegion)
+    + row('Pricing', v.pricing)
+    + row('Work quality', v.work_quality)
+    + row('Enjoyment', v.enjoyment)
+    + row('Recommended by', v.recco)
+    + (tagPills ? '<div style="margin:6px 0 4px;display:flex;flex-wrap:wrap;">' + tagPills + '</div>' : '')
+    + (v.notes ? sec('Notes') + '<div class="wos-detail-note">' + v.notes.replace(/\n/g,'<br>') + '</div>' : '')
+    + sec('Contacts')
+    + linkedHtml
+    + '</div>'
+    + '<div class="wos-detail-actions">'
+    + '<button class="wos-detail-btn primary" onclick="openVendorModal(' + id + ')">Edit</button>'
+    + '<button class="wos-detail-btn" style="color:#E24B4A;border-color:#F0997B;" onclick="deleteWOSVendorRecord(' + id + ')">Delete</button>'
+    + '</div>';
+}
+
+function closeVendorDetail() {
+  wosSelectedVendorId = null;
+  var panel = document.getElementById('wos-detail-panel');
+  if (panel) panel.classList.add('hidden');
+  document.querySelectorAll('.vendor-card').forEach(function(c) { c.classList.remove('selected'); });
+}
+
+// ── VENDOR MODAL ──
+function openVendorModal(id) {
+  var v    = id ? workOSVendors.find(function(x) { return x.id === id; }) : null;
+  var type = (v && v.type) || 'vendor';
+
+  var overlay = document.getElementById('vendor-modal-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'vendor-modal-overlay';
+    overlay.className = 'overlay';
+    overlay.innerHTML = '<div id="vendor-modal-box" class="wos-modal" style="width:500px;max-height:92vh;overflow-y:auto;"></div>';
+    document.querySelector('.app').appendChild(overlay);
+  }
+  overlay.classList.add('show');
+  _buildVendorModalContent(v, type);
+}
+
+function _buildVendorModalContent(v, type) {
+  var id   = v ? v.id : null;
+  var vKinds = type === 'studio' ? VENDOR_KINDS_STUDIO : VENDOR_KINDS_VENDOR;
+
+  function ms(label, elId, val, opts) {
+    return '<div class="wos-modal-row"><div class="wos-modal-label">' + label + '</div>'
+      + '<select class="wos-modal-input" id="' + elId + '"><option value="">—</option>'
+      + opts.map(function(o) { return '<option value="' + o + '"' + (val===o?' selected':'') + '>' + o + '</option>'; }).join('')
+      + '</select></div>';
+  }
+  function mf(label, elId, val, ph) {
+    return '<div class="wos-modal-row"><div class="wos-modal-label">' + label + '</div>'
+      + '<input class="wos-modal-input" id="' + elId + '" value="' + (val||'').replace(/"/g,'&quot;') + '" placeholder="' + (ph||'') + '"/></div>';
+  }
+  function msRecco(val) {
+    return '<div class="wos-modal-row"><div class="wos-modal-label">Recommendation</div>'
+      + '<select class="wos-modal-input" id="vm-recommendation"><option value="">—</option>'
+      + VENDOR_RECCO.map(function(r) { return '<option value="' + r.id + '"' + (val===r.id?' selected':'') + '>' + r.label + '</option>'; }).join('')
+      + '</select></div>';
+  }
+
+  var box = document.getElementById('vendor-modal-box');
+  box.innerHTML =
+    '<h3 style="font-size:15px;font-weight:500;color:#2c2c2a;margin-bottom:8px;">' + (v?'Edit':'Add') + ' Vendor / Studio</h3>'
+    + '<div style="display:flex;gap:6px;margin-bottom:14px;">'
+    + '<button id="vm-tab-vendor" class="vm-tab' + (type!=='studio'?' vm-tab-active':'') + '" onclick="switchVendorType(\'vendor\')">Vendor</button>'
+    + '<button id="vm-tab-studio" class="vm-tab' + (type==='studio'?' vm-tab-active':'') + '" onclick="switchVendorType(\'studio\')">Studio</button>'
+    + '</div>'
+    + '<input type="hidden" id="vm-type" value="' + type + '"/>'
+    + '<div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:6px;padding-bottom:4px;border-bottom:0.5px solid #e8e8e4;">Identity</div>'
+    + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'
+    + '<div class="wos-modal-row" style="grid-column:1/-1;"><div class="wos-modal-label">Company name <span style="color:#E24B4A;">*</span></div><input class="wos-modal-input" id="vm-name" value="' + (v?v.name||'':'').replace(/"/g,'&quot;') + '" placeholder="Company name"/></div>'
+    + ms('Kind','vm-kind', v?.kind||'', vKinds)
+    + mf('Website','vm-website', v?.website, 'company.com')
+    + mf('State / Country','vm-location', v?.location, 'NY, CA, UK, GER…')
+    + '</div>'
+    + '<div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin:12px 0 6px;padding-bottom:4px;border-bottom:0.5px solid #e8e8e4;">Assessment</div>'
+    + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'
+    + ms('Trust','vm-trust', v?.trust||'', VENDOR_TRUST)
+    + msRecco(v?.recommendation||'')
+    + ms('Work quality','vm-work-quality', v?.work_quality||'', VENDOR_QUALITY)
+    + ms('Enjoyment','vm-enjoyment', v?.enjoyment||'', VENDOR_ENJOY)
+    + ms('Pricing','vm-pricing', v?.pricing||'', VENDOR_PRICING)
+    + mf('Recommended by','vm-recco', v?.recco, 'Who told you about them')
+    + '</div>'
+    + '<div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin:12px 0 6px;padding-bottom:4px;border-bottom:0.5px solid #e8e8e4;">Areas</div>'
+    + '<div id="vm-areas-wrap" style="margin-bottom:8px;"></div>'
+    + '<div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin:12px 0 6px;padding-bottom:4px;border-bottom:0.5px solid #e8e8e4;">Notes</div>'
+    + '<div class="wos-modal-row"><textarea class="wos-modal-input" id="vm-notes" rows="3" style="resize:vertical;font-family:inherit;">' + (v?v.notes||'':'') + '</textarea></div>'
+    + '<div class="wos-modal-actions">'
+    + '<button class="wos-modal-cancel" onclick="closeVendorModal()">Cancel</button>'
+    + '<button class="wos-modal-save" onclick="saveVendorModal(' + (id?id:'null') + ')">' + (v?'Save changes':'Add ' + (type==='studio'?'Studio':'Vendor')) + '</button>'
+    + '</div>';
+
+  setTimeout(function() {
+    initVendorAreaPool(type);
+    renderVendorTagEditor('vm-areas-wrap', v ? (v.areas||[]) : [], type);
+  }, 50);
+}
+
+function switchVendorType(type) {
+  var typeEl = document.getElementById('vm-type');
+  if (typeEl) typeEl.value = type;
+  document.getElementById('vm-tab-vendor').className = 'vm-tab' + (type !== 'studio' ? ' vm-tab-active' : '');
+  document.getElementById('vm-tab-studio').className = 'vm-tab' + (type === 'studio' ? ' vm-tab-active' : '');
+  var vKinds = type === 'studio' ? VENDOR_KINDS_STUDIO : VENDOR_KINDS_VENDOR;
+  var sel = document.getElementById('vm-kind');
+  if (sel) sel.innerHTML = '<option value="">—</option>' + vKinds.map(function(k) { return '<option value="' + k + '">' + k + '</option>'; }).join('');
+  initVendorAreaPool(type);
+  renderVendorTagEditor('vm-areas-wrap', getVendorTags(), type);
+  var saveBtn = document.querySelector('#vendor-modal-box .wos-modal-save');
+  if (saveBtn && !saveBtn.textContent.startsWith('Save')) {
+    saveBtn.textContent = 'Add ' + (type === 'studio' ? 'Studio' : 'Vendor');
+  }
+}
+
+function closeVendorModal() {
+  var o = document.getElementById('vendor-modal-overlay');
+  if (o) o.classList.remove('show');
+  // If we were creating from a person link, clear the pending state
+  window._pendingVendorLinkPersonId = null;
+}
+
+async function saveVendorModal(existingId) {
+  var gv = function(eid) { var el = document.getElementById(eid); return el ? el.value.trim() || null : null; };
+  var name = gv('vm-name');
+  if (!name) { alert('Company name is required.'); return; }
+
+  var rawLoc = gv('vm-location');
+  var loc    = normalizeVendorLocation(rawLoc);
+
+  var vendor = {
+    name:           name,
+    type:           gv('vm-type') || 'vendor',
+    kind:           gv('vm-kind'),
+    website:        gv('vm-website'),
+    location:       loc.display || rawLoc,
+    region:         loc.globalRegion,
+    trust:          gv('vm-trust'),
+    recommendation: gv('vm-recommendation'),
+    work_quality:   gv('vm-work-quality'),
+    enjoyment:      gv('vm-enjoyment'),
+    pricing:        gv('vm-pricing'),
+    recco:          gv('vm-recco'),
+    notes:          document.getElementById('vm-notes') ? document.getElementById('vm-notes').value.trim() || null : null,
+    areas:          getVendorTags(),
+  };
+  if (existingId) vendor.id = existingId;
+
+  var saveBtn = document.querySelector('#vendor-modal-box .wos-modal-save');
+  if (saveBtn) { saveBtn.disabled = true; saveBtn.textContent = 'Saving...'; }
+
+  try {
+    var saved = await _saveVendorToSupabase(vendor);
+    if (!existingId && saved && saved.id) {
+      workOSVendors.push(saved);
+      wosSelectedVendorId = saved.id;
+      // Auto-link person if modal was opened from a person card
+      if (window._pendingVendorLinkPersonId) {
+        await _linkPersonVendor(window._pendingVendorLinkPersonId, saved.id);
+        window._pendingVendorLinkPersonId = null;
+      }
+    } else if (existingId) {
+      var idx = workOSVendors.findIndex(function(x) { return x.id === existingId; });
+      if (idx >= 0) Object.assign(workOSVendors[idx], vendor);
+    }
+    wosVendorsLoaded = false;
+    await loadWOSVendors(true);
+    closeVendorModal();
+    renderVendorList(document.getElementById('task-list'));
+    if (wosSelectedVendorId) _renderVendorDetailPanel(wosSelectedVendorId);
+    showXPFlash((existingId ? 'Updated' : 'Added') + ' — ' + name);
+  } catch(e) {
+    alert('Error saving: ' + e.message);
+  } finally {
+    if (saveBtn) { saveBtn.disabled = false; saveBtn.textContent = existingId ? 'Save changes' : 'Add'; }
+  }
+}
+
+// ── LINK PERSON → VENDOR  (+ button on person detail card) ──
+function _vendorChipHtml(p) {
+  if (!p) return '';
+  var pid = p.id;
+  var linked = p.vendor_id ? workOSVendors.find(function(v) { return v.id === p.vendor_id; }) : null;
+  if (linked) {
+    return '<span style="display:inline-flex;align-items:center;gap:3px;font-size:10px;background:#FAEEDA;color:#854F0B;'
+      + 'padding:1px 7px;border-radius:8px;margin-left:5px;cursor:pointer;" '
+      + 'onclick="openVendorLinkMenu(' + JSON.stringify(pid) + ')" title="Linked — click to unlink">'
+      + '🏢 ' + linked.name + '</span>';
+  }
+  return '<span id="vendor-link-btn-' + pid + '" '
+    + 'onclick="openVendorLinkMenu(' + JSON.stringify(pid) + ')" '
+    + 'style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;'
+    + 'border-radius:50%;border:1px solid #d1d1cf;color:#888780;cursor:pointer;font-size:11px;'
+    + 'margin-left:5px;line-height:1;flex-shrink:0;" title="Link to vendor or studio">+</span>';
+}
+
+async function _linkPersonVendor(personId, vendorId) {
+  var person = wosPeople.find(function(p) { return p.id === personId; });
+  if (!person) return;
+  person.vendor_id = vendorId;
+  await saveWOSPerson({ id: personId, vendor_id: vendorId });
+}
+
+function openVendorLinkMenu(personId) {
+  var person = wosPeople.find(function(p) { return p.id === personId; });
+  if (!person) return;
+  var btn = document.getElementById('vendor-link-btn-' + personId);
+
+  // If already linked → offer to unlink
+  if (person.vendor_id) {
+    var linked = workOSVendors.find(function(v) { return v.id === person.vendor_id; });
+    if (confirm('Linked to: ' + (linked ? linked.name : person.vendor_id) + '\n\nUnlink?')) {
+      _linkPersonVendor(personId, null);
+      renderWOSDetail(person);
+      showXPFlash('Unlinked');
+    }
+    return;
+  }
+
+  // Build search popup
+  var popup = document.getElementById('vlink-popup');
+  if (!popup) {
+    popup = document.createElement('div');
+    popup.id = 'vlink-popup';
+    popup.style.cssText = 'position:fixed;z-index:300;background:#fff;border:0.5px solid #d1d1cf;border-radius:10px;box-shadow:0 4px 24px rgba(0,0,0,0.15);padding:12px;width:260px;';
+    document.body.appendChild(popup);
+  }
+  if (btn) {
+    var rect = btn.getBoundingClientRect();
+    popup.style.top  = (rect.bottom + 6) + 'px';
+    popup.style.left = Math.min(rect.left, window.innerWidth - 276) + 'px';
+  }
+  popup.style.display = 'block';
+  popup.innerHTML =
+    '<div style="font-size:10px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:7px;">Link to vendor or studio</div>'
+    + '<input id="vlink-q" class="wos-modal-input" style="font-size:12px;padding:5px 8px;margin-bottom:6px;width:100%;" placeholder="Search..." oninput="_filterVlinkPopup(this.value,\'' + personId + '\')"/>'
+    + '<div id="vlink-results" style="max-height:160px;overflow-y:auto;"></div>'
+    + '<div style="border-top:0.5px solid #e8e8e4;margin-top:8px;padding-top:8px;display:flex;gap:6px;">'
+    + '<button style="flex:1;padding:5px;font-size:11px;border-radius:6px;border:0.5px solid #1D9E75;background:#E1F5EE;color:#0F6E56;cursor:pointer;font-family:inherit;" onclick="_createVendorFromPerson(\'' + personId + '\')">+ Create new</button>'
+    + '<button style="padding:5px 10px;font-size:11px;border-radius:6px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;" onclick="closeVlinkPopup()">✕</button>'
+    + '</div>';
+
+  _filterVlinkPopup('', personId);
+  setTimeout(function() { document.getElementById('vlink-q') && document.getElementById('vlink-q').focus(); }, 50);
+
+  // Close on outside click
+  setTimeout(function() {
+    function handler(e) {
+      if (!popup.contains(e.target) && e.target !== btn) {
+        closeVlinkPopup();
+        document.removeEventListener('click', handler);
+      }
+    }
+    document.addEventListener('click', handler);
+  }, 100);
+}
+
+function _filterVlinkPopup(q, personId) {
+  var results = document.getElementById('vlink-results');
+  if (!results) return;
+  var matches = workOSVendors.filter(function(v) {
+    return !q || v.name.toLowerCase().includes(q.toLowerCase());
+  }).slice(0, 10);
+  if (!matches.length) {
+    results.innerHTML = '<div style="font-size:11px;color:#b4b2a9;padding:6px 0;">No vendors found</div>';
+    return;
+  }
+  results.innerHTML = matches.map(function(v) {
+    var badge = v.type === 'studio'
+      ? '<span style="font-size:9px;background:#EEEDFE;color:#534AB7;padding:1px 5px;border-radius:6px;margin-left:4px;">Studio</span>' : '';
+    return '<div onclick="_doLinkPerson(\'' + personId + '\',' + v.id + ')" '
+      + 'style="padding:6px 8px;border-radius:7px;cursor:pointer;" '
+      + 'onmouseover="this.style.background=\'#f5f5f3\'" onmouseout="this.style.background=\'transparent\'">'
+      + '<div style="font-size:12px;font-weight:500;color:#2c2c2a;">' + v.name + badge + '</div>'
+      + (v.kind ? '<div style="font-size:10px;color:#888780;">' + v.kind + '</div>' : '')
+      + '</div>';
+  }).join('');
+}
+
+async function _doLinkPerson(personId, vendorId) {
+  var vendor = workOSVendors.find(function(v) { return v.id === vendorId; });
+  await _linkPersonVendor(personId, vendorId);
+  closeVlinkPopup();
+  var person = wosPeople.find(function(p) { return p.id === personId; });
+  if (person) renderWOSDetail(person);
+  showXPFlash('Linked to ' + (vendor ? vendor.name : vendorId));
+}
+
+function _createVendorFromPerson(personId) {
+  var person = wosPeople.find(function(p) { return p.id === personId; });
+  closeVlinkPopup();
+  window._pendingVendorLinkPersonId = personId;
+  openVendorModal(null);
+  setTimeout(function() {
+    var nameEl = document.getElementById('vm-name');
+    if (nameEl && person && person.company) nameEl.value = person.company;
+  }, 100);
+}
+
+function closeVlinkPopup() {
+  var p = document.getElementById('vlink-popup');
+  if (p) p.style.display = 'none';
+}
+
 
 async function dismissCleanupRecord(id){
   // Mark as dismissed in Supabase
