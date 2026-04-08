@@ -427,6 +427,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .col-panel{border:0.5px solid #d1d1cf;border-radius:8px;overflow:hidden;}
 .col-header{padding:6px 10px;font-size:10px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;border-bottom:0.5px solid #d1d1cf;display:flex;align-items:center;justify-content:space-between;}
 .col-header.work{color:#185FA5;background:#E6F1FB;} .col-header.life{color:#3B6D11;background:#EAF3DE;} .col-header.buy{color:#854F0B;background:#FAEEDA;} .col-header.claude{color:#534AB7;background:#EEEDFE;}
+.claude-draggable{cursor:default;}
+.claude-draggable.dragging{opacity:0.4;}
+.claude-draggable.drag-over-top{border-top:2px solid #7F77DD;}
+.claude-draggable.drag-over-bottom{border-bottom:2px solid #7F77DD;}
+.claude-drag-handle{font-size:13px;color:#b4b2a9;cursor:grab;padding:0 6px 0 2px;flex-shrink:0;user-select:none;}
+.claude-drag-handle:hover{color:#7F77DD;}
 .col-add-group{font-size:10px;opacity:0.6;cursor:pointer;padding:1px 3px;border-radius:3px;}
 .col-add-group:hover{opacity:1;background:rgba(0,0,0,0.06);}
 .group-block.dragging{opacity:0.4;} .group-block.drag-over-top{border-top:2px solid #7F77DD;} .group-block.drag-over-bottom{border-bottom:2px solid #7F77DD;}
@@ -2424,6 +2430,58 @@ function copyBrief(){const ta=document.getElementById('brief-text');ta.select();
 
 // ── DRAG ──
 function dragHandleHTML(){return`<div class="drag-handle"><div class="drag-dots"><div class="drag-dot"></div><div class="drag-dot"></div><div class="drag-dot"></div><div class="drag-dot"></div><div class="drag-dot"></div><div class="drag-dot"></div></div></div>`;}
+
+// ── CLAUDE BACKLOG DRAG-TO-REORDER ──
+let _claudeDragSrcId = null;
+
+function setupClaudeDrag(){
+  const list = document.getElementById('claude-backlog-list');
+  if(!list) return;
+  list.querySelectorAll('.claude-draggable').forEach(row => {
+    const handle = row.querySelector('.claude-drag-handle');
+    if(handle){
+      handle.addEventListener('mousedown', () => row.setAttribute('draggable','true'));
+      handle.addEventListener('mouseup',   () => row.setAttribute('draggable','false'));
+    }
+    row.addEventListener('dragstart', e => {
+      _claudeDragSrcId = parseInt(row.dataset.tid);
+      setTimeout(() => row.classList.add('dragging'), 0);
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    row.addEventListener('dragend', () => {
+      row.classList.remove('dragging');
+      row.setAttribute('draggable','false');
+      list.querySelectorAll('.claude-draggable').forEach(r => r.classList.remove('drag-over-top','drag-over-bottom'));
+    });
+    row.addEventListener('dragover', e => {
+      e.preventDefault();
+      if(parseInt(row.dataset.tid) === _claudeDragSrcId) return;
+      const mid = row.getBoundingClientRect().top + row.getBoundingClientRect().height / 2;
+      list.querySelectorAll('.claude-draggable').forEach(r => r.classList.remove('drag-over-top','drag-over-bottom'));
+      row.classList.add(e.clientY < mid ? 'drag-over-top' : 'drag-over-bottom');
+    });
+    row.addEventListener('dragleave', () => row.classList.remove('drag-over-top','drag-over-bottom'));
+    row.addEventListener('drop', e => {
+      e.preventDefault();
+      if(!_claudeDragSrcId || parseInt(row.dataset.tid) === _claudeDragSrcId) return;
+      row.classList.remove('drag-over-top','drag-over-bottom');
+      const insertBefore = e.clientY < row.getBoundingClientRect().top + row.getBoundingClientRect().height / 2;
+      reorderClaudeBacklog(_claudeDragSrcId, parseInt(row.dataset.tid), insertBefore);
+    });
+  });
+}
+
+function reorderClaudeBacklog(srcId, targetId, insertBefore){
+  let items = tasks.filter(t=>t.area==='claude'&&!t.done).sort((a,b)=>(a.claudeOrder??a.id)-(b.claudeOrder??b.id));
+  const srcIdx = items.findIndex(t=>t.id===srcId);
+  if(srcIdx===-1) return;
+  const [moved] = items.splice(srcIdx, 1);
+  const newTgt = items.findIndex(t=>t.id===targetId);
+  items.splice(insertBefore ? newTgt : newTgt+1, 0, moved);
+  items.forEach((t,i) => { t.claudeOrder = i; });
+  persist();
+  render();
+}
 function attachDragToBlocks(containerId,area){
   const container=document.getElementById(containerId);if(!container)return;
   container.querySelectorAll('[data-gid]').forEach(block=>{
@@ -2777,6 +2835,7 @@ function renderLosView(section){
 
 // ── MAIN RENDER ──
 function render(){
+  if(view==='claude') setupClaudeDrag();
   renderXPBanner();
   const tl=document.getElementById('task-list');
   const dp=document.getElementById('detail-panel');
@@ -2830,9 +2889,19 @@ function render(){
     if(!ao.length) html=`<div style="padding:40px;text-align:center;color:#888780;font-size:14px;">All clear</div>`;
     else ao.forEach(t=>{html+=taskRow(t,false,false);});
   } else if(view==='claude'){
-    const co=open.filter(t=>t.area==='claude');
+    const co=open.filter(t=>t.area==='claude').sort((a,b)=>(a.claudeOrder??a.id)-(b.claudeOrder??b.id));
     if(!co.length) html=`<div style="padding:40px;text-align:center;color:#888780;font-size:14px;">No Claude backlog items</div>`;
-    else co.forEach(t=>{html+=taskRow(t,false,false);});
+    else {
+      html=`<div id="claude-backlog-list">`;
+      co.forEach(t=>{
+        html+=`<div class="task-item claude-draggable${selectedId===t.id?' selected':''}" data-tid="${t.id}" draggable="true" onclick="selectTask(${t.id})">
+          <div class="claude-drag-handle" title="Drag to reorder">⠿</div>
+          <div class="checkbox${t.done?' checked':''}" onclick="toggle(${t.id},event)"></div>
+          <div style="flex:1;min-width:0"><div class="task-text">${t.urgent?'<span class="urgent-badge">urgent</span>':''}${t.text}</div></div>
+        </div>`;
+      });
+      html+=`</div>`;
+    }
   } else {
     const ao=open.filter(t=>t.area===view);
     const uh=ao.filter(t=>t.urgent),rh=ao.filter(t=>!t.urgent);
@@ -2881,7 +2950,7 @@ document.getElementById('task-list').addEventListener('click', function(e){
 });
 
 // ── CACHE BUST ── bump APP_VERSION on each push to force fresh load
-const APP_VERSION = '1.10';
+const APP_VERSION = '1.11';
 (function(){
   var params = new URLSearchParams(window.location.search);
   if (params.get('v') !== APP_VERSION) {
