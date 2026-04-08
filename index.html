@@ -65,7 +65,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .nav-divider{height:0.5px;background:#d1d1cf;margin:4px 14px;}
 
 /* OS SWITCHER CHIP */
-.os-switcher{margin:8px 10px 10px;padding:10px 14px;border-radius:10px;border:0.5px solid #d1d1cf;background:#fff;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.15s;flex-shrink:0;}
+.os-switcher{margin:8px 10px 0;padding:10px 14px;border-radius:10px;border:0.5px solid #d1d1cf;background:#fff;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.15s;flex-shrink:0;}
+.os-switcher-wrap{padding:8px 0 10px;flex-shrink:0;}
 .os-switcher:hover{opacity:0.85;}
 .os-switcher-label{font-size:13px;font-weight:600;flex:1;letter-spacing:-0.01em;}
 .os-switcher-sub{font-size:9px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;opacity:0.7;display:block;margin-top:1px;}
@@ -971,6 +972,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-item" onclick="setView('autotasks')" id="nav-autotasks"><div class="nav-dot" style="background:#1D9E75"></div>Auto Tasks</div>
         <div class="nav-item" onclick="setView('progress')" id="nav-progress"><div class="nav-dot" style="background:#FFB300"></div>Progress</div>
       </div>
+      <div class="os-switcher-wrap">
       <div class="os-switcher to-work" onclick="switchToWorkOS()">
           <div style="flex:1">
             <span class="os-switcher-label">Work OS</span>
@@ -978,6 +980,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           </div>
           <span class="os-switcher-arrow">›</span>
         </div>
+      </div>
     </div>
 
     <!-- WORK OS NAV -->
@@ -1003,6 +1006,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="sidebar-header">Career</div>
         <div class="nav-item work-nav" onclick="setWorkView('wos-applications')" id="nav-wos-applications"><div class="nav-dot" style="background:#7F77DD"></div>Applications</div>
       </div>
+      <div class="os-switcher-wrap">
       <div class="os-switcher to-life" onclick="switchToLifeOS()">
           <div style="flex:1">
             <span class="os-switcher-label">Life OS</span>
@@ -1010,6 +1014,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           </div>
           <span class="os-switcher-arrow">›</span>
         </div>
+      </div>
     </div>
 
   </div>
