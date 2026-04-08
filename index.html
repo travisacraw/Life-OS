@@ -5177,10 +5177,6 @@ function renderVendorList(el, typeFilter) {
       + '</div>';
   }).join('');
 
-    var hasCopyBtn = !!v.contact_email;
-
-
-
   var allKinds = VENDOR_KINDS_VENDOR.concat(VENDOR_KINDS_STUDIO);
   var kindOpts = allKinds.map(function(k) {
     return '<option value="' + k + '"' + (fkind===k?' selected':'') + '>' + k + '</option>';
