@@ -5049,13 +5049,19 @@ async function loadWOSVendors(force) {
       headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
     });
     var data = await res.json();
-    workOSVendors = Array.isArray(data) ? data : [];
+    if (!res.ok) {
+      console.error('Vendor load HTTP error:', res.status, data);
+      workOSVendors = [];
+    } else {
+      workOSVendors = Array.isArray(data) ? data : [];
+    }
     wosVendorsLoaded = true;
     initVendorAreaPool('vendor');
     initVendorAreaPool('studio');
   } catch(e) {
     console.error('Vendor load error:', e);
     workOSVendors = [];
+    wosVendorsLoaded = true;
   }
 }
 async function _saveVendorToSupabase(vendor) {
