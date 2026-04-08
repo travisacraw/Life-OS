@@ -1553,7 +1553,7 @@ async function loadFromSupabase(){
       if(data.wos_projects){ workProjects=data.wos_projects; }
       if(data.wos_contacts){ workContacts=data.wos_contacts; }
       if(data.wos_vendors){  workVendors=data.wos_vendors; }
-      if(data.wos_os_vendors){ workOSVendors=data.wos_os_vendors; }
+      // workOSVendors loads from its own work_os_vendors table via loadWOSVendors()
       nextWorkId=Math.max(0,...[...workProjects,...workContacts,...workVendors].map(x=>parseInt(x.id||0)||0))+1;
       // constitution_last_reviewed synced from Supabase, mirrored to localStorage for fast reads
       if(data.constitution_last_reviewed){ localStorage.setItem('constitution_last_reviewed', data.constitution_last_reviewed); }
@@ -1587,7 +1587,6 @@ async function pushToSupabase(){
         wos_projects:workProjects,
         wos_contacts:workContacts,
         wos_vendors:workVendors,
-        wos_os_vendors:workOSVendors,
         constitution_last_reviewed:localStorage.getItem('constitution_last_reviewed')||null,
         updated_at:new Date().toISOString()
       })
