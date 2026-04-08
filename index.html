@@ -2926,6 +2926,14 @@ document.getElementById('task-list').addEventListener('click', function(e){
   if(card) openHabitLog(card.dataset.hid);
 });
 
+// ── CACHE BUST ── forces fresh load on every visit via timestamp query param
+(function(){
+  if(!window.location.search){
+    var hash = window.location.hash || '';
+    window.location.replace('?' + Date.now() + hash);
+  }
+})();
+
 backfillCategories();
 loadFromSupabase().then(() => {
   // Hash-based routing: #work → Work OS, #life or anything else → Life OS
