@@ -2872,11 +2872,13 @@ document.getElementById('task-list').addEventListener('click', function(e){
   if(card) openHabitLog(card.dataset.hid);
 });
 
-// ── CACHE BUST ── forces fresh load on every visit via timestamp query param
+// ── CACHE BUST ── bump APP_VERSION on each push to force fresh load
+const APP_VERSION = '1.08';
 (function(){
-  if(!window.location.search){
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('v') !== APP_VERSION) {
     var hash = window.location.hash || '';
-    window.location.replace('?' + Date.now() + hash);
+    window.location.replace('?v=' + APP_VERSION + hash);
   }
 })();
 
