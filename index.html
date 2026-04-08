@@ -417,7 +417,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .note-dot{width:4px;height:4px;border-radius:50%;background:#b4b2a9;flex-shrink:0;margin-top:6px;}
 .urgent-badge{display:inline-flex;font-size:9px;padding:1px 5px;border-radius:8px;background:#FAECE7;color:#993C1D;margin-right:4px;font-weight:500;}
 .area-badge{display:inline-flex;font-size:9px;padding:1px 5px;border-radius:8px;margin-right:4px;}
-.badge-work{background:#E6F1FB;color:#185FA5;} .badge-life{background:#EAF3DE;color:#3B6D11;} .badge-buy{background:#FAEEDA;color:#854F0B;}
+.badge-work{background:#E6F1FB;color:#185FA5;} .badge-life{background:#EAF3DE;color:#3B6D11;} .badge-buy{background:#FAEEDA;color:#854F0B;} .badge-claude{background:#EEEDFE;color:#534AB7;}
 .age-badge{display:inline-flex;font-size:9px;padding:1px 4px;border-radius:8px;background:#F1EFE8;color:#888780;margin-right:3px;}
 .age-badge.stale{background:#FFF3F0;color:#993C1D;}
 .cat-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px;margin-left:2px;}
@@ -426,7 +426,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:0 10px 8px;}
 .col-panel{border:0.5px solid #d1d1cf;border-radius:8px;overflow:hidden;}
 .col-header{padding:6px 10px;font-size:10px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;border-bottom:0.5px solid #d1d1cf;display:flex;align-items:center;justify-content:space-between;}
-.col-header.work{color:#185FA5;background:#E6F1FB;} .col-header.life{color:#3B6D11;background:#EAF3DE;} .col-header.buy{color:#854F0B;background:#FAEEDA;}
+.col-header.work{color:#185FA5;background:#E6F1FB;} .col-header.life{color:#3B6D11;background:#EAF3DE;} .col-header.buy{color:#854F0B;background:#FAEEDA;} .col-header.claude{color:#534AB7;background:#EEEDFE;}
 .col-add-group{font-size:10px;opacity:0.6;cursor:pointer;padding:1px 3px;border-radius:3px;}
 .col-add-group:hover{opacity:1;background:rgba(0,0,0,0.06);}
 .group-block.dragging{opacity:0.4;} .group-block.drag-over-top{border-top:2px solid #7F77DD;} .group-block.drag-over-bottom{border-bottom:2px solid #7F77DD;}
@@ -878,7 +878,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div class="modal">
       <h3 id="autotask-modal-title">Add Recurring Task</h3>
       <div><label>Task name</label><input id="at-name" placeholder="e.g. Do laundry"/></div>
-      <div><label>Area</label><select id="at-area"><option value="life">Life</option><option value="work">Work</option><option value="buy">Buy</option></select></div>
+      <div><label>Area</label><select id="at-area"><option value="life">Life</option><option value="work">Work</option><option value="buy">Buy</option><option value="claude">Claude Backlog</option></select></div>
       <div><label>Frequency</label><select id="at-freq"><option value="daily">Every day</option><option value="weekly">Every week</option><option value="monthly">Every month</option></select></div>
       <div id="at-day-row"><label>Day of week</label><select id="at-day"><option value="0">Sunday</option><option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option></select></div>
       <div><label>Category</label><select id="at-cat"></select></div>
@@ -1173,6 +1173,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <input id="new-task-input" placeholder="Task name..." onkeydown="if(event.key==='Enter') saveTask()"/>
       <select id="new-task-area" onchange="updateGroupDropdown()">
         <option value="life">Life</option><option value="work">Work</option><option value="buy">Buy</option>
+          <option value="claude">Claude Backlog</option>
       </select>
       <select id="new-task-group"><option value="">No group</option></select>
       <select id="new-task-cat"><option value="">Category...</option></select>
@@ -1208,7 +1209,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <button class="progress-note-btn" id="progress-note-btn" onclick="submitProgressXP()"></button>
           </div>
           <div id="detail-meta-block"></div>
-          <div class="detail-row"><div class="detail-label">Area</div><select class="detail-select" id="detail-area" onchange="changeArea()"><option value="life">Life</option><option value="work">Work</option><option value="buy">Buy</option></select></div>
+          <div class="detail-row"><div class="detail-label">Area</div><select class="detail-select" id="detail-area" onchange="changeArea()"><option value="life">Life</option><option value="work">Work</option><option value="buy">Buy</option><option value="claude">Claude Backlog</option></select></div>
           <div class="detail-row"><div class="detail-label">Group</div><select class="detail-select" id="detail-group" onchange="changeGroup()"></select></div>
           <div class="detail-row"><div class="detail-label">Category</div><select class="detail-select" id="detail-cat" onchange="changeCat()"></select></div>
           <div class="awaiting-nudge-row" id="awaiting-note-row" style="display:none;">
@@ -1383,7 +1384,7 @@ const XP_RULES = {
   noteProgressXP_14: 15,
   noteProgressXP_30: 25,
   noteCooldownDays:  3,
-  areaMultiplier: { work: 0.5, life: 1.0, buy: 0.4 },
+  areaMultiplier: { work: 0.5, life: 1.0, buy: 0.4, claude: 0.4 },
   habitMultiplier: 1.3,
   staleWorkRecoveryDays: 14,  // work tasks stale this long get full multiplier
 };
@@ -1953,7 +1954,7 @@ function setView(v){
   view=v;
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
   const navEl=document.getElementById('nav-'+v);if(navEl)navEl.classList.add('active');
-  const titles={all:'All tasks',urgent:'Urgent',work:'Work',life:'Life',buy:'Buy',done:'Completed',
+  const titles={all:'All tasks',urgent:'Urgent',work:'Work',life:'Life',buy:'Buy',claude:'Claude Backlog',done:'Completed',
     habits:'Habits',goals:'Goals',projects:'Projects',opportunities:'Opportunities',
     thoughts:'Thoughts',constitution:'Constitution',insights:'Claude Insights',
     autotasks:'Auto Tasks',progress:'Progress','weekly-review':'Weekly Review','prioritizer':'AI Prioritizer'};
@@ -2532,7 +2533,8 @@ function renderAreaCol(area,taskList){
   if(ung.length) blocksHtml+=`<div class="group-block" data-gid="__ng_${area}"><div class="group-header" style="color:#888780;"><span class="name">No group</span></div>${ung.map(t=>taskRow(t,true,false)).join('')}</div>`;
   if(!blocksHtml) blocksHtml=`<div style="padding:6px 10px;font-size:11px;color:#888780;">All clear</div>`;
   const colId=`col-${area}-${Date.now()}`;
-  return{id:colId,area,html:`<div class="col-panel"><div class="col-header ${area}"><span>${area.charAt(0).toUpperCase()+area.slice(1)}</span><span class="col-add-group" onclick="addGroup('${area}')">+ group</span></div><div id="${colId}">${blocksHtml}</div></div>`};
+  const areaLabel = area === 'claude' ? 'Claude Backlog' : area.charAt(0).toUpperCase()+area.slice(1);
+  return{id:colId,area,html:`<div class="col-panel"><div class="col-header ${area}"><span>${areaLabel}</span><span class="col-add-group" onclick="addGroup('${area}')">+ group</span></div><div id="${colId}">${blocksHtml}</div></div>`};
 }
 
 // ── VIEW RENDERERS ──
@@ -2819,12 +2821,18 @@ function render(){
       dragTargets.push({id:wc.id,area:'work'},{id:lc.id,area:'life'});
       const br=rest.filter(t=>t.area==='buy');
       if(br.length){const bc=renderAreaCol('buy',br);html+=`<div style="padding:0 10px 8px">${bc.html}</div>`;dragTargets.push({id:bc.id,area:'buy'});}
+      const cr=rest.filter(t=>t.area==='claude');
+      if(cr.length){const cc=renderAreaCol('claude',cr);html+=`<div style="padding:0 10px 8px">${cc.html}</div>`;dragTargets.push({id:cc.id,area:'claude'});}
     }
     if(!uo.length&&!rest.length) html=`<div style="padding:40px;text-align:center;color:#888780;font-size:14px;">All clear</div>`;
   } else if(view==='buy'){
     const ao=open.filter(t=>t.area==='buy');
     if(!ao.length) html=`<div style="padding:40px;text-align:center;color:#888780;font-size:14px;">All clear</div>`;
     else ao.forEach(t=>{html+=taskRow(t,false,false);});
+  } else if(view==='claude'){
+    const co=open.filter(t=>t.area==='claude');
+    if(!co.length) html=`<div style="padding:40px;text-align:center;color:#888780;font-size:14px;">No Claude backlog items</div>`;
+    else co.forEach(t=>{html+=taskRow(t,false,false);});
   } else {
     const ao=open.filter(t=>t.area===view);
     const uh=ao.filter(t=>t.urgent),rh=ao.filter(t=>!t.urgent);
@@ -2873,7 +2881,7 @@ document.getElementById('task-list').addEventListener('click', function(e){
 });
 
 // ── CACHE BUST ── bump APP_VERSION on each push to force fresh load
-const APP_VERSION = '1.09';
+const APP_VERSION = '1.10';
 (function(){
   var params = new URLSearchParams(window.location.search);
   if (params.get('v') !== APP_VERSION) {
@@ -2942,6 +2950,7 @@ function toggleMoreDrawer() {
           <button class="more-drawer-item" onclick="mobileNav('work')">💼<span>Work</span></button>
           <button class="more-drawer-item" onclick="mobileNav('life')">🌿<span>Life</span></button>
           <button class="more-drawer-item" onclick="mobileNav('buy')">🛒<span>Buy</span></button>
+          <button class="more-drawer-item" onclick="mobileNav('claude')">✦<span>Claude</span></button>
           <button class="more-drawer-item" onclick="mobileNav('done')">✅<span>Done</span></button>
           <button class="more-drawer-item" onclick="mobileNav('goals')">🎯<span>Goals</span></button>
           <button class="more-drawer-item" onclick="mobileNav('thoughts')">💭<span>Thoughts</span></button>
