@@ -14,7 +14,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f3;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px;}
-.app{display:flex;height:720px;width:1060px;max-width:100%;border:0.5px solid #d1d1cf;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.08);position:relative;flex-direction:column;}
+.app{display:flex;height:min(720px,100dvh);width:1060px;max-width:100%;border:0.5px solid #d1d1cf;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.08);position:relative;flex-direction:column;}
 .app-inner{display:flex;flex:1;overflow:hidden;}
 
 /* XP BANNER */
@@ -49,9 +49,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @keyframes xpPopOut{0%{opacity:1;transform:translateX(-50%) scale(1) translateY(0);}100%{opacity:0;transform:translateX(-50%) scale(0.85) translateY(-12px);}}
 
 /* SIDEBAR */
-.sidebar{width:196px;border-right:0.5px solid #d1d1cf;background:#f5f5f3;display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;}
-#life-os-nav{display:flex;flex-direction:column;flex:1;min-height:0;overflow-y:auto;}
-#work-os-nav{display:flex;flex-direction:column;flex:1;min-height:0;overflow-y:auto;}
+.sidebar{width:196px;border-right:0.5px solid #d1d1cf;background:#f5f5f3;display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;min-height:0;height:100%;}
+#life-os-nav{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;}
+#work-os-nav{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;}
+#life-os-nav-scroll{flex:1;overflow-y:auto;min-height:0;}
+#work-os-nav-scroll{flex:1;overflow-y:auto;min-height:0;}
 .sidebar-brand{padding:12px 14px 8px;border-bottom:0.5px solid #d1d1cf;}
 .sidebar-brand-name{font-size:15px;font-weight:600;color:#2c2c2a;letter-spacing:-0.01em;}
 .sidebar-brand-sub{font-size:10px;color:#888780;letter-spacing:0.06em;text-transform:uppercase;margin-top:1px;}
@@ -63,7 +65,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .nav-divider{height:0.5px;background:#d1d1cf;margin:4px 14px;}
 
 /* OS SWITCHER CHIP */
-.os-switcher{margin:8px 10px 10px;padding:10px 14px;border-radius:10px;border:0.5px solid #d1d1cf;background:#fff;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.15s;flex-shrink:0;position:sticky;bottom:10px;}
+.os-switcher{margin:8px 10px 10px;padding:10px 14px;border-radius:10px;border:0.5px solid #d1d1cf;background:#fff;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.15s;flex-shrink:0;}
 .os-switcher:hover{opacity:0.85;}
 .os-switcher-label{font-size:13px;font-weight:600;flex:1;letter-spacing:-0.01em;}
 .os-switcher-sub{font-size:9px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;opacity:0.7;display:block;margin-top:1px;}
@@ -941,33 +943,34 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="sidebar" id="sidebar">
 
     <!-- LIFE OS NAV -->
-    <div id="life-os-nav">
+    <div id="life-os-nav" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
       <div class="sidebar-brand life"><div class="sidebar-brand-name">Life OS</div><div class="sidebar-brand-sub">Your operating system</div></div>
-      <div class="sidebar-header">Tasks</div>
-      <div class="nav-item active" onclick="setView('all')" id="nav-all"><div class="nav-dot" style="background:#7F77DD"></div>All tasks</div>
-      <div class="nav-item" onclick="setView('urgent')" id="nav-urgent"><div class="nav-dot" style="background:#D85A30"></div>Urgent</div>
-      <div class="nav-item" onclick="setView('work')" id="nav-work"><div class="nav-dot" style="background:#378ADD"></div>Work</div>
-      <div class="nav-item" onclick="setView('life')" id="nav-life"><div class="nav-dot" style="background:#639922"></div>Life</div>
-      <div class="nav-item" onclick="setView('buy')" id="nav-buy"><div class="nav-dot" style="background:#BA7517"></div>Buy</div>
-      <div class="nav-item" onclick="setView('done')" id="nav-done"><div class="nav-dot" style="background:#888780"></div>Done</div>
-      <div class="nav-divider"></div>
-      <div class="sidebar-header">Daily</div>
-      <div class="nav-item" onclick="setView('habits')" id="nav-habits"><div class="nav-dot" style="background:#FF8C42"></div>Habits</div>
-      <div class="nav-divider"></div>
-      <div class="sidebar-header">Context</div>
-      <div class="nav-item" onclick="setView('goals')" id="nav-goals"><div class="nav-dot" style="background:#7F77DD"></div>Goals</div>
-      <div class="nav-item" onclick="setView('projects')" id="nav-projects"><div class="nav-dot" style="background:#378ADD"></div>Projects</div>
-      <div class="nav-item" onclick="setView('opportunities')" id="nav-opportunities"><div class="nav-dot" style="background:#1D9E75"></div>Opportunities</div>
-      <div class="nav-item" onclick="setView('thoughts')" id="nav-thoughts"><div class="nav-dot" style="background:#888780"></div>Thoughts</div>
-      <div class="nav-item" onclick="setView('constitution')" id="nav-constitution"><div class="nav-dot" style="background:#D85A30"></div>Constitution</div>
-      <div class="nav-item" onclick="setView('insights')" id="nav-insights"><div class="nav-dot" style="background:#FFB300"></div>Claude Insights</div>
-      <div class="nav-item" onclick="setView('weekly-review')" id="nav-weekly-review"><div class="nav-dot" style="background:#D4537E"></div>Weekly Review</div>
-      <div class="nav-item" onclick="setView('prioritizer')" id="nav-prioritizer"><div class="nav-dot" style="background:#1D9E75"></div>AI Prioritizer</div>
-      <div class="nav-divider"></div>
-      <div class="sidebar-header">System</div>
-      <div class="nav-item" onclick="setView('autotasks')" id="nav-autotasks"><div class="nav-dot" style="background:#1D9E75"></div>Auto Tasks</div>
-      <div class="nav-item" onclick="setView('progress')" id="nav-progress"><div class="nav-dot" style="background:#FFB300"></div>Progress</div>
-      <div style="flex:1"></div>
+      <div id="life-os-nav-scroll" style="flex:1;overflow-y:auto;">
+        <div class="sidebar-header">Tasks</div>
+        <div class="nav-item active" onclick="setView('all')" id="nav-all"><div class="nav-dot" style="background:#7F77DD"></div>All tasks</div>
+        <div class="nav-item" onclick="setView('urgent')" id="nav-urgent"><div class="nav-dot" style="background:#D85A30"></div>Urgent</div>
+        <div class="nav-item" onclick="setView('work')" id="nav-work"><div class="nav-dot" style="background:#378ADD"></div>Work</div>
+        <div class="nav-item" onclick="setView('life')" id="nav-life"><div class="nav-dot" style="background:#639922"></div>Life</div>
+        <div class="nav-item" onclick="setView('buy')" id="nav-buy"><div class="nav-dot" style="background:#BA7517"></div>Buy</div>
+        <div class="nav-item" onclick="setView('done')" id="nav-done"><div class="nav-dot" style="background:#888780"></div>Done</div>
+        <div class="nav-divider"></div>
+        <div class="sidebar-header">Daily</div>
+        <div class="nav-item" onclick="setView('habits')" id="nav-habits"><div class="nav-dot" style="background:#FF8C42"></div>Habits</div>
+        <div class="nav-divider"></div>
+        <div class="sidebar-header">Context</div>
+        <div class="nav-item" onclick="setView('goals')" id="nav-goals"><div class="nav-dot" style="background:#7F77DD"></div>Goals</div>
+        <div class="nav-item" onclick="setView('projects')" id="nav-projects"><div class="nav-dot" style="background:#378ADD"></div>Projects</div>
+        <div class="nav-item" onclick="setView('opportunities')" id="nav-opportunities"><div class="nav-dot" style="background:#1D9E75"></div>Opportunities</div>
+        <div class="nav-item" onclick="setView('thoughts')" id="nav-thoughts"><div class="nav-dot" style="background:#888780"></div>Thoughts</div>
+        <div class="nav-item" onclick="setView('constitution')" id="nav-constitution"><div class="nav-dot" style="background:#D85A30"></div>Constitution</div>
+        <div class="nav-item" onclick="setView('insights')" id="nav-insights"><div class="nav-dot" style="background:#FFB300"></div>Claude Insights</div>
+        <div class="nav-item" onclick="setView('weekly-review')" id="nav-weekly-review"><div class="nav-dot" style="background:#D4537E"></div>Weekly Review</div>
+        <div class="nav-item" onclick="setView('prioritizer')" id="nav-prioritizer"><div class="nav-dot" style="background:#1D9E75"></div>AI Prioritizer</div>
+        <div class="nav-divider"></div>
+        <div class="sidebar-header">System</div>
+        <div class="nav-item" onclick="setView('autotasks')" id="nav-autotasks"><div class="nav-dot" style="background:#1D9E75"></div>Auto Tasks</div>
+        <div class="nav-item" onclick="setView('progress')" id="nav-progress"><div class="nav-dot" style="background:#FFB300"></div>Progress</div>
+      </div>
       <div class="os-switcher to-work" onclick="switchToWorkOS()">
           <div style="flex:1">
             <span class="os-switcher-label">Work OS</span>
@@ -978,25 +981,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <!-- WORK OS NAV -->
-    <div id="work-os-nav" style="display:none;flex-direction:column;flex:1;">
+    <div id="work-os-nav" style="display:none;flex-direction:column;flex:1;overflow:hidden;">
       <div class="sidebar-brand work"><div class="sidebar-brand-name">Work OS</div><div class="sidebar-brand-sub">Projects & clients</div></div>
-      <div class="sidebar-header">Overview</div>
-      <div class="nav-item work-nav active" onclick="setWorkView('wos-dashboard')" id="nav-wos-dashboard"><div class="nav-dot" style="background:#1D9E75"></div>Dashboard</div>
-      <div class="nav-divider"></div>
-      <div class="sidebar-header">Projects</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-projects')" id="nav-wos-projects"><div class="nav-dot" style="background:#378ADD"></div>All Projects</div>
-      <div class="nav-item work-nav" onclick="openNewProjectModal()" id="nav-wos-new-project" style="color:#1D9E75;font-weight:500;"><div class="nav-dot" style="background:#1D9E75"></div>+ New Project</div>
-      <div class="nav-divider"></div>
-      <div class="sidebar-header">People</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-network')" id="nav-wos-network"><div class="nav-dot" style="background:#D4537E"></div>Network</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-talent')" id="nav-wos-talent"><div class="nav-dot" style="background:#1D9E75"></div>Talent</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-vendors')" id="nav-wos-vendors"><div class="nav-dot" style="background:#BA7517"></div>Vendors</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-people')" id="nav-wos-people"><div class="nav-dot" style="background:#7F77DD"></div>People</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-outreach')" id="nav-wos-outreach"><div class="nav-dot" style="background:#BA7517"></div>Outreach</div>
-      <div class="nav-divider"></div>
-      <div class="sidebar-header">Career</div>
-      <div class="nav-item work-nav" onclick="setWorkView('wos-applications')" id="nav-wos-applications"><div class="nav-dot" style="background:#7F77DD"></div>Applications</div>
-      <div style="flex:1"></div>
+      <div id="work-os-nav-scroll" style="flex:1;overflow-y:auto;">
+        <div class="sidebar-header">Overview</div>
+        <div class="nav-item work-nav active" onclick="setWorkView('wos-dashboard')" id="nav-wos-dashboard"><div class="nav-dot" style="background:#1D9E75"></div>Dashboard</div>
+        <div class="nav-divider"></div>
+        <div class="sidebar-header">Projects</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-projects')" id="nav-wos-projects"><div class="nav-dot" style="background:#378ADD"></div>All Projects</div>
+        <div class="nav-item work-nav" onclick="openNewProjectModal()" id="nav-wos-new-project" style="color:#1D9E75;font-weight:500;"><div class="nav-dot" style="background:#1D9E75"></div>+ New Project</div>
+        <div class="nav-divider"></div>
+        <div class="sidebar-header">Production</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-vendors')" id="nav-wos-vendors"><div class="nav-dot" style="background:#BA7517"></div>Vendors & Studios</div>
+        <div class="nav-divider"></div>
+        <div class="sidebar-header">People</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-network')" id="nav-wos-network"><div class="nav-dot" style="background:#D4537E"></div>Network</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-talent')" id="nav-wos-talent"><div class="nav-dot" style="background:#1D9E75"></div>Talent</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-people')" id="nav-wos-people"><div class="nav-dot" style="background:#7F77DD"></div>All People</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-outreach')" id="nav-wos-outreach"><div class="nav-dot" style="background:#BA7517"></div>Outreach</div>
+        <div class="nav-divider"></div>
+        <div class="sidebar-header">Career</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-applications')" id="nav-wos-applications"><div class="nav-dot" style="background:#7F77DD"></div>Applications</div>
+      </div>
       <div class="os-switcher to-life" onclick="switchToLifeOS()">
           <div style="flex:1">
             <span class="os-switcher-label">Life OS</span>
@@ -2916,7 +2922,18 @@ document.getElementById('task-list').addEventListener('click', function(e){
 });
 
 backfillCategories();
-loadFromSupabase();
+loadFromSupabase().then(() => {
+  // Hash-based routing: #work → Work OS, #life or anything else → Life OS
+  if (window.location.hash === '#work') {
+    switchToWorkOS();
+  }
+});
+
+// Also handle back/forward browser navigation
+window.addEventListener('hashchange', () => {
+  if (window.location.hash === '#work' && !workOSMode) switchToWorkOS();
+  if (window.location.hash === '#life' && workOSMode)  switchToLifeOS();
+});
 
 // ── MOBILE TAB BAR ──
 function mobileTab(tab) {
@@ -3052,6 +3069,7 @@ function switchToWorkOS() {
   document.getElementById('life-os-nav').style.display = 'none';
   const wNav = document.getElementById('work-os-nav');
   wNav.style.display = 'flex';
+  history.replaceState(null, '', '#work');
   setWorkView('wos-dashboard');
 }
 
@@ -3059,6 +3077,7 @@ function switchToLifeOS() {
   workOSMode = false;
   document.getElementById('work-os-nav').style.display = 'none';
   document.getElementById('life-os-nav').style.display = 'block';
+  history.replaceState(null, '', '#life');
   setView('all');
 }
 
