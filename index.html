@@ -11,7 +11,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>Life OS</title>
-<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABK0lEQVR42u3bQQ7CMAxE0Z6PM3FvliAWrBBSaOOZn3gisWeeVTVJ7ePI8q7b/fFsEfLsr2XoZTEqQi+BoQyOg3CGtyIQgtsgqoO8FxaBWHkZguLPX6l+KYKqerMApiIow88EmIKgfHYrAC4hOMJXAJxGaA3gCl8F8BeC+r2tAhhG2DX8EMDO1R9CcIYPgBvAHV4F8BMhAObwVgBC9ZUAXwiE8O0BrDdH3aqPBFDjyG96SeGXAZA8Ah2rL0XAh68EWKL6VQDk8LaNEGlPgAXYeitM2hHmNJj7ABiAvYegPYDzVIjpIAnApl+DUJ/HsNV3nAyxHWRtq688IeJ7B9sDVCAsFb4CAbHndyIsGX4mAqILJN3iJgREF1gmRjIzlKmxzA1mcjSzw5ke/6wXUFhsjNH6eoAAAAAASUVORK5CYII=">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='32' fill='%234A7CF7'/><polygon points='37,8 23,35 34,35 27,56 41,29 30,29' fill='white'/></svg>">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f3;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px;}
@@ -996,7 +996,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-item work-nav" onclick="openNewProjectModal()" id="nav-wos-new-project" style="color:#1D9E75;font-weight:500;"><div class="nav-dot" style="background:#1D9E75"></div>+ New Project</div>
         <div class="nav-divider"></div>
         <div class="sidebar-header">Production</div>
-        <div class="nav-item work-nav" onclick="setWorkView('wos-vendors')" id="nav-wos-vendors"><div class="nav-dot" style="background:#BA7517"></div>Vendors & Studios</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-vendors')" id="nav-wos-vendors"><div class="nav-dot" style="background:#BA7517"></div>Vendors</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-studios')" id="nav-wos-studios"><div class="nav-dot" style="background:#534AB7"></div>Studios</div>
         <div class="nav-divider"></div>
         <div class="sidebar-header">People</div>
         <div class="nav-item work-nav" onclick="setWorkView('wos-network')" id="nav-wos-network"><div class="nav-dot" style="background:#D4537E"></div>Network</div>
@@ -3107,6 +3108,7 @@ function setWorkView(v) {
     'wos-network':   'Network',
     'wos-talent':    'Talent',
     'wos-vendors':   'Vendors',
+    'wos-studios':   'Studios',
     'wos-people':    'People',
     'wos-outreach':  'Outreach',
     'wos-cleanup':   'Data Cleanup',
@@ -3121,7 +3123,7 @@ function setWorkView(v) {
   const wosDetail = document.getElementById('wos-detail-panel');
   if (wosDetail) {
     wosDetail.classList.add('hidden');
-    if (['wos-people','wos-talent','wos-network','wos-vendors','wos-cleanup'].includes(v)) {
+    if (['wos-people','wos-talent','wos-network','wos-vendors','wos-studios','wos-cleanup'].includes(v)) {
       wosDetail.style.display = '';
     } else {
       wosDetail.style.display = 'none';
@@ -3137,7 +3139,8 @@ function renderWorkView() {
   if (workView === 'wos-projects')   { renderWOSProjects(list);  return; }
   if (workView === 'wos-network')    { renderWOSPeopleView(list, 'network'); return; }
   if (workView === 'wos-talent')     { renderWOSPeopleView(list, 'talent');  return; }
-  if (workView === 'wos-vendors')    { renderWOSVendorView(list);             return; }
+  if (workView === 'wos-vendors')    { renderWOSVendorView(list, 'vendor');   return; }
+  if (workView === 'wos-studios')    { renderWOSVendorView(list, 'studio');   return; }
   if (workView === 'wos-people')     { renderWOSPeopleView(list, 'all');     return; }
   if (workView === 'wos-outreach')   { renderWOSOutreachView(list);          return; }
   if (workView === 'wos-cleanup')    { renderWOSCleanup(list);               return; }
@@ -5143,18 +5146,18 @@ async function deleteWOSVendorRecord(id) {
 }
 
 // ── VENDOR LIST VIEW ──
-async function renderWOSVendorView(el) {
-  el.innerHTML = '<div class="wos-loading">Loading vendors...</div>';
+async function renderWOSVendorView(el, typeFilter) {
+  el.innerHTML = '<div class="wos-loading">Loading ' + (typeFilter === 'studio' ? 'studios' : 'vendors') + '...</div>';
   await loadWOSPeople();
   await loadWOSVendors();
   var panel = document.getElementById('wos-detail-panel');
   if (panel) { panel.style.display = ''; panel.classList.add('hidden'); }
-  renderVendorList(el);
+  renderVendorList(el, typeFilter);
 }
 
-function renderVendorList(el) {
+function renderVendorList(el, typeFilter) {
   var q     = (document.getElementById('vl-search')     ? document.getElementById('vl-search').value     : '').toLowerCase();
-  var ftype = (document.getElementById('vl-type')       ? document.getElementById('vl-type').value       : '');
+  var ftype = typeFilter || (document.getElementById('vl-type') ? document.getElementById('vl-type').value : '');
   var fkind = (document.getElementById('vl-kind')       ? document.getElementById('vl-kind').value       : '');
   var ftrust= (document.getElementById('vl-trust')      ? document.getElementById('vl-trust').value      : '');
   var ftag  = (document.getElementById('vl-tag')        ? document.getElementById('vl-tag').value        : '').toLowerCase();
@@ -5209,12 +5212,8 @@ function renderVendorList(el) {
 
   el.innerHTML = '<div class="vendor-view">'
     + '<div class="vendor-toolbar">'
-    + '<input class="wos-search-input" id="vl-search" placeholder="Search vendors & studios..." oninput="renderVendorList(document.getElementById(\'task-list\'))" value="' + q.replace(/"/g,'&quot;') + '" style="flex:1;min-width:80px;"/>'
-    + '<select class="wos-filter-sel" id="vl-type" onchange="renderVendorList(document.getElementById(\'task-list\'))" style="width:86px;">'
-    + '<option value="">All</option>'
-    + '<option value="vendor"' + (ftype==='vendor'?' selected':'') + '>Vendors</option>'
-    + '<option value="studio"' + (ftype==='studio'?' selected':'') + '>Studios</option>'
-    + '</select>'
+    + '<input class="wos-search-input" id="vl-search" placeholder="Search ' + (typeFilter==='studio'?'studios':typeFilter==='vendor'?'vendors':'vendors & studios') + '..." oninput="renderVendorList(document.getElementById(\'task-list\'),(typeof typeFilter!==\'undefined\'?typeFilter:null))" value="' + q.replace(/"/g,'&quot;') + '" style="flex:1;min-width:80px;"/>'
+    + (!typeFilter ? '<select class="wos-filter-sel" id="vl-type" onchange="renderVendorList(document.getElementById(\'task-list\'))" style="width:86px;"><option value="">All</option><option value="vendor"' + (ftype==="vendor"?' selected':'') + '>Vendors</option><option value="studio"' + (ftype==="studio"?' selected':'') + '>Studios</option></select>' : '')
     + '<select class="wos-filter-sel" id="vl-kind" onchange="renderVendorList(document.getElementById(\'task-list\'))" style="width:86px;">'
     + '<option value="">Kind</option>' + kindOpts
     + '</select>'
