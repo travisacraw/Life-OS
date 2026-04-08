@@ -5308,6 +5308,13 @@ function _renderVendorDetailPanel(id) {
     + (tagPills ? '<div style="margin:6px 0 4px;display:flex;flex-wrap:wrap;">' + tagPills + '</div>' : '')
     + (v.notes ? sec('Notes') + '<div class="wos-detail-note">' + v.notes.replace(/\n/g,'<br>') + '</div>' : '')
     + sec('Contacts')
+    + (v.contact_name || v.contact_email ? '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 0 8px;border-bottom:0.5px solid #f5f5f3;margin-bottom:6px;">'
+        + '<div>'
+        + (v.contact_name ? '<div style="font-size:12px;font-weight:500;color:#2c2c2a;">' + v.contact_name + '</div>' : '')
+        + (v.contact_email ? '<div style="font-size:11px;color:#888780;">' + v.contact_email + '</div>' : '')
+        + '</div>'
+        + (v.contact_email ? '<button onclick="copyVendorEmail(\'' + v.contact_email.replace(/'/g,"\\'") + '\')" style="padding:4px 10px;font-size:11px;font-weight:500;border-radius:6px;border:0.5px solid #b4b2a9;background:#fff;color:#2c2c2a;cursor:pointer;font-family:inherit;flex-shrink:0;" title="Copy email">Copy email</button>' : '')
+        + '</div>' : '')
     + linkedHtml
     + '</div>'
     + '<div class="wos-detail-actions">'
@@ -5375,6 +5382,11 @@ function _buildVendorModalContent(v, type) {
     + ms('Kind','vm-kind', v?.kind||'', vKinds)
     + mf('Website','vm-website', v?.website, 'company.com')
     + mf('State / Country','vm-location', v?.location, 'NY, CA, UK, GER…')
+    + '</div>'
+    + '<div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin:12px 0 6px;padding-bottom:4px;border-bottom:0.5px solid #e8e8e4;">Primary Contact</div>'
+    + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'
+    + mf('Name','vm-contact-name', v?.contact_name, 'Contact name')
+    + mf('Email','vm-contact-email', v?.contact_email, 'contact@company.com')
     + '</div>'
     + '<div style="font-size:10px;font-weight:500;color:#888780;letter-spacing:0.07em;text-transform:uppercase;margin:12px 0 6px;padding-bottom:4px;border-bottom:0.5px solid #e8e8e4;">Assessment</div>'
     + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'
@@ -5446,6 +5458,8 @@ async function saveVendorModal(existingId) {
     recco:          gv('vm-recco'),
     notes:          document.getElementById('vm-notes') ? document.getElementById('vm-notes').value.trim() || null : null,
     areas:          getVendorTags(),
+    contact_name:   gv('vm-contact-name'),
+    contact_email:  gv('vm-contact-email'),
   };
   if (existingId) vendor.id = existingId;
 
@@ -5598,6 +5612,15 @@ function _createVendorFromPerson(personId) {
     var nameEl = document.getElementById('vm-name');
     if (nameEl && person && person.company) nameEl.value = person.company;
   }, 100);
+}
+
+function copyVendorEmail(email) {
+  navigator.clipboard.writeText(email).catch(function() {
+    var ta = document.createElement('textarea');
+    ta.value = email; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta);
+  });
+  showXPFlash('Copied: ' + email);
 }
 
 function closeVlinkPopup() {
