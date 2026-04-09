@@ -2875,7 +2875,7 @@ function render(){
       html+=`<div class="section-divider"></div><div class="section-label">Everything else</div>`;
       const wc=renderAreaCol('work',rest.filter(t=>t.area==='work'));
       const lc=renderAreaCol('life',rest.filter(t=>t.area==='life'));
-      html+=`<div class="two-col">${lc.html}${wc.html}</div>`;
+      html+=`<div class="two-col">${wc.html}${lc.html}</div>`;
       dragTargets.push({id:wc.id,area:'work'},{id:lc.id,area:'life'});
       const br=rest.filter(t=>t.area==='buy');
       if(br.length){const bc=renderAreaCol('buy',br);html+=`<div style="padding:0 10px 8px">${bc.html}</div>`;dragTargets.push({id:bc.id,area:'buy'});}
@@ -2949,7 +2949,7 @@ document.getElementById('task-list').addEventListener('click', function(e){
 });
 
 // ── CACHE BUST ── bump APP_VERSION on each push to force fresh load
-const APP_VERSION = '1.12';
+const APP_VERSION = '1.14';
 (function(){
   var params = new URLSearchParams(window.location.search);
   if (params.get('v') !== APP_VERSION) {
@@ -5104,7 +5104,7 @@ function _inferUSRegion(st) {
 
 // ── VENDOR CONSTANTS ──
 const VENDOR_KINDS_VENDOR = ['AV','DESIGN','EVENTS','FAB','FILM','OTHER','PRINT','PROD','TECH'];
-const VENDOR_KINDS_STUDIO = ['STUDIO'];
+const VENDOR_KINDS_STUDIO = ['Digital','Experiential','Immersive','Film','Brand','Tech','Other'];
 const VENDOR_TRUST   = ['Unknown','Spoken','Known','Trusted'];
 const VENDOR_RECCO   = [
   { id:'top',       label:'⭐️ Top tier',  color:'#BA7517', bg:'#FAEEDA' },
@@ -5185,6 +5185,74 @@ async function renderWOSVendorView(el, typeFilter) {
   renderVendorList(el, typeFilter);
 }
 
+function filterVendorListOnly() {
+  // Re-render only the vendor cards, not the entire toolbar
+  // This preserves the input focus state
+  var el = document.getElementById('task-list');
+  if (!el) return;
+  var typeFilter = null;
+  if (workView === 'wos-vendors') typeFilter = 'vendor';
+  if (workView === 'wos-studios') typeFilter = 'studio';
+
+  var q      = (document.getElementById('vl-search')  ? document.getElementById('vl-search').value  : '').toLowerCase();
+  var fkind  = (document.getElementById('vl-kind')    ? document.getElementById('vl-kind').value    : '');
+  var ftrust = (document.getElementById('vl-trust')   ? document.getElementById('vl-trust').value   : '');
+  var fregion= (document.getElementById('vl-region')  ? document.getElementById('vl-region').value  : '');
+  var ftag   = (document.getElementById('vl-tag')     ? document.getElementById('vl-tag').value     : '').toLowerCase();
+  var ftype  = typeFilter || (document.getElementById('vl-type') ? document.getElementById('vl-type').value : '');
+
+  var vendors = workOSVendors.filter(function(v) {
+    if (ftype   && v.type  !== ftype)  return false;
+    if (fkind   && v.kind  !== fkind)  return false;
+    if (ftrust  && v.trust !== ftrust) return false;
+    if (ftag    && !(v.areas||[]).some(function(a) { return a.toLowerCase().includes(ftag); })) return false;
+    if (q && !(((v.name||'') + ' ' + (v.notes||'')).toLowerCase().includes(q))) return false;
+    if (fregion) {
+      var loc = normalizeVendorLocation(v.location);
+      var region = loc.usRegion || loc.globalRegion || '';
+      if (!region.toLowerCase().includes(fregion.toLowerCase())) return false;
+    }
+    return true;
+  });
+  vendors.sort(function(a,b) { return (a.name||'').localeCompare(b.name||''); });
+
+  // Update count bar
+  var countBar = el.querySelector('.vendor-count-bar');
+  if (countBar) countBar.textContent = vendors.length + (workOSVendors.length !== vendors.length ? ' of ' + workOSVendors.length : '') + ' result' + (vendors.length !== 1 ? 's' : '');
+
+  // Update card list only
+  var listEl = el.querySelector('.vendor-list');
+  if (!listEl) return;
+
+  var KIND_COLORS = {
+    'AV':{color:'#0C447C',bg:'#E6F1FB'},'FAB':{color:'#633806',bg:'#FAEEDA'},
+    'DESIGN':{color:'#993C1D',bg:'#FAECE7'},'EVENTS':{color:'#27500A',bg:'#EAF3DE'},
+    'FILM':{color:'#72243E',bg:'#FBEAF0'},'PRINT':{color:'#3C3489',bg:'#EEEDFE'},
+    'PROD':{color:'#085041',bg:'#E1F5EE'},'TECH':{color:'#0C447C',bg:'#E6F1FB'},
+    'STUDIO':{color:'#3C3489',bg:'#EEEDFE'},'OTHER':{color:'#444441',bg:'#F1EFE8'},
+  };
+  var RECCO_EMOJI = {top:'⭐️',preferred:'💚',solid:'🟢',ok:'🧡',cautious:'🟨'};
+
+  if (vendors.length === 0) {
+    listEl.innerHTML = '<div class="wos-empty" style="padding:40px 20px;">No results.</div>';
+    return;
+  }
+
+  listEl.innerHTML = vendors.map(function(v) {
+    var reccoEmoji = v.recommendation ? (RECCO_EMOJI[v.recommendation]||'') : '';
+    var loc = normalizeVendorLocation(v.location);
+    var kc  = v.kind ? (KIND_COLORS[v.kind] || {color:'#444441',bg:'#F1EFE8'}) : null;
+    var tagPills = (v.areas||[]).map(function(a) { return '<span class="vc-tag">'+a+'</span>'; }).join('');
+    var studioBadge = (v.type === 'studio' && !typeFilter) ? ' <span class="vendor-type-badge vendor-type-studio">Studio</span>' : '';
+    return '<div class="vendor-card' + (wosSelectedVendorId === v.id ? ' selected' : '') + '" onclick="openVendorDetail(' + v.id + ')">'
+      + '<div class="vc-top-left"><span class="vc-name">' + (v.name||'—') + studioBadge + '</span>' + (loc.display ? '<span class="vc-loc">📍 ' + loc.display + '</span>' : '') + '</div>'
+      + '<div class="vc-top-right">' + (reccoEmoji ? '<span class="vc-recco">'+reccoEmoji+'</span>' : '') + (v.trust && v.trust !== 'Unknown' ? '<span class="vc-trust vc-trust-'+v.trust.toLowerCase()+'">'+v.trust+'</span>' : '') + (v.contact_email ? '<button class="vc-mail" onclick="event.stopPropagation();copyVendorEmail(\''+v.contact_email.replace(/'/g,"\\'")+'\')">✉</button>' : '') + '</div>'
+      + '<div class="vc-bottom-left">' + (kc ? '<span class="vc-kind" style="background:'+kc.bg+';color:'+kc.color+';">'+v.kind+'</span>' : '') + '</div>'
+      + '<div class="vc-bottom-right">' + tagPills + '</div>'
+      + '</div>';
+  }).join('');
+}
+
 function renderVendorList(el, typeFilter) {
   var q     = (document.getElementById('vl-search')     ? document.getElementById('vl-search').value     : '').toLowerCase();
   var ftype = typeFilter || (document.getElementById('vl-type') ? document.getElementById('vl-type').value : '');
@@ -5263,7 +5331,7 @@ function renderVendorList(el, typeFilter) {
 
   el.innerHTML = '<div class="vendor-view">'
     + '<div class="vendor-toolbar">'
-    + '<input class="wos-search-input" id="vl-search" placeholder="Search ' + (typeFilter==='studio'?'studios':typeFilter==='vendor'?'vendors':'vendors & studios') + '..." oninput="renderVendorList(document.getElementById(\'task-list\'),(typeof typeFilter!==\'undefined\'?typeFilter:null))" value="' + q.replace(/"/g,'&quot;') + '" style="flex:1;min-width:80px;"/>'
+    + '<input class="wos-search-input" id="vl-search" placeholder="Search ' + (typeFilter==='studio'?'studios':typeFilter==='vendor'?'vendors':'vendors & studios') + '..." oninput="filterVendorListOnly()" value="' + q.replace(/"/g,'&quot;') + '" style="flex:1;min-width:80px;"/>'
     + (!typeFilter ? '<select class="wos-filter-sel" id="vl-type" onchange="renderVendorList(document.getElementById(\'task-list\'))" style="width:86px;"><option value="">All</option><option value="vendor"' + (ftype==="vendor"?' selected':'') + '>Vendors</option><option value="studio"' + (ftype==="studio"?' selected':'') + '>Studios</option></select>' : '')
     + '<select class="wos-filter-sel" id="vl-kind" onchange="renderVendorList(document.getElementById(\'task-list\'))" style="width:86px;">'
     + '<option value="">Kind</option>' + kindOpts
@@ -5276,7 +5344,7 @@ function renderVendorList(el, typeFilter) {
     + '<option value="">Region</option>'
     + ['East Coast','West Coast','Central','US','EMEA','GLOBAL'].map(function(r) { return '<option value="' + r + '"' + (fregion===r?' selected':'') + '>' + r + '</option>'; }).join('')
     + '</select>'
-    + '<input class="wos-filter-sel" id="vl-tag" placeholder="Area tag..." oninput="renderVendorList(document.getElementById(\'task-list\'))" value="' + ftag.replace(/"/g,'&quot;') + '" style="width:90px;"/>'
+    + '<input class="wos-filter-sel" id="vl-tag" placeholder="Area tag..." oninput="filterVendorListOnly()" value="' + ftag.replace(/"/g,'&quot;') + '" style="width:90px;"/>'
     + '<button class="add-btn" onclick="openVendorModal(null)" style="white-space:nowrap;flex-shrink:0;">+ Add</button>'
     + '</div>'
     + '<div class="vendor-count-bar">' + vendors.length + (workOSVendors.length !== vendors.length ? ' of ' + workOSVendors.length : '') + ' result' + (vendors.length !== 1 ? 's' : '') + '</div>'
