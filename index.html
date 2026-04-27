@@ -360,6 +360,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .resume-copy-btn:hover{background:#534AB7;color:#fff;}
 
 .sync-bar{padding:3px 14px;background:#f5f5f3;border-bottom:0.5px solid #d1d1cf;display:flex;align-items:center;gap:8px;flex-shrink:0;}
+/* ── STACK HABIT BAR ── */
+.stack-bar{padding:5px 16px 5px;background:linear-gradient(90deg,#f4f2ff,#eef8ee);border-bottom:0.5px solid #c5c0f0;display:flex;align-items:center;gap:10px;flex-shrink:0;min-height:32px;display:none;}
+.stack-bar.visible{display:flex;}
+.stack-bar-label{font-size:10px;font-weight:600;color:#7F77DD;white-space:nowrap;letter-spacing:0.03em;}
+.stack-bar-habits{display:flex;gap:8px;flex:1;align-items:center;overflow:hidden;}
+.stack-bar-habit{display:flex;align-items:center;gap:5px;padding:2px 8px 2px 5px;border-radius:20px;border:1px solid #c5c0f0;background:#fff;cursor:pointer;transition:all 0.15s;flex-shrink:0;}
+.stack-bar-habit:hover{border-color:#7F77DD;background:#f4f2ff;}
+.stack-bar-habit.done{border-color:#1D9E75;background:#edf8f1;}
+.stack-bar-habit-emoji{font-size:13px;line-height:1;}
+.stack-bar-habit-name{font-size:10px;font-weight:500;color:#2c2c2a;white-space:nowrap;}
+.stack-bar-habit-check{width:13px;height:13px;border-radius:50%;border:1.5px solid #c5c0f0;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.stack-bar-habit.done .stack-bar-habit-check{background:#1D9E75;border-color:#1D9E75;}
+.stack-bar-habit.done .stack-bar-habit-check::after{content:'';width:6px;height:3px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block;}
+.stack-bar-progress{display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.stack-bar-ring{width:20px;height:20px;flex-shrink:0;}
+.stack-bar-count{font-size:10px;color:#7F77DD;font-weight:600;white-space:nowrap;}
 .sync-dot{width:6px;height:6px;border-radius:50%;background:#888780;flex-shrink:0;transition:background 0.3s;}
 .sync-dot.ok{background:#639922;} .sync-dot.error{background:#E24B4A;} .sync-dot.syncing{background:#7F77DD;animation:pulse 1s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
@@ -1266,6 +1282,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <button class="brief-btn" onclick="openBrief()">Brief Claude</button>
       <button class="setup-btn" onclick="openSetup()">⚙</button>
     </div>
+    <div class="stack-bar" id="stack-bar"></div>
     <div class="topbar">
       <h2 id="view-title">All tasks</h2>
       <button class="add-btn" id="main-add-btn" onclick="handleAddBtn()">+ Add task</button>
@@ -2659,7 +2676,39 @@ function renderXPBanner(){
     <div class="xp-banner-cats">${catPills}</div>`;
 }
 
-// ── TASK ROW ──
+function renderStackBar(){
+  const bar=document.getElementById('stack-bar');
+  if(!bar) return;
+  const filledIds=habitStack.slots.filter(Boolean);
+  // Only show on 'all' view and when there are stacked habits
+  if(view!=='all'||!filledIds.length){bar.classList.remove('visible');bar.innerHTML='';return;}
+  const doneCount=filledIds.filter(id=>{const h=habits.find(x=>x.id===id);return h&&habitDoneOn(h);}).length;
+  const total=filledIds.length;
+  const allDone=doneCount===total;
+  // SVG ring
+  const r=8,cx=10,cy=10,circ=2*Math.PI*r;
+  const fill=total>0?circ*(doneCount/total):0;
+  const ringColor=allDone?'#1D9E75':'#7F77DD';
+  const ringHtml=`<svg class="stack-bar-ring" viewBox="0 0 20 20"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e0ddf5" stroke-width="2.5"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${ringColor}" stroke-width="2.5" stroke-dasharray="${fill} ${circ}" stroke-dashoffset="${circ/4}" stroke-linecap="round" style="transition:stroke-dasharray 0.4s;"/></svg>`;
+  const habitsHtml=filledIds.map(id=>{
+    const h=habits.find(x=>x.id===id);
+    if(!h) return '';
+    const done=habitDoneOn(h);
+    return`<div class="stack-bar-habit${done?' done':''}" onclick="openHabitLog('${h.id}')" title="${done?'Tap to undo':'Tap to log'}">
+      <div class="stack-bar-habit-check"></div>
+      <span class="stack-bar-habit-emoji">${h.emoji}</span>
+      <span class="stack-bar-habit-name">${h.name}</span>
+    </div>`;
+  }).join('');
+  bar.classList.add('visible');
+  bar.innerHTML=`
+    <span class="stack-bar-label">⚡ Stack</span>
+    <div class="stack-bar-habits">${habitsHtml}</div>
+    <div class="stack-bar-progress">
+      ${ringHtml}
+      <span class="stack-bar-count">${doneCount}/${total}${allDone?' ✓':''}</span>
+    </div>`;
+}
 function taskRow(t,compact,showArea){
   const age=ageDays(t.createdAt||t.updatedAt);
   const stale=!t.done&&!t.awaiting&&age>14;
@@ -3226,6 +3275,7 @@ function renderLosView(section){
 function render(){
   if(view==='claude') setupClaudeDrag();
   renderXPBanner();
+  renderStackBar();
   const tl=document.getElementById('task-list');
   const dp=document.getElementById('detail-panel');
   const sb=document.getElementById('stats-bar');
@@ -3259,6 +3309,34 @@ function render(){
     if(!u.length) html=`<div style="padding:40px;text-align:center;color:#888780;font-size:14px;">No urgent tasks</div>`;
     else u.forEach(t=>{html+=taskRow(t,false,true);});
   } else if(view==='all'){
+    // ── Focus Stack mini-widget ──
+    const _stackedIds=habitStack.slots.filter(Boolean);
+    if(_stackedIds.length){
+      const _todayDone=_stackedIds.filter(id=>{const h=habits.find(x=>x.id===id);return h&&habitDoneOn(h);}).length;
+      const _allDone=_todayDone===_stackedIds.length;
+      const _slotCards=_stackedIds.map(id=>{
+        const h=habits.find(x=>x.id===id);if(!h)return'';
+        const done=habitDoneOn(h);
+        const streak=getHabitStreak(h);
+        const streakBonus=streak>1?5*(streak-1):0;
+        const xp=(h.xp+streakBonus)*2;
+        return`<div onclick="openHabitLog('${h.id}')" data-hid="${h.id}" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:9px 10px 8px;border-radius:10px;border:1.5px solid ${done?'#1D9E75':'#c5c0f0'};background:${done?'#f0f9ea':'#fff'};cursor:pointer;min-width:76px;flex:1;max-width:120px;transition:border-color 0.15s;position:relative;" title="${done?'Tap to undo':'Tap to log'}">
+          ${done?`<div style="position:absolute;top:4px;right:4px;width:13px;height:13px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;"><span style="width:6px;height:3px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block;"></span></div>`:''}
+          <span style="font-size:20px;line-height:1;">${h.emoji}</span>
+          <span style="font-size:10px;font-weight:500;color:${done?'#0F6E56':'#2c2c2a'};text-align:center;line-height:1.2;">${h.name}</span>
+          <span style="font-size:9px;color:${streak>0?'#639922':'#888780'};font-weight:${streak>0?'500':'400'};">${streak>0?(streak>=7?'🔥':'')+streak+'d streak':''}</span>
+          <span style="font-size:9px;color:#7F77DD;background:#f0eeff;padding:1px 5px;border-radius:4px;font-weight:500;">+${xp} XP</span>
+        </div>`;
+      }).join('');
+      html+=`<div style="margin:10px 14px 2px;background:linear-gradient(135deg,#f4f2ff,#eef8ee);border:1.5px solid #c5c0f0;border-radius:12px;padding:10px 12px;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+          <span style="font-size:13px;">⚡</span>
+          <span style="font-size:11px;font-weight:500;color:#3C3489;flex:1;">Focus stack</span>
+          <span style="font-size:10px;color:${_allDone?'#1D9E75':'#7F77DD'};font-weight:500;">${_todayDone}/${_stackedIds.length} today${_allDone?' ✓':''}</span>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">${_slotCards}</div>
+      </div>`;
+    }
     const uo=open.filter(t=>t.urgent),rest=open.filter(t=>!t.urgent);
     if(uo.length){html+=`<div class="section-label">Urgent</div>`;uo.forEach(t=>{html+=taskRow(t,false,true);});}
     if(rest.length){
@@ -3272,7 +3350,7 @@ function render(){
       const cr=rest.filter(t=>t.area==='claude');
       if(cr.length){const cc=renderAreaCol('claude',cr);html+=`<div style="padding:0 10px 8px">${cc.html}</div>`;dragTargets.push({id:cc.id,area:'claude'});}
     }
-    if(!uo.length&&!rest.length) html=`<div style="padding:40px;text-align:center;color:#888780;font-size:14px;">All clear</div>`;
+    if(!uo.length&&!rest.length&&!_stackedIds.length) html=`<div style="padding:40px;text-align:center;color:#888780;font-size:14px;">All clear</div>`;
   } else if(view==='buy'){
     const ao=open.filter(t=>t.area==='buy');
     if(!ao.length) html=`<div style="padding:40px;text-align:center;color:#888780;font-size:14px;">All clear</div>`;
@@ -3341,7 +3419,7 @@ document.getElementById('task-list').addEventListener('click', function(e){
 });
 
 // ── CACHE BUST ── bump APP_VERSION on each push to force fresh load
-const APP_VERSION = '1.14';
+const APP_VERSION = '1.15';
 (function(){
   var params = new URLSearchParams(window.location.search);
   if (params.get('v') !== APP_VERSION) {
