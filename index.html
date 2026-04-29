@@ -1632,6 +1632,7 @@ async function loadFromSupabase(){
       if(data.habits){ habits=data.habits; nextHabitId=Math.max(9,...habits.map(h=>parseInt((h.id||'h0').replace(/\D/g,''))||0))+1; }
       if(data.auto_tasks) autoTasks=data.auto_tasks;
       if(data.insights) insights=data.insights;
+      if(data.habit_stack){ habitStack=data.habit_stack; }
       if(data.xp_epoch){ localStorage.setItem(XP_EPOCH_KEY, data.xp_epoch); }
       // Work OS data
       if(data.wos_projects){ workProjects=data.wos_projects; }
@@ -1667,6 +1668,7 @@ async function pushToSupabase(){
       body:JSON.stringify({
         tasks,groups,los,constitution,habits,
         auto_tasks:autoTasks,insights,
+        habit_stack:habitStack,
         xp_epoch:localStorage.getItem(XP_EPOCH_KEY)||XP_EPOCH,
         wos_projects:workProjects,
         wos_contacts:workContacts,
@@ -3418,15 +3420,7 @@ document.getElementById('task-list').addEventListener('click', function(e){
   if(slot) openHabitLog(slot.dataset.hid);
 });
 
-// ── CACHE BUST ── bump APP_VERSION on each push to force fresh load
-const APP_VERSION = '1.16';
-(function(){
-  var params = new URLSearchParams(window.location.search);
-  if (params.get('v') !== APP_VERSION) {
-    var hash = window.location.hash || '';
-    window.location.replace('?v=' + APP_VERSION + hash);
-  }
-})();
+// v1.16
 
 backfillCategories();
 loadFromSupabase().then(() => {
