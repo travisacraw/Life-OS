@@ -1586,16 +1586,16 @@ let nextHabitId = Math.max(9, ...habits.map(h => parseInt((h.id||'h0').replace(/
 // unlockedSlots: 2 or 3
 // strikeHistory: [{date, habitId}]
 // lastCleanCheck: ISO date of last check for 14-day unlock / 7-day reset
-let habitStack = JSON.parse(localStorage.getItem('los_habitstack')||'null') || {
+let habitStack = {
   slots: [null, null],
   unlockedSlots: 2,
   strikes: 0,
   strikeHistory: [],
   lastCleanCheck: null,
-  slot3UnlockProgress: 0  // consecutive weekday days all stack habits done
+  slot3UnlockProgress: 0
 };
 let _stackPickerSlotIndex = null;
-let _exceptionTarget = null; // {habitId, date}
+let _exceptionTarget = null;
 
 function ts(){ return new Date().toISOString(); }
 
@@ -1608,7 +1608,6 @@ function persist(){
   localStorage.setItem('los_habits', JSON.stringify(habits));
   localStorage.setItem('los_autotasks', JSON.stringify(autoTasks));
   localStorage.setItem('los_insights', JSON.stringify(insights));
-  localStorage.setItem('los_habitstack', JSON.stringify(habitStack));
   schedulePush();
 }
 
