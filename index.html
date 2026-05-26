@@ -866,6 +866,59 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media (min-width: 769px) {
   .mobile-tabs{display:none;}
 }
+
+/* ── HEALTH VIEW ── */
+.health-view{max-width:680px;margin:0 auto;padding:0 0 40px;}
+.health-header{padding:20px 18px 10px;border-bottom:0.5px solid #e8e8e4;}
+.health-title{font-size:20px;font-weight:700;color:#1D9E75;}
+.health-subtitle{font-size:12px;color:#888780;margin-top:2px;}
+.health-tabs{display:flex;gap:0;border-bottom:0.5px solid #e8e8e4;padding:0 18px;}
+.health-tab{padding:10px 14px;font-size:12px;font-weight:500;color:#888780;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.15s;}
+.health-tab.active{color:#1D9E75;border-bottom-color:#1D9E75;}
+.health-tab:hover{color:#2c2c2a;}
+.health-panel{padding:16px 18px;}
+.health-log-form{background:#f7f7f5;border-radius:12px;padding:14px;margin-bottom:16px;border:0.5px solid #e8e8e4;}
+.health-log-title{font-size:11px;font-weight:600;color:#5f5e5a;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;}
+.health-input-row{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;}
+.health-input{flex:1;min-width:80px;padding:8px 10px;font-size:13px;border:1px solid #d1d1cf;border-radius:8px;background:#fff;font-family:inherit;color:#2c2c2a;outline:none;}
+.health-input:focus{border-color:#1D9E75;}
+.health-input-label{font-size:11px;color:#888780;margin-bottom:3px;}
+.health-input-group{display:flex;flex-direction:column;flex:1;min-width:80px;}
+.health-log-btn{padding:8px 16px;font-size:13px;font-weight:500;border:none;border-radius:8px;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;white-space:nowrap;}
+.health-log-btn:hover{background:#0F6E56;}
+.health-log-btn.secondary{background:#7F77DD;}
+.health-log-btn.secondary:hover{background:#534AB7;}
+.health-entries{display:flex;flex-direction:column;gap:6px;}
+.health-entry{background:#fff;border:0.5px solid #e8e8e4;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;}
+.health-entry-icon{font-size:20px;flex-shrink:0;}
+.health-entry-body{flex:1;}
+.health-entry-main{font-size:14px;font-weight:600;color:#2c2c2a;}
+.health-entry-sub{font-size:11px;color:#888780;margin-top:1px;}
+.health-entry-del{font-size:12px;color:#d1d1cf;cursor:pointer;padding:4px;border-radius:4px;}
+.health-entry-del:hover{color:#E24B4A;background:#fff3f0;}
+.health-empty{text-align:center;padding:30px 18px;color:#b4b2a9;font-size:13px;}
+.health-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+.health-stat{background:#fff;border:0.5px solid #e8e8e4;border-radius:10px;padding:12px;text-align:center;}
+.health-stat-num{font-size:20px;font-weight:700;color:#1D9E75;}
+.health-stat-label{font-size:10px;color:#888780;margin-top:2px;}
+.health-water-bar-wrap{background:#e8f5f1;border-radius:10px;height:12px;margin:8px 0 4px;overflow:hidden;}
+.health-water-bar{height:100%;background:linear-gradient(90deg,#1D9E75,#5AC8A5);border-radius:10px;transition:width 0.4s;}
+.health-section-label{font-size:10px;font-weight:500;color:#888780;letter-spacing:0.08em;text-transform:uppercase;margin:14px 0 6px;display:flex;align-items:center;gap:6px;}
+.health-section-label::after{content:'';flex:1;height:0.5px;background:#e8e8e4;margin-left:8px;}
+.health-meal-tag{display:inline-block;padding:2px 8px;font-size:10px;font-weight:600;border-radius:5px;margin-right:4px;}
+.health-meal-breakfast{background:#FFF3E0;color:#E65100;}
+.health-meal-lunch{background:#E8F5E9;color:#2E7D32;}
+.health-meal-dinner{background:#EDE7F6;color:#4527A0;}
+.health-meal-snack{background:#FFF8E1;color:#F57F17;}
+.health-weight-chart{display:flex;gap:4px;align-items:flex-end;height:60px;margin:8px 0;}
+.health-weight-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.health-weight-bar{width:100%;background:#1D9E75;border-radius:3px 3px 0 0;min-height:2px;transition:height 0.3s;}
+.health-weight-bar-label{font-size:9px;color:#888780;}
+.health-glp1-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#e8f5f1,#d4edde);border:1px solid #a8dcc5;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:#0F6E56;margin-bottom:14px;}
+@media(max-width:768px){
+  .health-stat-row{grid-template-columns:repeat(2,1fr);}
+  .health-input-row{gap:6px;}
+}
 </style>
 </head>
 <body>
@@ -1020,6 +1073,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-divider"></div>
         <div class="sidebar-header">Daily</div>
         <div class="nav-item" onclick="setView('habits')" id="nav-habits"><div class="nav-dot" style="background:#FF8C42"></div>Habits</div>
+        <div class="nav-item" onclick="setView('health')" id="nav-health"><div class="nav-dot" style="background:#1D9E75"></div>Health</div>
         <div class="nav-divider"></div>
         <div class="sidebar-header">Context</div>
         <div class="nav-item" onclick="setView('goals')" id="nav-goals"><div class="nav-dot" style="background:#7F77DD"></div>Goals</div>
@@ -1461,7 +1515,7 @@ const LOS_SECTIONS = {
   thoughts:      {label:'Thoughts',      subtitle:'Raw thinking, observations.',                         color:'#888780', placeholder:'Add a thought...'},
 };
 const LOS_VIEWS = ['goals','projects','opportunities','thoughts','constitution','insights','weekly-review','prioritizer'];
-const SPECIAL_VIEWS = ['habits','progress','autotasks'];
+const SPECIAL_VIEWS = ['habits','health','progress','autotasks'];
 const isLosView = v => LOS_VIEWS.includes(v);
 const isSpecialView = v => SPECIAL_VIEWS.includes(v);
 
@@ -1572,6 +1626,8 @@ let constitution = JSON.parse(localStorage.getItem('los_constitution')||'null') 
 let habits     = JSON.parse(localStorage.getItem('los_habits')||'null') || JSON.parse(JSON.stringify(DEFAULT_HABITS));
 let autoTasks  = JSON.parse(localStorage.getItem('los_autotasks')||'null') || JSON.parse(JSON.stringify(DEFAULT_AUTO_TASKS));
 let insights   = JSON.parse(localStorage.getItem('los_insights')||'null') || DEFAULT_INSIGHTS;
+let health     = JSON.parse(localStorage.getItem('los_health') ||'null') || {weightLogs:[],waterLogs:[],foodLogs:[],exerciseLogs:[],settings:{weightUnit:'lbs',waterTargetOz:64,glp1StartDate:new Date().toISOString().split('T')[0]}};
+let healthTab  = 'weight'; // active health sub-tab
 let view = 'all', selectedId = null, noteTimer = null, syncTimer = null, dragSrcId = null;
 let editTarget = null, habitLogTarget = null, habitEditTarget = null;
 let nameTimer = null;
@@ -1608,6 +1664,7 @@ function persist(){
   localStorage.setItem('los_habits', JSON.stringify(habits));
   localStorage.setItem('los_autotasks', JSON.stringify(autoTasks));
   localStorage.setItem('los_insights', JSON.stringify(insights));
+  localStorage.setItem('los_health', JSON.stringify(health));
   schedulePush();
 }
 
@@ -1632,6 +1689,7 @@ async function loadFromSupabase(){
       if(data.auto_tasks) autoTasks=data.auto_tasks;
       if(data.insights) insights=data.insights;
       if(data.habit_stack){ habitStack=data.habit_stack; }
+      if(data.health){ health=data.health; }
       if(data.xp_epoch){ localStorage.setItem(XP_EPOCH_KEY, data.xp_epoch); }
       // Work OS data
       if(data.wos_projects){ workProjects=data.wos_projects; }
@@ -1668,6 +1726,7 @@ async function pushToSupabase(){
         tasks,groups,los,constitution,habits,
         auto_tasks:autoTasks,insights,
         habit_stack:habitStack,
+        health,
         xp_epoch:localStorage.getItem(XP_EPOCH_KEY)||XP_EPOCH,
         wos_projects:workProjects,
         wos_contacts:workContacts,
@@ -2092,7 +2151,7 @@ function setView(v){
   document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
   const navEl=document.getElementById('nav-'+v);if(navEl)navEl.classList.add('active');
   const titles={all:'All tasks',urgent:'Urgent',work:'Work',life:'Life',buy:'Buy',claude:'Claude Backlog',done:'Completed',
-    habits:'Habits',goals:'Goals',projects:'Projects',opportunities:'Opportunities',
+    habits:'Habits',health:'Health',goals:'Goals',projects:'Projects',opportunities:'Opportunities',
     thoughts:'Thoughts',constitution:'Constitution',insights:'Claude Insights',
     autotasks:'Auto Tasks',progress:'Progress','weekly-review':'Weekly Review','prioritizer':'AI Prioritizer'};
   document.getElementById('view-title').textContent=titles[v]||v;
@@ -3066,6 +3125,321 @@ function renderHabitsView(){
   </div>`;
 }
 
+// ── HEALTH VIEW ──
+function renderHealthView(){
+  const tabs = [
+    {id:'weight', label:'⚖️ Weight'},
+    {id:'water',  label:'💧 Water'},
+    {id:'food',   label:'🍽️ Food'},
+    {id:'exercise',label:'🏃 Exercise'},
+    {id:'settings',label:'⚙️ Settings'},
+  ];
+  const tabHtml = tabs.map(t=>`<div class="health-tab${healthTab===t.id?' active':''}" onclick="healthTab='${t.id}';render()">${t.label}</div>`).join('');
+
+  // GLP-1 days badge
+  const glp1Start = health.settings?.glp1StartDate;
+  const glp1Days = glp1Start ? Math.max(0, Math.floor((Date.now()-new Date(glp1Start).getTime())/86400000)) : 0;
+  const glp1Badge = `<div class="health-glp1-badge">💊 GLP-1 Day ${glp1Days+1} — Started ${glp1Start||'today'}</div>`;
+
+  let panelHtml = '';
+  if(healthTab==='weight') panelHtml = renderHealthWeight();
+  else if(healthTab==='water') panelHtml = renderHealthWater();
+  else if(healthTab==='food') panelHtml = renderHealthFood();
+  else if(healthTab==='exercise') panelHtml = renderHealthExercise();
+  else if(healthTab==='settings') panelHtml = renderHealthSettings();
+
+  return `<div class="health-view">
+    <div class="health-header">
+      <div class="health-title">Health</div>
+      <div class="health-subtitle">GLP-1 journey — weight, water, food & exercise tracker</div>
+    </div>
+    <div style="padding:12px 18px 0;">${glp1Badge}</div>
+    <div class="health-tabs">${tabHtml}</div>
+    <div class="health-panel">${panelHtml}</div>
+  </div>`;
+}
+
+function renderHealthWeight(){
+  const logs = (health.weightLogs||[]).slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const unit = health.settings?.weightUnit||'lbs';
+  const latest = logs[0]?.weight;
+  const first = logs[logs.length-1]?.weight;
+  const change = (latest && first && logs.length>1) ? (latest-first).toFixed(1) : null;
+  const changeHtml = change!==null
+    ? `<div class="health-stat"><div class="health-stat-num" style="color:${parseFloat(change)<0?'#1D9E75':'#E24B4A'}">${parseFloat(change)<0?'':'+'}${change}</div><div class="health-stat-label">Total change (${unit})</div></div>`
+    : '';
+
+  // Mini chart — last 7 entries
+  const chart7 = logs.slice(0,7).reverse();
+  let chartHtml = '';
+  if(chart7.length>1){
+    const min=Math.min(...chart7.map(l=>l.weight));
+    const max=Math.max(...chart7.map(l=>l.weight));
+    const range=max-min||1;
+    chartHtml = `<div class="health-section-label">Last ${chart7.length} entries</div>
+    <div class="health-weight-chart">${chart7.map(l=>{
+      const h=Math.max(6,Math.round(((l.weight-min)/range)*50));
+      return `<div class="health-weight-bar-wrap"><div class="health-weight-bar" style="height:${h}px;"></div><div class="health-weight-bar-label">${l.weight}</div></div>`;
+    }).join('')}</div>`;
+  }
+
+  const entriesHtml = logs.length ? logs.map(l=>`
+    <div class="health-entry">
+      <div class="health-entry-icon">⚖️</div>
+      <div class="health-entry-body">
+        <div class="health-entry-main">${l.weight} ${unit}</div>
+        <div class="health-entry-sub">${fmtHealthDate(l.date)}${l.note?` · ${l.note}`:''}</div>
+      </div>
+      <div class="health-entry-del" onclick="deleteHealthLog('weight','${l.id}')">✕</div>
+    </div>`).join('') : `<div class="health-empty">No weight entries yet — log your starting weight!</div>`;
+
+  return `
+    <div class="health-log-form">
+      <div class="health-log-title">Log Weight</div>
+      <div class="health-input-row">
+        <div class="health-input-group"><div class="health-input-label">Weight (${unit})</div><input class="health-input" id="h-weight-val" type="number" step="0.1" placeholder="e.g. 185.5"></div>
+        <div class="health-input-group"><div class="health-input-label">Date</div><input class="health-input" id="h-weight-date" type="date" value="${todayStr()}"></div>
+        <div class="health-input-group" style="flex:2"><div class="health-input-label">Note (optional)</div><input class="health-input" id="h-weight-note" type="text" placeholder="morning, fasted..."></div>
+        <button class="health-log-btn" onclick="logHealth('weight')">Log</button>
+      </div>
+    </div>
+    <div class="health-stat-row">
+      ${latest?`<div class="health-stat"><div class="health-stat-num">${latest}</div><div class="health-stat-label">Current (${unit})</div></div>`:''}
+      ${changeHtml}
+      <div class="health-stat"><div class="health-stat-num">${logs.length}</div><div class="health-stat-label">Entries</div></div>
+    </div>
+    ${chartHtml}
+    <div class="health-section-label">History</div>
+    <div class="health-entries">${entriesHtml}</div>`;
+}
+
+function renderHealthWater(){
+  const todayDate = todayStr();
+  const todayLogs = (health.waterLogs||[]).filter(l=>l.date===todayDate);
+  const todayTotal = todayLogs.reduce((s,l)=>s+(l.oz||0),0);
+  const target = health.settings?.waterTargetOz||64;
+  const pct = Math.min(100, Math.round((todayTotal/target)*100));
+  const allLogs = (health.waterLogs||[]).slice().sort((a,b)=>b.loggedAt>a.loggedAt?1:-1);
+
+  return `
+    <div class="health-log-form">
+      <div class="health-log-title">Log Water</div>
+      <div class="health-input-row">
+        <div class="health-input-group"><div class="health-input-label">Amount (oz)</div><input class="health-input" id="h-water-oz" type="number" step="1" placeholder="8"></div>
+        <div class="health-input-group"><div class="health-input-label">Date</div><input class="health-input" id="h-water-date" type="date" value="${todayDate}"></div>
+        <div class="health-input-group"><div class="health-input-label">Note</div><input class="health-input" id="h-water-note" type="text" placeholder="with meal, morning..."></div>
+        <button class="health-log-btn" onclick="logHealth('water')">Log</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+        ${[8,12,16,20,32].map(oz=>`<button onclick="quickLogWater(${oz})" style="padding:5px 10px;font-size:12px;border:1px solid #d1d1cf;border-radius:6px;background:#fff;cursor:pointer;font-family:inherit;">+${oz}oz</button>`).join('')}
+      </div>
+    </div>
+    <div class="health-stat-row">
+      <div class="health-stat"><div class="health-stat-num" style="color:${pct>=100?'#1D9E75':'#378ADD'}">${todayTotal}</div><div class="health-stat-label">oz today</div></div>
+      <div class="health-stat"><div class="health-stat-num">${target}</div><div class="health-stat-label">daily goal (oz)</div></div>
+      <div class="health-stat"><div class="health-stat-num">${pct}%</div><div class="health-stat-label">of goal</div></div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:2px;"><span>Today's intake</span><span>${todayTotal} / ${target} oz${pct>=100?' ✓':''}</span></div>
+      <div class="health-water-bar-wrap"><div class="health-water-bar" style="width:${pct}%"></div></div>
+    </div>
+    <div class="health-section-label">Log</div>
+    <div class="health-entries">${allLogs.length?allLogs.slice(0,30).map(l=>`
+      <div class="health-entry">
+        <div class="health-entry-icon">💧</div>
+        <div class="health-entry-body">
+          <div class="health-entry-main">${l.oz} oz</div>
+          <div class="health-entry-sub">${fmtHealthDate(l.date)}${l.note?` · ${l.note}`:''}</div>
+        </div>
+        <div class="health-entry-del" onclick="deleteHealthLog('water','${l.id}')">✕</div>
+      </div>`).join('') : `<div class="health-empty">No water logs yet — stay hydrated! 💧</div>`}
+    </div>`;
+}
+
+function renderHealthFood(){
+  const logs = (health.foodLogs||[]).slice().sort((a,b)=>b.loggedAt>a.loggedAt?1:-1);
+  const meals = ['breakfast','lunch','dinner','snack'];
+  const mealEmoji = {breakfast:'🌅',lunch:'☀️',dinner:'🌙',snack:'🍪'};
+
+  return `
+    <div class="health-log-form">
+      <div class="health-log-title">Log Food</div>
+      <div class="health-input-row">
+        <div class="health-input-group" style="flex:3"><div class="health-input-label">Food / meal description</div><input class="health-input" id="h-food-item" type="text" placeholder="e.g. Grilled salmon, salad..."></div>
+        <div class="health-input-group"><div class="health-input-label">Meal</div>
+          <select class="health-input" id="h-food-meal" style="cursor:pointer;">
+            ${meals.map(m=>`<option value="${m}">${m.charAt(0).toUpperCase()+m.slice(1)}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="health-input-row" style="margin-top:8px;">
+        <div class="health-input-group"><div class="health-input-label">Calories (optional)</div><input class="health-input" id="h-food-cal" type="number" placeholder="e.g. 450"></div>
+        <div class="health-input-group"><div class="health-input-label">Protein g (optional)</div><input class="health-input" id="h-food-protein" type="number" placeholder="e.g. 35"></div>
+        <div class="health-input-group"><div class="health-input-label">Date</div><input class="health-input" id="h-food-date" type="date" value="${todayStr()}"></div>
+        <button class="health-log-btn" onclick="logHealth('food')">Log</button>
+      </div>
+    </div>
+    <div class="health-section-label">Food Log</div>
+    <div class="health-entries">${logs.length?logs.slice(0,50).map(l=>`
+      <div class="health-entry">
+        <div class="health-entry-icon">${mealEmoji[l.meal]||'🍽️'}</div>
+        <div class="health-entry-body">
+          <div class="health-entry-main"><span class="health-meal-tag health-meal-${l.meal}">${l.meal}</span>${l.item}</div>
+          <div class="health-entry-sub">${fmtHealthDate(l.date)}${l.calories?` · ${l.calories} cal`:''}${l.protein?` · ${l.protein}g protein`:''}</div>
+        </div>
+        <div class="health-entry-del" onclick="deleteHealthLog('food','${l.id}')">✕</div>
+      </div>`).join('') : `<div class="health-empty">No food logged yet — track what you eat to support your GLP-1 journey.</div>`}
+    </div>`;
+}
+
+function renderHealthExercise(){
+  const logs = (health.exerciseLogs||[]).slice().sort((a,b)=>b.loggedAt>a.loggedAt?1:-1);
+  const types = ['Walk','Run','Gym','Bike','Swim','Yoga','Other'];
+
+  return `
+    <div class="health-log-form">
+      <div class="health-log-title">Log Exercise</div>
+      <div class="health-input-row">
+        <div class="health-input-group" style="flex:2"><div class="health-input-label">Activity</div>
+          <input class="health-input" id="h-ex-type" type="text" placeholder="e.g. Walk, Run, Gym..." list="h-ex-types-list">
+          <datalist id="h-ex-types-list">${types.map(t=>`<option value="${t}">`).join('')}</datalist>
+        </div>
+        <div class="health-input-group"><div class="health-input-label">Duration (min)</div><input class="health-input" id="h-ex-dur" type="number" placeholder="30"></div>
+        <div class="health-input-group"><div class="health-input-label">Date</div><input class="health-input" id="h-ex-date" type="date" value="${todayStr()}"></div>
+      </div>
+      <div class="health-input-row" style="margin-top:8px;">
+        <div class="health-input-group" style="flex:3"><div class="health-input-label">Notes (optional)</div><input class="health-input" id="h-ex-note" type="text" placeholder="How did it feel? Distance, intensity..."></div>
+        <button class="health-log-btn" onclick="logHealth('exercise')">Log</button>
+      </div>
+    </div>
+    <div class="health-stat-row">
+      <div class="health-stat"><div class="health-stat-num">${logs.filter(l=>l.date===todayStr()).length}</div><div class="health-stat-label">sessions today</div></div>
+      <div class="health-stat"><div class="health-stat-num">${logs.filter(l=>l.date>=weekStartStr()).length}</div><div class="health-stat-label">sessions this week</div></div>
+      <div class="health-stat"><div class="health-stat-num">${logs.length}</div><div class="health-stat-label">total sessions</div></div>
+    </div>
+    <div class="health-section-label">Exercise Log</div>
+    <div class="health-entries">${logs.length?logs.slice(0,50).map(l=>`
+      <div class="health-entry">
+        <div class="health-entry-icon">🏃</div>
+        <div class="health-entry-body">
+          <div class="health-entry-main">${l.type}${l.duration?` · ${l.duration} min`:''}</div>
+          <div class="health-entry-sub">${fmtHealthDate(l.date)}${l.note?` · ${l.note}`:''}</div>
+        </div>
+        <div class="health-entry-del" onclick="deleteHealthLog('exercise','${l.id}')">✕</div>
+      </div>`).join('') : `<div class="health-empty">No exercise logged yet — every step counts on your GLP-1 journey! 💪</div>`}
+    </div>`;
+}
+
+function renderHealthSettings(){
+  return `
+    <div class="health-log-form">
+      <div class="health-log-title">Settings</div>
+      <div class="health-input-row" style="flex-wrap:wrap;gap:12px;">
+        <div class="health-input-group">
+          <div class="health-input-label">Weight unit</div>
+          <select class="health-input" id="h-set-unit" onchange="saveHealthSettings()" style="cursor:pointer;">
+            <option value="lbs" ${(health.settings?.weightUnit||'lbs')==='lbs'?'selected':''}>lbs</option>
+            <option value="kg" ${health.settings?.weightUnit==='kg'?'selected':''}>kg</option>
+          </select>
+        </div>
+        <div class="health-input-group">
+          <div class="health-input-label">Daily water goal (oz)</div>
+          <input class="health-input" id="h-set-water" type="number" value="${health.settings?.waterTargetOz||64}" onchange="saveHealthSettings()">
+        </div>
+        <div class="health-input-group">
+          <div class="health-input-label">GLP-1 start date</div>
+          <input class="health-input" id="h-set-glp1" type="date" value="${health.settings?.glp1StartDate||todayStr()}" onchange="saveHealthSettings()">
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:8px;padding:12px;background:#fff8f0;border:0.5px solid #f0d9b0;border-radius:10px;font-size:12px;color:#7a5c2e;line-height:1.6;">
+      <strong>💊 GLP-1 Tips</strong><br>
+      • Aim for <strong>64–80 oz of water daily</strong> — GLP-1s increase dehydration risk<br>
+      • <strong>Prioritize protein</strong> (aim 80–100g/day) to preserve muscle while losing fat<br>
+      • Track weight <strong>weekly at the same time</strong> for the most accurate trend<br>
+      • Even short walks help — exercise amplifies GLP-1 fat-loss benefits<br>
+      • Nausea? Log smaller, more frequent meals and avoid high-fat foods
+    </div>`;
+}
+
+// ── HEALTH CRUD ──
+function todayStr(){ return new Date().toISOString().split('T')[0]; }
+function weekStartStr(){
+  const d=new Date(); d.setDate(d.getDate()-d.getDay()); return d.toISOString().split('T')[0];
+}
+function fmtHealthDate(d){
+  if(!d) return '';
+  const today=todayStr();
+  const yest=new Date(); yest.setDate(yest.getDate()-1);
+  const yestStr=yest.toISOString().split('T')[0];
+  if(d===today) return 'Today';
+  if(d===yestStr) return 'Yesterday';
+  return new Date(d+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+function healthUID(){ return 'h'+Date.now()+'_'+Math.random().toString(36).slice(2,6); }
+
+function logHealth(type){
+  if(type==='weight'){
+    const val=parseFloat(document.getElementById('h-weight-val').value);
+    const date=document.getElementById('h-weight-date').value||todayStr();
+    const note=document.getElementById('h-weight-note').value.trim();
+    if(!val||isNaN(val)) return alert('Please enter a weight value.');
+    health.weightLogs.push({id:healthUID(),weight:val,date,note,loggedAt:new Date().toISOString()});
+    document.getElementById('h-weight-val').value='';
+    document.getElementById('h-weight-note').value='';
+  } else if(type==='water'){
+    const oz=parseInt(document.getElementById('h-water-oz').value);
+    const date=document.getElementById('h-water-date').value||todayStr();
+    const note=document.getElementById('h-water-note').value.trim();
+    if(!oz||isNaN(oz)) return alert('Please enter an amount in oz.');
+    health.waterLogs.push({id:healthUID(),oz,date,note,loggedAt:new Date().toISOString()});
+    document.getElementById('h-water-oz').value='';
+    document.getElementById('h-water-note').value='';
+  } else if(type==='food'){
+    const item=document.getElementById('h-food-item').value.trim();
+    const meal=document.getElementById('h-food-meal').value;
+    const calories=parseInt(document.getElementById('h-food-cal').value)||null;
+    const protein=parseInt(document.getElementById('h-food-protein').value)||null;
+    const date=document.getElementById('h-food-date').value||todayStr();
+    if(!item) return alert('Please describe what you ate.');
+    health.foodLogs.push({id:healthUID(),item,meal,calories,protein,date,loggedAt:new Date().toISOString()});
+    document.getElementById('h-food-item').value='';
+    document.getElementById('h-food-cal').value='';
+    document.getElementById('h-food-protein').value='';
+  } else if(type==='exercise'){
+    const exType=document.getElementById('h-ex-type').value.trim();
+    const duration=parseInt(document.getElementById('h-ex-dur').value)||null;
+    const note=document.getElementById('h-ex-note').value.trim();
+    const date=document.getElementById('h-ex-date').value||todayStr();
+    if(!exType) return alert('Please enter an activity type.');
+    health.exerciseLogs.push({id:healthUID(),type:exType,duration,note,date,loggedAt:new Date().toISOString()});
+    document.getElementById('h-ex-type').value='';
+    document.getElementById('h-ex-dur').value='';
+    document.getElementById('h-ex-note').value='';
+  }
+  persist(); render();
+}
+
+function quickLogWater(oz){
+  health.waterLogs.push({id:healthUID(),oz,date:todayStr(),note:'quick log',loggedAt:new Date().toISOString()});
+  persist(); render();
+}
+
+function deleteHealthLog(type, id){
+  if(type==='weight') health.weightLogs=health.weightLogs.filter(l=>l.id!==id);
+  else if(type==='water') health.waterLogs=health.waterLogs.filter(l=>l.id!==id);
+  else if(type==='food') health.foodLogs=health.foodLogs.filter(l=>l.id!==id);
+  else if(type==='exercise') health.exerciseLogs=health.exerciseLogs.filter(l=>l.id!==id);
+  persist(); render();
+}
+
+function saveHealthSettings(){
+  health.settings.weightUnit=document.getElementById('h-set-unit').value;
+  health.settings.waterTargetOz=parseInt(document.getElementById('h-set-water').value)||64;
+  health.settings.glp1StartDate=document.getElementById('h-set-glp1').value||todayStr();
+  persist(); render();
+}
+
 function renderConstitutionView(){
   const sections=[...new Set(constitution.map(c=>c.section))];
   const lastReviewed=localStorage.getItem('constitution_last_reviewed');
@@ -3283,6 +3657,7 @@ function render(){
   const open=tasks.filter(t=>!t.done),done=tasks.filter(t=>t.done),awaiting=tasks.filter(t=>t.awaiting);
 
   if(view==='habits'){tl.innerHTML=renderHabitsView();sb.innerHTML='';return;}
+  if(view==='health'){tl.innerHTML=renderHealthView();sb.innerHTML='';return;}
   if(view==='constitution'){tl.innerHTML=renderConstitutionView();sb.innerHTML='';return;}
   if(view==='insights'){tl.innerHTML=renderInsightsView();sb.innerHTML='';return;}
   if(view==='autotasks'){tl.innerHTML=renderAutoTasksView();sb.innerHTML='';return;}
@@ -3483,6 +3858,7 @@ function toggleMoreDrawer() {
           <button class="more-drawer-item" onclick="mobileNav('buy')">🛒<span>Buy</span></button>
           <button class="more-drawer-item" onclick="mobileNav('claude')">✦<span>Claude</span></button>
           <button class="more-drawer-item" onclick="mobileNav('done')">✅<span>Done</span></button>
+          <button class="more-drawer-item" onclick="mobileNav('health')">💊<span>Health</span></button>
           <button class="more-drawer-item" onclick="mobileNav('goals')">🎯<span>Goals</span></button>
           <button class="more-drawer-item" onclick="mobileNav('thoughts')">💭<span>Thoughts</span></button>
           <button class="more-drawer-item" onclick="mobileNav('constitution')">📜<span>Identity</span></button>
