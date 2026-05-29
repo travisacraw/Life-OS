@@ -4692,6 +4692,7 @@ async function renderWOSPeopleView(el, mode){
       <div class="wos-people-tabs" id="wos-people-tabs">${tabs}</div>
       <div class="wos-search-row">
         <input class="wos-search-input" id="wos-people-search" placeholder="Search name, company, role..." oninput="filterWOSPeople()"/>
+        <button class="add-btn" onclick="openContactModal()" style="flex-shrink:0;white-space:nowrap;">+ Add Contact</button>
       </div>
       <div class="wos-filters">
         <select class="wos-filter-sel" id="wos-f-kind" onchange="filterWOSPeople()">
