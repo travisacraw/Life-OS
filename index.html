@@ -1177,27 +1177,58 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <!-- NEW PROJECT MODAL -->
   <div class="wos-modal-overlay" id="wos-new-project-overlay">
-    <div class="wos-modal">
+    <div class="wos-modal" style="width:460px;max-height:88vh;overflow-y:auto;">
       <h3>🏹 New Project</h3>
+
+      <!-- STEP 1: COMPANY -->
       <div class="wos-modal-row">
-        <div class="wos-modal-label">Production Company</div>
-        <input class="wos-modal-input" id="wos-company" placeholder="e.g. Radical Media" oninput="updateProjectPreview()"/>
+        <div class="wos-modal-label">Company</div>
+        <div id="np-company-loading" style="font-size:12px;color:#888780;padding:6px 0;">Loading…</div>
+        <div id="np-existing-companies" style="display:none;flex-direction:column;gap:4px;max-height:130px;overflow-y:auto;padding:2px 0;"></div>
+        <div style="margin-top:7px;display:flex;align-items:center;gap:8px;">
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#5f5e5a;cursor:pointer;">
+            <input type="checkbox" id="np-new-company-check" onchange="npToggleNewCompany(this)" style="accent-color:#534AB7;width:13px;height:13px;cursor:pointer;"/>
+            New company
+          </label>
+        </div>
+        <div id="np-new-company-row" style="display:none;margin-top:6px;">
+          <input class="wos-modal-input" id="np-new-company-name" placeholder="Company name…" oninput="npUpdatePreview()"/>
+        </div>
       </div>
-      <div class="wos-modal-row">
+
+      <!-- STEP 2: CLIENT (locked until company selected) -->
+      <div class="wos-modal-row" id="np-client-section" style="opacity:0.4;pointer-events:none;transition:opacity 0.2s;">
         <div class="wos-modal-label">Client</div>
-        <input class="wos-modal-input" id="wos-client" placeholder="e.g. Meta" oninput="updateProjectPreview()"/>
+        <div id="np-client-loading" style="font-size:12px;color:#888780;padding:6px 0;">Select a company first…</div>
+        <div id="np-existing-clients" style="display:none;flex-direction:column;gap:4px;max-height:130px;overflow-y:auto;padding:2px 0;"></div>
+        <div style="margin-top:7px;display:flex;align-items:center;gap:8px;">
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#5f5e5a;cursor:pointer;">
+            <input type="checkbox" id="np-new-client-check" onchange="npToggleNewClient(this)" style="accent-color:#534AB7;width:13px;height:13px;cursor:pointer;"/>
+            New client
+          </label>
+        </div>
+        <div id="np-new-client-row" style="display:none;margin-top:6px;">
+          <input class="wos-modal-input" id="np-new-client-name" placeholder="Client name…" oninput="npUpdatePreview()"/>
+        </div>
       </div>
+
+      <!-- STEP 3: PROJECT NAME -->
       <div class="wos-modal-row">
         <div class="wos-modal-label">Project Name</div>
-        <input class="wos-modal-input" id="wos-project-name" placeholder="e.g. 5th Ave Store" oninput="updateProjectPreview()"/>
+        <input class="wos-modal-input" id="np-project-name" placeholder="e.g. 5th Ave Store Opening" oninput="npUpdatePreview()"/>
       </div>
+
+      <!-- PATH PREVIEW -->
       <div class="wos-modal-row">
-        <div class="wos-modal-label">Folder preview</div>
-        <div class="wos-modal-preview" id="wos-folder-preview">Fill in the fields above…</div>
+        <div class="wos-modal-label">Will be created at</div>
+        <div class="wos-modal-preview" id="np-path-preview" style="font-size:10px;line-height:1.9;">Select a company to begin…</div>
       </div>
+
+      <div id="np-status" style="font-size:12px;min-height:18px;"></div>
+
       <div class="wos-modal-actions">
         <button class="wos-modal-cancel" onclick="closeNewProjectModal()">Cancel</button>
-        <button class="wos-modal-save" onclick="saveNewProject()">Create Project</button>
+        <button class="wos-modal-save" id="np-submit-btn" onclick="saveNewProject()">Create Project</button>
       </div>
     </div>
   </div>
@@ -4383,61 +4414,212 @@ function contactCard(c) {
   `;
 }
 
-// ── NEW PROJECT MODAL ──
-function openNewProjectModal() {
-  document.getElementById('wos-company').value = '';
-  document.getElementById('wos-client').value = '';
-  document.getElementById('wos-project-name').value = '';
-  document.getElementById('wos-folder-preview').textContent = 'Fill in the fields above…';
+// ── NEW PROJECT MODAL (merged: Supabase record + local folders) ──
+const MF_SERVER = 'http://localhost:3737';
+let _npSelectedCompany = null;
+let _npSelectedClient  = null;
+let _npIsNewCompany    = false;
+let _npIsNewClient     = false;
+
+async function openNewProjectModal() {
+  // Reset state
+  _npSelectedCompany = null;
+  _npSelectedClient  = null;
+  _npIsNewCompany    = false;
+  _npIsNewClient     = false;
+
+  // Reset UI
+  ['np-new-company-check','np-new-client-check'].forEach(id => {
+    document.getElementById(id).checked = false;
+  });
+  ['np-new-company-row','np-new-client-row'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+  ['np-new-company-name','np-new-client-name','np-project-name'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('np-path-preview').textContent = 'Select a company to begin…';
+  document.getElementById('np-status').textContent = '';
+  document.getElementById('np-submit-btn').disabled = false;
+  document.getElementById('np-submit-btn').textContent = 'Create Project';
+
+  // Lock client section until company is chosen
+  const clientSection = document.getElementById('np-client-section');
+  clientSection.style.opacity = '0.4';
+  clientSection.style.pointerEvents = 'none';
+  document.getElementById('np-existing-clients').style.display = 'none';
+  document.getElementById('np-client-loading').style.display = 'block';
+  document.getElementById('np-client-loading').textContent = 'Select a company first…';
+
   document.getElementById('wos-new-project-overlay').classList.add('show');
-  setTimeout(() => document.getElementById('wos-company').focus(), 80);
+
+  // Load production companies from local server
+  const companyLoading = document.getElementById('np-company-loading');
+  const companyList    = document.getElementById('np-existing-companies');
+  companyLoading.style.display = 'block';
+  companyLoading.textContent   = 'Loading…';
+  companyList.style.display    = 'none';
+
+  try {
+    const res      = await fetch(MF_SERVER + '/companies', { signal: AbortSignal.timeout(3000) });
+    const companies = await res.json();
+    npRenderList('company', companies);
+  } catch (e) {
+    companyLoading.innerHTML =
+      '<div style="background:#FFF8EC;border:0.5px solid #E8C97A;border-radius:8px;padding:10px 12px;font-size:11px;line-height:1.7;color:#5f5e5a;">' +
+      '<div style="font-weight:600;color:#854F0B;margin-bottom:4px;">⚠️ Folder server not running</div>' +
+      'Projects will still save to the app, but folders won\'t be created on disk.<br>' +
+      'To enable folder creation, open <strong>Terminal</strong> and run:<br>' +
+      '<code style="display:block;margin-top:6px;background:#f5f5f3;border:0.5px solid #d1d1cf;border-radius:5px;padding:5px 8px;font-size:10px;word-break:break-all;color:#2c2c2a;">' +
+      'node "/Users/traviscraw/Desktop/TC Drive/05_Projects/🔮Claude Code/To Do App/folder-server.js"' +
+      '</code>' +
+      '<div style="margin-top:6px;color:#888780;font-size:10px;">Keep that Terminal window open while using the app.</div>' +
+      '</div>';
+  }
 }
 
 function closeNewProjectModal() {
   document.getElementById('wos-new-project-overlay').classList.remove('show');
 }
 
-function updateProjectPreview() {
-  const company = document.getElementById('wos-company').value.trim();
-  const client  = document.getElementById('wos-client').value.trim();
-  const project = document.getElementById('wos-project-name').value.trim();
-  const date    = new Date().toISOString().slice(0,7); // YYYY-MM
-
-  const clean = s => s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_\-]/g,'');
-
-  if (!company && !client && !project) {
-    document.getElementById('wos-folder-preview').textContent = 'Fill in the fields above…';
+function npRenderList(type, items) {
+  const plural    = type === 'company' ? 'companies' : 'clients';
+  const loadingEl = document.getElementById(`np-${type}-loading`);
+  const listEl    = document.getElementById(`np-existing-${plural}`);
+  if (!items.length) {
+    loadingEl.textContent   = `No existing ${type} folders found — use "New ${type}" below.`;
+    loadingEl.style.display = 'block';
+    listEl.style.display    = 'none';
     return;
   }
-
-  const lines = [
-    `🏹 Jobs/`,
-    company ? `  ${clean(company)}/` : `  <Company>/`,
-    `    Contracts & Invoices/`,
-    `    General Docs/`,
-    client  ? `    ${clean(client)}/` : `    <Client>/`,
-    project ? `      ${date}_${clean(project)}/` : `      YYYY-MM_<Project>/`,
-    `        00_Admin/`,
-    `        01_Creative/`,
-    `        02_Design/`,
-    `        03_Production/`,
-    `        04_Photos & Video/`,
-  ];
-  document.getElementById('wos-folder-preview').textContent = lines.join('\n');
+  loadingEl.style.display = 'none';
+  listEl.style.display    = 'flex';
+  listEl.innerHTML = items.map(name => `
+    <label style="display:flex;align-items:center;gap:8px;padding:5px 9px;border:0.5px solid #d1d1cf;border-radius:7px;cursor:pointer;font-size:12px;color:#2c2c2a;transition:background 0.1s;"
+           onmouseover="this.style.background='#f5f5f3'" onmouseout="this.style.background='transparent'">
+      <input type="radio" name="np-${type}" value="${name.replace(/'/g,'&#39;')}"
+             onchange="npSelectItem('${type}','${name.replace(/'/g,'\\\'')}')"
+             style="accent-color:#534AB7;width:13px;height:13px;cursor:pointer;"/>
+      ${name}
+    </label>
+  `).join('');
 }
 
-function saveNewProject() {
-  const company = document.getElementById('wos-company').value.trim();
-  const client  = document.getElementById('wos-client').value.trim();
-  const project = document.getElementById('wos-project-name').value.trim();
-  if (!company || !client || !project) {
-    alert('Please fill in all three fields.');
-    return;
-  }
-  const date = new Date().toISOString().slice(0,7);
-  const clean = s => s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_\-]/g,'');
-  const folderName = `${date}_${clean(project)}`;
+async function npSelectItem(type, name) {
+  if (type === 'company') {
+    _npSelectedCompany = name;
+    _npIsNewCompany    = false;
+    document.getElementById('np-new-company-check').checked = false;
+    document.getElementById('np-new-company-row').style.display = 'none';
 
+    // Unlock client section and load its folders
+    const clientSection = document.getElementById('np-client-section');
+    clientSection.style.opacity      = '1';
+    clientSection.style.pointerEvents = 'auto';
+    _npSelectedClient = null;
+    document.querySelectorAll('input[name="np-client"]').forEach(r => r.checked = false);
+    document.getElementById('np-new-client-check').checked = false;
+    document.getElementById('np-new-client-row').style.display = 'none';
+    document.getElementById('np-existing-clients').style.display = 'none';
+    document.getElementById('np-client-loading').style.display = 'block';
+    document.getElementById('np-client-loading').textContent = 'Loading clients…';
+
+    try {
+      const res     = await fetch(`${MF_SERVER}/clients?company=${encodeURIComponent(name)}`, { signal: AbortSignal.timeout(3000) });
+      const clients = await res.json();
+      npRenderList('client', clients);
+    } catch (e) {
+      document.getElementById('np-client-loading').textContent = 'Could not load client folders.';
+    }
+  } else {
+    _npSelectedClient = name;
+    _npIsNewClient    = false;
+    document.getElementById('np-new-client-check').checked = false;
+    document.getElementById('np-new-client-row').style.display = 'none';
+  }
+  npUpdatePreview();
+}
+
+function npToggleNewCompany(cb) {
+  _npIsNewCompany = cb.checked;
+  document.getElementById('np-new-company-row').style.display = cb.checked ? 'block' : 'none';
+  if (cb.checked) {
+    document.querySelectorAll('input[name="np-company"]').forEach(r => r.checked = false);
+    _npSelectedCompany = null;
+    // Lock client section again
+    const clientSection = document.getElementById('np-client-section');
+    clientSection.style.opacity      = '1'; // keep unlocked — they can type a new client too
+    clientSection.style.pointerEvents = 'auto';
+    document.getElementById('np-client-loading').style.display = 'block';
+    document.getElementById('np-client-loading').textContent = 'Enter client name below…';
+    document.getElementById('np-existing-clients').style.display = 'none';
+    document.getElementById('np-new-client-check').checked = true;
+    document.getElementById('np-new-client-row').style.display = 'block';
+    _npIsNewClient = true;
+    document.getElementById('np-new-company-name').focus();
+  }
+  npUpdatePreview();
+}
+
+function npToggleNewClient(cb) {
+  _npIsNewClient = cb.checked;
+  document.getElementById('np-new-client-row').style.display = cb.checked ? 'block' : 'none';
+  if (cb.checked) {
+    document.querySelectorAll('input[name="np-client"]').forEach(r => r.checked = false);
+    _npSelectedClient = null;
+    document.getElementById('np-new-client-name').focus();
+  }
+  npUpdatePreview();
+}
+
+function npUpdatePreview() {
+  const company     = _npIsNewCompany ? document.getElementById('np-new-company-name').value.trim() : _npSelectedCompany;
+  const client      = _npIsNewClient  ? document.getElementById('np-new-client-name').value.trim()  : _npSelectedClient;
+  const projectRaw  = document.getElementById('np-project-name').value.trim();
+  const strip       = s => s ? s.replace(/[\/\\:*?"<>|]/g,'') : '';
+
+  let preview = '';
+  if (!company) {
+    preview = 'Select a company to begin…';
+  } else if (!client) {
+    preview = `03_Work / ${strip(company)} / …\n  Select or create a client`;
+  } else if (!projectRaw) {
+    preview = `03_Work / ${strip(company)} / ${strip(client)} / …\n  Enter a project name`;
+  } else {
+    preview =
+      `03_Work / ${strip(company)} / ${strip(client)} / ${strip(projectRaw)} /\n` +
+      `  00_client  01_strategy  02_creative\n` +
+      `  03_design  04_production  05_logistics\n` +
+      `  06_budget  07_content_capture  08_post_event`;
+  }
+  document.getElementById('np-path-preview').textContent = preview;
+}
+
+async function saveNewProject() {
+  const company    = _npIsNewCompany ? document.getElementById('np-new-company-name').value.trim() : _npSelectedCompany;
+  const client     = _npIsNewClient  ? document.getElementById('np-new-client-name').value.trim()  : _npSelectedClient;
+  const project    = document.getElementById('np-project-name').value.trim();
+  const status     = document.getElementById('np-status');
+
+  if (!company) {
+    status.style.color = '#BA7517'; status.textContent = '⚠️ Select or create a company.'; return;
+  }
+  if (!client) {
+    status.style.color = '#BA7517'; status.textContent = '⚠️ Select or create a client.'; return;
+  }
+  if (!project) {
+    status.style.color = '#BA7517'; status.textContent = '⚠️ Enter a project name.';
+    document.getElementById('np-project-name').focus(); return;
+  }
+
+  const btn = document.getElementById('np-submit-btn');
+  btn.disabled    = true;
+  btn.textContent = 'Creating…';
+  status.textContent = '';
+
+  // 1 — Save project record to Supabase (app awareness)
+  const date       = new Date().toISOString().slice(0,7);
+  const folderName = project.replace(/[\/\\:*?"<>|]/g,'');
   workProjects.push({
     id: nextWorkId++,
     company, client,
@@ -4448,15 +4630,45 @@ function saveNewProject() {
     notes: '',
   });
   persistWork();
-  closeNewProjectModal();
 
-  // Switch to Work OS and show projects
+  // 2 — Create folders on local disk (non-fatal if server not running)
+  try {
+    const res  = await fetch(MF_SERVER + '/create-project', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ company, client, projectName: project, isNewCompany: _npIsNewCompany, isNewClient: _npIsNewClient }),
+      signal:  AbortSignal.timeout(8000),
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      status.style.color = '#BA7517';
+      status.textContent = '⚠️ Project saved, but folders: ' + data.error;
+      btn.disabled = false; btn.textContent = 'Create Project';
+      return;
+    }
+  } catch (e) {
+    // Server not running — project still saved to app, just no folders
+    status.style.color = '#888780';
+    status.innerHTML =
+      'Project saved to app. ' +
+      '<span style="color:#888780;">To also create folders, start the server:<br>' +
+      '<code style="font-size:10px;background:#f5f5f3;border-radius:4px;padding:2px 5px;">' +
+      'node "/Users/traviscraw/Desktop/TC Drive/05_Projects/🔮Claude Code/To Do App/folder-server.js"' +
+      '</code></span>';
+    setTimeout(() => {
+      closeNewProjectModal();
+      if (!workOSMode) switchToWorkOS();
+      setWorkView('wos-dashboard');
+    }, 2000);
+    return;
+  }
+
+  closeNewProjectModal();
+  showXPFlash('🏹 Project created!');
   if (!workOSMode) switchToWorkOS();
   setWorkView('wos-dashboard');
 }
-
-// ── NEW CLIENT MODAL (reuses contact modal with type=client) ──
-function openNewClientModal() { openContactModal('client'); }
+// ─────────────────────────────────────────────────────────────
 
 // ── CONTACT MODAL ──
 function openContactModal(type) {
@@ -6853,6 +7065,10 @@ async function dismissCleanupRecord(id){
   closeWOSDetail();
   showXPFlash('Dismissed');
 }
+
+
+// ── NEW CLIENT MODAL (reuses contact modal with type=client) ──
+function openNewClientModal() { openContactModal('client'); }
 
 </script>
 </body>
