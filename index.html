@@ -868,6 +868,74 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 }
 
 /* ── HEALTH VIEW ── */
+.health-view{max-width:680px;margin:0 auto;padding:0 0 60px;}
+.health-header{padding:16px 18px 10px;border-bottom:0.5px solid #e8e8e4;}
+.health-title{font-size:20px;font-weight:700;color:#1D9E75;}
+.health-subtitle{font-size:12px;color:#888780;margin-top:2px;}
+.health-tabs{display:flex;gap:0;border-bottom:0.5px solid #e8e8e4;padding:0 18px;}
+.health-tab{padding:10px 14px;font-size:12px;font-weight:500;color:#888780;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.15s;}
+.health-tab.active{color:#1D9E75;border-bottom-color:#1D9E75;}
+.health-tab:hover{color:#2c2c2a;}
+.health-panel{padding:14px 18px;}
+/* shared inputs */
+.health-log-form{background:#f7f7f5;border-radius:12px;padding:13px;margin-bottom:12px;border:0.5px solid #e8e8e4;}
+.health-log-title{font-size:10px;font-weight:600;color:#5f5e5a;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:6px;}
+.health-input-row{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;}
+.health-input{flex:1;min-width:80px;padding:7px 10px;font-size:13px;border:1px solid #d1d1cf;border-radius:8px;background:#fff;font-family:inherit;color:#2c2c2a;outline:none;}
+.health-input:focus{border-color:#1D9E75;}
+.health-input-label{font-size:11px;color:#888780;margin-bottom:3px;}
+.health-input-group{display:flex;flex-direction:column;flex:1;min-width:80px;}
+.health-log-btn{padding:7px 15px;font-size:13px;font-weight:500;border:none;border-radius:8px;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;white-space:nowrap;}
+.health-log-btn:hover{background:#0F6E56;}
+.health-log-btn:disabled{background:#b4ddd1;cursor:not-allowed;}
+/* entries */
+.health-entries{display:flex;flex-direction:column;gap:5px;}
+.health-entry{background:#fff;border:0.5px solid #e8e8e4;border-radius:10px;padding:9px 13px;display:flex;align-items:center;gap:9px;}
+.health-entry-icon{font-size:18px;flex-shrink:0;}
+.health-entry-body{flex:1;min-width:0;}
+.health-entry-main{font-size:13px;font-weight:600;color:#2c2c2a;}
+.health-entry-sub{font-size:11px;color:#888780;margin-top:1px;}
+.health-entry-del{font-size:12px;color:#d1d1cf;cursor:pointer;padding:4px;border-radius:4px;flex-shrink:0;}
+.health-entry-del:hover{color:#E24B4A;background:#fff3f0;}
+.health-empty{text-align:center;padding:20px 18px;color:#b4b2a9;font-size:13px;}
+/* section dividers */
+.health-section-label{font-size:10px;font-weight:600;color:#5f5e5a;letter-spacing:0.08em;text-transform:uppercase;margin:18px 0 8px;display:flex;align-items:center;gap:8px;}
+.health-section-label::after{content:'';flex:1;height:0.5px;background:#e8e8e4;margin-left:4px;}
+/* stats */
+.health-stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:12px;}
+.health-stat{background:#fff;border:0.5px solid #e8e8e4;border-radius:10px;padding:10px 8px;text-align:center;}
+.health-stat-num{font-size:18px;font-weight:700;color:#1D9E75;}
+.health-stat-label{font-size:9px;color:#888780;margin-top:2px;}
+/* water bar */
+.health-water-bar-wrap{background:#e8f5f1;border-radius:10px;height:10px;margin:6px 0 3px;overflow:hidden;}
+.health-water-bar{height:100%;background:linear-gradient(90deg,#1D9E75,#5AC8A5);border-radius:10px;transition:width 0.4s;}
+/* meal tags */
+.health-meal-tag{display:inline-block;padding:2px 7px;font-size:10px;font-weight:600;border-radius:5px;margin-right:4px;}
+.health-meal-breakfast{background:#FFF3E0;color:#E65100;}
+.health-meal-lunch{background:#E8F5E9;color:#2E7D32;}
+.health-meal-dinner{background:#EDE7F6;color:#4527A0;}
+.health-meal-snack{background:#FFF8E1;color:#F57F17;}
+/* weight chart */
+.health-weight-chart{display:flex;gap:4px;align-items:flex-end;height:56px;margin:8px 0;}
+.health-weight-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.health-weight-bar{width:100%;background:#1D9E75;border-radius:3px 3px 0 0;min-height:2px;transition:height 0.3s;}
+.health-weight-bar-label{font-size:9px;color:#888780;}
+/* GLP-1 badge */
+.health-glp1-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#e8f5f1,#d4edde);border:1px solid #a8dcc5;border-radius:8px;padding:5px 11px;font-size:12px;font-weight:600;color:#0F6E56;}
+/* AI estimating spinner */
+.health-ai-estimating{font-size:10px;color:#7F77DD;font-style:italic;margin-top:4px;display:none;}
+.health-ai-estimating.show{display:block;}
+.health-ai-result{font-size:11px;color:#1D9E75;background:#e8f5f1;border-radius:6px;padding:4px 9px;margin-top:5px;display:none;}
+.health-ai-result.show{display:block;}
+/* quick water btns */
+.health-quick-btns{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
+.health-quick-btn{padding:4px 10px;font-size:12px;border:1px solid #c5e8dc;border-radius:6px;background:#f0faf6;color:#0F6E56;cursor:pointer;font-family:inherit;transition:all 0.1s;}
+.health-quick-btn:hover{background:#1D9E75;color:#fff;border-color:#1D9E75;}
+@media(max-width:768px){
+  .health-stat-row{grid-template-columns:repeat(2,1fr);}
+  .health-input-row{gap:6px;}
+}
+/* ── HEALTH VIEW ── */
 .health-view{padding:0 0 40px;}
 .health-header{padding:14px 18px 10px;border-bottom:0.5px solid #e8e8e4;}
 .health-title{font-size:17px;font-weight:500;color:#2c2c2a;}
@@ -876,7 +944,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .health-tab{padding:10px 14px;font-size:12px;font-weight:500;color:#888780;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.15s;}
 .health-tab.active{color:#1D9E75;border-bottom-color:#1D9E75;}
 .health-tab:hover{color:#2c2c2a;}
-/* tracker cards — same pattern as habit cards */
 .health-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px 18px;}
 .health-card{border-radius:12px;border:1.5px solid #e8e8e4;background:#fff;padding:14px 12px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;transition:all 0.15s;position:relative;user-select:none;min-height:130px;justify-content:center;}
 .health-card:hover{border-color:#b4b2a9;background:#fafaf8;}
@@ -889,10 +956,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .health-card-badge{position:absolute;top:7px;right:7px;width:16px;height:16px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;}
 .health-card-badge::after{content:'';width:8px;height:4px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block;}
 .health-card-tap{font-size:9px;color:#b4b2a9;position:absolute;bottom:7px;right:10px;}
-/* water mini bar inside card */
 .health-card-bar-wrap{width:80%;height:5px;background:#e8f5f1;border-radius:4px;overflow:hidden;margin-top:2px;}
 .health-card-bar{height:100%;background:linear-gradient(90deg,#1D9E75,#5AC8A5);border-radius:4px;transition:width 0.4s;}
-/* GLP-1 strip */
 .health-glp1-strip{margin:10px 18px 0;padding:8px 12px;background:linear-gradient(135deg,#e8f5f1,#d4edde);border:1px solid #a8dcc5;border-radius:10px;display:flex;align-items:center;gap:8px;transition:all 0.3s;}
 .health-glp1-strip.overdue{background:linear-gradient(135deg,#FCEBEB,#fde8e8);border-color:#F0997B;}
 .health-glp1-strip.overdue .health-glp1-day{color:#E24B4A;}
@@ -901,17 +966,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .health-glp1-day{font-size:20px;font-weight:700;color:#0F6E56;line-height:1;}
 .health-glp1-label{font-size:11px;color:#0F6E56;font-weight:500;}
 .health-glp1-sub{font-size:10px;color:#3B8C6E;margin-top:1px;}
-/* shot mini-card in habit stack */
-.habit-shot-card{border-radius:10px;border:1.5px solid #f0c4c4;background:#fff8f8;padding:10px 10px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all 0.15s;position:relative;user-select:none;}
+.health-shot-bar{display:flex;align-items:center;gap:10px;padding:7px 18px;border-bottom:0.5px solid #f0f0ee;}
+.health-shot-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.health-shot-dot.due{background:#E24B4A;animation:pulse 1.5s ease-in-out infinite;}
+.health-shot-dot.done{background:#1D9E75;}
+.health-shot-dot.ok{background:#b4b2a9;}
+.health-shot-text{font-size:11px;color:#888780;flex:1;}
+.health-shot-text strong{color:#2c2c2a;}
+.health-shot-btn{font-size:10px;padding:3px 9px;border-radius:5px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;white-space:nowrap;}
+.health-shot-btn:hover{border-color:#1D9E75;color:#1D9E75;background:#f0faf6;}
+.health-shot-btn.done{border-color:#1D9E75;color:#1D9E75;background:#f0faf6;}
+.habit-shot-card{border-radius:10px;border:1.5px solid #f0c4c4;background:#fff8f8;padding:10px 10px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all 0.15s;}
 .habit-shot-card:hover{border-color:#E24B4A;background:#fff3f0;}
-.habit-shot-card.done{border-color:#1D9E75;background:#f0faf6;}
-/* quick-log overlay — same style as habit-log-overlay */
 .health-log-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.35);z-index:30;align-items:center;justify-content:center;border-radius:12px;}
 .health-log-overlay.show{display:flex;}
 .health-log-box{background:#fff;border-radius:12px;border:0.5px solid #d1d1cf;padding:20px;width:360px;max-width:calc(100% - 32px);display:flex;flex-direction:column;gap:11px;box-shadow:0 4px 24px rgba(0,0,0,0.12);}
 .health-log-icon{font-size:36px;text-align:center;}
 .health-log-title{font-size:15px;font-weight:500;color:#2c2c2a;text-align:center;}
-.health-log-input{width:100%;padding:8px 10px;font-size:14px;border:0.5px solid #b4b2a9;border-radius:8px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;}
+.health-log-input{width:100%;padding:7px 10px;font-size:14px;border:0.5px solid #b4b2a9;border-radius:8px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;}
 .health-log-input:focus{outline:none;border-color:#1D9E75;background:#fff;}
 .health-log-row{display:flex;gap:8px;}
 .health-log-actions{display:flex;gap:8px;margin-top:2px;}
@@ -919,11 +991,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .health-log-save{flex:2;padding:9px;font-size:13px;border-radius:8px;border:none;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;font-weight:500;}
 .health-log-save:hover{background:#0F6E56;}
 .health-quick-btns{display:flex;gap:5px;flex-wrap:wrap;}
-.health-quick-btn{padding:5px 10px;font-size:12px;border:1px solid #c5e8dc;border-radius:6px;background:#f0faf6;color:#0F6E56;cursor:pointer;font-family:inherit;transition:all 0.1s;}
-.health-quick-btn:hover{background:#1D9E75;color:#fff;border-color:#1D9E75;}
+.health-quick-btn{padding:5px 10px;font-size:12px;border:1px solid #c5e8dc;border-radius:6px;background:#f0faf6;color:#0F6E56;cursor:pointer;font-family:inherit;}
+.health-quick-btn:hover{background:#1D9E75;color:#fff;}
 .health-ai-pill{font-size:10px;color:#7F77DD;background:#f0eeff;padding:3px 9px;border-radius:6px;text-align:center;display:none;}
 .health-ai-pill.show{display:block;}
-/* history & settings */
 .health-panel{padding:14px 18px;}
 .health-section-label{font-size:10px;font-weight:600;color:#5f5e5a;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 7px;display:flex;align-items:center;gap:8px;}
 .health-section-label::after{content:'';flex:1;height:0.5px;background:#e8e8e4;margin-left:4px;}
@@ -944,19 +1015,45 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .health-weight-bar{width:100%;background:#1D9E75;border-radius:3px 3px 0 0;min-height:2px;}
 .health-weight-bar-label{font-size:9px;color:#888780;}
 .health-empty{text-align:center;padding:16px;color:#b4b2a9;font-size:12px;}
-.health-shot-bar{display:flex;align-items:center;gap:10px;padding:7px 18px;border-bottom:0.5px solid #f0f0ee;}
-.health-shot-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.health-shot-dot.due{background:#E24B4A;animation:pulse 1.5s ease-in-out infinite;}
-.health-shot-dot.done{background:#1D9E75;}
-.health-shot-dot.ok{background:#b4b2a9;}
-.health-shot-text{font-size:11px;color:#888780;flex:1;}
-.health-shot-text strong{color:#2c2c2a;}
-.health-shot-btn{font-size:10px;padding:3px 9px;border-radius:5px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;white-space:nowrap;}
-.health-shot-btn:hover{border-color:#1D9E75;color:#1D9E75;background:#f0faf6;}
-.health-shot-btn.done{border-color:#1D9E75;color:#1D9E75;background:#f0faf6;}
+.health-log-input-label{font-size:10px;color:#888780;font-weight:500;letter-spacing:0.04em;margin-bottom:3px;}
+@media(max-width:768px){
   .health-grid{grid-template-columns:repeat(2,1fr);gap:8px;padding:10px 12px;}
   .health-card{min-height:110px;}
 }
+/* ── CAREER AUDIT ── */
+.audit-wrap{padding:0 0 40px;}
+.audit-setup{padding:16px 18px;}
+.audit-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.audit-run-btn{padding:9px 20px;font-size:13px;font-weight:500;border:none;border-radius:9px;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;}
+.audit-run-btn:hover{background:#0F6E56;}
+.audit-progress{margin:12px 0;background:#f5f5f3;border-radius:8px;padding:12px 14px;}
+.audit-progress-bar-wrap{height:6px;background:#e8e8e4;border-radius:4px;margin:8px 0 4px;overflow:hidden;}
+.audit-progress-bar{height:100%;background:linear-gradient(90deg,#1D9E75,#5AC8A5);border-radius:4px;transition:width 0.3s;}
+.audit-progress-label{font-size:12px;color:#5f5e5a;font-weight:500;}
+.audit-progress-sub{font-size:11px;color:#888780;}
+.audit-card{border:0.5px solid #d1d1cf;border-radius:10px;background:#fff;margin:0 14px 10px;overflow:hidden;}
+.audit-card-header{padding:10px 14px 8px;display:flex;align-items:center;gap:10px;border-bottom:0.5px solid #f0f0ee;}
+.audit-card-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;}
+.audit-card-name{font-size:14px;font-weight:500;color:#2c2c2a;flex:1;}
+.audit-card-conf{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:600;}
+.audit-card-conf.high{background:#E1F5EE;color:#0F6E56;}
+.audit-card-conf.med{background:#FAEEDA;color:#854F0B;}
+.audit-card-conf.low{background:#F1EFE8;color:#5F5E5A;}
+.audit-card-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.audit-col{padding:10px 14px;}
+.audit-col.current{border-right:0.5px solid #f0f0ee;}
+.audit-col-label{font-size:9px;font-weight:600;color:#888780;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;}
+.audit-field{margin-bottom:5px;}
+.audit-field-key{font-size:10px;color:#888780;}
+.audit-field-val{font-size:12px;font-weight:500;color:#2c2c2a;margin-top:1px;}
+.audit-field-val.changed{color:#1D9E75;}
+.audit-flag{font-size:10px;background:#FFF3E0;color:#E65100;padding:3px 8px;border-radius:5px;margin-top:6px;display:inline-flex;align-items:center;gap:4px;}
+.audit-card-actions{padding:8px 14px;border-top:0.5px solid #f0f0ee;display:flex;gap:7px;align-items:center;}
+.audit-update-btn{padding:6px 14px;font-size:12px;font-weight:500;border:none;border-radius:7px;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;}
+.audit-update-btn:hover{background:#0F6E56;}
+.audit-skip-btn{padding:6px 12px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:7px;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;}
+.audit-li-btn{padding:6px 10px;font-size:11px;border:0.5px solid #0077B5;border-radius:7px;background:#fff;color:#0077B5;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:4px;}
+.audit-summary{font-size:11px;color:#888780;padding:8px 18px;}
 </style>
 </head>
 <body>
@@ -1161,6 +1258,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-divider"></div>
         <div class="sidebar-header">Career</div>
         <div class="nav-item work-nav" onclick="setWorkView('wos-applications')" id="nav-wos-applications"><div class="nav-dot" style="background:#7F77DD"></div>Applications</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-career-audit')" id="nav-wos-career-audit"><div class="nav-dot" style="background:#1D9E75"></div>Career Audit</div>
       </div>
       <div class="os-switcher-wrap">
       <div class="os-switcher to-life" onclick="switchToLifeOS()">
@@ -1662,11 +1760,8 @@ let autoTasks  = JSON.parse(localStorage.getItem('los_autotasks')||'null') || JS
 let insights   = JSON.parse(localStorage.getItem('los_insights')||'null') || DEFAULT_INSIGHTS;
 let health     = JSON.parse(localStorage.getItem('los_health') ||'null') || {weightLogs:[],waterLogs:[],foodLogs:[],exerciseLogs:[],shotLogs:[{id:'shot_seed_1',date:'2026-05-25',dose:'Zepbound 2.5mg',note:'First dose',loggedAt:'2026-05-25T21:00:00.000Z'}],settings:{weightUnit:'lbs',waterTargetOz:64,glp1StartDate:'2026-05-25'}};
 if(!health.shotLogs) health.shotLogs = [];
-// Seed first shot if no shots exist and startDate is May 25
-if(health.shotLogs.length===0 && health.settings?.glp1StartDate==='2026-05-25'){
-  health.shotLogs.push({id:'shot_seed_1',date:'2026-05-25',dose:'Zepbound 2.5mg',note:'First dose',loggedAt:'2026-05-25T21:00:00.000Z'});
-}
-let healthTab  = 'today'; // active health sub-tab
+let healthTab  = 'today';
+
 let view = 'all', selectedId = null, noteTimer = null, syncTimer = null, dragSrcId = null;
 let editTarget = null, habitLogTarget = null, habitEditTarget = null;
 let nameTimer = null;
@@ -1729,6 +1824,7 @@ async function loadFromSupabase(){
       if(data.insights) insights=data.insights;
       if(data.habit_stack){ habitStack=data.habit_stack; }
       if(data.health){ health=data.health; }
+      if(data.health){ health=data.health; }
       if(data.xp_epoch){ localStorage.setItem(XP_EPOCH_KEY, data.xp_epoch); }
       // Work OS data
       if(data.wos_projects){ workProjects=data.wos_projects; }
@@ -1765,6 +1861,7 @@ async function pushToSupabase(){
         tasks,groups,los,constitution,habits,
         auto_tasks:autoTasks,insights,
         habit_stack:habitStack,
+        health,
         health,
         xp_epoch:localStorage.getItem(XP_EPOCH_KEY)||XP_EPOCH,
         wos_projects:workProjects,
@@ -3168,483 +3265,238 @@ function renderHabitsView(){
 // ── HEALTH VIEW ──
 function renderHealthView(){
   const tabs = [
-    {id:'today',   label:'📋 Today'},
-    {id:'history', label:'📈 History'},
+    {id:'weight', label:'⚖️ Weight'},
+    {id:'water',  label:'💧 Water'},
+    {id:'food',   label:'🍽️ Food'},
+    {id:'exercise',label:'🏃 Exercise'},
     {id:'settings',label:'⚙️ Settings'},
   ];
   const tabHtml = tabs.map(t=>`<div class="health-tab${healthTab===t.id?' active':''}" onclick="healthTab='${t.id}';render()">${t.label}</div>`).join('');
 
+  // GLP-1 days badge
   const glp1Start = health.settings?.glp1StartDate;
   const glp1Days = glp1Start ? Math.max(0, Math.floor((Date.now()-new Date(glp1Start).getTime())/86400000)) : 0;
+  const glp1Badge = `<div class="health-glp1-badge">💊 GLP-1 Day ${glp1Days+1} — Started ${glp1Start||'today'}</div>`;
 
   let panelHtml = '';
-  if(healthTab==='today')        panelHtml = renderHealthToday();
-  else if(healthTab==='history') panelHtml = renderHealthHistory();
-  else if(healthTab==='settings')panelHtml = renderHealthSettings();
+  if(healthTab==='weight') panelHtml = renderHealthWeight();
+  else if(healthTab==='water') panelHtml = renderHealthWater();
+  else if(healthTab==='food') panelHtml = renderHealthFood();
+  else if(healthTab==='exercise') panelHtml = renderHealthExercise();
+  else if(healthTab==='settings') panelHtml = renderHealthSettings();
 
   return `<div class="health-view">
     <div class="health-header">
       <div class="health-title">Health</div>
-      <div class="health-subtitle">Daily tracker — weight, water, food & exercise</div>
+      <div class="health-subtitle">GLP-1 journey — weight, water, food & exercise tracker</div>
     </div>
-    ${renderGlp1Strip(glp1Days, glp1Start)}
-    ${renderShotBar()}
+    <div style="padding:12px 18px 0;">${glp1Badge}</div>
     <div class="health-tabs">${tabHtml}</div>
-    ${panelHtml}
-    <div class="health-log-overlay" id="health-log-overlay">
-      <div class="health-log-box" id="health-log-box"></div>
-    </div>
+    <div class="health-panel">${panelHtml}</div>
   </div>`;
 }
 
-// ── SHOT TRACKER BAR ──
-// ── SHOT HELPERS ──
-function getShotState(){
-  const today = new Date();
-  const dow   = today.getDay();
-  const todayStr_ = todayStr();
-  const lastMonday = new Date(today);
-  lastMonday.setDate(today.getDate() - ((dow + 6) % 7));
-  const lastMondayStr = lastMonday.toISOString().split('T')[0];
-  const thisWeekShot = (health.shotLogs||[]).find(s => s.date >= lastMondayStr);
-  const isMonday   = dow === 1;
-  const isDue      = isMonday && !thisWeekShot;
-  const isOverdue  = !thisWeekShot && lastMondayStr < todayStr_ && !isMonday;
-  const lastShot   = (health.shotLogs||[]).slice().sort((a,b)=>b.date>a.date?1:-1)[0];
-  return { thisWeekShot, isMonday, isDue, isOverdue, lastShot, lastMondayStr };
-}
-
-function renderGlp1Strip(glp1Days, glp1Start){
-  const { isOverdue, isDue, thisWeekShot } = getShotState();
-  const overdueClass = (isOverdue || isDue) && !thisWeekShot ? ' overdue' : '';
-  const statusSub = thisWeekShot ? `Shot logged ${fmtHealthDate(thisWeekShot.date)}` :
-                    isDue        ? '💉 Shot due tonight!' :
-                    isOverdue    ? '⚠️ Shot overdue' :
-                    `Started ${glp1Start||'today'}`;
-  return `<div class="health-glp1-strip${overdueClass}">
-    <div class="health-glp1-day">Day ${glp1Days+1}</div>
-    <div><div class="health-glp1-label">💊 GLP-1 Journey</div><div class="health-glp1-sub">${statusSub}</div></div>
-  </div>`;
-}
-
-function renderShotBar(){
-  const { thisWeekShot, isDue, isOverdue, lastShot } = getShotState();
-  const lastShotText = lastShot ? `Last: ${fmtHealthDate(lastShot.date)}${lastShot.dose?' · '+lastShot.dose:''}` : 'No shots logged yet';
-
-  let dotClass = 'ok';
-  let message  = '';
-
-  if(thisWeekShot){
-    dotClass = 'done';
-    message  = `<strong>Shot logged</strong> — ${fmtHealthDate(thisWeekShot.date)}${thisWeekShot.dose?' · '+thisWeekShot.dose:''}`;
-  } else if(isDue){
-    dotClass = 'due';
-    message  = `<strong>Shot due tonight</strong> (Monday) · ${lastShotText}`;
-  } else if(isOverdue){
-    dotClass = 'due';
-    message  = `<strong>Shot overdue</strong> — due last Monday · ${lastShotText}`;
-  } else {
-    message  = `Next shot Monday evening · ${lastShotText}`;
-  }
-
-  return `<div class="health-shot-bar">
-    <div class="health-shot-dot ${dotClass}"></div>
-    <div class="health-shot-text">${message}</div>
-    ${!thisWeekShot
-      ? `<button class="health-shot-btn" onclick="openShotLog()">Log shot</button>`
-      : `<button class="health-shot-btn done" onclick="undoGLP1Shot('${thisWeekShot.id}')">Undo</button>`}
-  </div>`;
-}
-
-function openShotLog(){
-  const overlay = document.getElementById('health-log-overlay');
-  const box     = document.getElementById('health-log-box');
-  if(!overlay||!box) return;
-  // If overlay not in DOM yet (habits view), use a small inline confirm
-  if(!overlay.isConnected){
-    const dose = prompt('Dose (leave blank for default: Zepbound 2.5mg):', '') || 'Zepbound 2.5mg';
-    logGLP1Shot(dose); return;
-  }
-  box.innerHTML = `
-    <div class="health-log-icon">💉</div>
-    <div class="health-log-title">Log GLP-1 Shot</div>
-    <div>
-      <div class="health-log-input-label">Dose</div>
-      <input class="health-log-input" id="hl-shot-dose" type="text" value="Zepbound 2.5mg" autofocus>
-    </div>
-    <div>
-      <div class="health-log-input-label">Notes (optional)</div>
-      <input class="health-log-input" id="hl-shot-note" type="text" placeholder="injection site, reaction...">
-    </div>
-    <div class="health-log-actions">
-      <button class="health-log-cancel" onclick="closeHealthLog()">Cancel</button>
-      <button class="health-log-save" onclick="saveHealthLog('shot')">Log it</button>
-    </div>`;
-  overlay.classList.add('show');
-}
-
-function logGLP1Shot(dose){
-  health.shotLogs = health.shotLogs || [];
-  const d = dose || 'Zepbound 2.5mg';
-  health.shotLogs.push({id:healthUID(), date:todayStr(), dose:d, loggedAt:new Date().toISOString()});
-  persist(); render();
-  showXPFlash('💉 Shot logged — '+d);
-}
-
-function undoGLP1Shot(id){
-  health.shotLogs = (health.shotLogs||[]).filter(s=>s.id!==id);
-  persist(); render();
-}
-
-function renderShotCardForStack(){
-  const dow = new Date().getDay();
-  if(dow !== 1) return ''; // only show on Mondays
-  const { thisWeekShot } = getShotState();
-  if(thisWeekShot) return ''; // disappear after logged
-  return `<div style="margin-top:10px;border-top:0.5px solid #e0ddf8;padding-top:10px;">
-    <div class="habit-shot-card" onclick="openShotLog()" title="Log your weekly GLP-1 shot">
-      <div style="font-size:22px;line-height:1;">💉</div>
-      <div style="font-size:11px;font-weight:600;color:#E24B4A;text-align:center;">Weekly Shot</div>
-      <div style="font-size:9px;color:#888780;text-align:center;">Due tonight</div>
-    </div>
-  </div>`;
-}
-
-// ── TODAY — card grid ──
-function renderHealthToday(){
-  const today = todayStr();
+function renderHealthWeight(){
+  const logs = (health.weightLogs||[]).slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
   const unit = health.settings?.weightUnit||'lbs';
-  const target = health.settings?.waterTargetOz||64;
+  const latest = logs[0]?.weight;
+  const first = logs[logs.length-1]?.weight;
+  const change = (latest && first && logs.length>1) ? (latest-first).toFixed(1) : null;
+  const changeHtml = change!==null
+    ? `<div class="health-stat"><div class="health-stat-num" style="color:${parseFloat(change)<0?'#1D9E75':'#E24B4A'}">${parseFloat(change)<0?'':'+'}${change}</div><div class="health-stat-label">Total change (${unit})</div></div>`
+    : '';
 
-  // Water
-  const todayWater = (health.waterLogs||[]).filter(l=>l.date===today);
-  const waterTotal = todayWater.reduce((s,l)=>s+(l.oz||0),0);
-  const waterPct   = Math.min(100,Math.round((waterTotal/target)*100));
-  const waterMet   = waterTotal>=target;
-
-  // Weight
-  const wLogs = (health.weightLogs||[]).slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
-  const latestW = wLogs[0];
-  const prevW   = wLogs[1];
-  const wChange = (latestW&&prevW) ? (latestW.weight-prevW.weight).toFixed(1) : null;
-
-  // Food
-  const todayFood = (health.foodLogs||[]).filter(l=>l.date===today);
-  const totalCal  = todayFood.reduce((s,l)=>s+(l.calories||0),0);
-  const totalProt = todayFood.reduce((s,l)=>s+(l.protein||0),0);
-  const foodLogged= todayFood.length>0;
-
-  // Exercise
-  const todayEx  = (health.exerciseLogs||[]).filter(l=>l.date===today);
-  const totalMins= todayEx.reduce((s,l)=>s+(l.duration||0),0);
-  const exLogged = todayEx.length>0;
-
-  // ── 4 cards ──
-  const weightCard = `<div class="health-card${latestW?' logged':''}" onclick="openHealthLog('weight')">
-    ${latestW?'<div class="health-card-badge"></div>':''}
-    <div class="health-card-emoji">⚖️</div>
-    <div class="health-card-name">Weight</div>
-    <div class="health-card-value">${latestW?latestW.weight+' '+unit:'—'}</div>
-    <div class="health-card-sub">${wChange!==null?(parseFloat(wChange)<0?'▼ ':'▲ ')+Math.abs(wChange)+' '+unit+' from last':'Tap to log'}</div>
-    <div class="health-card-tap">tap to log</div>
-  </div>`;
-
-  const waterCard = `<div class="health-card${waterMet?' goal-met':waterTotal>0?' logged':''}" onclick="openHealthLog('water')">
-    ${waterMet?'<div class="health-card-badge"></div>':''}
-    <div class="health-card-emoji">💧</div>
-    <div class="health-card-name">Water</div>
-    <div class="health-card-value">${waterTotal} <span style="font-size:11px;font-weight:400;color:#888780;">/ ${target} oz</span></div>
-    <div class="health-card-bar-wrap"><div class="health-card-bar" style="width:${waterPct}%"></div></div>
-    <div class="health-card-sub">${waterPct}% of goal${waterMet?' ✓':''}</div>
-    <div class="health-card-tap">tap to add</div>
-  </div>`;
-
-  const foodCard = `<div class="health-card${foodLogged?' logged':''}" onclick="openHealthLog('food')">
-    ${foodLogged?'<div class="health-card-badge"></div>':''}
-    <div class="health-card-emoji">🍽️</div>
-    <div class="health-card-name">Food</div>
-    <div class="health-card-value">${totalCal>0?totalCal+' cal':'—'}</div>
-    <div class="health-card-sub">${todayFood.length>0?todayFood.length+' meal'+(todayFood.length>1?'s':'')+(totalProt>0?' · '+totalProt+'g protein':''):'Tap to log'}</div>
-    <div class="health-card-tap">tap to log</div>
-  </div>`;
-
-  const exCard = `<div class="health-card${exLogged?' logged':''}" onclick="openHealthLog('exercise')">
-    ${exLogged?'<div class="health-card-badge"></div>':''}
-    <div class="health-card-emoji">🏃</div>
-    <div class="health-card-name">Exercise</div>
-    <div class="health-card-value">${totalMins>0?totalMins+' min':'—'}</div>
-    <div class="health-card-sub">${todayEx.length>0?todayEx.map(l=>l.type).join(', '):'Tap to log'}</div>
-    <div class="health-card-tap">tap to log</div>
-  </div>`;
-
-  return `<div class="health-grid">${weightCard}${waterCard}${foodCard}${exCard}</div>`;
-}
-
-// ── QUICK-LOG OVERLAY (like habit log overlay) ──
-function openHealthLog(type){
-  const overlay = document.getElementById('health-log-overlay');
-  const box     = document.getElementById('health-log-box');
-  if(!overlay||!box) return;
-
-  const unit   = health.settings?.weightUnit||'lbs';
-  const target = health.settings?.waterTargetOz||64;
-
-  if(type==='weight'){
-    const wLogs = (health.weightLogs||[]).slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
-    const latest = wLogs[0];
-    box.innerHTML = `
-      <div class="health-log-icon">⚖️</div>
-      <div class="health-log-title">Log Weight</div>
-      ${latest?`<div style="text-align:center;font-size:12px;color:#888780;">Last: ${latest.weight} ${unit} on ${fmtHealthDate(latest.date)}</div>`:''}
-      <div>
-        <div class="health-log-input-label">Weight (${unit})</div>
-        <input class="health-log-input" id="hl-weight-val" type="number" step="0.1" placeholder="e.g. 185.5" autofocus>
-      </div>
-      <div>
-        <div class="health-log-input-label">Note (optional)</div>
-        <input class="health-log-input" id="hl-weight-note" type="text" placeholder="morning, fasted...">
-      </div>
-      <div class="health-log-actions">
-        <button class="health-log-cancel" onclick="closeHealthLog()">Cancel</button>
-        <button class="health-log-save" onclick="saveHealthLog('weight')">Log it</button>
-      </div>`;
-  } else if(type==='water'){
-    const todayTotal = (health.waterLogs||[]).filter(l=>l.date===todayStr()).reduce((s,l)=>s+(l.oz||0),0);
-    const pct = Math.min(100,Math.round((todayTotal/target)*100));
-    box.innerHTML = `
-      <div class="health-log-icon">💧</div>
-      <div class="health-log-title">Log Water</div>
-      <div style="text-align:center;font-size:12px;color:#888780;">${todayTotal} / ${target} oz today (${pct}%)</div>
-      <div class="health-quick-btns" style="justify-content:center;">
-        ${[8,12,16,20,32].map(oz=>`<button class="health-quick-btn" onclick="quickLogWater(${oz})">${oz} oz</button>`).join('')}
-      </div>
-      <div>
-        <div class="health-log-input-label">Custom amount (oz)</div>
-        <input class="health-log-input" id="hl-water-oz" type="number" placeholder="custom oz">
-      </div>
-      <div class="health-log-actions">
-        <button class="health-log-cancel" onclick="closeHealthLog()">Done</button>
-        <button class="health-log-save" onclick="saveHealthLog('water')">Add</button>
-      </div>`;
-  } else if(type==='food'){
-    box.innerHTML = `
-      <div class="health-log-icon">🍽️</div>
-      <div class="health-log-title">Log Food</div>
-      <div>
-        <div class="health-log-input-label">What did you eat?</div>
-        <input class="health-log-input" id="hl-food-item" type="text" placeholder="e.g. Grilled salmon, salad..." autofocus onblur="healthEstimateCalories()">
-      </div>
-      <div id="hl-ai-pill" class="health-ai-pill">✦ estimating calories...</div>
-      <div class="health-log-row">
-        <div style="flex:1;">
-          <div class="health-log-input-label">Meal</div>
-          <select class="health-log-input" id="hl-food-meal" style="cursor:pointer;">
-            <option value="breakfast">🌅 Breakfast</option>
-            <option value="lunch" selected>☀️ Lunch</option>
-            <option value="dinner">🌙 Dinner</option>
-            <option value="snack">🍪 Snack</option>
-          </select>
-        </div>
-        <div style="flex:1;">
-          <div class="health-log-input-label">Calories</div>
-          <input class="health-log-input" id="hl-food-cal" type="number" placeholder="auto">
-        </div>
-        <div style="flex:1;">
-          <div class="health-log-input-label">Protein (g)</div>
-          <input class="health-log-input" id="hl-food-protein" type="number" placeholder="auto">
-        </div>
-      </div>
-      <div class="health-log-actions">
-        <button class="health-log-cancel" onclick="closeHealthLog()">Cancel</button>
-        <button class="health-log-save" onclick="saveHealthLog('food')">Log it</button>
-      </div>`;
-  } else if(type==='exercise'){
-    const types=['Walk','Run','Gym','Bike','Swim','Yoga','Other'];
-    box.innerHTML = `
-      <div class="health-log-icon">🏃</div>
-      <div class="health-log-title">Log Exercise</div>
-      <div>
-        <div class="health-log-input-label">Activity</div>
-        <input class="health-log-input" id="hl-ex-type" type="text" placeholder="Walk, Run, Gym..." list="hl-ex-list" autofocus>
-        <datalist id="hl-ex-list">${types.map(t=>`<option value="${t}">`).join('')}</datalist>
-      </div>
-      <div class="health-log-row">
-        <div style="flex:1;">
-          <div class="health-log-input-label">Duration (min)</div>
-          <input class="health-log-input" id="hl-ex-dur" type="number" placeholder="30">
-        </div>
-        <div style="flex:2;">
-          <div class="health-log-input-label">Notes</div>
-          <input class="health-log-input" id="hl-ex-note" type="text" placeholder="How did it feel?">
-        </div>
-      </div>
-      <div class="health-log-actions">
-        <button class="health-log-cancel" onclick="closeHealthLog()">Cancel</button>
-        <button class="health-log-save" onclick="saveHealthLog('exercise')">Log it</button>
-      </div>`;
-  }
-  overlay.classList.add('show');
-}
-
-function closeHealthLog(){
-  const overlay=document.getElementById('health-log-overlay');
-  if(overlay) overlay.classList.remove('show');
-}
-
-async function healthEstimateCalories(){
-  const item = document.getElementById('hl-food-item')?.value?.trim();
-  if(!item||item.length<3) return;
-  const pill=document.getElementById('hl-ai-pill');
-  const calEl=document.getElementById('hl-food-cal');
-  const protEl=document.getElementById('hl-food-protein');
-  if(calEl?.value||protEl?.value) return; // don't overwrite manual entry
-  if(pill) pill.classList.add('show');
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:120,
-        system:'Nutrition estimator. Return ONLY JSON: {"calories":450,"protein":38}. No markdown.',
-        messages:[{role:'user',content:`Estimate calories and protein for: "${item}"`}]
-      })
-    });
-    const data=await res.json();
-    const parsed=JSON.parse((data.content?.[0]?.text||'{}').replace(/```json|```/g,'').trim());
-    if(parsed.calories&&calEl&&!calEl.value) calEl.value=parsed.calories;
-    if(parsed.protein&&protEl&&!protEl.value)  protEl.value=parsed.protein;
-    if(pill) pill.textContent=`✦ ~${parsed.calories||'?'} cal · ~${parsed.protein||'?'}g protein`;
-  }catch(e){ if(pill) pill.classList.remove('show'); }
-}
-
-function saveHealthLog(type){
-  if(type==='shot'){
-    const dose=(document.getElementById('hl-shot-dose')?.value?.trim())||'Zepbound 2.5mg';
-    const note=(document.getElementById('hl-shot-note')?.value?.trim())||'';
-    health.shotLogs=health.shotLogs||[];
-    health.shotLogs.push({id:healthUID(),date:todayStr(),dose,note,loggedAt:new Date().toISOString()});
-    closeHealthLog(); persist(); render();
-    showXPFlash('💉 Shot logged — '+dose);
-    return;
-  }
-  if(type==='weight'){
-    const val=parseFloat(document.getElementById('hl-weight-val')?.value);
-    if(!val||isNaN(val)){alert('Please enter a weight.');return;}
-    const note=document.getElementById('hl-weight-note')?.value?.trim()||'';
-    health.weightLogs.push({id:healthUID(),weight:val,date:todayStr(),note,loggedAt:new Date().toISOString()});
-  } else if(type==='water'){
-    const oz=parseInt(document.getElementById('hl-water-oz')?.value);
-    if(!oz||isNaN(oz)){closeHealthLog();return;}
-    health.waterLogs.push({id:healthUID(),oz,date:todayStr(),note:'',loggedAt:new Date().toISOString()});
-  } else if(type==='food'){
-    const item=document.getElementById('hl-food-item')?.value?.trim();
-    if(!item){alert('Please describe what you ate.');return;}
-    const meal=document.getElementById('hl-food-meal')?.value||'lunch';
-    const calories=parseInt(document.getElementById('hl-food-cal')?.value)||null;
-    const protein=parseInt(document.getElementById('hl-food-protein')?.value)||null;
-    health.foodLogs.push({id:healthUID(),item,meal,calories,protein,date:todayStr(),loggedAt:new Date().toISOString()});
-  } else if(type==='exercise'){
-    const exType=document.getElementById('hl-ex-type')?.value?.trim();
-    if(!exType){alert('Please enter an activity.');return;}
-    const duration=parseInt(document.getElementById('hl-ex-dur')?.value)||null;
-    const note=document.getElementById('hl-ex-note')?.value?.trim()||'';
-    health.exerciseLogs.push({id:healthUID(),type:exType,duration,note,date:todayStr(),loggedAt:new Date().toISOString()});
-  }
-  closeHealthLog();
-  persist(); render();
-}
-
-// ── HISTORY TAB ──
-function renderHealthHistory(){
-  const unit  = health.settings?.weightUnit||'lbs';
-  const wLogs = (health.weightLogs||[]).slice().sort((a,b)=>new Date(b.date)-new Date(a.date));
-  const aFood = (health.foodLogs||[]).slice().sort((a,b)=>b.loggedAt>a.loggedAt?1:-1);
-  const aEx   = (health.exerciseLogs||[]).slice().sort((a,b)=>b.loggedAt>a.loggedAt?1:-1);
-  const mealEmoji={breakfast:'🌅',lunch:'☀️',dinner:'🌙',snack:'🍪'};
-
-  const chart7=wLogs.slice(0,7).reverse();
-  let chartHtml='';
+  // Mini chart — last 7 entries
+  const chart7 = logs.slice(0,7).reverse();
+  let chartHtml = '';
   if(chart7.length>1){
     const min=Math.min(...chart7.map(l=>l.weight));
     const max=Math.max(...chart7.map(l=>l.weight));
     const range=max-min||1;
-    chartHtml=`<div class="health-weight-chart">${chart7.map(l=>{
-      const h=Math.max(4,Math.round(((l.weight-min)/range)*44));
+    chartHtml = `<div class="health-section-label">Last ${chart7.length} entries</div>
+    <div class="health-weight-chart">${chart7.map(l=>{
+      const h=Math.max(6,Math.round(((l.weight-min)/range)*50));
       return `<div class="health-weight-bar-wrap"><div class="health-weight-bar" style="height:${h}px;"></div><div class="health-weight-bar-label">${l.weight}</div></div>`;
     }).join('')}</div>`;
   }
-  const latest=wLogs[0]?.weight;
-  const first=wLogs[wLogs.length-1]?.weight;
-  const totalChange=(latest&&first&&wLogs.length>1)?(latest-first).toFixed(1):null;
 
-  return `<div class="health-panel">
-    <div class="health-section-label">⚖️ Weight</div>
-    ${totalChange!==null?`<div style="display:flex;gap:12px;margin-bottom:8px;align-items:baseline;">
-      <span style="font-size:22px;font-weight:700;color:#1D9E75;">${latest} ${unit}</span>
-      <span style="font-size:12px;color:${parseFloat(totalChange)<0?'#1D9E75':'#E24B4A'};font-weight:500;">${parseFloat(totalChange)<0?'▼':'▲'} ${Math.abs(totalChange)} total</span>
-    </div>`:''}
+  const entriesHtml = logs.length ? logs.map(l=>`
+    <div class="health-entry">
+      <div class="health-entry-icon">⚖️</div>
+      <div class="health-entry-body">
+        <div class="health-entry-main">${l.weight} ${unit}</div>
+        <div class="health-entry-sub">${fmtHealthDate(l.date)}${l.note?` · ${l.note}`:''}</div>
+      </div>
+      <div class="health-entry-del" onclick="deleteHealthLog('weight','${l.id}')">✕</div>
+    </div>`).join('') : `<div class="health-empty">No weight entries yet — log your starting weight!</div>`;
+
+  return `
+    <div class="health-log-form">
+      <div class="health-log-title">Log Weight</div>
+      <div class="health-input-row">
+        <div class="health-input-group"><div class="health-input-label">Weight (${unit})</div><input class="health-input" id="h-weight-val" type="number" step="0.1" placeholder="e.g. 185.5"></div>
+        <div class="health-input-group"><div class="health-input-label">Date</div><input class="health-input" id="h-weight-date" type="date" value="${todayStr()}"></div>
+        <div class="health-input-group" style="flex:2"><div class="health-input-label">Note (optional)</div><input class="health-input" id="h-weight-note" type="text" placeholder="morning, fasted..."></div>
+        <button class="health-log-btn" onclick="logHealth('weight')">Log</button>
+      </div>
+    </div>
+    <div class="health-stat-row">
+      ${latest?`<div class="health-stat"><div class="health-stat-num">${latest}</div><div class="health-stat-label">Current (${unit})</div></div>`:''}
+      ${changeHtml}
+      <div class="health-stat"><div class="health-stat-num">${logs.length}</div><div class="health-stat-label">Entries</div></div>
+    </div>
     ${chartHtml}
-    ${wLogs.length?wLogs.slice(0,15).map(l=>`
-      <div class="health-entry">
-        <div class="health-entry-icon">⚖️</div>
-        <div class="health-entry-body"><div class="health-entry-main">${l.weight} ${unit}</div><div class="health-entry-sub">${fmtHealthDate(l.date)}${l.note?' · '+l.note:''}</div></div>
-        <div class="health-entry-del" onclick="deleteHealthLog('weight','${l.id}')">✕</div>
-      </div>`).join('') : `<div class="health-empty">No weight logged yet</div>`}
+    <div class="health-section-label">History</div>
+    <div class="health-entries">${entriesHtml}</div>`;
+}
 
-    <div class="health-section-label">🍽️ Food</div>
-    ${aFood.length?aFood.slice(0,25).map(l=>`
+function renderHealthWater(){
+  const todayDate = todayStr();
+  const todayLogs = (health.waterLogs||[]).filter(l=>l.date===todayDate);
+  const todayTotal = todayLogs.reduce((s,l)=>s+(l.oz||0),0);
+  const target = health.settings?.waterTargetOz||64;
+  const pct = Math.min(100, Math.round((todayTotal/target)*100));
+  const allLogs = (health.waterLogs||[]).slice().sort((a,b)=>b.loggedAt>a.loggedAt?1:-1);
+
+  return `
+    <div class="health-log-form">
+      <div class="health-log-title">Log Water</div>
+      <div class="health-input-row">
+        <div class="health-input-group"><div class="health-input-label">Amount (oz)</div><input class="health-input" id="h-water-oz" type="number" step="1" placeholder="8"></div>
+        <div class="health-input-group"><div class="health-input-label">Date</div><input class="health-input" id="h-water-date" type="date" value="${todayDate}"></div>
+        <div class="health-input-group"><div class="health-input-label">Note</div><input class="health-input" id="h-water-note" type="text" placeholder="with meal, morning..."></div>
+        <button class="health-log-btn" onclick="logHealth('water')">Log</button>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;">
+        ${[8,12,16,20,32].map(oz=>`<button onclick="quickLogWater(${oz})" style="padding:5px 10px;font-size:12px;border:1px solid #d1d1cf;border-radius:6px;background:#fff;cursor:pointer;font-family:inherit;">+${oz}oz</button>`).join('')}
+      </div>
+    </div>
+    <div class="health-stat-row">
+      <div class="health-stat"><div class="health-stat-num" style="color:${pct>=100?'#1D9E75':'#378ADD'}">${todayTotal}</div><div class="health-stat-label">oz today</div></div>
+      <div class="health-stat"><div class="health-stat-num">${target}</div><div class="health-stat-label">daily goal (oz)</div></div>
+      <div class="health-stat"><div class="health-stat-num">${pct}%</div><div class="health-stat-label">of goal</div></div>
+    </div>
+    <div style="margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:#888780;margin-bottom:2px;"><span>Today's intake</span><span>${todayTotal} / ${target} oz${pct>=100?' ✓':''}</span></div>
+      <div class="health-water-bar-wrap"><div class="health-water-bar" style="width:${pct}%"></div></div>
+    </div>
+    <div class="health-section-label">Log</div>
+    <div class="health-entries">${allLogs.length?allLogs.slice(0,30).map(l=>`
+      <div class="health-entry">
+        <div class="health-entry-icon">💧</div>
+        <div class="health-entry-body">
+          <div class="health-entry-main">${l.oz} oz</div>
+          <div class="health-entry-sub">${fmtHealthDate(l.date)}${l.note?` · ${l.note}`:''}</div>
+        </div>
+        <div class="health-entry-del" onclick="deleteHealthLog('water','${l.id}')">✕</div>
+      </div>`).join('') : `<div class="health-empty">No water logs yet — stay hydrated! 💧</div>`}
+    </div>`;
+}
+
+function renderHealthFood(){
+  const logs = (health.foodLogs||[]).slice().sort((a,b)=>b.loggedAt>a.loggedAt?1:-1);
+  const meals = ['breakfast','lunch','dinner','snack'];
+  const mealEmoji = {breakfast:'🌅',lunch:'☀️',dinner:'🌙',snack:'🍪'};
+
+  return `
+    <div class="health-log-form">
+      <div class="health-log-title">Log Food</div>
+      <div class="health-input-row">
+        <div class="health-input-group" style="flex:3"><div class="health-input-label">Food / meal description</div><input class="health-input" id="h-food-item" type="text" placeholder="e.g. Grilled salmon, salad..."></div>
+        <div class="health-input-group"><div class="health-input-label">Meal</div>
+          <select class="health-input" id="h-food-meal" style="cursor:pointer;">
+            ${meals.map(m=>`<option value="${m}">${m.charAt(0).toUpperCase()+m.slice(1)}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="health-input-row" style="margin-top:8px;">
+        <div class="health-input-group"><div class="health-input-label">Calories (optional)</div><input class="health-input" id="h-food-cal" type="number" placeholder="e.g. 450"></div>
+        <div class="health-input-group"><div class="health-input-label">Protein g (optional)</div><input class="health-input" id="h-food-protein" type="number" placeholder="e.g. 35"></div>
+        <div class="health-input-group"><div class="health-input-label">Date</div><input class="health-input" id="h-food-date" type="date" value="${todayStr()}"></div>
+        <button class="health-log-btn" onclick="logHealth('food')">Log</button>
+      </div>
+    </div>
+    <div class="health-section-label">Food Log</div>
+    <div class="health-entries">${logs.length?logs.slice(0,50).map(l=>`
       <div class="health-entry">
         <div class="health-entry-icon">${mealEmoji[l.meal]||'🍽️'}</div>
         <div class="health-entry-body">
           <div class="health-entry-main"><span class="health-meal-tag health-meal-${l.meal}">${l.meal}</span>${l.item}</div>
-          <div class="health-entry-sub">${fmtHealthDate(l.date)}${l.calories?' · '+l.calories+' cal':''}${l.protein?' · '+l.protein+'g protein':''}</div>
+          <div class="health-entry-sub">${fmtHealthDate(l.date)}${l.calories?` · ${l.calories} cal`:''}${l.protein?` · ${l.protein}g protein`:''}</div>
         </div>
         <div class="health-entry-del" onclick="deleteHealthLog('food','${l.id}')">✕</div>
-      </div>`).join('') : `<div class="health-empty">No food logged yet</div>`}
+      </div>`).join('') : `<div class="health-empty">No food logged yet — track what you eat to support your GLP-1 journey.</div>`}
+    </div>`;
+}
 
-    <div class="health-section-label">🏃 Exercise</div>
-    ${aEx.length?aEx.slice(0,25).map(l=>`
+function renderHealthExercise(){
+  const logs = (health.exerciseLogs||[]).slice().sort((a,b)=>b.loggedAt>a.loggedAt?1:-1);
+  const types = ['Walk','Run','Gym','Bike','Swim','Yoga','Other'];
+
+  return `
+    <div class="health-log-form">
+      <div class="health-log-title">Log Exercise</div>
+      <div class="health-input-row">
+        <div class="health-input-group" style="flex:2"><div class="health-input-label">Activity</div>
+          <input class="health-input" id="h-ex-type" type="text" placeholder="e.g. Walk, Run, Gym..." list="h-ex-types-list">
+          <datalist id="h-ex-types-list">${types.map(t=>`<option value="${t}">`).join('')}</datalist>
+        </div>
+        <div class="health-input-group"><div class="health-input-label">Duration (min)</div><input class="health-input" id="h-ex-dur" type="number" placeholder="30"></div>
+        <div class="health-input-group"><div class="health-input-label">Date</div><input class="health-input" id="h-ex-date" type="date" value="${todayStr()}"></div>
+      </div>
+      <div class="health-input-row" style="margin-top:8px;">
+        <div class="health-input-group" style="flex:3"><div class="health-input-label">Notes (optional)</div><input class="health-input" id="h-ex-note" type="text" placeholder="How did it feel? Distance, intensity..."></div>
+        <button class="health-log-btn" onclick="logHealth('exercise')">Log</button>
+      </div>
+    </div>
+    <div class="health-stat-row">
+      <div class="health-stat"><div class="health-stat-num">${logs.filter(l=>l.date===todayStr()).length}</div><div class="health-stat-label">sessions today</div></div>
+      <div class="health-stat"><div class="health-stat-num">${logs.filter(l=>l.date>=weekStartStr()).length}</div><div class="health-stat-label">sessions this week</div></div>
+      <div class="health-stat"><div class="health-stat-num">${logs.length}</div><div class="health-stat-label">total sessions</div></div>
+    </div>
+    <div class="health-section-label">Exercise Log</div>
+    <div class="health-entries">${logs.length?logs.slice(0,50).map(l=>`
       <div class="health-entry">
         <div class="health-entry-icon">🏃</div>
         <div class="health-entry-body">
-          <div class="health-entry-main">${l.type}${l.duration?' · '+l.duration+' min':''}</div>
-          <div class="health-entry-sub">${fmtHealthDate(l.date)}${l.note?' · '+l.note:''}</div>
+          <div class="health-entry-main">${l.type}${l.duration?` · ${l.duration} min`:''}</div>
+          <div class="health-entry-sub">${fmtHealthDate(l.date)}${l.note?` · ${l.note}`:''}</div>
         </div>
         <div class="health-entry-del" onclick="deleteHealthLog('exercise','${l.id}')">✕</div>
-      </div>`).join('') : `<div class="health-empty">No exercise logged yet</div>`}
-  </div>`;
+      </div>`).join('') : `<div class="health-empty">No exercise logged yet — every step counts on your GLP-1 journey! 💪</div>`}
+    </div>`;
 }
 
 function renderHealthSettings(){
-  return `<div class="health-panel">
-    <div style="background:#f7f7f5;border-radius:12px;padding:14px;border:0.5px solid #e8e8e4;">
-      <div style="font-size:10px;font-weight:600;color:#5f5e5a;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px;">Settings</div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:100px;">
-          <div class="health-log-input-label">Weight unit</div>
-          <select class="health-log-input" id="h-set-unit" onchange="saveHealthSettings()" style="cursor:pointer;">
+  return `
+    <div class="health-log-form">
+      <div class="health-log-title">Settings</div>
+      <div class="health-input-row" style="flex-wrap:wrap;gap:12px;">
+        <div class="health-input-group">
+          <div class="health-input-label">Weight unit</div>
+          <select class="health-input" id="h-set-unit" onchange="saveHealthSettings()" style="cursor:pointer;">
             <option value="lbs" ${(health.settings?.weightUnit||'lbs')==='lbs'?'selected':''}>lbs</option>
             <option value="kg" ${health.settings?.weightUnit==='kg'?'selected':''}>kg</option>
           </select>
         </div>
-        <div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:100px;">
-          <div class="health-log-input-label">Daily water goal (oz)</div>
-          <input class="health-log-input" id="h-set-water" type="number" value="${health.settings?.waterTargetOz||64}" onchange="saveHealthSettings()">
+        <div class="health-input-group">
+          <div class="health-input-label">Daily water goal (oz)</div>
+          <input class="health-input" id="h-set-water" type="number" value="${health.settings?.waterTargetOz||64}" onchange="saveHealthSettings()">
         </div>
-        <div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:120px;">
-          <div class="health-log-input-label">GLP-1 start date</div>
-          <input class="health-log-input" id="h-set-glp1" type="date" value="${health.settings?.glp1StartDate||todayStr()}" onchange="saveHealthSettings()">
+        <div class="health-input-group">
+          <div class="health-input-label">GLP-1 start date</div>
+          <input class="health-input" id="h-set-glp1" type="date" value="${health.settings?.glp1StartDate||todayStr()}" onchange="saveHealthSettings()">
         </div>
       </div>
     </div>
-    <div style="margin-top:12px;padding:12px;background:#fff8f0;border:0.5px solid #f0d9b0;border-radius:10px;font-size:12px;color:#7a5c2e;line-height:1.7;">
+    <div style="margin-top:8px;padding:12px;background:#fff8f0;border:0.5px solid #f0d9b0;border-radius:10px;font-size:12px;color:#7a5c2e;line-height:1.6;">
       <strong>💊 GLP-1 Tips</strong><br>
       • Aim for <strong>64–80 oz of water daily</strong> — GLP-1s increase dehydration risk<br>
-      • <strong>Prioritize protein</strong> (80–100g/day) to preserve muscle while losing fat<br>
+      • <strong>Prioritize protein</strong> (aim 80–100g/day) to preserve muscle while losing fat<br>
       • Track weight <strong>weekly at the same time</strong> for the most accurate trend<br>
       • Even short walks help — exercise amplifies GLP-1 fat-loss benefits<br>
       • Nausea? Log smaller, more frequent meals and avoid high-fat foods
-    </div>
-  </div>`;
+    </div>`;
 }
 
 // ── HEALTH CRUD ──
@@ -3663,11 +3515,51 @@ function fmtHealthDate(d){
 }
 function healthUID(){ return 'h'+Date.now()+'_'+Math.random().toString(36).slice(2,6); }
 
+function logHealth(type){
+  if(type==='weight'){
+    const val=parseFloat(document.getElementById('h-weight-val').value);
+    const date=document.getElementById('h-weight-date').value||todayStr();
+    const note=document.getElementById('h-weight-note').value.trim();
+    if(!val||isNaN(val)) return alert('Please enter a weight value.');
+    health.weightLogs.push({id:healthUID(),weight:val,date,note,loggedAt:new Date().toISOString()});
+    document.getElementById('h-weight-val').value='';
+    document.getElementById('h-weight-note').value='';
+  } else if(type==='water'){
+    const oz=parseInt(document.getElementById('h-water-oz').value);
+    const date=document.getElementById('h-water-date').value||todayStr();
+    const note=document.getElementById('h-water-note').value.trim();
+    if(!oz||isNaN(oz)) return alert('Please enter an amount in oz.');
+    health.waterLogs.push({id:healthUID(),oz,date,note,loggedAt:new Date().toISOString()});
+    document.getElementById('h-water-oz').value='';
+    document.getElementById('h-water-note').value='';
+  } else if(type==='food'){
+    const item=document.getElementById('h-food-item').value.trim();
+    const meal=document.getElementById('h-food-meal').value;
+    const calories=parseInt(document.getElementById('h-food-cal').value)||null;
+    const protein=parseInt(document.getElementById('h-food-protein').value)||null;
+    const date=document.getElementById('h-food-date').value||todayStr();
+    if(!item) return alert('Please describe what you ate.');
+    health.foodLogs.push({id:healthUID(),item,meal,calories,protein,date,loggedAt:new Date().toISOString()});
+    document.getElementById('h-food-item').value='';
+    document.getElementById('h-food-cal').value='';
+    document.getElementById('h-food-protein').value='';
+  } else if(type==='exercise'){
+    const exType=document.getElementById('h-ex-type').value.trim();
+    const duration=parseInt(document.getElementById('h-ex-dur').value)||null;
+    const note=document.getElementById('h-ex-note').value.trim();
+    const date=document.getElementById('h-ex-date').value||todayStr();
+    if(!exType) return alert('Please enter an activity type.');
+    health.exerciseLogs.push({id:healthUID(),type:exType,duration,note,date,loggedAt:new Date().toISOString()});
+    document.getElementById('h-ex-type').value='';
+    document.getElementById('h-ex-dur').value='';
+    document.getElementById('h-ex-note').value='';
+  }
+  persist(); render();
+}
+
 function quickLogWater(oz){
   health.waterLogs.push({id:healthUID(),oz,date:todayStr(),note:'quick log',loggedAt:new Date().toISOString()});
   persist(); render();
-  // Re-open water log so user can keep adding
-  setTimeout(()=>openHealthLog('water'),50);
 }
 
 function deleteHealthLog(type, id){
@@ -3682,6 +3574,500 @@ function saveHealthSettings(){
   health.settings.weightUnit=document.getElementById('h-set-unit').value;
   health.settings.waterTargetOz=parseInt(document.getElementById('h-set-water').value)||64;
   health.settings.glp1StartDate=document.getElementById('h-set-glp1').value||todayStr();
+  persist(); render();
+}
+
+
+// ── HEALTH VIEW ──
+function renderHealthView(){
+  var tabs = [
+    {id:'today',    label:'&#x1F4CB; Today'},
+    {id:'history',  label:'&#x1F4C8; History'},
+    {id:'settings', label:'&#x2699;&#xFE0F; Settings'},
+  ];
+  var tabHtml = tabs.map(function(t){
+    return '<div class="health-tab'+(healthTab===t.id?' active':'')+'" onclick="healthTab=\''+t.id+'\';render()">'+t.label+'</div>';
+  }).join('');
+
+  var glp1Start = health.settings && health.settings.glp1StartDate;
+  var glp1Days = glp1Start ? Math.max(0, Math.floor((Date.now()-new Date(glp1Start).getTime())/86400000)) : 0;
+
+  var panelHtml = '';
+  if(healthTab==='today')        panelHtml = renderHealthToday();
+  else if(healthTab==='history') panelHtml = renderHealthHistory();
+  else if(healthTab==='settings')panelHtml = renderHealthSettings();
+
+  return '<div class="health-view">'
+    +'<div class="health-header">'
+    +'<div class="health-title">Health</div>'
+    +'<div class="health-subtitle">Daily tracker \u2014 weight, water, food &amp; exercise</div>'
+    +'</div>'
+    +renderGlp1Strip(glp1Days, glp1Start)
+    +renderShotBar()
+    +'<div class="health-tabs">'+tabHtml+'</div>'
+    +panelHtml
+    +'<div class="health-log-overlay" id="health-log-overlay">'
+    +'<div class="health-log-box" id="health-log-box"></div>'
+    +'</div>'
+    +'</div>';
+}
+
+// ── SHOT HELPERS ──
+function getShotState(){
+  var today = new Date();
+  var dow   = today.getDay();
+  var todayStr_ = todayStr();
+  var lastMonday = new Date(today);
+  lastMonday.setDate(today.getDate() - ((dow + 6) % 7));
+  var lastMondayStr = lastMonday.toISOString().split('T')[0];
+  var shotLogs = health.shotLogs || [];
+  var thisWeekShot = shotLogs.find(function(s){ return s.date >= lastMondayStr; });
+  var isMonday   = dow === 1;
+  var isDue      = isMonday && !thisWeekShot;
+  var isOverdue  = !thisWeekShot && lastMondayStr < todayStr_ && !isMonday;
+  var lastShot   = shotLogs.slice().sort(function(a,b){ return b.date>a.date?1:-1; })[0];
+  return { thisWeekShot:thisWeekShot, isMonday:isMonday, isDue:isDue, isOverdue:isOverdue, lastShot:lastShot, lastMondayStr:lastMondayStr };
+}
+
+function renderGlp1Strip(glp1Days, glp1Start){
+  var ss = getShotState();
+  var overdueClass = (ss.isOverdue || ss.isDue) && !ss.thisWeekShot ? ' overdue' : '';
+  var statusSub = ss.thisWeekShot ? ('Shot logged '+fmtHealthDate(ss.thisWeekShot.date)) :
+                  ss.isDue        ? '\ud83d\udc89 Shot due tonight!' :
+                  ss.isOverdue    ? '\u26a0\ufe0f Shot overdue' :
+                  ('Started '+(glp1Start||'today'));
+  return '<div class="health-glp1-strip'+overdueClass+'">'
+    +'<div class="health-glp1-day">Day '+(glp1Days+1)+'</div>'
+    +'<div><div class="health-glp1-label">\ud83d\udc8a GLP-1 Journey</div>'
+    +'<div class="health-glp1-sub">'+statusSub+'</div></div>'
+    +'</div>';
+}
+
+function renderShotBar(){
+  var ss = getShotState();
+  var lastShotText = ss.lastShot ? ('Last: '+fmtHealthDate(ss.lastShot.date)+(ss.lastShot.dose?' \u00b7 '+ss.lastShot.dose:'')) : 'No shots logged yet';
+  var dotClass = 'ok';
+  var message  = '';
+  if(ss.thisWeekShot){
+    dotClass = 'done';
+    message  = '<strong>Shot logged</strong> \u2014 '+fmtHealthDate(ss.thisWeekShot.date)+(ss.thisWeekShot.dose?' \u00b7 '+ss.thisWeekShot.dose:'');
+  } else if(ss.isDue){
+    dotClass = 'due';
+    message  = '<strong>Shot due tonight</strong> (Monday) \u00b7 '+lastShotText;
+  } else if(ss.isOverdue){
+    dotClass = 'due';
+    message  = '<strong>Shot overdue</strong> \u2014 due last Monday \u00b7 '+lastShotText;
+  } else {
+    message  = 'Next shot Monday evening \u00b7 '+lastShotText;
+  }
+  var btn = !ss.thisWeekShot
+    ? '<button class="health-shot-btn" onclick="openShotLog()">Log shot</button>'
+    : '<button class="health-shot-btn done" onclick="undoGLP1Shot('+JSON.stringify(ss.thisWeekShot.id)+')">Undo</button>';
+  return '<div class="health-shot-bar">'
+    +'<div class="health-shot-dot '+dotClass+'"></div>'
+    +'<div class="health-shot-text">'+message+'</div>'
+    +btn+'</div>';
+}
+
+function openShotLog(){
+  var overlay = document.getElementById('health-log-overlay');
+  var box     = document.getElementById('health-log-box');
+  if(!overlay||!box) return;
+  box.innerHTML = '<div class="health-log-icon">\ud83d\udc89</div>'
+    +'<div class="health-log-title">Log GLP-1 Shot</div>'
+    +'<div><div class="health-log-input-label">Dose</div>'
+    +'<input class="health-log-input" id="hl-shot-dose" type="text" value="Zepbound 2.5mg" autofocus></div>'
+    +'<div><div class="health-log-input-label">Notes (optional)</div>'
+    +'<input class="health-log-input" id="hl-shot-note" type="text" placeholder="injection site, reaction..."></div>'
+    +'<div class="health-log-actions">'
+    +'<button class="health-log-cancel" onclick="closeHealthLog()">Cancel</button>'
+    +'<button class="health-log-save" onclick="saveHealthLog(\'shot\')">Log it</button>'
+    +'</div>';
+  overlay.classList.add('show');
+}
+
+function logGLP1Shot(dose){
+  health.shotLogs = health.shotLogs || [];
+  var d = dose || 'Zepbound 2.5mg';
+  health.shotLogs.push({id:healthUID(), date:todayStr(), dose:d, loggedAt:new Date().toISOString()});
+  persist(); render();
+  showXPFlash('\ud83d\udc89 Shot logged \u2014 '+d);
+}
+
+function undoGLP1Shot(id){
+  health.shotLogs = (health.shotLogs||[]).filter(function(s){ return s.id!==id; });
+  persist(); render();
+}
+
+function renderShotCardForStack(){
+  var dow = new Date().getDay();
+  if(dow !== 1) return '';
+  var ss = getShotState();
+  if(ss.thisWeekShot) return '';
+  return '<div style="margin-top:10px;border-top:0.5px solid #e0ddf8;padding-top:10px;">'
+    +'<div class="habit-shot-card" onclick="openShotLog()" title="Log your weekly GLP-1 shot">'
+    +'<div style="font-size:22px;line-height:1;">\ud83d\udc89</div>'
+    +'<div style="font-size:11px;font-weight:600;color:#E24B4A;text-align:center;">Weekly Shot</div>'
+    +'<div style="font-size:9px;color:#888780;text-align:center;">Due tonight</div>'
+    +'</div></div>';
+}
+
+// ── TODAY TAB ──
+function renderHealthToday(){
+  var today = todayStr();
+  var unit = (health.settings && health.settings.weightUnit) || 'lbs';
+  var target = (health.settings && health.settings.waterTargetOz) || 64;
+
+  var todayWater = (health.waterLogs||[]).filter(function(l){ return l.date===today; });
+  var waterTotal = todayWater.reduce(function(s,l){ return s+(l.oz||0); }, 0);
+  var waterPct   = Math.min(100, Math.round((waterTotal/target)*100));
+  var waterMet   = waterTotal >= target;
+
+  var wLogs = (health.weightLogs||[]).slice().sort(function(a,b){ return new Date(b.date)-new Date(a.date); });
+  var latestW = wLogs[0];
+  var prevW   = wLogs[1];
+  var wChange = (latestW && prevW) ? (latestW.weight - prevW.weight).toFixed(1) : null;
+
+  var todayFood = (health.foodLogs||[]).filter(function(l){ return l.date===today; });
+  var totalCal  = todayFood.reduce(function(s,l){ return s+(l.calories||0); }, 0);
+  var totalProt = todayFood.reduce(function(s,l){ return s+(l.protein||0); }, 0);
+  var foodLogged= todayFood.length > 0;
+
+  var todayEx   = (health.exerciseLogs||[]).filter(function(l){ return l.date===today; });
+  var totalMins = todayEx.reduce(function(s,l){ return s+(l.duration||0); }, 0);
+  var exLogged  = todayEx.length > 0;
+
+  var wChangeTxt = wChange !== null
+    ? (parseFloat(wChange)<0?'\u25bc ':'\u25b2 ')+Math.abs(wChange)+' '+unit+' from last'
+    : 'Tap to log';
+
+  var weightCard = '<div class="health-card'+(latestW?' logged':'')+'" onclick="openHealthLog(\'weight\')">'
+    +(latestW?'<div class="health-card-badge"></div>':'')
+    +'<div class="health-card-emoji">\u2696\ufe0f</div>'
+    +'<div class="health-card-name">Weight</div>'
+    +'<div class="health-card-value">'+(latestW?latestW.weight+' '+unit:'\u2014')+'</div>'
+    +'<div class="health-card-sub">'+wChangeTxt+'</div>'
+    +'<div class="health-card-tap">tap to log</div></div>';
+
+  var waterCard = '<div class="health-card'+(waterMet?' goal-met':waterTotal>0?' logged':'')+'" onclick="openHealthLog(\'water\')">'
+    +(waterMet?'<div class="health-card-badge"></div>':'')
+    +'<div class="health-card-emoji">\ud83d\udca7</div>'
+    +'<div class="health-card-name">Water</div>'
+    +'<div class="health-card-value">'+waterTotal+' <span style="font-size:11px;font-weight:400;color:#888780;">/ '+target+' oz</span></div>'
+    +'<div class="health-card-bar-wrap"><div class="health-card-bar" style="width:'+waterPct+'%"></div></div>'
+    +'<div class="health-card-sub">'+waterPct+'% of goal'+(waterMet?' \u2713':'')+'</div>'
+    +'<div class="health-card-tap">tap to add</div></div>';
+
+  var foodCard = '<div class="health-card'+(foodLogged?' logged':'')+'" onclick="openHealthLog(\'food\')">'
+    +(foodLogged?'<div class="health-card-badge"></div>':'')
+    +'<div class="health-card-emoji">\ud83c\udf7d\ufe0f</div>'
+    +'<div class="health-card-name">Food</div>'
+    +'<div class="health-card-value">'+(totalCal>0?totalCal+' cal':'\u2014')+'</div>'
+    +'<div class="health-card-sub">'+(todayFood.length>0?todayFood.length+' meal'+(todayFood.length>1?'s':'')+(totalProt>0?' \u00b7 '+totalProt+'g protein':''):'Tap to log')+'</div>'
+    +'<div class="health-card-tap">tap to log</div></div>';
+
+  var exCard = '<div class="health-card'+(exLogged?' logged':'')+'" onclick="openHealthLog(\'exercise\')">'
+    +(exLogged?'<div class="health-card-badge"></div>':'')
+    +'<div class="health-card-emoji">\ud83c\udfc3</div>'
+    +'<div class="health-card-name">Exercise</div>'
+    +'<div class="health-card-value">'+(totalMins>0?totalMins+' min':'\u2014')+'</div>'
+    +'<div class="health-card-sub">'+(todayEx.length>0?todayEx.map(function(l){return l.type;}).join(', '):'Tap to log')+'</div>'
+    +'<div class="health-card-tap">tap to log</div></div>';
+
+  return '<div class="health-grid">'+weightCard+waterCard+foodCard+exCard+'</div>';
+}
+
+// ── LOG OVERLAY ──
+function openHealthLog(type){
+  var overlay = document.getElementById('health-log-overlay');
+  var box     = document.getElementById('health-log-box');
+  if(!overlay||!box) return;
+  var unit   = (health.settings && health.settings.weightUnit) || 'lbs';
+  var target = (health.settings && health.settings.waterTargetOz) || 64;
+
+  if(type==='weight'){
+    var wLogs = (health.weightLogs||[]).slice().sort(function(a,b){ return new Date(b.date)-new Date(a.date); });
+    var latest = wLogs[0];
+    box.innerHTML = '<div class="health-log-icon">\u2696\ufe0f</div>'
+      +'<div class="health-log-title">Log Weight</div>'
+      +(latest?'<div style="text-align:center;font-size:12px;color:#888780;">Last: '+latest.weight+' '+unit+' on '+fmtHealthDate(latest.date)+'</div>':'')
+      +'<div><div class="health-log-input-label">Weight ('+unit+')</div>'
+      +'<input class="health-log-input" id="hl-weight-val" type="number" step="0.1" placeholder="e.g. 185.5" autofocus></div>'
+      +'<div><div class="health-log-input-label">Note (optional)</div>'
+      +'<input class="health-log-input" id="hl-weight-note" type="text" placeholder="morning, fasted..."></div>'
+      +'<div class="health-log-actions">'
+      +'<button class="health-log-cancel" onclick="closeHealthLog()">Cancel</button>'
+      +'<button class="health-log-save" onclick="saveHealthLog(\'weight\')">Log it</button>'
+      +'</div>';
+
+  } else if(type==='water'){
+    var todayTotal = (health.waterLogs||[]).filter(function(l){ return l.date===todayStr(); }).reduce(function(s,l){ return s+(l.oz||0); }, 0);
+    var pct = Math.min(100, Math.round((todayTotal/target)*100));
+    box.innerHTML = '<div class="health-log-icon">\ud83d\udca7</div>'
+      +'<div class="health-log-title">Log Water</div>'
+      +'<div style="text-align:center;font-size:12px;color:#888780;">'+todayTotal+' / '+target+' oz today ('+pct+'%)</div>'
+      +'<div class="health-quick-btns" style="justify-content:center;">'
+      +'<button class="health-quick-btn" onclick="quickLogWater(8)">8 oz</button>'
+      +'<button class="health-quick-btn" onclick="quickLogWater(12)">12 oz</button>'
+      +'<button class="health-quick-btn" onclick="quickLogWater(16)">16 oz</button>'
+      +'<button class="health-quick-btn" onclick="quickLogWater(20)">20 oz</button>'
+      +'<button class="health-quick-btn" onclick="quickLogWater(32)">32 oz</button>'
+      +'</div>'
+      +'<div><div class="health-log-input-label">Custom amount (oz)</div>'
+      +'<input class="health-log-input" id="hl-water-oz" type="number" placeholder="custom oz"></div>'
+      +'<div class="health-log-actions">'
+      +'<button class="health-log-cancel" onclick="closeHealthLog()">Done</button>'
+      +'<button class="health-log-save" onclick="saveHealthLog(\'water\')">Add</button>'
+      +'</div>';
+
+  } else if(type==='food'){
+    box.innerHTML = '<div class="health-log-icon">\ud83c\udf7d\ufe0f</div>'
+      +'<div class="health-log-title">Log Food</div>'
+      +'<div><div class="health-log-input-label">What did you eat?</div>'
+      +'<input class="health-log-input" id="hl-food-item" type="text" placeholder="e.g. Grilled salmon, salad..." autofocus onblur="healthEstimateCalories()"></div>'
+      +'<div id="hl-ai-pill" class="health-ai-pill">\u2726 estimating calories...</div>'
+      +'<div class="health-log-row">'
+      +'<div style="flex:1;"><div class="health-log-input-label">Meal</div>'
+      +'<select class="health-log-input" id="hl-food-meal" style="cursor:pointer;">'
+      +'<option value="breakfast">\ud83c\udf05 Breakfast</option>'
+      +'<option value="lunch" selected>\u2600\ufe0f Lunch</option>'
+      +'<option value="dinner">\ud83c\udf19 Dinner</option>'
+      +'<option value="snack">\ud83c\udf6a Snack</option>'
+      +'</select></div>'
+      +'<div style="flex:1;"><div class="health-log-input-label">Calories</div>'
+      +'<input class="health-log-input" id="hl-food-cal" type="number" placeholder="auto"></div>'
+      +'<div style="flex:1;"><div class="health-log-input-label">Protein (g)</div>'
+      +'<input class="health-log-input" id="hl-food-protein" type="number" placeholder="auto"></div>'
+      +'</div>'
+      +'<div class="health-log-actions">'
+      +'<button class="health-log-cancel" onclick="closeHealthLog()">Cancel</button>'
+      +'<button class="health-log-save" onclick="saveHealthLog(\'food\')">Log it</button>'
+      +'</div>';
+
+  } else if(type==='exercise'){
+    box.innerHTML = '<div class="health-log-icon">\ud83c\udfc3</div>'
+      +'<div class="health-log-title">Log Exercise</div>'
+      +'<div><div class="health-log-input-label">Activity</div>'
+      +'<input class="health-log-input" id="hl-ex-type" type="text" placeholder="Walk, Run, Gym..." list="hl-ex-list" autofocus>'
+      +'<datalist id="hl-ex-list"><option value="Walk"><option value="Run"><option value="Gym"><option value="Bike"><option value="Swim"><option value="Yoga"><option value="Other"></datalist>'
+      +'</div>'
+      +'<div class="health-log-row">'
+      +'<div style="flex:1;"><div class="health-log-input-label">Duration (min)</div>'
+      +'<input class="health-log-input" id="hl-ex-dur" type="number" placeholder="30"></div>'
+      +'<div style="flex:2;"><div class="health-log-input-label">Notes</div>'
+      +'<input class="health-log-input" id="hl-ex-note" type="text" placeholder="How did it feel?"></div>'
+      +'</div>'
+      +'<div class="health-log-actions">'
+      +'<button class="health-log-cancel" onclick="closeHealthLog()">Cancel</button>'
+      +'<button class="health-log-save" onclick="saveHealthLog(\'exercise\')">Log it</button>'
+      +'</div>';
+  }
+  overlay.classList.add('show');
+}
+
+function closeHealthLog(){
+  var overlay = document.getElementById('health-log-overlay');
+  if(overlay) overlay.classList.remove('show');
+}
+
+async function healthEstimateCalories(){
+  var item = document.getElementById('hl-food-item');
+  if(!item || item.value.trim().length < 3) return;
+  var calEl    = document.getElementById('hl-food-cal');
+  var protEl   = document.getElementById('hl-food-protein');
+  var pill     = document.getElementById('hl-ai-pill');
+  if(calEl && calEl.value) return;
+  if(pill) pill.classList.add('show');
+  try {
+    var res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 120,
+        system: 'Nutrition estimator. Return ONLY JSON: {"calories":450,"protein":38}. No markdown.',
+        messages: [{role:'user', content:'Estimate calories and protein for: "'+item.value.trim()+'"'}]
+      })
+    });
+    var data = await res.json();
+    var parsed = JSON.parse((data.content&&data.content[0]?data.content[0].text||'{}':'{}').replace(/```json|```/g,'').trim());
+    if(parsed.calories && calEl && !calEl.value) calEl.value = parsed.calories;
+    if(parsed.protein  && protEl && !protEl.value) protEl.value = parsed.protein;
+    if(pill) pill.textContent = '\u2726 ~'+(parsed.calories||'?')+' cal \u00b7 ~'+(parsed.protein||'?')+'g protein';
+  } catch(e) {
+    if(pill) pill.classList.remove('show');
+  }
+}
+
+function saveHealthLog(type){
+  if(type==='shot'){
+    var dose = (document.getElementById('hl-shot-dose') ? document.getElementById('hl-shot-dose').value.trim() : '') || 'Zepbound 2.5mg';
+    var note = document.getElementById('hl-shot-note') ? document.getElementById('hl-shot-note').value.trim() : '';
+    health.shotLogs = health.shotLogs || [];
+    health.shotLogs.push({id:healthUID(), date:todayStr(), dose:dose, note:note, loggedAt:new Date().toISOString()});
+    closeHealthLog(); persist(); render();
+    showXPFlash('\ud83d\udc89 Shot logged \u2014 '+dose);
+    return;
+  }
+  if(type==='weight'){
+    var val = parseFloat(document.getElementById('hl-weight-val') ? document.getElementById('hl-weight-val').value : '');
+    if(!val||isNaN(val)){ alert('Please enter a weight.'); return; }
+    var note = document.getElementById('hl-weight-note') ? document.getElementById('hl-weight-note').value.trim() : '';
+    health.weightLogs.push({id:healthUID(), weight:val, date:todayStr(), note:note, loggedAt:new Date().toISOString()});
+  } else if(type==='water'){
+    var oz = parseInt(document.getElementById('hl-water-oz') ? document.getElementById('hl-water-oz').value : '');
+    if(!oz||isNaN(oz)){ closeHealthLog(); return; }
+    health.waterLogs.push({id:healthUID(), oz:oz, date:todayStr(), note:'', loggedAt:new Date().toISOString()});
+  } else if(type==='food'){
+    var itemEl = document.getElementById('hl-food-item');
+    if(!itemEl || !itemEl.value.trim()){ alert('Please describe what you ate.'); return; }
+    var meal = document.getElementById('hl-food-meal') ? document.getElementById('hl-food-meal').value : 'lunch';
+    var calories = parseInt(document.getElementById('hl-food-cal') ? document.getElementById('hl-food-cal').value : '') || null;
+    var protein  = parseInt(document.getElementById('hl-food-protein') ? document.getElementById('hl-food-protein').value : '') || null;
+    health.foodLogs.push({id:healthUID(), item:itemEl.value.trim(), meal:meal, calories:calories, protein:protein, date:todayStr(), loggedAt:new Date().toISOString()});
+  } else if(type==='exercise'){
+    var exTypeEl = document.getElementById('hl-ex-type');
+    if(!exTypeEl || !exTypeEl.value.trim()){ alert('Please enter an activity.'); return; }
+    var duration = parseInt(document.getElementById('hl-ex-dur') ? document.getElementById('hl-ex-dur').value : '') || null;
+    var exNote   = document.getElementById('hl-ex-note') ? document.getElementById('hl-ex-note').value.trim() : '';
+    health.exerciseLogs.push({id:healthUID(), type:exTypeEl.value.trim(), duration:duration, note:exNote, date:todayStr(), loggedAt:new Date().toISOString()});
+  }
+  closeHealthLog(); persist(); render();
+}
+
+// ── HISTORY TAB ──
+function renderHealthHistory(){
+  var unit   = (health.settings && health.settings.weightUnit) || 'lbs';
+  var wLogs  = (health.weightLogs||[]).slice().sort(function(a,b){ return new Date(b.date)-new Date(a.date); });
+  var aFood  = (health.foodLogs||[]).slice().sort(function(a,b){ return b.loggedAt>a.loggedAt?1:-1; });
+  var aEx    = (health.exerciseLogs||[]).slice().sort(function(a,b){ return b.loggedAt>a.loggedAt?1:-1; });
+  var mealEmoji = {breakfast:'\ud83c\udf05',lunch:'\u2600\ufe0f',dinner:'\ud83c\udf19',snack:'\ud83c\udf6a'};
+
+  var chart7 = wLogs.slice(0,7).reverse();
+  var chartHtml = '';
+  if(chart7.length > 1){
+    var minW = Math.min.apply(null, chart7.map(function(l){return l.weight;}));
+    var maxW = Math.max.apply(null, chart7.map(function(l){return l.weight;}));
+    var range = maxW - minW || 1;
+    chartHtml = '<div class="health-weight-chart">'+chart7.map(function(l){
+      var h = Math.max(4, Math.round(((l.weight-minW)/range)*44));
+      return '<div class="health-weight-bar-wrap"><div class="health-weight-bar" style="height:'+h+'px;"></div><div class="health-weight-bar-label">'+l.weight+'</div></div>';
+    }).join('')+'</div>';
+  }
+
+  var latest = wLogs[0] && wLogs[0].weight;
+  var first  = wLogs[wLogs.length-1] && wLogs[wLogs.length-1].weight;
+  var totalChange = (latest && first && wLogs.length>1) ? (latest-first).toFixed(1) : null;
+
+  var weightSection = '<div class="health-section-label">\u2696\ufe0f Weight</div>'
+    +(totalChange!==null?'<div style="display:flex;gap:12px;margin-bottom:8px;align-items:baseline;">'
+      +'<span style="font-size:22px;font-weight:700;color:#1D9E75;">'+latest+' '+unit+'</span>'
+      +'<span style="font-size:12px;color:'+(parseFloat(totalChange)<0?'#1D9E75':'#E24B4A')+';font-weight:500;">'+(parseFloat(totalChange)<0?'\u25bc':'\u25b2')+' '+Math.abs(totalChange)+' total</span>'
+      +'</div>':'')
+    +chartHtml
+    +(wLogs.length ? wLogs.slice(0,15).map(function(l){
+      return '<div class="health-entry">'
+        +'<div class="health-entry-icon">\u2696\ufe0f</div>'
+        +'<div class="health-entry-body"><div class="health-entry-main">'+l.weight+' '+unit+'</div>'
+        +'<div class="health-entry-sub">'+fmtHealthDate(l.date)+(l.note?' \u00b7 '+l.note:'')+'</div></div>'
+        +'<div class="health-entry-del" onclick="deleteHealthLog(\'weight\','+JSON.stringify(l.id)+')">\u2715</div>'
+        +'</div>';
+    }).join('') : '<div class="health-empty">No weight logged yet</div>');
+
+  var foodSection = '<div class="health-section-label">\ud83c\udf7d\ufe0f Food</div>'
+    +(aFood.length ? aFood.slice(0,25).map(function(l){
+      var emoji = mealEmoji[l.meal] || '\ud83c\udf7d\ufe0f';
+      var mealTag = '<span class="health-meal-tag health-meal-'+l.meal+'">'+l.meal+'</span>';
+      return '<div class="health-entry">'
+        +'<div class="health-entry-icon">'+emoji+'</div>'
+        +'<div class="health-entry-body"><div class="health-entry-main">'+mealTag+l.item+'</div>'
+        +'<div class="health-entry-sub">'+fmtHealthDate(l.date)+(l.calories?' \u00b7 '+l.calories+' cal':'')+(l.protein?' \u00b7 '+l.protein+'g protein':'')+'</div></div>'
+        +'<div class="health-entry-del" onclick="deleteHealthLog(\'food\','+JSON.stringify(l.id)+')">\u2715</div>'
+        +'</div>';
+    }).join('') : '<div class="health-empty">No food logged yet</div>');
+
+  var exSection = '<div class="health-section-label">\ud83c\udfc3 Exercise</div>'
+    +(aEx.length ? aEx.slice(0,25).map(function(l){
+      return '<div class="health-entry">'
+        +'<div class="health-entry-icon">\ud83c\udfc3</div>'
+        +'<div class="health-entry-body"><div class="health-entry-main">'+l.type+(l.duration?' \u00b7 '+l.duration+' min':'')+'</div>'
+        +'<div class="health-entry-sub">'+fmtHealthDate(l.date)+(l.note?' \u00b7 '+l.note:'')+'</div></div>'
+        +'<div class="health-entry-del" onclick="deleteHealthLog(\'exercise\','+JSON.stringify(l.id)+')">\u2715</div>'
+        +'</div>';
+    }).join('') : '<div class="health-empty">No exercise logged yet</div>');
+
+  return '<div class="health-panel">'+weightSection+foodSection+exSection+'</div>';
+}
+
+// ── SETTINGS TAB ──
+function renderHealthSettings(){
+  var unit   = (health.settings && health.settings.weightUnit) || 'lbs';
+  var target = (health.settings && health.settings.waterTargetOz) || 64;
+  var glp1   = (health.settings && health.settings.glp1StartDate) || todayStr();
+  return '<div class="health-panel">'
+    +'<div style="background:#f7f7f5;border-radius:12px;padding:14px;border:0.5px solid #e8e8e4;">'
+    +'<div style="font-size:10px;font-weight:600;color:#5f5e5a;letter-spacing:0.07em;text-transform:uppercase;margin-bottom:10px;">Settings</div>'
+    +'<div style="display:flex;gap:12px;flex-wrap:wrap;">'
+    +'<div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:100px;">'
+    +'<div class="health-log-input-label">Weight unit</div>'
+    +'<select class="health-log-input" id="h-set-unit" onchange="saveHealthSettings()" style="cursor:pointer;">'
+    +'<option value="lbs"'+(unit==='lbs'?' selected':'')+'>lbs</option>'
+    +'<option value="kg"'+(unit==='kg'?' selected':'')+'>kg</option>'
+    +'</select></div>'
+    +'<div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:100px;">'
+    +'<div class="health-log-input-label">Daily water goal (oz)</div>'
+    +'<input class="health-log-input" id="h-set-water" type="number" value="'+target+'" onchange="saveHealthSettings()"></div>'
+    +'<div style="display:flex;flex-direction:column;gap:3px;flex:1;min-width:120px;">'
+    +'<div class="health-log-input-label">GLP-1 start date</div>'
+    +'<input class="health-log-input" id="h-set-glp1" type="date" value="'+glp1+'" onchange="saveHealthSettings()"></div>'
+    +'</div></div>'
+    +'<div style="margin-top:12px;padding:12px;background:#fff8f0;border:0.5px solid #f0d9b0;border-radius:10px;font-size:12px;color:#7a5c2e;line-height:1.7;">'
+    +'<strong>\ud83d\udc8a GLP-1 Tips</strong><br>'
+    +'\u2022 Aim for <strong>64\u201380 oz of water daily</strong> \u2014 GLP-1s increase dehydration risk<br>'
+    +'\u2022 <strong>Prioritize protein</strong> (80\u2013100g/day) to preserve muscle while losing fat<br>'
+    +'\u2022 Track weight <strong>weekly at the same time</strong> for the most accurate trend<br>'
+    +'\u2022 Even short walks help \u2014 exercise amplifies GLP-1 fat-loss benefits<br>'
+    +'\u2022 Nausea? Log smaller, more frequent meals and avoid high-fat foods'
+    +'</div></div>';
+}
+
+// ── HEALTH CRUD ──
+function todayStr(){ return new Date().toISOString().split('T')[0]; }
+function weekStartStr(){
+  var d=new Date(); d.setDate(d.getDate()-d.getDay()); return d.toISOString().split('T')[0];
+}
+function fmtHealthDate(d){
+  if(!d) return '';
+  var today=todayStr();
+  var yest=new Date(); yest.setDate(yest.getDate()-1);
+  var yestStr=yest.toISOString().split('T')[0];
+  if(d===today) return 'Today';
+  if(d===yestStr) return 'Yesterday';
+  return new Date(d+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+function healthUID(){ return 'h'+Date.now()+'_'+Math.random().toString(36).slice(2,6); }
+
+function quickLogWater(oz){
+  health.waterLogs.push({id:healthUID(), oz:oz, date:todayStr(), note:'quick log', loggedAt:new Date().toISOString()});
+  persist(); render();
+  setTimeout(function(){ openHealthLog('water'); }, 50);
+}
+
+function deleteHealthLog(type, id){
+  if(type==='weight')   health.weightLogs   = health.weightLogs.filter(function(l){return l.id!==id;});
+  else if(type==='water')    health.waterLogs    = health.waterLogs.filter(function(l){return l.id!==id;});
+  else if(type==='food')     health.foodLogs     = health.foodLogs.filter(function(l){return l.id!==id;});
+  else if(type==='exercise') health.exerciseLogs = health.exerciseLogs.filter(function(l){return l.id!==id;});
+  persist(); render();
+}
+
+function saveHealthSettings(){
+  var unitEl  = document.getElementById('h-set-unit');
+  var waterEl = document.getElementById('h-set-water');
+  var glp1El  = document.getElementById('h-set-glp1');
+  if(unitEl)  health.settings.weightUnit    = unitEl.value;
+  if(waterEl) health.settings.waterTargetOz = parseInt(waterEl.value)||64;
+  if(glp1El)  health.settings.glp1StartDate = glp1El.value||todayStr();
   persist(); render();
 }
 
@@ -3902,6 +4288,7 @@ function render(){
   const open=tasks.filter(t=>!t.done),done=tasks.filter(t=>t.done),awaiting=tasks.filter(t=>t.awaiting);
 
   if(view==='habits'){tl.innerHTML=renderHabitsView();sb.innerHTML='';return;}
+  if(view==='health'){tl.innerHTML=renderHealthView();sb.innerHTML='';return;}
   if(view==='health'){tl.innerHTML=renderHealthView();sb.innerHTML='';return;}
   if(view==='constitution'){tl.innerHTML=renderConstitutionView();sb.innerHTML='';return;}
   if(view==='insights'){tl.innerHTML=renderInsightsView();sb.innerHTML='';return;}
@@ -4221,6 +4608,7 @@ function setWorkView(v) {
     'wos-outreach':  'Outreach',
     'wos-cleanup':   'Data Cleanup',
     'wos-applications': 'Job Applications',
+    'wos-career-audit': 'Career Audit',
   };
   document.getElementById('view-title').textContent = titles[v] || v;
   document.getElementById('main-add-btn').style.display = 'none';
@@ -4243,7 +4631,7 @@ function setWorkView(v) {
 
 function renderWorkView() {
   const list = document.getElementById('task-list');
-  if (workView === 'wos-dashboard')  { loadWOSPeople().then(()=>loadWOSVendors()).then(()=>renderWOSDashboard(list)); return; }
+  if (workView === 'wos-dashboard')  { renderWOSDashboard(list); return; }
   if (workView === 'wos-projects')   { renderWOSProjects(list);  return; }
   if (workView === 'wos-network')    { renderWOSPeopleView(list, 'network'); return; }
   if (workView === 'wos-talent')     { renderWOSPeopleView(list, 'talent');  return; }
@@ -4253,6 +4641,7 @@ function renderWorkView() {
   if (workView === 'wos-outreach')   { renderWOSOutreachView(list);          return; }
   if (workView === 'wos-cleanup')    { renderWOSCleanup(list);               return; }
   if (workView === 'wos-applications') { renderWOSApplications(list);         return; }
+  if (workView === 'wos-career-audit') { renderCareerAuditView(list);         return; }
 }
 
 // ── DASHBOARD ──
@@ -4287,7 +4676,7 @@ function renderWOSDashboard(el) {
             oninput="renderDashSearchResults(this.value)"
             onkeydown="if(event.key==='Escape'){this.value='';renderDashSearchResults('');}"
             style="width:100%;padding-left:30px;"/>
-          <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;color:#b4b2a9;pointer-events:none;">🔍</span>
+          <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;color:#b4b2a9;pointer-events:none;">&#x1F50D;</span>
         </div>
         <div id="wos-dash-results" style="margin-top:6px;"></div>
       </div>
@@ -4300,7 +4689,7 @@ function renderWOSDashboard(el) {
           <span class="wos-action-btn-icon">👤</span>
           <span>New Contact</span>
         </button>
-        <button class="wos-action-btn" onclick="setWorkView('wos-cleanup')" id="wos-cleanup-btn">
+        <button class="wos-action-btn" onclick="setWorkView('wos-cleanup')" id="wos-cleanup-btn" style="--hover-bg:#FAEEDA;--hover-border:#BA7517;--hover-color:#854F0B;">
           <span class="wos-action-btn-icon">🧹</span>
           <span>Clean up</span>
         </button>
@@ -4314,79 +4703,6 @@ function renderWOSDashboard(el) {
       }
     </div>
   `;
-}
-
-async function dashSearchOpenPerson(id){
-  await loadWOSPeople();
-  const isTalent = wosPeople.find(p=>p.id===id)?.talent;
-  setWorkView(isTalent ? 'wos-talent' : 'wos-network');
-  // Wait for view to render then open detail
-  setTimeout(()=>openWOSPersonDetail(id), 150);
-}
-
-async function dashSearchOpenVendor(id, type){
-  await loadWOSVendors();
-  setWorkView(type==='studio' ? 'wos-studios' : 'wos-vendors');
-  setTimeout(()=>openVendorDetail(id), 150);
-}
-
-function renderDashSearchResults(q){
-  const el = document.getElementById('wos-dash-results');
-  if(!el) return;
-  const query = (q||'').toLowerCase().trim();
-  if(!query){ el.innerHTML=''; return; }
-
-  // Search people
-  const peopleHits = wosPeople.filter(p =>
-    `${p.name||''} ${p.company||''} ${p.role||''} ${(p.specialty||[]).join(' ')}`.toLowerCase().includes(query)
-  ).slice(0,5);
-
-  // Search vendors/studios
-  const vendorHits = workOSVendors.filter(v =>
-    `${v.name||''} ${(v.areas||[]).join(' ')}`.toLowerCase().includes(query)
-  ).slice(0,4);
-
-  if(!peopleHits.length && !vendorHits.length){
-    el.innerHTML=`<div style="font-size:12px;color:#b4b2a9;padding:8px 4px;">No results for "${q}"</div>`;
-    return;
-  }
-
-  const personRows = peopleHits.map(p => {
-    const [bg,fg] = wosAvatarColor(cleanName(p.name)||'');
-    const initials = wosInitials(cleanName(p.name)||'');
-    const sub = [p.freelance_status==='Currently freelance'?'Freelance':p.company, p.role].filter(Boolean).join(' · ');
-    const kindBadge = p.kind ? `<span style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:4px;background:#F1EFE8;color:#444441;">${p.kind}</span>` : '';
-    const talentBadge = p.talent ? `<span style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:4px;background:#E1F5EE;color:#0F6E56;">Talent</span>` : '';
-    return `<div onclick="dashSearchOpenPerson('${p.id}')" style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;transition:background 0.1s;" onmouseover="this.style.background='#f5f5f3'" onmouseout="this.style.background='transparent'">
-      <div style="width:26px;height:26px;border-radius:50%;background:${bg};color:${fg};display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;flex-shrink:0;">${initials}</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:13px;font-weight:500;color:#2c2c2a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${cleanName(p.name)||'—'}</div>
-        <div style="font-size:11px;color:#888780;">${sub}</div>
-      </div>
-      <div style="display:flex;gap:3px;flex-shrink:0;">${talentBadge}${kindBadge}</div>
-    </div>`;
-  }).join('');
-
-  const vendorRows = vendorHits.map(v => {
-    const isStudio = v.type === 'studio';
-    return `<div onclick="dashSearchOpenVendor(${v.id},'${v.type}')" style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;transition:background 0.1s;" onmouseover="this.style.background='#f5f5f3'" onmouseout="this.style.background='transparent'">
-      <div style="width:26px;height:26px;border-radius:50%;background:${isStudio?'#EEEDFE':'#FAEEDA'};color:${isStudio?'#534AB7':'#854F0B'};display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">${isStudio?'🎨':'🏢'}</div>
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:13px;font-weight:500;color:#2c2c2a;">${v.name||'—'}</div>
-        <div style="font-size:11px;color:#888780;">${isStudio?'Studio':'Vendor'}${v.kind?' · '+v.kind:''}${v.location?' · '+v.location:''}</div>
-      </div>
-    </div>`;
-  }).join('');
-
-  const peopleSection = peopleHits.length ? `
-    <div style="font-size:9px;font-weight:600;color:#888780;letter-spacing:0.08em;text-transform:uppercase;padding:4px 8px 2px;">People</div>
-    ${personRows}` : '';
-
-  const vendorSection = vendorHits.length ? `
-    <div style="font-size:9px;font-weight:600;color:#888780;letter-spacing:0.08em;text-transform:uppercase;padding:4px 8px 2px;margin-top:4px;">Vendors & Studios</div>
-    ${vendorRows}` : '';
-
-  el.innerHTML = `<div style="background:#fff;border:0.5px solid #d1d1cf;border-radius:10px;padding:4px 0;box-shadow:0 2px 12px rgba(0,0,0,0.08);">${peopleSection}${vendorSection}</div>`;
 }
 
 function projectCard(p) {
@@ -4848,9 +5164,14 @@ function filterWOSPeople(){
   function matchRegion(p, r){
     if(!r) return true;
     const loc = (p.location||'').toUpperCase();
-    if(r==='East Coast') return US_EAST.includes(loc);
-    if(r==='West Coast') return US_WEST.includes(loc);
-    if(r==='Central') return US_CENTRAL.includes(loc);
+    const isEast    = US_EAST.includes(loc);
+    const isWest    = US_WEST.includes(loc);
+    const isCentral = US_CENTRAL.includes(loc);
+    const isUS      = isEast || isWest || isCentral || (p.region||'')==='US';
+    if(r==='East Coast') return isEast;
+    if(r==='West Coast') return isWest;
+    if(r==='Central')    return isCentral;
+    if(r==='US')         return isUS;
     return (p.region||'') === r;
   }
 
@@ -5532,6 +5853,269 @@ function scanWOSPeople(){
 
   return issues;
 }
+
+
+// ── CAREER AUDIT ──
+let _auditState = { results:[], running:false, processed:0, total:0, currentName:'' };
+
+function renderCareerAuditView(el){
+  el.innerHTML = '<div class="audit-wrap" id="career-audit-wrap">'
+    +'<div class="ai-feature-header" style="background:linear-gradient(135deg,#E1F5EE,#f0eeff);">'
+    +'<div class="ai-feature-icon">&#x1F50D;</div>'
+    +'<div class="ai-feature-title" style="color:#0F6E56;">Career Audit</div>'
+    +'<div class="ai-feature-subtitle">Cross-reference your contacts against their current LinkedIn presence. AI web search finds role changes.</div>'
+    +'</div>'
+    +'<div class="audit-setup" id="audit-setup">'
+    +'<div style="font-size:11px;font-weight:500;color:#5f5e5a;margin-bottom:8px;">Choose who to audit:</div>'
+    +'<div class="audit-filters">'
+    +'<select class="wos-filter-sel" id="audit-rel" style="width:140px;"><option value="">All relationships</option><option value="Inner circle">Inner circle</option><option value="Contact">Contact</option><option value="Known">Known</option></select>'
+    +'<select class="wos-filter-sel" id="audit-kind" style="width:120px;"><option value="">All kinds</option><option>PROD</option><option>BIZ</option><option>CREATIVE</option><option>DESIGN</option><option>TECH</option><option>EVENTS</option><option>AV</option><option>FILM</option><option>STUDIO</option><option>OTHER</option></select>'
+    +'<select class="wos-filter-sel" id="audit-limit" style="width:110px;"><option value="20">Top 20</option><option value="40">Top 40</option><option value="60">Top 60</option><option value="100">Top 100</option></select>'
+    +'</div>'
+    +'<div style="font-size:11px;color:#888780;margin-bottom:12px;" id="audit-count-preview"></div>'
+    +'<button class="audit-run-btn" onclick="startCareerAudit()" id="audit-run-btn">&#x1F50D; Start Audit</button>'
+    +'<div style="font-size:10px;color:#b4b2a9;margin-top:8px;">Each lookup uses a web search — ~3-5 sec per person. Best for contacts with a company name on file.</div>'
+    +'</div>'
+    +'<div id="audit-progress" style="display:none;padding:12px 18px;">'
+    +'<div class="audit-progress"><div class="audit-progress-label" id="audit-prog-label">Starting...</div><div class="audit-progress-bar-wrap"><div class="audit-progress-bar" id="audit-prog-bar" style="width:0%"></div></div><div class="audit-progress-sub" id="audit-prog-sub"></div></div>'
+    +'<button onclick="stopCareerAudit()" style="font-size:11px;color:#888780;background:none;border:none;cursor:pointer;margin-top:4px;font-family:inherit;">Stop</button>'
+    +'</div>'
+    +'<div id="audit-results"></div></div>';
+  updateAuditCountPreview();
+  if(_auditState.results.length > 0) renderAuditResults();
+}
+
+function updateAuditCountPreview(){
+  var rel   = document.getElementById('audit-rel') ? document.getElementById('audit-rel').value : '';
+  var kind  = document.getElementById('audit-kind') ? document.getElementById('audit-kind').value : '';
+  var limit = parseInt(document.getElementById('audit-limit') ? document.getElementById('audit-limit').value : '20');
+  var pool  = getAuditPool(rel, kind, limit);
+  var el    = document.getElementById('audit-count-preview');
+  if(el) el.textContent = pool.length + ' contacts selected';
+}
+
+function getAuditPool(rel, kind, limit){
+  var relOrder = {'Inner circle':0,'Contact':1,'Known':2,'Cold':3};
+  var pool = wosPeople.filter(function(p){
+    if(!p.company && !p.role) return false;
+    if(rel && p.relationship !== rel) return false;
+    if(kind && p.kind !== kind) return false;
+    return true;
+  });
+  pool.sort(function(a,b){
+    var rd=(relOrder[a.relationship]||3)-(relOrder[b.relationship]||3);
+    if(rd!==0)return rd;
+    return (cleanName(a.name)||'').localeCompare(cleanName(b.name)||'');
+  });
+  return pool.slice(0, limit);
+}
+
+async function startCareerAudit(){
+  await loadWOSPeople(true);
+  var rel   = document.getElementById('audit-rel') ? document.getElementById('audit-rel').value : '';
+  var kind  = document.getElementById('audit-kind') ? document.getElementById('audit-kind').value : '';
+  var limit = parseInt(document.getElementById('audit-limit') ? document.getElementById('audit-limit').value : '20');
+  var pool  = getAuditPool(rel, kind, limit);
+  if(!pool.length){ alert('No contacts match these filters.'); return; }
+  _auditState = { results:[], running:true, processed:0, total:pool.length, currentName:'' };
+  document.getElementById('audit-setup').style.display = 'none';
+  document.getElementById('audit-progress').style.display = 'block';
+  document.getElementById('audit-results').innerHTML = '';
+  for(var i=0; i<pool.length; i++){
+    if(!_auditState.running) break;
+    var person = pool[i];
+    var name = cleanName(person.name)||'';
+    _auditState.processed = i+1;
+    var pct = Math.round(((i+1)/pool.length)*100);
+    var barEl = document.getElementById('audit-prog-bar');
+    var labelEl = document.getElementById('audit-prog-label');
+    var subEl = document.getElementById('audit-prog-sub');
+    if(barEl) barEl.style.width = pct+'%';
+    if(labelEl) labelEl.textContent = 'Looking up '+name+'... ('+(i+1)+'/'+pool.length+')';
+    if(subEl) subEl.textContent = _auditState.results.filter(function(r){return r.status==='changed';}).length+' potential updates found so far';
+    try {
+      var found = await auditOnePerson(person);
+      _auditState.results.push({ person:person, found:found, status: found.changed ? 'changed' : 'same' });
+    } catch(e) {
+      _auditState.results.push({ person:person, found:null, status:'error' });
+    }
+    renderAuditResults();
+    await new Promise(function(r){ setTimeout(r, 800); });
+  }
+  _auditState.running = false;
+  document.getElementById('audit-progress').style.display = 'none';
+  var changedCount = _auditState.results.filter(function(r){return r.status==='changed';}).length;
+  if(changedCount===0){
+    document.getElementById('audit-results').innerHTML = '<div style="text-align:center;padding:40px 20px;color:#1D9E75;font-size:14px;font-weight:500;">\u2713 All done \u2014 no role changes found in this batch.</div>';
+  }
+}
+
+function stopCareerAudit(){
+  _auditState.running = false;
+  document.getElementById('audit-progress').style.display = 'none';
+  renderAuditResults();
+}
+
+async function auditOnePerson(person){
+  var name = cleanName(person.name)||'';
+  var company = person.company||'';
+  var role = person.role||'';
+  var systemPrompt = 'You are a career researcher. Use web search to find the current job title and company for this person. Return ONLY a JSON object: {"currentRole":"job title or null","currentCompany":"company or null","confidence":"high|medium|low","source":"brief source","changed":true,"note":"brief note"}. Set changed=true only if clearly different. Person: Name="'+name+'", Known role="'+role+'", Known company="'+company+'". Be conservative.';
+  var res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 300,
+      system: systemPrompt,
+      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+      messages: [{ role: 'user', content: 'Find current role for: '+name+', previously '+role+' at '+company }]
+    })
+  });
+  var data = await res.json();
+  var textBlock = (data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
+  if(!textBlock) return { changed:false, confidence:'low', note:'No data found' };
+  return JSON.parse(textBlock.replace(/```json|```/g,'').trim());
+}
+
+function renderAuditResults(){
+  var el = document.getElementById('audit-results');
+  if(!el) return;
+  var visible = _auditState.results.filter(function(r){ return r.status==='changed'; });
+  var updated  = _auditState.results.filter(function(r){ return r.status==='updated'; }).length;
+  var dismissed= _auditState.results.filter(function(r){ return r.status==='dismissed'; }).length;
+  if(!visible.length) return;
+  var summaryHtml = (updated>0||dismissed>0)
+    ? '<div class="audit-summary">'+(updated>0?updated+' updated \u00b7 ':'')+(dismissed>0?dismissed+' skipped \u00b7 ':'')+visible.length+' remaining</div>'
+    : '';
+  var cardsHtml = visible.map(function(r){
+    var p = r.person;
+    var f = r.found;
+    var name = cleanName(p.name)||'\u2014';
+    var colors = wosAvatarColor(name);
+    var bg=colors[0], fg=colors[1];
+    var initials = wosInitials(name);
+    var conf = f ? (f.confidence||'low') : 'low';
+    var confLabel = conf==='high'?'High confidence':conf==='medium'?'Medium confidence':'Low confidence';
+    var roleChanged    = f && f.currentRole    && f.currentRole    !== (p.role||'');
+    var companyChanged = f && f.currentCompany && f.currentCompany !== (p.company||'');
+    var knownFromFlag  = p.known_from && companyChanged
+      ? '<div class="audit-flag">\u26a0\ufe0f Known from already set: "'+p.known_from+'" \u2014 will be kept</div>'
+      : '';
+    var liQuery = encodeURIComponent(name+' '+(p.company||'')+' LinkedIn');
+    var liUrl = 'https://www.linkedin.com/search/results/people/?keywords='+liQuery;
+    var pid = JSON.stringify(p.id);
+    return '<div class="audit-card" id="audit-card-'+p.id+'">'
+      +'<div class="audit-card-header">'
+      +'<div class="audit-card-avatar" style="background:'+bg+';color:'+fg+';">'+initials+'</div>'
+      +'<div class="audit-card-name">'+name+'</div>'
+      +'<span class="audit-card-conf '+conf+'">'+confLabel+'</span>'
+      +'</div>'
+      +'<div class="audit-card-body">'
+      +'<div class="audit-col current"><div class="audit-col-label">On file</div>'
+      +'<div class="audit-field"><div class="audit-field-key">Company</div><div class="audit-field-val">'+(p.company||'\u2014')+'</div></div>'
+      +'<div class="audit-field"><div class="audit-field-key">Role</div><div class="audit-field-val">'+(p.role||'\u2014')+'</div></div>'
+      +'<div class="audit-field"><div class="audit-field-key">Known from</div><div class="audit-field-val">'+(p.known_from||'\u2014')+'</div></div>'
+      +'</div>'
+      +'<div class="audit-col"><div class="audit-col-label">Found online</div>'
+      +'<div class="audit-field"><div class="audit-field-key">Company</div><div class="audit-field-val'+(companyChanged?' changed':'')+'">'+((f&&f.currentCompany)||'\u2014')+'</div></div>'
+      +'<div class="audit-field"><div class="audit-field-key">Role</div><div class="audit-field-val'+(roleChanged?' changed':'')+'">'+((f&&f.currentRole)||'\u2014')+'</div></div>'
+      +'<div class="audit-field"><div class="audit-field-key">Source</div><div class="audit-field-val" style="font-size:10px;color:#888780;">'+((f&&(f.note||f.source))||'\u2014')+'</div></div>'
+      +'</div></div>'
+      +(knownFromFlag?'<div style="padding:0 14px 8px;">'+knownFromFlag+'</div>':'')
+      +'<div class="audit-card-actions">'
+      +'<button class="audit-update-btn" onclick="applyCareerUpdate('+pid+')">Update entry</button>'
+      +'<button class="audit-skip-btn" onclick="dismissAuditCard('+pid+')">Skip</button>'
+      +'<a class="audit-li-btn" href="'+liUrl+'" target="_blank">LinkedIn</a>'
+      +'<span style="font-size:10px;color:#888780;margin-left:auto;">'+(p.kind||'')+'</span>'
+      +'</div></div>';
+  }).join('');
+  el.innerHTML = summaryHtml + cardsHtml;
+}
+
+async function applyCareerUpdate(personId){
+  var result = _auditState.results.find(function(r){ return r.person.id===personId; });
+  if(!result) return;
+  var person = wosPeople.find(function(p){ return p.id===personId; });
+  if(!person) return;
+  var f = result.found;
+  var updates = { id:personId };
+  if(f.currentCompany && f.currentCompany !== person.company){
+    if(!person.known_from && person.company){ updates.known_from=person.company; updates.known_from_is_former=true; }
+    updates.company = f.currentCompany;
+  }
+  if(f.currentRole && f.currentRole !== person.role){ updates.role = f.currentRole; }
+  Object.assign(person, updates);
+  await saveWOSPerson(updates);
+  result.status = 'updated';
+  renderAuditResults();
+  var card = document.getElementById('audit-card-'+personId);
+  if(card){ card.style.transition='opacity 0.4s'; card.style.opacity='0'; setTimeout(function(){card.remove();},400); }
+  showXPFlash('Updated '+cleanName(person.name));
+}
+
+function dismissAuditCard(personId){
+  var result = _auditState.results.find(function(r){ return r.person.id===personId; });
+  if(result) result.status='dismissed';
+  var card = document.getElementById('audit-card-'+personId);
+  if(card){ card.style.transition='opacity 0.3s'; card.style.opacity='0'; setTimeout(function(){card.remove();renderAuditResults();},300); }
+}
+
+// ── DASHBOARD SEARCH ──
+function renderDashSearchResults(q){
+  var el = document.getElementById('wos-dash-results');
+  if(!el) return;
+  var query = (q||'').toLowerCase().trim();
+  if(!query){ el.innerHTML=''; return; }
+  var peopleHits = wosPeople.filter(function(p){
+    return ((p.name||'')+' '+(p.company||'')+' '+(p.role||'')).toLowerCase().includes(query);
+  }).slice(0,5);
+  var vendorHits = workOSVendors.filter(function(v){
+    return ((v.name||'')+' '+(v.areas||[]).join(' ')).toLowerCase().includes(query);
+  }).slice(0,4);
+  if(!peopleHits.length && !vendorHits.length){
+    el.innerHTML='<div style="font-size:12px;color:#b4b2a9;padding:8px 4px;">No results for "'+q+'"</div>';
+    return;
+  }
+  var personRows = peopleHits.map(function(p){
+    var name = cleanName(p.name)||'';
+    var colors = wosAvatarColor(name);
+    var sub = [(p.freelance_status==='Currently freelance'?'Freelance':p.company),p.role].filter(Boolean).join(' \u00b7 ');
+    var kindBadge = p.kind ? '<span style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:4px;background:#F1EFE8;color:#444441;">'+p.kind+'</span>' : '';
+    var talentBadge = p.talent ? '<span style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:4px;background:#E1F5EE;color:#0F6E56;">Talent</span>' : '';
+    var pid = JSON.stringify(p.id);
+    return '<div onclick="dashSearchOpenPerson('+pid+')" style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;" onmouseover="this.style.background=\'#f5f5f3\'" onmouseout="this.style.background=\'transparent\'">'
+      +'<div style="width:26px;height:26px;border-radius:50%;background:'+colors[0]+';color:'+colors[1]+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;flex-shrink:0;">'+wosInitials(name)+'</div>'
+      +'<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:500;color:#2c2c2a;">'+name+'</div><div style="font-size:11px;color:#888780;">'+sub+'</div></div>'
+      +'<div style="display:flex;gap:3px;">'+talentBadge+kindBadge+'</div></div>';
+  }).join('');
+  var vendorRows = vendorHits.map(function(v){
+    var isStudio = v.type==='studio';
+    var vid = v.id;
+    var vtype = JSON.stringify(v.type);
+    return '<div onclick="dashSearchOpenVendor('+vid+','+vtype+')" style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;" onmouseover="this.style.background=\'#f5f5f3\'" onmouseout="this.style.background=\'transparent\'">'
+      +'<div style="width:26px;height:26px;border-radius:50%;background:'+(isStudio?'#EEEDFE':'#FAEEDA')+';color:'+(isStudio?'#534AB7':'#854F0B')+';display:flex;align-items:center;justify-content:center;font-size:13px;">'+(isStudio?'\ud83c\udfa8':'\ud83c\udfe2')+'</div>'
+      +'<div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#2c2c2a;">'+(v.name||'\u2014')+'</div><div style="font-size:11px;color:#888780;">'+(isStudio?'Studio':'Vendor')+(v.kind?' \u00b7 '+v.kind:'')+(v.location?' \u00b7 '+v.location:'')+'</div></div></div>';
+  }).join('');
+  var pSec = peopleHits.length ? '<div style="font-size:9px;font-weight:600;color:#888780;letter-spacing:0.08em;text-transform:uppercase;padding:4px 8px 2px;">People</div>'+personRows : '';
+  var vSec = vendorHits.length ? '<div style="font-size:9px;font-weight:600;color:#888780;letter-spacing:0.08em;text-transform:uppercase;padding:4px 8px 2px;margin-top:4px;">Vendors &amp; Studios</div>'+vendorRows : '';
+  el.innerHTML = '<div style="background:#fff;border:0.5px solid #d1d1cf;border-radius:10px;padding:4px 0;box-shadow:0 2px 12px rgba(0,0,0,0.08);">'+pSec+vSec+'</div>';
+}
+
+async function dashSearchOpenPerson(id){
+  await loadWOSPeople();
+  var p = wosPeople.find(function(x){return x.id===id;});
+  var isTalent = p && p.talent;
+  setWorkView(isTalent ? 'wos-talent' : 'wos-network');
+  setTimeout(function(){openWOSPersonDetail(id);}, 150);
+}
+
+async function dashSearchOpenVendor(id, type){
+  await loadWOSVendors();
+  setWorkView(type==='studio' ? 'wos-studios' : 'wos-vendors');
+  setTimeout(function(){openVendorDetail(id);}, 150);
+}
+
 
 async function renderWOSCleanup(el){
   el.innerHTML = `<div class="wos-loading">Scanning records...</div>`;
@@ -6377,8 +6961,11 @@ function filterVendorListOnly() {
     if (q && !(((v.name||'') + ' ' + (v.notes||'')).toLowerCase().includes(q))) return false;
     if (fregion) {
       var loc = normalizeVendorLocation(v.location);
-      var region = loc.usRegion || loc.globalRegion || '';
-      if (!region.toLowerCase().includes(fregion.toLowerCase())) return false;
+      var usRegion = loc.usRegion || '';
+      var globalRegion = loc.globalRegion || '';
+      var isUS = globalRegion === 'US' || usRegion !== '';
+      if (fregion === 'US') { if (!isUS) return false; }
+      else if (!usRegion.toLowerCase().includes(fregion.toLowerCase()) && globalRegion !== fregion) return false;
     }
     return true;
   });
@@ -6437,8 +7024,11 @@ function renderVendorList(el, typeFilter) {
     if (ftag   && !(v.areas||[]).some(function(a) { return a.toLowerCase().includes(ftag); })) return false;
     if (fregion) {
       var loc = normalizeVendorLocation(v.location);
-      var region = loc.usRegion || loc.globalRegion || '';
-      if (!region.toLowerCase().includes(fregion.toLowerCase())) return false;
+      var usRegion = loc.usRegion || '';
+      var globalRegion = loc.globalRegion || '';
+      var isUS = globalRegion === 'US' || usRegion !== '';
+      if (fregion === 'US') { if (!isUS) return false; }
+      else if (!usRegion.toLowerCase().includes(fregion.toLowerCase()) && globalRegion !== fregion) return false;
     }
     return true;
   });
