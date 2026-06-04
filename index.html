@@ -133,7 +133,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 /* ── WORK OS PEOPLE ── */
 .wos-people-wrap{padding:0 14px 16px;}
-.wos-search-row{display:flex;gap:8px;margin-bottom:10px;}
+.wos-search-row{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
 .wos-search-input{flex:1;padding:7px 11px;font-size:13px;border:0.5px solid #b4b2a9;border-radius:8px;background:#fff;color:#2c2c2a;font-family:inherit;}
 .wos-search-input:focus{outline:none;border-color:#534AB7;}
 .wos-filters{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
@@ -226,7 +226,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wos-detail-row{display:flex;justify-content:space-between;font-size:11px;padding:2px 0;gap:8px;}
 .wos-detail-row .dk{color:#888780;flex-shrink:0;} .wos-detail-row .dv{color:#2c2c2a;font-weight:500;text-align:right;}
 .wos-detail-note{font-size:11px;color:#5f5e5a;line-height:1.5;background:#f5f5f3;border-radius:6px;padding:7px 9px;}
-.wos-detail-actions{padding:8px 12px;border-top:0.5px solid #d1d1cf;display:flex;gap:6px;flex-shrink:0;}
+.wos-detail-actions{padding:8px 12px;border-top:0.5px solid #d1d1cf;display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap;}
 .wos-detail-btn{flex:1;padding:5px;font-size:11px;border-radius:7px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;transition:all 0.1s;}
 .wos-detail-btn:hover{background:#f5f5f3;}
 .wos-detail-btn.primary{background:#1D9E75;border-color:#1D9E75;color:#fff;}
@@ -1217,6 +1217,35 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="wos-modal-actions">
         <button class="wos-modal-cancel" onclick="closeNewProjectModal()">Cancel</button>
         <button class="wos-modal-save" id="np-submit-btn" onclick="saveNewProject()">Create Project</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BULK IMPORT MODAL -->
+  <div class="wos-modal-overlay" id="wos-bulk-overlay" style="align-items:flex-start;padding:20px;overflow-y:auto;">
+    <div class="wos-modal-box" style="width:700px;max-width:100%;max-height:90vh;overflow-y:auto;">
+      <div class="wos-modal-title">&#x26A1; Bulk Add Contacts</div>
+      <div id="bulk-step-paste">
+        <div style="font-size:12px;color:#5f5e5a;margin-bottom:8px;">Paste email addresses in any format:</div>
+        <div style="font-size:11px;color:#888780;background:#f5f5f3;border-radius:8px;padding:8px 10px;margin-bottom:10px;line-height:1.9;font-family:monospace;">"Elisa Moore (She Her)" &lt;elisamoore@pinterest.com&gt;<br>Jessie Mizrahi &lt;jmizrahi@pinterest.com&gt;<br>ella@1stavemachine.com</div>
+        <textarea id="bulk-paste-input" style="width:100%;height:140px;border:0.5px solid #b4b2a9;border-radius:8px;padding:10px;font-size:13px;font-family:inherit;resize:vertical;background:#f5f5f3;color:#2c2c2a;box-sizing:border-box;" placeholder="Paste email list here..."></textarea>
+        <div id="bulk-parse-status" style="font-size:11px;color:#888780;margin-top:6px;min-height:16px;"></div>
+        <div style="display:flex;gap:8px;margin-top:12px;">
+          <button class="wos-modal-cancel" onclick="closeBulkImport()">Cancel</button>
+          <button class="wos-modal-save" onclick="bulkParseAndPreview()">Parse &amp; Preview &rarr;</button>
+        </div>
+      </div>
+      <div id="bulk-step-review" style="display:none;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <div style="font-size:13px;font-weight:500;color:#2c2c2a;" id="bulk-review-title"></div>
+          <button onclick="bulkBackToPaste()" style="font-size:11px;color:#888780;background:none;border:none;cursor:pointer;font-family:inherit;">&larr; Back</button>
+        </div>
+        <div id="bulk-review-table"></div>
+        <div id="bulk-save-status" style="font-size:12px;color:#888780;margin-top:8px;min-height:16px;"></div>
+        <div style="display:flex;gap:8px;margin-top:12px;">
+          <button class="wos-modal-cancel" onclick="closeBulkImport()">Cancel</button>
+          <button class="wos-modal-save" onclick="bulkSaveAll()" id="bulk-save-btn">Save All</button>
+        </div>
       </div>
     </div>
   </div>
@@ -4601,6 +4630,10 @@ function renderWOSDashboard(el) {
           <span class="wos-action-btn-icon">👤</span>
           <span>New Contact</span>
         </button>
+        <button class="wos-action-btn" onclick="openBulkImport()" style="--hover-bg:#f0eeff;--hover-border:#534AB7;--hover-color:#534AB7;">
+          <span class="wos-action-btn-icon">⚡</span>
+          <span>Bulk Add</span>
+        </button>
         <button class="wos-action-btn" onclick="setWorkView('wos-cleanup')" id="wos-cleanup-btn" style="--hover-bg:#FAEEDA;--hover-border:#BA7517;--hover-color:#854F0B;">
           <span class="wos-action-btn-icon">🧹</span>
           <span>Clean up</span>
@@ -5114,15 +5147,20 @@ async function saveWOSPerson(person){
     : `${SUPABASE_URL}/rest/v1/work_os_people?id=eq.${person.id}`;
   const method = isNew ? 'POST' : 'PATCH';
   person.updated_at = new Date().toISOString();
-  await fetch(url,{
+  const res = await fetch(url,{
     method,
     headers:{
       'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,
-      'Content-Type':'application/json','Prefer':'return=representation'
+      'Content-Type':'application/json',
+      'Prefer': isNew ? 'return=representation' : 'return=minimal'
     },
     body: JSON.stringify(person)
   });
-  wosPeopleLoaded = false; // force reload
+  wosPeopleLoaded = false;
+  if(isNew){
+    try { const rows = await res.json(); return Array.isArray(rows) ? rows[0] : rows; } catch(e){ return null; }
+  }
+  return person;
 }
 
 async function saveWOSOutreach(outreach){
@@ -5155,7 +5193,7 @@ async function renderWOSPeopleView(el, mode){
   await loadWOSPeople();
 
   const talentCount  = wosPeople.filter(p=>p.talent).length;
-  const hiringCount  = wosPeople.filter(p=>p.is_hiring_decision_maker).length;
+  const hiringCount  = wosPeople.filter(p=>p.hiring_decision_maker).length;
   const radarCount   = wosPeople.filter(p=>p.on_radar).length;
   const networkCount = wosPeople.length;
 
@@ -5177,6 +5215,7 @@ async function renderWOSPeopleView(el, mode){
       <div class="wos-search-row">
         <input class="wos-search-input" id="wos-people-search" placeholder="Search name, company, role..." oninput="filterWOSPeople()"/>
         <button class="add-btn" onclick="openContactModal()" style="flex-shrink:0;white-space:nowrap;">+ Add Contact</button>
+        <button class="add-btn" onclick="openBulkImport()" style="flex-shrink:0;white-space:nowrap;background:#f0eeff;color:#534AB7;border-color:#AFA9EC;">⚡ Bulk Add</button>
       </div>
       <div class="wos-filters">
         <select class="wos-filter-sel" id="wos-f-kind" onchange="filterWOSPeople()">
@@ -5248,22 +5287,39 @@ function filterWOSPeople(){
 
   const US_EAST = ['NY','NJ','CT','MA','PA','DC','MD','VA','NC','SC','GA','FL','ME','NH','VT','RI','DE'];
   const US_WEST = ['CA','WA','OR','NV','AZ','HI','AK'];
-  const US_CENTRAL = ['TX','IL','CO','MN','WI','MO','IA','KS','NE','SD','ND','WY','MT','ID','UT','NM','OK','AR','LA','MS','AL','TN','KY','IN','OH','MI'];
+  const US_CENTRAL = ['TX','IL','CO','MN','WI','MO','IA','KS','NE','SD','ND','WY','MT','ID','UT','NM','OK','AR','MS','AL','TN','KY','IN','OH','MI'];
+
+  // City aliases: LA=Los Angeles=CA, SF=San Francisco=CA
+  const CITY_TO_STATE = {'LA':'CA','LOS ANGELES':'CA','SF':'CA','SAN FRANCISCO':'CA',
+    'NYC':'NY','NEW YORK':'NY','NEW YORK CITY':'NY','BROOKLYN':'NY','MANHATTAN':'NY',
+    'CHI':'IL','CHICAGO':'IL','AUSTIN':'TX','DALLAS':'TX','HOUSTON':'TX',
+    'SEATTLE':'WA','PORTLAND':'OR','DENVER':'CO','PHOENIX':'AZ','VEGAS':'NV','LAS VEGAS':'NV',
+    'MIAMI':'FL','ATLANTA':'GA','BOSTON':'MA','PHILLY':'PA','PHILADELPHIA':'PA',
+    'DC':'DC','WASHINGTON DC':'DC','NASHVILLE':'TN','MINNEAPOLIS':'MN','DETROIT':'MI'};
+
+  function resolveLocation(raw){
+    var up = (raw||'').toUpperCase().trim();
+    return CITY_TO_STATE[up] || up;
+  }
 
   function matchRegion(p, r){
     if(!r) return true;
-    const loc=(p.location||'').toUpperCase();
-    const isE=US_EAST.includes(loc),isW=US_WEST.includes(loc),isC=US_CENTRAL.includes(loc);
+    var rawLoc = (p.location||'').toUpperCase().trim();
+    var loc = resolveLocation(rawLoc); // resolve city alias to state
+    const isE=US_EAST.includes(loc)||US_EAST.includes(rawLoc);
+    const isW=US_WEST.includes(loc)||US_WEST.includes(rawLoc);
+    const isC=US_CENTRAL.includes(loc)||US_CENTRAL.includes(rawLoc);
     const isUS=isE||isW||isC||(p.region||'')==='US';
     if(r==='East Coast')return isE;
     if(r==='West Coast')return isW;
     if(r==='Central')return isC;
     if(r==='US')return isUS;
+    if(r==='CA') return loc==='CA';
     return (p.region||'')===r;
   }
 
   let pool = wosCurrentPeopleTab === 'talent'  ? wosPeople.filter(p=>p.talent)
-    : wosCurrentPeopleTab === 'hiring' ? wosPeople.filter(p=>p.is_hiring_decision_maker)
+    : wosCurrentPeopleTab === 'hiring' ? wosPeople.filter(p=>p.hiring_decision_maker)
     : wosCurrentPeopleTab === 'radar'  ? wosPeople.filter(p=>p.on_radar)
     : wosPeople;
 
@@ -5662,7 +5718,7 @@ function closeWOSDetail(){
 }
 
 async function toggleTalentFromDetail(){
-  const id = document.querySelector('.wos-detail-panel')?.dataset?.personId;
+  const id = wosSelectedPersonId;
   if(!id) return;
   const p = wosPeople.find(x=>x.id===id);
   if(!p) return;
@@ -5673,7 +5729,7 @@ async function toggleTalentFromDetail(){
 }
 
 async function toggleFreelanceFromDetail(){
-  const id = document.querySelector('.wos-detail-panel')?.dataset?.personId;
+  const id = wosSelectedPersonId;
   if(!id) return;
   const p = wosPeople.find(x=>x.id===id);
   if(!p) return;
@@ -6259,6 +6315,307 @@ async function dashSearchOpenVendor(id, type){
   setWorkView(type==='studio' ? 'wos-studios' : 'wos-vendors');
   setTimeout(function(){openVendorDetail(id);}, 150);
 }
+
+
+
+// ── BULK IMPORT ──
+let _bulkEntries = [];
+
+function openBulkImport(){
+  document.getElementById('wos-bulk-overlay').classList.add('show');
+  document.getElementById('bulk-step-paste').style.display = 'block';
+  document.getElementById('bulk-step-review').style.display = 'none';
+  document.getElementById('bulk-parse-status').textContent = '';
+  setTimeout(function(){ var t=document.getElementById('bulk-paste-input'); if(t) t.focus(); }, 100);
+}
+
+function closeBulkImport(){
+  document.getElementById('wos-bulk-overlay').classList.remove('show');
+}
+
+function bulkBackToPaste(){
+  document.getElementById('bulk-step-paste').style.display = 'block';
+  document.getElementById('bulk-step-review').style.display = 'none';
+}
+
+function parseBulkPaste(raw){
+  // Split on common separators: newline, comma-space before a quote or name, semicolon
+  // Strategy: split on >, then on newlines, then parse each chunk
+  var entries = [];
+  // Normalize: replace \r\n with \n
+  var text = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+  // Split on patterns: newline, or comma followed by optional space then a letter/quote
+  // We want to split email list items that are comma-separated
+  var chunks = [];
+  // First split by newlines
+  var lines = text.split('\n');
+  for(var i=0; i<lines.length; i++){
+    var line = lines[i].trim();
+    if(!line) continue;
+    // Each line may contain multiple comma-separated entries
+    // But we need to be careful not to split inside "Name, Jr" patterns
+    // Safe split: split after > or after .com/.net etc followed by comma
+    var parts = line.split(/,\s*(?=[A-Z"']|[a-z0-9._%+\-]+@)/);
+    for(var j=0; j<parts.length; j++){
+      var p = parts[j].trim();
+      if(p) chunks.push(p);
+    }
+  }
+
+  for(var k=0; k<chunks.length; k++){
+    var chunk = chunks[k].trim().replace(/,\s*$/, ''); // remove trailing comma
+    if(!chunk) continue;
+
+    var entry = { raw: chunk, name:'', firstName:'', lastName:'', email:'', company:'', domain:'', pronouns:'' };
+
+    // Pattern 1: "Name (Pronouns)" <email> or Name <email>
+    var m1 = chunk.match(/^"?([^"<]+?)"?\s*<([^>]+)>/);
+    if(m1){
+      var namePart = m1[1].trim();
+      entry.email = m1[2].trim().toLowerCase();
+      // Extract pronouns from (She Her), (He/Him), etc.
+      var pronounMatch = namePart.match(/\(([^)]+)\)/);
+      if(pronounMatch){
+        entry.pronouns = pronounMatch[1].trim();
+        namePart = namePart.replace(/\s*\([^)]+\)/, '').trim();
+      }
+      entry.name = namePart;
+    } else {
+      // Pattern 2: bare email
+      var m2 = chunk.match(/([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})/);
+      if(m2){
+        entry.email = m2[1].trim().toLowerCase();
+      }
+    }
+
+    if(!entry.email || !entry.email.includes('@')) continue;
+
+    // Extract domain
+    entry.domain = entry.email.split('@')[1] || '';
+
+    // Infer name from email local part if no name
+    if(!entry.name && entry.email){
+      var local = entry.email.split('@')[0];
+      // Convert jmizrahi → J Mizrahi, elisamoore → Elisa Moore
+      var guessName = local
+        .replace(/[._\-]/g, ' ')
+        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .split(' ')
+        .map(function(w){ return w.charAt(0).toUpperCase() + w.slice(1); })
+        .join(' ');
+      entry.name = guessName;
+      entry.nameInferred = true;
+    }
+
+    // Split name into first/last
+    var nameParts = entry.name.trim().split(/\s+/);
+    entry.firstName = nameParts[0] || '';
+    entry.lastName  = nameParts.slice(1).join(' ') || '';
+
+    entries.push(entry);
+  }
+  return entries;
+}
+
+function domainToCompanyGuess(domain){
+  // Remove www., common TLDs, and format nicely
+  var d = domain.replace(/^www\./, '');
+  // Check existing people DB first
+  var existing = wosPeople.find(function(p){
+    return p.email && p.email.toLowerCase().split('@')[1] === d.toLowerCase();
+  });
+  if(existing && existing.company) return existing.company;
+  // Check for known domains
+  var known = {
+    'google.com':'Google','apple.com':'Apple','meta.com':'Meta','facebook.com':'Meta',
+    'amazon.com':'Amazon','netflix.com':'Netflix','microsoft.com':'Microsoft',
+    'spotify.com':'Spotify','uber.com':'Uber','airbnb.com':'Airbnb',
+    'pinterest.com':'Pinterest','twitter.com':'Twitter/X','x.com':'X (Twitter)',
+    'linkedin.com':'LinkedIn','adobe.com':'Adobe','salesforce.com':'Salesforce',
+    'slack.com':'Slack','stripe.com':'Stripe','shopify.com':'Shopify',
+    'gmail.com':'','yahoo.com':'','hotmail.com':'','icloud.com':'',
+    'outlook.com':'','me.com':'',
+  };
+  if(known.hasOwnProperty(d)) return known[d];
+  // Heuristic: strip TLD(s), title-case, handle numbers
+  var name = d.replace(/\.(com|net|org|io|co|agency|studio|tv|fm|ai|app)(\.[a-z]{2})?$/, '');
+  // Convert 1stavemachine -> 1st Ave Machine style isn't possible without AI, so return formatted version
+  name = name.replace(/[.\-_]/g, ' ');
+  name = name.split(' ').map(function(w){
+    if(/^\d/.test(w)) return w; // keep "1st" as-is
+    return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+  }).join(' ');
+  return name;
+}
+
+async function bulkParseAndPreview(){
+  var raw = document.getElementById('bulk-paste-input').value;
+  if(!raw.trim()){ document.getElementById('bulk-parse-status').textContent = 'Paste something first.'; return; }
+
+  var entries = parseBulkPaste(raw);
+  if(!entries.length){ document.getElementById('bulk-parse-status').textContent = 'No valid emails found.'; return; }
+
+  // Enrich with company guesses synchronously first
+  entries.forEach(function(e){
+    if(!e.company) e.company = domainToCompanyGuess(e.domain);
+  });
+
+  // Use Claude API to improve uncertain company names (domains we couldn't resolve)
+  var uncertain = entries.filter(function(e){ return !e.company || e.company === e.domain.split('.')[0]; });
+  if(uncertain.length > 0){
+    document.getElementById('bulk-parse-status').textContent = 'Identifying companies...';
+    try {
+      var domainList = uncertain.map(function(e){ return e.domain; }).join(', ');
+      var res = await fetch('https://api.anthropic.com/v1/messages', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          model:'claude-sonnet-4-20250514',
+          max_tokens:200,
+          system:'Return ONLY a JSON object mapping email domain to company name. Example: {"1stavemachine.com":"1st Ave Machine","tbwa.com":"TBWA"}. If unknown, use an empty string.',
+          messages:[{role:'user', content:'What companies own these email domains? '+domainList}]
+        })
+      });
+      var data = await res.json();
+      var txt = (data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
+      var map = JSON.parse(txt.replace(/```json|```/g,'').trim());
+      uncertain.forEach(function(e){
+        if(map[e.domain]) e.company = map[e.domain];
+      });
+    } catch(err) { /* fallback silently */ }
+  }
+
+  _bulkEntries = entries;
+  renderBulkReview();
+}
+
+function renderBulkReview(){
+  document.getElementById('bulk-step-paste').style.display = 'none';
+  document.getElementById('bulk-step-review').style.display = 'block';
+  document.getElementById('bulk-review-title').textContent = _bulkEntries.length + ' contacts to add — review & edit before saving:';
+
+  var rows = _bulkEntries.map(function(e, i){
+    var dupCheck = wosPeople.find(function(p){
+      return (p.email||'').toLowerCase() === e.email.toLowerCase();
+    });
+    var dupWarn = dupCheck ? '<span style="font-size:10px;color:#E24B4A;margin-left:4px;">already exists</span>' : '';
+    return '<div style="border:0.5px solid #e8e8e4;border-radius:8px;padding:10px 12px;margin-bottom:7px;background:'+(dupCheck?'#fff8f8':'#fff')+';">'
+      +'<div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">'
+      +'<span style="font-size:11px;font-weight:500;color:#888780;">#'+(i+1)+'</span>'
+      +'<span style="font-size:12px;color:#888780;">'+e.email+'</span>'
+      +dupWarn
+      +'</div>'
+      +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;">'
+      +'<div><div style="font-size:9px;color:#888780;font-weight:500;margin-bottom:2px;">FIRST NAME</div>'
+      +'<input class="wos-modal-input" style="font-size:12px;padding:4px 7px;" value="'+htmlEsc(e.firstName)+'" oninput="_bulkEntries['+i+'].firstName=this.value"></div>'
+      +'<div><div style="font-size:9px;color:#888780;font-weight:500;margin-bottom:2px;">LAST NAME</div>'
+      +'<input class="wos-modal-input" style="font-size:12px;padding:4px 7px;" value="'+htmlEsc(e.lastName)+'" oninput="_bulkEntries['+i+'].lastName=this.value"></div>'
+      +'<div><div style="font-size:9px;color:#888780;font-weight:500;margin-bottom:2px;">ROLE</div>'
+      +'<input class="wos-modal-input" style="font-size:12px;padding:4px 7px;" value="'+htmlEsc(e.role||'')+'" oninput="_bulkEntries['+i+'].role=this.value" placeholder="title..."></div>'
+      +'<div><div style="font-size:9px;color:#888780;font-weight:500;margin-bottom:2px;">COMPANY</div>'
+      +'<input class="wos-modal-input" style="font-size:12px;padding:4px 7px;" value="'+htmlEsc(e.company)+'" oninput="_bulkEntries['+i+'].company=this.value"></div>'
+      +'<div><div style="font-size:9px;color:#888780;font-weight:500;margin-bottom:2px;">LOCATION</div>'
+      +'<input class="wos-modal-input" style="font-size:12px;padding:4px 7px;" value="'+htmlEsc(e.location||'')+'" oninput="_bulkEntries['+i+'].location=this.value" placeholder="NY, CA, LA..."></div>'
+      +'<div><div style="font-size:9px;color:#888780;font-weight:500;margin-bottom:2px;">KNOWN FROM</div>'
+      +'<input class="wos-modal-input" style="font-size:12px;padding:4px 7px;" value="'+htmlEsc(e.knownFrom||'')+'" oninput="_bulkEntries['+i+'].knownFrom=this.value" placeholder="project, person..."></div>'
+      +'<div><div style="font-size:9px;color:#888780;font-weight:500;margin-bottom:2px;">KIND</div>'
+      +'<select class="wos-modal-input" style="font-size:12px;padding:4px 7px;cursor:pointer;" onchange="_bulkEntries['+i+'].kind=this.value">'
+      +'<option value="">—</option>'
+      +'<option value="PROD">PROD</option><option value="BIZ">BIZ</option><option value="CREATIVE">CREATIVE</option>'
+      +'<option value="DESIGN">DESIGN</option><option value="TECH">TECH</option><option value="EVENTS">EVENTS</option>'
+      +'<option value="AV">AV</option><option value="FILM">FILM</option><option value="OTHER">OTHER</option>'
+      +'</select></div>'
+      +'<div><div style="font-size:9px;color:#888780;font-weight:500;margin-bottom:2px;">RELATIONSHIP</div>'
+      +'<select class="wos-modal-input" style="font-size:12px;padding:4px 7px;cursor:pointer;" onchange="_bulkEntries['+i+'].relationship=this.value">'
+      +'<option value="Contact" selected>Contact</option>'
+      +'<option value="Inner circle">Inner circle</option>'
+      +'<option value="Known">Known</option>'
+      +'<option value="Cold">Cold</option>'
+      +'</select></div>'
+      +'</div>'
+      +'<div style="display:flex;gap:10px;margin-top:6px;align-items:center;">'
+      +'<label style="display:flex;align-items:center;gap:4px;font-size:11px;color:#5f5e5a;cursor:pointer;">'
+      +'<input type="checkbox" style="accent-color:#1D9E75;cursor:pointer;" '+(e.talent?'checked':'')+' onchange="_bulkEntries['+i+'].talent=this.checked"> Talent</label>'
+      +'<label style="display:flex;align-items:center;gap:4px;font-size:11px;color:#5f5e5a;cursor:pointer;">'
+      +'<input type="checkbox" style="accent-color:#534AB7;cursor:pointer;" onchange="_bulkEntries['+i+'].skip=this.checked"> Skip this one</label>'
+      +(e.nameInferred?'<span style="font-size:10px;color:#b4b2a9;">name guessed from email</span>':'')
+      +'</div>'
+      +'</div>';
+  }).join('');
+
+  document.getElementById('bulk-review-table').innerHTML = rows;
+  document.getElementById('bulk-save-status').textContent = '';
+  document.getElementById('bulk-save-btn').textContent = 'Save All (' + _bulkEntries.length + ')';
+}
+
+function htmlEsc(str){
+  return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+async function bulkSaveAll(){
+  var toSave = _bulkEntries.filter(function(e){ return !e.skip && e.email; });
+  if(!toSave.length){ alert('Nothing to save.'); return; }
+
+  var btn = document.getElementById('bulk-save-btn');
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+
+  var saved = 0, skipped = 0, errors = 0;
+
+  for(var i=0; i<toSave.length; i++){
+    var e = toSave[i];
+    var dup = wosPeople.find(function(p){ return (p.email||'').toLowerCase() === e.email.toLowerCase(); });
+    if(dup){ skipped++; continue; }
+
+    var name = (e.firstName + ' ' + e.lastName).trim() || e.email.split('@')[0];
+    var newPerson = {
+      name:         name,
+      email:        e.email,
+      company:      e.company      || null,
+      role:         e.role         || null,
+      kind:         e.kind         || null,
+      location:     e.location     || null,
+      known_from:   e.knownFrom    || null,
+      relationship: e.relationship || 'Contact',
+      talent:       !!e.talent,
+      on_radar:     false,
+      radar_score:  0,
+      created_at:   new Date().toISOString(),
+    };
+
+    try {
+      var res = await fetch(SUPABASE_URL + '/rest/v1/work_os_people', {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation'
+        },
+        body: JSON.stringify(newPerson)
+      });
+      if(res.ok){ saved++; }
+      else { var t = await res.text(); console.error('Bulk save error', res.status, t); errors++; }
+    } catch(err) {
+      console.error('Bulk save error:', err); errors++;
+    }
+    document.getElementById('bulk-save-status').textContent = 'Saved ' + saved + ' of ' + toSave.length + '...';
+  }
+
+  // Full reload — same as saveNewContact
+  await reloadAndRender();
+
+  btn.disabled = false;
+  var msg = saved + ' contact' + (saved!==1?'s':'') + ' added';
+  if(skipped) msg += ' \u00b7 ' + skipped + ' skipped (already in DB)';
+  if(errors)  msg += ' \u00b7 ' + errors + ' failed';
+  document.getElementById('bulk-save-status').textContent = msg;
+  btn.textContent = '\u2713 Done';
+  showXPFlash('\u26A1 ' + saved + ' contacts added!');
+  setTimeout(closeBulkImport, 2000);
+}
+
 
 
 async function renderWOSCleanup(el){
