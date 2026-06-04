@@ -936,124 +936,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   .health-input-row{gap:6px;}
 }
 /* ── HEALTH VIEW ── */
-.health-view{padding:0 0 40px;}
-.health-header{padding:14px 18px 10px;border-bottom:0.5px solid #e8e8e4;}
-.health-title{font-size:17px;font-weight:500;color:#2c2c2a;}
-.health-subtitle{font-size:12px;color:#5f5e5a;margin-top:2px;}
-.health-tabs{display:flex;gap:0;border-bottom:0.5px solid #e8e8e4;padding:0 18px;}
-.health-tab{padding:10px 14px;font-size:12px;font-weight:500;color:#888780;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.15s;}
-.health-tab.active{color:#1D9E75;border-bottom-color:#1D9E75;}
-.health-tab:hover{color:#2c2c2a;}
-.health-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px 18px;}
-.health-card{border-radius:12px;border:1.5px solid #e8e8e4;background:#fff;padding:14px 12px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;transition:all 0.15s;position:relative;user-select:none;min-height:130px;justify-content:center;}
-.health-card:hover{border-color:#b4b2a9;background:#fafaf8;}
-.health-card.logged{border-color:#1D9E75;background:#f0faf6;}
-.health-card.goal-met{border-color:#639922;background:#f0f9ea;}
-.health-card-emoji{font-size:28px;line-height:1;}
-.health-card-name{font-size:11px;font-weight:500;color:#2c2c2a;text-align:center;}
-.health-card-value{font-size:18px;font-weight:700;color:#1D9E75;line-height:1.1;text-align:center;}
-.health-card-sub{font-size:10px;color:#888780;text-align:center;line-height:1.3;}
-.health-card-badge{position:absolute;top:7px;right:7px;width:16px;height:16px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;}
-.health-card-badge::after{content:'';width:8px;height:4px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block;}
-.health-card-tap{font-size:9px;color:#b4b2a9;position:absolute;bottom:7px;right:10px;}
-.health-card-bar-wrap{width:80%;height:5px;background:#e8f5f1;border-radius:4px;overflow:hidden;margin-top:2px;}
-.health-card-bar{height:100%;background:linear-gradient(90deg,#1D9E75,#5AC8A5);border-radius:4px;transition:width 0.4s;}
-.health-glp1-strip{margin:10px 18px 0;padding:8px 12px;background:linear-gradient(135deg,#e8f5f1,#d4edde);border:1px solid #a8dcc5;border-radius:10px;display:flex;align-items:center;gap:8px;transition:all 0.3s;}
-.health-glp1-strip.overdue{background:linear-gradient(135deg,#FCEBEB,#fde8e8);border-color:#F0997B;}
-.health-glp1-strip.overdue .health-glp1-day{color:#E24B4A;}
-.health-glp1-strip.overdue .health-glp1-label{color:#E24B4A;}
-.health-glp1-strip.overdue .health-glp1-sub{color:#A32D2D;}
-.health-glp1-day{font-size:20px;font-weight:700;color:#0F6E56;line-height:1;}
-.health-glp1-label{font-size:11px;color:#0F6E56;font-weight:500;}
-.health-glp1-sub{font-size:10px;color:#3B8C6E;margin-top:1px;}
-.health-shot-bar{display:flex;align-items:center;gap:10px;padding:7px 18px;border-bottom:0.5px solid #f0f0ee;}
-.health-shot-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.health-shot-dot.due{background:#E24B4A;animation:pulse 1.5s ease-in-out infinite;}
-.health-shot-dot.done{background:#1D9E75;}
-.health-shot-dot.ok{background:#b4b2a9;}
-.health-shot-text{font-size:11px;color:#888780;flex:1;}
-.health-shot-text strong{color:#2c2c2a;}
-.health-shot-btn{font-size:10px;padding:3px 9px;border-radius:5px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;white-space:nowrap;}
-.health-shot-btn:hover{border-color:#1D9E75;color:#1D9E75;background:#f0faf6;}
-.health-shot-btn.done{border-color:#1D9E75;color:#1D9E75;background:#f0faf6;}
-.habit-shot-card{border-radius:10px;border:1.5px solid #f0c4c4;background:#fff8f8;padding:10px 10px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all 0.15s;}
-.habit-shot-card:hover{border-color:#E24B4A;background:#fff3f0;}
-.health-log-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.35);z-index:30;align-items:center;justify-content:center;border-radius:12px;}
-.health-log-overlay.show{display:flex;}
-.health-log-box{background:#fff;border-radius:12px;border:0.5px solid #d1d1cf;padding:20px;width:360px;max-width:calc(100% - 32px);display:flex;flex-direction:column;gap:11px;box-shadow:0 4px 24px rgba(0,0,0,0.12);}
-.health-log-icon{font-size:36px;text-align:center;}
-.health-log-title{font-size:15px;font-weight:500;color:#2c2c2a;text-align:center;}
-.health-log-input{width:100%;padding:7px 10px;font-size:14px;border:0.5px solid #b4b2a9;border-radius:8px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;}
-.health-log-input:focus{outline:none;border-color:#1D9E75;background:#fff;}
-.health-log-row{display:flex;gap:8px;}
-.health-log-actions{display:flex;gap:8px;margin-top:2px;}
-.health-log-cancel{flex:1;padding:9px;font-size:13px;border-radius:8px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;}
-.health-log-save{flex:2;padding:9px;font-size:13px;border-radius:8px;border:none;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;font-weight:500;}
-.health-log-save:hover{background:#0F6E56;}
-.health-quick-btns{display:flex;gap:5px;flex-wrap:wrap;}
-.health-quick-btn{padding:5px 10px;font-size:12px;border:1px solid #c5e8dc;border-radius:6px;background:#f0faf6;color:#0F6E56;cursor:pointer;font-family:inherit;}
-.health-quick-btn:hover{background:#1D9E75;color:#fff;}
-.health-ai-pill{font-size:10px;color:#7F77DD;background:#f0eeff;padding:3px 9px;border-radius:6px;text-align:center;display:none;}
-.health-ai-pill.show{display:block;}
-.health-panel{padding:14px 18px;}
-.health-section-label{font-size:10px;font-weight:600;color:#5f5e5a;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 7px;display:flex;align-items:center;gap:8px;}
-.health-section-label::after{content:'';flex:1;height:0.5px;background:#e8e8e4;margin-left:4px;}
-.health-entry{background:#fff;border:0.5px solid #e8e8e4;border-radius:10px;padding:9px 12px;display:flex;align-items:center;gap:9px;margin-bottom:5px;}
-.health-entry-icon{font-size:17px;flex-shrink:0;}
-.health-entry-body{flex:1;min-width:0;}
-.health-entry-main{font-size:13px;font-weight:500;color:#2c2c2a;}
-.health-entry-sub{font-size:11px;color:#888780;margin-top:1px;}
-.health-entry-del{font-size:11px;color:#d1d1cf;cursor:pointer;padding:4px;border-radius:4px;flex-shrink:0;}
-.health-entry-del:hover{color:#E24B4A;background:#fff3f0;}
-.health-meal-tag{display:inline-block;padding:1px 6px;font-size:9px;font-weight:600;border-radius:4px;margin-right:4px;}
-.health-meal-breakfast{background:#FFF3E0;color:#E65100;}
-.health-meal-lunch{background:#E8F5E9;color:#2E7D32;}
-.health-meal-dinner{background:#EDE7F6;color:#4527A0;}
-.health-meal-snack{background:#FFF8E1;color:#F57F17;}
-.health-weight-chart{display:flex;gap:4px;align-items:flex-end;height:52px;margin:6px 0 10px;}
-.health-weight-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;}
-.health-weight-bar{width:100%;background:#1D9E75;border-radius:3px 3px 0 0;min-height:2px;}
-.health-weight-bar-label{font-size:9px;color:#888780;}
-.health-empty{text-align:center;padding:16px;color:#b4b2a9;font-size:12px;}
-.health-log-input-label{font-size:10px;color:#888780;font-weight:500;letter-spacing:0.04em;margin-bottom:3px;}
-@media(max-width:768px){
-  .health-grid{grid-template-columns:repeat(2,1fr);gap:8px;padding:10px 12px;}
-  .health-card{min-height:110px;}
-}
+.health-view{padding:0 0 40px;}.health-header{padding:14px 18px 10px;border-bottom:0.5px solid #e8e8e4;}.health-title{font-size:17px;font-weight:500;color:#2c2c2a;}.health-subtitle{font-size:12px;color:#5f5e5a;margin-top:2px;}.health-tabs{display:flex;gap:0;border-bottom:0.5px solid #e8e8e4;padding:0 18px;}.health-tab{padding:10px 14px;font-size:12px;font-weight:500;color:#888780;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.15s;}.health-tab.active{color:#1D9E75;border-bottom-color:#1D9E75;}.health-tab:hover{color:#2c2c2a;}.health-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:14px 18px;}.health-card{border-radius:12px;border:1.5px solid #e8e8e4;background:#fff;padding:14px 12px 12px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;transition:all 0.15s;position:relative;user-select:none;min-height:130px;justify-content:center;}.health-card:hover{border-color:#b4b2a9;background:#fafaf8;}.health-card.logged{border-color:#1D9E75;background:#f0faf6;}.health-card.goal-met{border-color:#639922;background:#f0f9ea;}.health-card-emoji{font-size:28px;line-height:1;}.health-card-name{font-size:11px;font-weight:500;color:#2c2c2a;text-align:center;}.health-card-value{font-size:18px;font-weight:700;color:#1D9E75;line-height:1.1;text-align:center;}.health-card-sub{font-size:10px;color:#888780;text-align:center;line-height:1.3;}.health-card-badge{position:absolute;top:7px;right:7px;width:16px;height:16px;border-radius:50%;background:#1D9E75;display:flex;align-items:center;justify-content:center;}.health-card-badge::after{content:'';width:8px;height:4px;border-left:1.5px solid #fff;border-bottom:1.5px solid #fff;transform:rotate(-45deg) translateY(-1px);display:block;}.health-card-tap{font-size:9px;color:#b4b2a9;position:absolute;bottom:7px;right:10px;}.health-card-bar-wrap{width:80%;height:5px;background:#e8f5f1;border-radius:4px;overflow:hidden;margin-top:2px;}.health-card-bar{height:100%;background:linear-gradient(90deg,#1D9E75,#5AC8A5);border-radius:4px;transition:width 0.4s;}.health-glp1-strip{margin:10px 18px 0;padding:8px 12px;background:linear-gradient(135deg,#e8f5f1,#d4edde);border:1px solid #a8dcc5;border-radius:10px;display:flex;align-items:center;gap:8px;transition:all 0.3s;}.health-glp1-strip.overdue{background:linear-gradient(135deg,#FCEBEB,#fde8e8);border-color:#F0997B;}.health-glp1-strip.overdue .health-glp1-day{color:#E24B4A;}.health-glp1-strip.overdue .health-glp1-label{color:#E24B4A;}.health-glp1-strip.overdue .health-glp1-sub{color:#A32D2D;}.health-glp1-day{font-size:20px;font-weight:700;color:#0F6E56;line-height:1;}.health-glp1-label{font-size:11px;color:#0F6E56;font-weight:500;}.health-glp1-sub{font-size:10px;color:#3B8C6E;margin-top:1px;}.health-shot-bar{display:flex;align-items:center;gap:10px;padding:7px 18px;border-bottom:0.5px solid #f0f0ee;}.health-shot-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}.health-shot-dot.due{background:#E24B4A;animation:pulse 1.5s ease-in-out infinite;}.health-shot-dot.done{background:#1D9E75;}.health-shot-dot.ok{background:#b4b2a9;}.health-shot-text{font-size:11px;color:#888780;flex:1;}.health-shot-text strong{color:#2c2c2a;}.health-shot-btn{font-size:10px;padding:3px 9px;border-radius:5px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;white-space:nowrap;}.health-shot-btn:hover{border-color:#1D9E75;color:#1D9E75;background:#f0faf6;}.health-shot-btn.done{border-color:#1D9E75;color:#1D9E75;background:#f0faf6;}.habit-shot-card{border-radius:10px;border:1.5px solid #f0c4c4;background:#fff8f8;padding:10px 10px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all 0.15s;}.habit-shot-card:hover{border-color:#E24B4A;background:#fff3f0;}.health-log-overlay{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.35);z-index:30;align-items:center;justify-content:center;border-radius:12px;}.health-log-overlay.show{display:flex;}.health-log-box{background:#fff;border-radius:12px;border:0.5px solid #d1d1cf;padding:20px;width:360px;max-width:calc(100% - 32px);display:flex;flex-direction:column;gap:11px;box-shadow:0 4px 24px rgba(0,0,0,0.12);}.health-log-icon{font-size:36px;text-align:center;}.health-log-title{font-size:15px;font-weight:500;color:#2c2c2a;text-align:center;}.health-log-input{width:100%;padding:7px 10px;font-size:14px;border:0.5px solid #b4b2a9;border-radius:8px;background:#f5f5f3;color:#2c2c2a;font-family:inherit;}.health-log-input:focus{outline:none;border-color:#1D9E75;background:#fff;}.health-log-row{display:flex;gap:8px;}.health-log-actions{display:flex;gap:8px;margin-top:2px;}.health-log-cancel{flex:1;padding:9px;font-size:13px;border-radius:8px;border:0.5px solid #b4b2a9;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;}.health-log-save{flex:2;padding:9px;font-size:13px;border-radius:8px;border:none;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;font-weight:500;}.health-log-save:hover{background:#0F6E56;}.health-quick-btns{display:flex;gap:5px;flex-wrap:wrap;}.health-quick-btn{padding:5px 10px;font-size:12px;border:1px solid #c5e8dc;border-radius:6px;background:#f0faf6;color:#0F6E56;cursor:pointer;font-family:inherit;}.health-quick-btn:hover{background:#1D9E75;color:#fff;}.health-ai-pill{font-size:10px;color:#7F77DD;background:#f0eeff;padding:3px 9px;border-radius:6px;text-align:center;display:none;}.health-ai-pill.show{display:block;}.health-panel{padding:14px 18px;}.health-section-label{font-size:10px;font-weight:600;color:#5f5e5a;letter-spacing:0.08em;text-transform:uppercase;margin:16px 0 7px;display:flex;align-items:center;gap:8px;}.health-section-label::after{content:'';flex:1;height:0.5px;background:#e8e8e4;margin-left:4px;}.health-entry{background:#fff;border:0.5px solid #e8e8e4;border-radius:10px;padding:9px 12px;display:flex;align-items:center;gap:9px;margin-bottom:5px;}.health-entry-icon{font-size:17px;flex-shrink:0;}.health-entry-body{flex:1;min-width:0;}.health-entry-main{font-size:13px;font-weight:500;color:#2c2c2a;}.health-entry-sub{font-size:11px;color:#888780;margin-top:1px;}.health-entry-del{font-size:11px;color:#d1d1cf;cursor:pointer;padding:4px;border-radius:4px;flex-shrink:0;}.health-entry-del:hover{color:#E24B4A;background:#fff3f0;}.health-meal-tag{display:inline-block;padding:1px 6px;font-size:9px;font-weight:600;border-radius:4px;margin-right:4px;}.health-meal-breakfast{background:#FFF3E0;color:#E65100;}.health-meal-lunch{background:#E8F5E9;color:#2E7D32;}.health-meal-dinner{background:#EDE7F6;color:#4527A0;}.health-meal-snack{background:#FFF8E1;color:#F57F17;}.health-weight-chart{display:flex;gap:4px;align-items:flex-end;height:52px;margin:6px 0 10px;}.health-weight-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;}.health-weight-bar{width:100%;background:#1D9E75;border-radius:3px 3px 0 0;min-height:2px;}.health-weight-bar-label{font-size:9px;color:#888780;}.health-empty{text-align:center;padding:16px;color:#b4b2a9;font-size:12px;}.health-log-input-label{font-size:10px;color:#888780;font-weight:500;letter-spacing:0.04em;margin-bottom:3px;}@media(max-width:768px){.health-grid{grid-template-columns:repeat(2,1fr);gap:8px;padding:10px 12px;}.health-card{min-height:110px;}}
 /* ── CAREER AUDIT ── */
-.audit-wrap{padding:0 0 40px;}
-.audit-setup{padding:16px 18px;}
-.audit-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
-.audit-run-btn{padding:9px 20px;font-size:13px;font-weight:500;border:none;border-radius:9px;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;}
-.audit-run-btn:hover{background:#0F6E56;}
-.audit-progress{margin:12px 0;background:#f5f5f3;border-radius:8px;padding:12px 14px;}
-.audit-progress-bar-wrap{height:6px;background:#e8e8e4;border-radius:4px;margin:8px 0 4px;overflow:hidden;}
-.audit-progress-bar{height:100%;background:linear-gradient(90deg,#1D9E75,#5AC8A5);border-radius:4px;transition:width 0.3s;}
-.audit-progress-label{font-size:12px;color:#5f5e5a;font-weight:500;}
-.audit-progress-sub{font-size:11px;color:#888780;}
-.audit-card{border:0.5px solid #d1d1cf;border-radius:10px;background:#fff;margin:0 14px 10px;overflow:hidden;}
-.audit-card-header{padding:10px 14px 8px;display:flex;align-items:center;gap:10px;border-bottom:0.5px solid #f0f0ee;}
-.audit-card-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;}
-.audit-card-name{font-size:14px;font-weight:500;color:#2c2c2a;flex:1;}
-.audit-card-conf{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:600;}
-.audit-card-conf.high{background:#E1F5EE;color:#0F6E56;}
-.audit-card-conf.med{background:#FAEEDA;color:#854F0B;}
-.audit-card-conf.low{background:#F1EFE8;color:#5F5E5A;}
-.audit-card-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}
-.audit-col{padding:10px 14px;}
-.audit-col.current{border-right:0.5px solid #f0f0ee;}
-.audit-col-label{font-size:9px;font-weight:600;color:#888780;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;}
-.audit-field{margin-bottom:5px;}
-.audit-field-key{font-size:10px;color:#888780;}
-.audit-field-val{font-size:12px;font-weight:500;color:#2c2c2a;margin-top:1px;}
-.audit-field-val.changed{color:#1D9E75;}
-.audit-flag{font-size:10px;background:#FFF3E0;color:#E65100;padding:3px 8px;border-radius:5px;margin-top:6px;display:inline-flex;align-items:center;gap:4px;}
-.audit-card-actions{padding:8px 14px;border-top:0.5px solid #f0f0ee;display:flex;gap:7px;align-items:center;}
-.audit-update-btn{padding:6px 14px;font-size:12px;font-weight:500;border:none;border-radius:7px;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;}
-.audit-update-btn:hover{background:#0F6E56;}
-.audit-skip-btn{padding:6px 12px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:7px;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;}
-.audit-li-btn{padding:6px 10px;font-size:11px;border:0.5px solid #0077B5;border-radius:7px;background:#fff;color:#0077B5;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:4px;}
-.audit-summary{font-size:11px;color:#888780;padding:8px 18px;}
+.audit-wrap{padding:0 0 40px;}.audit-setup{padding:16px 18px;}.audit-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}.audit-run-btn{padding:9px 20px;font-size:13px;font-weight:500;border:none;border-radius:9px;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;}.audit-run-btn:hover{background:#0F6E56;}.audit-progress{margin:12px 0;background:#f5f5f3;border-radius:8px;padding:12px 14px;}.audit-progress-bar-wrap{height:6px;background:#e8e8e4;border-radius:4px;margin:8px 0 4px;overflow:hidden;}.audit-progress-bar{height:100%;background:linear-gradient(90deg,#1D9E75,#5AC8A5);border-radius:4px;transition:width 0.3s;}.audit-progress-label{font-size:12px;color:#5f5e5a;font-weight:500;}.audit-progress-sub{font-size:11px;color:#888780;}.audit-card{border:0.5px solid #d1d1cf;border-radius:10px;background:#fff;margin:0 14px 10px;overflow:hidden;}.audit-card-header{padding:10px 14px 8px;display:flex;align-items:center;gap:10px;border-bottom:0.5px solid #f0f0ee;}.audit-card-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;}.audit-card-name{font-size:14px;font-weight:500;color:#2c2c2a;flex:1;}.audit-card-conf{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:600;}.audit-card-conf.high{background:#E1F5EE;color:#0F6E56;}.audit-card-conf.med{background:#FAEEDA;color:#854F0B;}.audit-card-conf.low{background:#F1EFE8;color:#5F5E5A;}.audit-card-body{display:grid;grid-template-columns:1fr 1fr;gap:0;}.audit-col{padding:10px 14px;}.audit-col.current{border-right:0.5px solid #f0f0ee;}.audit-col-label{font-size:9px;font-weight:600;color:#888780;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;}.audit-field{margin-bottom:5px;}.audit-field-key{font-size:10px;color:#888780;}.audit-field-val{font-size:12px;font-weight:500;color:#2c2c2a;margin-top:1px;}.audit-field-val.changed{color:#1D9E75;}.audit-flag{font-size:10px;background:#FFF3E0;color:#E65100;padding:3px 8px;border-radius:5px;margin-top:6px;display:inline-flex;align-items:center;gap:4px;}.audit-card-actions{padding:8px 14px;border-top:0.5px solid #f0f0ee;display:flex;gap:7px;align-items:center;}.audit-update-btn{padding:6px 14px;font-size:12px;font-weight:500;border:none;border-radius:7px;background:#1D9E75;color:#fff;cursor:pointer;font-family:inherit;}.audit-update-btn:hover{background:#0F6E56;}.audit-skip-btn{padding:6px 12px;font-size:12px;border:0.5px solid #b4b2a9;border-radius:7px;background:#fff;color:#5f5e5a;cursor:pointer;font-family:inherit;}.audit-li-btn{padding:6px 10px;font-size:11px;border:0.5px solid #0077B5;border-radius:7px;background:#fff;color:#0077B5;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:4px;}.audit-summary{font-size:11px;color:#888780;padding:8px 18px;}
 </style>
 </head>
 <body>
@@ -1275,27 +1160,58 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
   <!-- NEW PROJECT MODAL -->
   <div class="wos-modal-overlay" id="wos-new-project-overlay">
-    <div class="wos-modal">
+    <div class="wos-modal" style="width:460px;max-height:88vh;overflow-y:auto;">
       <h3>🏹 New Project</h3>
+
+      <!-- STEP 1: COMPANY -->
       <div class="wos-modal-row">
-        <div class="wos-modal-label">Production Company</div>
-        <input class="wos-modal-input" id="wos-company" placeholder="e.g. Radical Media" oninput="updateProjectPreview()"/>
+        <div class="wos-modal-label">Company</div>
+        <div id="np-company-loading" style="font-size:12px;color:#888780;padding:6px 0;">Loading…</div>
+        <div id="np-existing-companies" style="display:none;flex-direction:column;gap:4px;max-height:130px;overflow-y:auto;padding:2px 0;"></div>
+        <div style="margin-top:7px;display:flex;align-items:center;gap:8px;">
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#5f5e5a;cursor:pointer;">
+            <input type="checkbox" id="np-new-company-check" onchange="npToggleNewCompany(this)" style="accent-color:#534AB7;width:13px;height:13px;cursor:pointer;"/>
+            New company
+          </label>
+        </div>
+        <div id="np-new-company-row" style="display:none;margin-top:6px;">
+          <input class="wos-modal-input" id="np-new-company-name" placeholder="Company name…" oninput="npUpdatePreview()"/>
+        </div>
       </div>
-      <div class="wos-modal-row">
+
+      <!-- STEP 2: CLIENT (locked until company selected) -->
+      <div class="wos-modal-row" id="np-client-section" style="opacity:0.4;pointer-events:none;transition:opacity 0.2s;">
         <div class="wos-modal-label">Client</div>
-        <input class="wos-modal-input" id="wos-client" placeholder="e.g. Meta" oninput="updateProjectPreview()"/>
+        <div id="np-client-loading" style="font-size:12px;color:#888780;padding:6px 0;">Select a company first…</div>
+        <div id="np-existing-clients" style="display:none;flex-direction:column;gap:4px;max-height:130px;overflow-y:auto;padding:2px 0;"></div>
+        <div style="margin-top:7px;display:flex;align-items:center;gap:8px;">
+          <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:#5f5e5a;cursor:pointer;">
+            <input type="checkbox" id="np-new-client-check" onchange="npToggleNewClient(this)" style="accent-color:#534AB7;width:13px;height:13px;cursor:pointer;"/>
+            New client
+          </label>
+        </div>
+        <div id="np-new-client-row" style="display:none;margin-top:6px;">
+          <input class="wos-modal-input" id="np-new-client-name" placeholder="Client name…" oninput="npUpdatePreview()"/>
+        </div>
       </div>
+
+      <!-- STEP 3: PROJECT NAME -->
       <div class="wos-modal-row">
         <div class="wos-modal-label">Project Name</div>
-        <input class="wos-modal-input" id="wos-project-name" placeholder="e.g. 5th Ave Store" oninput="updateProjectPreview()"/>
+        <input class="wos-modal-input" id="np-project-name" placeholder="e.g. 5th Ave Store Opening" oninput="npUpdatePreview()"/>
       </div>
+
+      <!-- PATH PREVIEW -->
       <div class="wos-modal-row">
-        <div class="wos-modal-label">Folder preview</div>
-        <div class="wos-modal-preview" id="wos-folder-preview">Fill in the fields above…</div>
+        <div class="wos-modal-label">Will be created at</div>
+        <div class="wos-modal-preview" id="np-path-preview" style="font-size:10px;line-height:1.9;">Select a company to begin…</div>
       </div>
+
+      <div id="np-status" style="font-size:12px;min-height:18px;"></div>
+
       <div class="wos-modal-actions">
         <button class="wos-modal-cancel" onclick="closeNewProjectModal()">Cancel</button>
-        <button class="wos-modal-save" onclick="saveNewProject()">Create Project</button>
+        <button class="wos-modal-save" id="np-submit-btn" onclick="saveNewProject()">Create Project</button>
       </div>
     </div>
   </div>
@@ -1390,13 +1306,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           </select>
         </div>
         <div class="wos-modal-row">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
-            <div class="wos-modal-label">Known from</div>
-            <label style="display:flex;align-items:center;gap:4px;font-size:10px;color:#5f5e5a;cursor:pointer;">
-              <input type="checkbox" id="nc-known-from-ex" style="width:12px;height:12px;accent-color:#534AB7;cursor:pointer;"/>
-              ex (former company)
-            </label>
-          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;"><div class="wos-modal-label">Known from</div><label style="display:flex;align-items:center;gap:4px;font-size:10px;color:#5f5e5a;cursor:pointer;"><input type="checkbox" id="nc-known-from-ex" style="width:12px;height:12px;accent-color:#534AB7;cursor:pointer;"/> ex (former company)</label></div>
           <input class="wos-modal-input" id="nc-known-from" placeholder="Project, person, event..."/>
         </div>
         <div class="wos-modal-row">
@@ -1758,10 +1668,10 @@ let constitution = JSON.parse(localStorage.getItem('los_constitution')||'null') 
 let habits     = JSON.parse(localStorage.getItem('los_habits')||'null') || JSON.parse(JSON.stringify(DEFAULT_HABITS));
 let autoTasks  = JSON.parse(localStorage.getItem('los_autotasks')||'null') || JSON.parse(JSON.stringify(DEFAULT_AUTO_TASKS));
 let insights   = JSON.parse(localStorage.getItem('los_insights')||'null') || DEFAULT_INSIGHTS;
-let health     = JSON.parse(localStorage.getItem('los_health') ||'null') || {weightLogs:[],waterLogs:[],foodLogs:[],exerciseLogs:[],shotLogs:[{id:'shot_seed_1',date:'2026-05-25',dose:'Zepbound 2.5mg',note:'First dose',loggedAt:'2026-05-25T21:00:00.000Z'}],settings:{weightUnit:'lbs',waterTargetOz:64,glp1StartDate:'2026-05-25'}};
-if(!health.shotLogs) health.shotLogs = [];
-let healthTab  = 'today';
-
+let health={weightLogs:[],waterLogs:[],foodLogs:[],exerciseLogs:[],shotLogs:[{id:'shot_seed_1',date:'2026-05-25',dose:'Zepbound 2.5mg',note:'First dose',loggedAt:'2026-05-25T21:00:00.000Z'}],settings:{weightUnit:'lbs',waterTargetOz:64,glp1StartDate:'2026-05-25'}};
+try{var _h=JSON.parse(localStorage.getItem('los_health'));if(_h){health=_h;}}catch(e){}
+if(!health.shotLogs) health.shotLogs=[];
+let healthTab='today';
 let view = 'all', selectedId = null, noteTimer = null, syncTimer = null, dragSrcId = null;
 let editTarget = null, habitLogTarget = null, habitEditTarget = null;
 let nameTimer = null;
@@ -4670,16 +4580,7 @@ function renderWOSDashboard(el) {
 
   el.innerHTML = `
     <div class="wos-dashboard">
-      <div style="padding:12px 14px 8px;">
-        <div style="position:relative;">
-          <input id="wos-dash-search" class="wos-search-input" placeholder="Search talent, contacts, vendors, studios..."
-            oninput="renderDashSearchResults(this.value)"
-            onkeydown="if(event.key==='Escape'){this.value='';renderDashSearchResults('');}"
-            style="width:100%;padding-left:30px;"/>
-          <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;color:#b4b2a9;pointer-events:none;">&#x1F50D;</span>
-        </div>
-        <div id="wos-dash-results" style="margin-top:6px;"></div>
-      </div>
+      <div style="padding:12px 14px 8px;"><div style="position:relative;"><input id="wos-dash-search" class="wos-search-input" placeholder="Search talent, contacts, vendors, studios..." oninput="renderDashSearchResults(this.value)" onkeydown="if(event.key==='Escape'){this.value='';renderDashSearchResults('');}" style="width:100%;padding-left:30px;"/><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;color:#b4b2a9;pointer-events:none;">&#x1F50D;</span></div><div id="wos-dash-results" style="margin-top:6px;"></div></div>
       <div class="wos-action-row">
         <button class="wos-action-btn" onclick="openNewProjectModal()">
           <span class="wos-action-btn-icon">🏹</span>
@@ -4783,60 +4684,213 @@ function contactCard(c) {
 }
 
 // ── NEW PROJECT MODAL ──
-function openNewProjectModal() {
-  document.getElementById('wos-company').value = '';
-  document.getElementById('wos-client').value = '';
-  document.getElementById('wos-project-name').value = '';
-  document.getElementById('wos-folder-preview').textContent = 'Fill in the fields above…';
+
+
+const MF_SERVER = 'http://localhost:3737';
+let _npSelectedCompany = null;
+let _npSelectedClient  = null;
+let _npIsNewCompany    = false;
+let _npIsNewClient     = false;
+
+async function openNewProjectModal() {
+  // Reset state
+  _npSelectedCompany = null;
+  _npSelectedClient  = null;
+  _npIsNewCompany    = false;
+  _npIsNewClient     = false;
+
+  // Reset UI
+  ['np-new-company-check','np-new-client-check'].forEach(id => {
+    document.getElementById(id).checked = false;
+  });
+  ['np-new-company-row','np-new-client-row'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+  ['np-new-company-name','np-new-client-name','np-project-name'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('np-path-preview').textContent = 'Select a company to begin…';
+  document.getElementById('np-status').textContent = '';
+  document.getElementById('np-submit-btn').disabled = false;
+  document.getElementById('np-submit-btn').textContent = 'Create Project';
+
+  // Lock client section until company is chosen
+  const clientSection = document.getElementById('np-client-section');
+  clientSection.style.opacity = '0.4';
+  clientSection.style.pointerEvents = 'none';
+  document.getElementById('np-existing-clients').style.display = 'none';
+  document.getElementById('np-client-loading').style.display = 'block';
+  document.getElementById('np-client-loading').textContent = 'Select a company first…';
+
   document.getElementById('wos-new-project-overlay').classList.add('show');
-  setTimeout(() => document.getElementById('wos-company').focus(), 80);
+
+  // Load production companies from local server
+  const companyLoading = document.getElementById('np-company-loading');
+  const companyList    = document.getElementById('np-existing-companies');
+  companyLoading.style.display = 'block';
+  companyLoading.textContent   = 'Loading…';
+  companyList.style.display    = 'none';
+
+  try {
+    const res      = await fetch(MF_SERVER + '/companies', { signal: AbortSignal.timeout(3000) });
+    const companies = await res.json();
+    npRenderList('company', companies);
+  } catch (e) {
+    companyLoading.innerHTML =
+      '<div style="background:#FFF8EC;border:0.5px solid #E8C97A;border-radius:8px;padding:10px 12px;font-size:11px;line-height:1.7;color:#5f5e5a;">' +
+      '<div style="font-weight:600;color:#854F0B;margin-bottom:4px;">⚠️ Folder server not running</div>' +
+      'Projects will still save to the app, but folders won\'t be created on disk.<br>' +
+      'To enable folder creation, open <strong>Terminal</strong> and run:<br>' +
+      '<code style="display:block;margin-top:6px;background:#f5f5f3;border:0.5px solid #d1d1cf;border-radius:5px;padding:5px 8px;font-size:10px;word-break:break-all;color:#2c2c2a;">' +
+      'node "/Users/traviscraw/Desktop/TC Drive/05_Projects/🔮Claude Code/To Do App/folder-server.js"' +
+      '</code>' +
+      '<div style="margin-top:6px;color:#888780;font-size:10px;">Keep that Terminal window open while using the app.</div>' +
+      '</div>';
+  }
 }
 
 function closeNewProjectModal() {
   document.getElementById('wos-new-project-overlay').classList.remove('show');
 }
 
-function updateProjectPreview() {
-  const company = document.getElementById('wos-company').value.trim();
-  const client  = document.getElementById('wos-client').value.trim();
-  const project = document.getElementById('wos-project-name').value.trim();
-  const date    = new Date().toISOString().slice(0,7); // YYYY-MM
-
-  const clean = s => s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_\-]/g,'');
-
-  if (!company && !client && !project) {
-    document.getElementById('wos-folder-preview').textContent = 'Fill in the fields above…';
+function npRenderList(type, items) {
+  const plural    = type === 'company' ? 'companies' : 'clients';
+  const loadingEl = document.getElementById(`np-${type}-loading`);
+  const listEl    = document.getElementById(`np-existing-${plural}`);
+  if (!items.length) {
+    loadingEl.textContent   = `No existing ${type} folders found — use "New ${type}" below.`;
+    loadingEl.style.display = 'block';
+    listEl.style.display    = 'none';
     return;
   }
-
-  const lines = [
-    `🏹 Jobs/`,
-    company ? `  ${clean(company)}/` : `  <Company>/`,
-    `    Contracts & Invoices/`,
-    `    General Docs/`,
-    client  ? `    ${clean(client)}/` : `    <Client>/`,
-    project ? `      ${date}_${clean(project)}/` : `      YYYY-MM_<Project>/`,
-    `        00_Admin/`,
-    `        01_Creative/`,
-    `        02_Design/`,
-    `        03_Production/`,
-    `        04_Photos & Video/`,
-  ];
-  document.getElementById('wos-folder-preview').textContent = lines.join('\n');
+  loadingEl.style.display = 'none';
+  listEl.style.display    = 'flex';
+  listEl.innerHTML = items.map(name => `
+    <label style="display:flex;align-items:center;gap:8px;padding:5px 9px;border:0.5px solid #d1d1cf;border-radius:7px;cursor:pointer;font-size:12px;color:#2c2c2a;transition:background 0.1s;"
+           onmouseover="this.style.background='#f5f5f3'" onmouseout="this.style.background='transparent'">
+      <input type="radio" name="np-${type}" value="${name.replace(/'/g,'&#39;')}"
+             onchange="npSelectItem('${type}','${name.replace(/'/g,'\\\'')}')"
+             style="accent-color:#534AB7;width:13px;height:13px;cursor:pointer;"/>
+      ${name}
+    </label>
+  `).join('');
 }
 
-function saveNewProject() {
-  const company = document.getElementById('wos-company').value.trim();
-  const client  = document.getElementById('wos-client').value.trim();
-  const project = document.getElementById('wos-project-name').value.trim();
-  if (!company || !client || !project) {
-    alert('Please fill in all three fields.');
-    return;
-  }
-  const date = new Date().toISOString().slice(0,7);
-  const clean = s => s.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_\-]/g,'');
-  const folderName = `${date}_${clean(project)}`;
+async function npSelectItem(type, name) {
+  if (type === 'company') {
+    _npSelectedCompany = name;
+    _npIsNewCompany    = false;
+    document.getElementById('np-new-company-check').checked = false;
+    document.getElementById('np-new-company-row').style.display = 'none';
 
+    // Unlock client section and load its folders
+    const clientSection = document.getElementById('np-client-section');
+    clientSection.style.opacity      = '1';
+    clientSection.style.pointerEvents = 'auto';
+    _npSelectedClient = null;
+    document.querySelectorAll('input[name="np-client"]').forEach(r => r.checked = false);
+    document.getElementById('np-new-client-check').checked = false;
+    document.getElementById('np-new-client-row').style.display = 'none';
+    document.getElementById('np-existing-clients').style.display = 'none';
+    document.getElementById('np-client-loading').style.display = 'block';
+    document.getElementById('np-client-loading').textContent = 'Loading clients…';
+
+    try {
+      const res     = await fetch(`${MF_SERVER}/clients?company=${encodeURIComponent(name)}`, { signal: AbortSignal.timeout(3000) });
+      const clients = await res.json();
+      npRenderList('client', clients);
+    } catch (e) {
+      document.getElementById('np-client-loading').textContent = 'Could not load client folders.';
+    }
+  } else {
+    _npSelectedClient = name;
+    _npIsNewClient    = false;
+    document.getElementById('np-new-client-check').checked = false;
+    document.getElementById('np-new-client-row').style.display = 'none';
+  }
+  npUpdatePreview();
+}
+
+function npToggleNewCompany(cb) {
+  _npIsNewCompany = cb.checked;
+  document.getElementById('np-new-company-row').style.display = cb.checked ? 'block' : 'none';
+  if (cb.checked) {
+    document.querySelectorAll('input[name="np-company"]').forEach(r => r.checked = false);
+    _npSelectedCompany = null;
+    // Lock client section again
+    const clientSection = document.getElementById('np-client-section');
+    clientSection.style.opacity      = '1'; // keep unlocked — they can type a new client too
+    clientSection.style.pointerEvents = 'auto';
+    document.getElementById('np-client-loading').style.display = 'block';
+    document.getElementById('np-client-loading').textContent = 'Enter client name below…';
+    document.getElementById('np-existing-clients').style.display = 'none';
+    document.getElementById('np-new-client-check').checked = true;
+    document.getElementById('np-new-client-row').style.display = 'block';
+    _npIsNewClient = true;
+    document.getElementById('np-new-company-name').focus();
+  }
+  npUpdatePreview();
+}
+
+function npToggleNewClient(cb) {
+  _npIsNewClient = cb.checked;
+  document.getElementById('np-new-client-row').style.display = cb.checked ? 'block' : 'none';
+  if (cb.checked) {
+    document.querySelectorAll('input[name="np-client"]').forEach(r => r.checked = false);
+    _npSelectedClient = null;
+    document.getElementById('np-new-client-name').focus();
+  }
+  npUpdatePreview();
+}
+
+function npUpdatePreview() {
+  const company     = _npIsNewCompany ? document.getElementById('np-new-company-name').value.trim() : _npSelectedCompany;
+  const client      = _npIsNewClient  ? document.getElementById('np-new-client-name').value.trim()  : _npSelectedClient;
+  const projectRaw  = document.getElementById('np-project-name').value.trim();
+  const strip       = s => s ? s.replace(/[\/\\:*?"<>|]/g,'') : '';
+
+  let preview = '';
+  if (!company) {
+    preview = 'Select a company to begin…';
+  } else if (!client) {
+    preview = `03_Work / ${strip(company)} / …\n  Select or create a client`;
+  } else if (!projectRaw) {
+    preview = `03_Work / ${strip(company)} / ${strip(client)} / …\n  Enter a project name`;
+  } else {
+    preview =
+      `03_Work / ${strip(company)} / ${strip(client)} / ${strip(projectRaw)} /\n` +
+      `  00_client  01_strategy  02_creative\n` +
+      `  03_design  04_production  05_logistics\n` +
+      `  06_budget  07_content_capture  08_post_event`;
+  }
+  document.getElementById('np-path-preview').textContent = preview;
+}
+
+async function saveNewProject() {
+  const company    = _npIsNewCompany ? document.getElementById('np-new-company-name').value.trim() : _npSelectedCompany;
+  const client     = _npIsNewClient  ? document.getElementById('np-new-client-name').value.trim()  : _npSelectedClient;
+  const project    = document.getElementById('np-project-name').value.trim();
+  const status     = document.getElementById('np-status');
+
+  if (!company) {
+    status.style.color = '#BA7517'; status.textContent = '⚠️ Select or create a company.'; return;
+  }
+  if (!client) {
+    status.style.color = '#BA7517'; status.textContent = '⚠️ Select or create a client.'; return;
+  }
+  if (!project) {
+    status.style.color = '#BA7517'; status.textContent = '⚠️ Enter a project name.';
+    document.getElementById('np-project-name').focus(); return;
+  }
+
+  const btn = document.getElementById('np-submit-btn');
+  btn.disabled    = true;
+  btn.textContent = 'Creating…';
+  status.textContent = '';
+
+  // 1 — Save project record to Supabase (app awareness)
+  const date       = new Date().toISOString().slice(0,7);
+  const folderName = project.replace(/[\/\\:*?"<>|]/g,'');
   workProjects.push({
     id: nextWorkId++,
     company, client,
@@ -4847,15 +4901,45 @@ function saveNewProject() {
     notes: '',
   });
   persistWork();
-  closeNewProjectModal();
 
-  // Switch to Work OS and show projects
+  // 2 — Create folders on local disk (non-fatal if server not running)
+  try {
+    const res  = await fetch(MF_SERVER + '/create-project', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ company, client, projectName: project, isNewCompany: _npIsNewCompany, isNewClient: _npIsNewClient }),
+      signal:  AbortSignal.timeout(8000),
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      status.style.color = '#BA7517';
+      status.textContent = '⚠️ Project saved, but folders: ' + data.error;
+      btn.disabled = false; btn.textContent = 'Create Project';
+      return;
+    }
+  } catch (e) {
+    // Server not running — project still saved to app, just no folders
+    status.style.color = '#888780';
+    status.innerHTML =
+      'Project saved to app. ' +
+      '<span style="color:#888780;">To also create folders, start the server:<br>' +
+      '<code style="font-size:10px;background:#f5f5f3;border-radius:4px;padding:2px 5px;">' +
+      'node "/Users/traviscraw/Desktop/TC Drive/05_Projects/🔮Claude Code/To Do App/folder-server.js"' +
+      '</code></span>';
+    setTimeout(() => {
+      closeNewProjectModal();
+      if (!workOSMode) switchToWorkOS();
+      setWorkView('wos-dashboard');
+    }, 2000);
+    return;
+  }
+
+  closeNewProjectModal();
+  showXPFlash('🏹 Project created!');
   if (!workOSMode) switchToWorkOS();
   setWorkView('wos-dashboard');
 }
-
-// ── NEW CLIENT MODAL (reuses contact modal with type=client) ──
-function openNewClientModal() { openContactModal('client'); }
+// ─────────────────────────────────────────────────────────────
 
 // ── CONTACT MODAL ──
 function openContactModal(type) {
@@ -4960,15 +5044,6 @@ function openProjectDetail(id) {
   // For now just show a simple alert — full detail panel coming in next phase
   alert(`${p.projectName}\n${p.company} › ${p.client}\nStatus: ${p.status}\nCreated: ${new Date(p.createdAt).toLocaleDateString()}`);
 }
-
-// Patch render() to handle work views
-const _origRender = render;
-render = function() {
-  if (workOSMode) { renderWorkView(); return; }
-  _origRender();
-};
-
-
 
 
 
@@ -5163,16 +5238,14 @@ function filterWOSPeople(){
 
   function matchRegion(p, r){
     if(!r) return true;
-    const loc = (p.location||'').toUpperCase();
-    const isEast    = US_EAST.includes(loc);
-    const isWest    = US_WEST.includes(loc);
-    const isCentral = US_CENTRAL.includes(loc);
-    const isUS      = isEast || isWest || isCentral || (p.region||'')==='US';
-    if(r==='East Coast') return isEast;
-    if(r==='West Coast') return isWest;
-    if(r==='Central')    return isCentral;
-    if(r==='US')         return isUS;
-    return (p.region||'') === r;
+    const loc=(p.location||'').toUpperCase();
+    const isE=US_EAST.includes(loc),isW=US_WEST.includes(loc),isC=US_CENTRAL.includes(loc);
+    const isUS=isE||isW||isC||(p.region||'')==='US';
+    if(r==='East Coast')return isE;
+    if(r==='West Coast')return isW;
+    if(r==='Central')return isC;
+    if(r==='US')return isUS;
+    return (p.region||'')===r;
   }
 
   let pool = wosCurrentPeopleTab === 'talent'
@@ -6960,12 +7033,11 @@ function filterVendorListOnly() {
     if (ftag    && !(v.areas||[]).some(function(a) { return a.toLowerCase().includes(ftag); })) return false;
     if (q && !(((v.name||'') + ' ' + (v.notes||'')).toLowerCase().includes(q))) return false;
     if (fregion) {
-      var loc = normalizeVendorLocation(v.location);
-      var usRegion = loc.usRegion || '';
-      var globalRegion = loc.globalRegion || '';
-      var isUS = globalRegion === 'US' || usRegion !== '';
-      if (fregion === 'US') { if (!isUS) return false; }
-      else if (!usRegion.toLowerCase().includes(fregion.toLowerCase()) && globalRegion !== fregion) return false;
+      var loc=normalizeVendorLocation(v.location);
+      var ur=loc.usRegion||'',gr=loc.globalRegion||'';
+      var isUS=gr==='US'||ur!=='';
+      if(fregion==='US'){if(!isUS)return false;}
+      else if(!ur.toLowerCase().includes(fregion.toLowerCase())&&gr!==fregion)return false;
     }
     return true;
   });
@@ -7023,12 +7095,11 @@ function renderVendorList(el, typeFilter) {
     if (ftrust && v.trust !== ftrust) return false;
     if (ftag   && !(v.areas||[]).some(function(a) { return a.toLowerCase().includes(ftag); })) return false;
     if (fregion) {
-      var loc = normalizeVendorLocation(v.location);
-      var usRegion = loc.usRegion || '';
-      var globalRegion = loc.globalRegion || '';
-      var isUS = globalRegion === 'US' || usRegion !== '';
-      if (fregion === 'US') { if (!isUS) return false; }
-      else if (!usRegion.toLowerCase().includes(fregion.toLowerCase()) && globalRegion !== fregion) return false;
+      var loc=normalizeVendorLocation(v.location);
+      var ur=loc.usRegion||'',gr=loc.globalRegion||'';
+      var isUS=gr==='US'||ur!=='';
+      if(fregion==='US'){if(!isUS)return false;}
+      else if(!ur.toLowerCase().includes(fregion.toLowerCase())&&gr!==fregion)return false;
     }
     return true;
   });
