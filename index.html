@@ -164,10 +164,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wos-badge-FILM{background:#FBEAF0;color:#993556;} .wos-badge-EVENTS{background:#E1F5EE;color:#085041;} .wos-badge-AV{background:#E6F1FB;color:#0C447C;}
 .wos-badge-STUDIO{background:#EEEDFE;color:#3C3489;} .wos-badge-SCENIC{background:#FAEEDA;color:#633806;} .wos-badge-Scenic{background:#FAEEDA;color:#633806;} .wos-badge-OTHER{background:#F1EFE8;color:#444441;}
 .wos-badge-hires{font-size:10px;padding:2px 6px;border-radius:5px;background:#FAEEDA;color:#854F0B;}
-.wos-people-tabs{display:flex;border-bottom:0.5px solid #d1d1cf;margin-bottom:12px;}
-.wos-ptab{padding:7px 14px;font-size:12px;font-weight:500;color:#5f5e5a;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;transition:all 0.1s;}
-.wos-ptab.active{color:#3C3489;border-bottom-color:#534AB7;}
-.wos-ptab-count{display:inline-flex;align-items:center;justify-content:center;min-width:15px;height:15px;border-radius:8px;background:#EEEDFE;color:#534AB7;font-size:9px;font-weight:500;margin-left:3px;padding:0 3px;}
+.wos-people-tabs{display:flex;gap:6px;padding:10px 14px 0;border-bottom:0.5px solid #d1d1cf;margin-bottom:12px;}
+.wos-ptab{padding:6px 13px;font-size:12px;font-weight:500;color:#5f5e5a;cursor:pointer;border-radius:8px 8px 0 0;border:0.5px solid transparent;border-bottom:none;transition:all 0.12s;background:#f5f5f3;margin-bottom:-0.5px;}
+.wos-ptab:hover{background:#eeecea;color:#2c2c2a;}
+.wos-ptab.active.tab-network{background:#E8F4FC;color:#0C447C;border-color:#9ECEF5;border-bottom-color:#E8F4FC;}
+.wos-ptab.active.tab-talent{background:#E1F5EE;color:#0F6E56;border-color:#7ECDB5;border-bottom-color:#E1F5EE;}
+.wos-ptab.active.tab-hiring{background:#FFF3E0;color:#9C4B00;border-color:#F5C07A;border-bottom-color:#FFF3E0;}
+.wos-ptab.active.tab-radar{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC;border-bottom-color:#EEEDFE;}
+.wos-ptab-count{display:inline-flex;align-items:center;justify-content:center;min-width:15px;height:15px;border-radius:8px;background:rgba(0,0,0,0.07);color:inherit;font-size:9px;font-weight:600;margin-left:4px;padding:0 3px;}
 .wos-loading{padding:24px;text-align:center;color:#888780;font-size:13px;}
 .wos-cleanup-group{margin:0 14px 16px;}
 .wos-cleanup-group-header{font-size:10px;font-weight:500;color:#888780;letter-spacing:0.08em;text-transform:uppercase;padding:8px 0 6px;display:flex;align-items:center;gap:6px;border-bottom:0.5px solid #e8e8e4;margin-bottom:6px;}
@@ -1136,9 +1140,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-item work-nav" onclick="setWorkView('wos-studios')" id="nav-wos-studios"><div class="nav-dot" style="background:#534AB7"></div>Studios</div>
         <div class="nav-divider"></div>
         <div class="sidebar-header">People</div>
-        <div class="nav-item work-nav" onclick="setWorkView('wos-network')" id="nav-wos-network"><div class="nav-dot" style="background:#D4537E"></div>Network</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-network')" id="nav-wos-network"><div class="nav-dot" style="background:#0C447C"></div>Network</div>
         <div class="nav-item work-nav" onclick="setWorkView('wos-talent')" id="nav-wos-talent"><div class="nav-dot" style="background:#1D9E75"></div>Talent</div>
-        <div class="nav-item work-nav" onclick="setWorkView('wos-people')" id="nav-wos-people"><div class="nav-dot" style="background:#7F77DD"></div>All People</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-hiring')" id="nav-wos-hiring"><div class="nav-dot" style="background:#E58A00"></div>Hiring</div>
+        <div class="nav-item work-nav" onclick="setWorkView('wos-radar')" id="nav-wos-radar"><div class="nav-dot" style="background:#534AB7"></div>On Radar</div>
         <div class="nav-item work-nav" onclick="setWorkView('wos-outreach')" id="nav-wos-outreach"><div class="nav-dot" style="background:#BA7517"></div>Outreach</div>
         <div class="nav-divider"></div>
         <div class="sidebar-header">Career</div>
@@ -4400,7 +4405,6 @@ function toggleMoreDrawer() {
           <button class="more-drawer-item" onclick="mobileNav('buy')">🛒<span>Buy</span></button>
           <button class="more-drawer-item" onclick="mobileNav('claude')">✦<span>Claude</span></button>
           <button class="more-drawer-item" onclick="mobileNav('done')">✅<span>Done</span></button>
-          <button class="more-drawer-item" onclick="mobileNav('health')">💊<span>Health</span></button>
           <button class="more-drawer-item" onclick="mobileNav('goals')">🎯<span>Goals</span></button>
           <button class="more-drawer-item" onclick="mobileNav('thoughts')">💭<span>Thoughts</span></button>
           <button class="more-drawer-item" onclick="mobileNav('constitution')">📜<span>Identity</span></button>
@@ -4512,6 +4516,8 @@ function setWorkView(v) {
     'wos-projects':  'All Projects',
     'wos-network':   'Network',
     'wos-talent':    'Talent',
+    'wos-hiring':    'Hiring',
+    'wos-radar':     'On Radar',
     'wos-vendors':   'Vendors',
     'wos-studios':   'Studios',
     'wos-people':    'People',
@@ -4529,7 +4535,7 @@ function setWorkView(v) {
   const wosDetail = document.getElementById('wos-detail-panel');
   if (wosDetail) {
     wosDetail.classList.add('hidden');
-    if (['wos-people','wos-talent','wos-network','wos-vendors','wos-studios','wos-cleanup'].includes(v)) {
+    if (['wos-people','wos-talent','wos-network','wos-hiring','wos-radar','wos-vendors','wos-studios','wos-cleanup'].includes(v)) {
       wosDetail.style.display = '';
     } else {
       wosDetail.style.display = 'none';
@@ -4545,6 +4551,8 @@ function renderWorkView() {
   if (workView === 'wos-projects')   { renderWOSProjects(list);  return; }
   if (workView === 'wos-network')    { renderWOSPeopleView(list, 'network'); return; }
   if (workView === 'wos-talent')     { renderWOSPeopleView(list, 'talent');  return; }
+  if (workView === 'wos-hiring')     { renderWOSPeopleView(list, 'hiring');  return; }
+  if (workView === 'wos-radar')      { renderWOSPeopleView(list, 'radar');   return; }
   if (workView === 'wos-vendors')    { renderWOSVendorView(list, 'vendor');   return; }
   if (workView === 'wos-studios')    { renderWOSVendorView(list, 'studio');   return; }
   if (workView === 'wos-people')     { renderWOSPeopleView(list, 'all');     return; }
@@ -4556,6 +4564,9 @@ function renderWorkView() {
 
 // ── DASHBOARD ──
 function renderWOSDashboard(el) {
+  // Preload people + vendors in the background so search works immediately
+  if(!wosPeopleLoaded) loadWOSPeople();
+  if(!workOSVendors.length) loadWOSVendors();
   const recentProjects = [...workProjects]
     .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 6);
@@ -5143,16 +5154,19 @@ async function renderWOSPeopleView(el, mode){
   el.innerHTML = `<div class="wos-loading">Loading people...</div>`;
   await loadWOSPeople();
 
-  const talentCount = wosPeople.filter(p=>p.talent).length;
+  const talentCount  = wosPeople.filter(p=>p.talent).length;
+  const hiringCount  = wosPeople.filter(p=>p.is_hiring_decision_maker).length;
+  const radarCount   = wosPeople.filter(p=>p.on_radar).length;
   const networkCount = wosPeople.length;
 
-  const tabMode = (m, label, count) =>
-    `<div class="wos-ptab ${mode===m?'active':''}" onclick="switchToWOSPeopleMode('${m}')">${label} <span class="wos-ptab-count">${count}</span></div>`;
+  const tabMode = (m, label, count, cls) =>
+    `<div class="wos-ptab tab-${cls||m} ${mode===m?'active':''}" onclick="switchToWOSPeopleMode('${m}')">${label} <span class="wos-ptab-count">${count}</span></div>`;
 
   const tabs = `
     ${tabMode('network','Network', networkCount)}
-    ${tabMode('talent','Talent', talentCount)}
-    ${tabMode('all','People', wosPeople.length)}`;
+    ${tabMode('talent','Talent',  talentCount)}
+    ${tabMode('hiring','Hiring',  hiringCount)}
+    ${tabMode('radar','On Radar', radarCount)}`;
 
   const kindOpts = ['PROD','BIZ','CREATIVE','DESIGN','TECH','EVENTS','AV','FILM','STUDIO','OTHER']
     .map(k=>`<option value="${k}">${k}</option>`).join('');
@@ -5215,7 +5229,7 @@ async function renderWOSPeopleView(el, mode){
 }
 
 function switchToWOSPeopleMode(mode){
-  const viewMap = {network:'wos-network', talent:'wos-talent', all:'wos-people'};
+  const viewMap = {network:'wos-network', talent:'wos-talent', all:'wos-people', hiring:'wos-hiring', radar:'wos-radar'};
   workView = viewMap[mode] || 'wos-network';
   document.querySelectorAll('.nav-item.work-nav').forEach(el=>el.classList.remove('active'));
   const navEl = document.getElementById('nav-'+workView);
@@ -5248,8 +5262,9 @@ function filterWOSPeople(){
     return (p.region||'')===r;
   }
 
-  let pool = wosCurrentPeopleTab === 'talent'
-    ? wosPeople.filter(p=>p.talent)
+  let pool = wosCurrentPeopleTab === 'talent'  ? wosPeople.filter(p=>p.talent)
+    : wosCurrentPeopleTab === 'hiring' ? wosPeople.filter(p=>p.is_hiring_decision_maker)
+    : wosCurrentPeopleTab === 'radar'  ? wosPeople.filter(p=>p.on_radar)
     : wosPeople;
 
   const results = pool.filter(p=>{
@@ -5391,8 +5406,10 @@ function renderWOSDetail(p){
          <button class="wos-detail-btn primary" onclick="saveWOSEdit()">Save</button>
          <button class="wos-detail-btn" onclick="deleteWOSPerson('${p.id}')" style="border-color:#F0997B;color:#993C1D;" onmouseover="this.style.background='#FAECE7'" onmouseout="this.style.background='#fff'">Delete</button>`
       : `<button class="wos-detail-btn primary" onclick="createOutreachFromDetail()">+ Outreach</button>
-         <button class="wos-detail-btn" onclick="startWOSEdit()" style="flex:0.6;">Edit</button>
-         <button class="wos-detail-btn" onclick="toggleRadarFromDetail()" id="wos-radar-btn" style="flex:0.6;${p.on_radar?'background:#EEEDFE;color:#534AB7;border-color:#AFA9EC;':''}">${p.on_radar?'On radar ✓':'On radar'}</button>`;
+         <button class="wos-detail-btn" onclick="startWOSEdit()" style="flex:0.5;">Edit</button>
+         <button class="wos-detail-btn" onclick="toggleRadarFromDetail()" id="wos-radar-btn" style="flex:0.6;${p.on_radar?'background:#EEEDFE;color:#534AB7;border-color:#AFA9EC;':''}">${p.on_radar?'On radar ✓':'On radar'}</button>
+         <button class="wos-detail-btn" onclick="toggleTalentFromDetail()" id="wos-talent-btn" style="flex:0.5;${p.talent?'background:#E1F5EE;color:#0F6E56;border-color:#7ECDB5;':''}">${p.talent?'Talent ✓':'Talent'}</button>
+         <button class="wos-detail-btn" onclick="toggleFreelanceFromDetail()" id="wos-freelance-btn" style="flex:0.7;${p.freelance_status==='Currently freelance'?'background:#FFF3E0;color:#9C4B00;border-color:#F5C07A;':''}">${p.freelance_status==='Currently freelance'?'Freelance ✓':'Freelance'}</button>`;
   }
 
   const body = document.getElementById('wos-detail-body');
@@ -5641,6 +5658,29 @@ function closeWOSDetail(){
   wosEditMode = false;
   const panel = document.getElementById('wos-detail-panel');
   if(panel) panel.classList.add('hidden');
+  filterWOSPeople();
+}
+
+async function toggleTalentFromDetail(){
+  const id = document.querySelector('.wos-detail-panel')?.dataset?.personId;
+  if(!id) return;
+  const p = wosPeople.find(x=>x.id===id);
+  if(!p) return;
+  p.talent = !p.talent;
+  await saveWOSPerson({id, talent:p.talent});
+  openWOSPersonDetail(id);
+  filterWOSPeople();
+}
+
+async function toggleFreelanceFromDetail(){
+  const id = document.querySelector('.wos-detail-panel')?.dataset?.personId;
+  if(!id) return;
+  const p = wosPeople.find(x=>x.id===id);
+  if(!p) return;
+  const isFreelance = p.freelance_status === 'Currently freelance';
+  p.freelance_status = isFreelance ? '' : 'Currently freelance';
+  await saveWOSPerson({id, freelance_status:p.freelance_status});
+  openWOSPersonDetail(id);
   filterWOSPeople();
 }
 
@@ -5929,25 +5969,29 @@ function scanWOSPeople(){
 
 
 // ── CAREER AUDIT ──
-let _auditState = { results:[], running:false, processed:0, total:0, currentName:'' };
+let _auditState = { results:[], running:false, processed:0, total:0, currentName:'', offset:0 };
 
 function renderCareerAuditView(el){
   el.innerHTML = '<div class="audit-wrap" id="career-audit-wrap">'
     +'<div class="ai-feature-header" style="background:linear-gradient(135deg,#E1F5EE,#f0eeff);">'
     +'<div class="ai-feature-icon">&#x1F50D;</div>'
     +'<div class="ai-feature-title" style="color:#0F6E56;">Career Audit</div>'
-    +'<div class="ai-feature-subtitle">Cross-reference your contacts against their current LinkedIn presence. AI web search finds role changes.</div>'
+    +'<div class="ai-feature-subtitle">Cross-reference your talent against their current role online. AI web search finds changes — you confirm each one.</div>'
     +'</div>'
     +'<div class="audit-setup" id="audit-setup">'
-    +'<div style="font-size:11px;font-weight:500;color:#5f5e5a;margin-bottom:8px;">Choose who to audit:</div>'
+    +'<div style="font-size:11px;font-weight:500;color:#5f5e5a;margin-bottom:8px;">Who to audit:</div>'
     +'<div class="audit-filters">'
-    +'<select class="wos-filter-sel" id="audit-rel" style="width:140px;"><option value="">All relationships</option><option value="Inner circle">Inner circle</option><option value="Contact">Contact</option><option value="Known">Known</option></select>'
-    +'<select class="wos-filter-sel" id="audit-kind" style="width:120px;"><option value="">All kinds</option><option>PROD</option><option>BIZ</option><option>CREATIVE</option><option>DESIGN</option><option>TECH</option><option>EVENTS</option><option>AV</option><option>FILM</option><option>STUDIO</option><option>OTHER</option></select>'
-    +'<select class="wos-filter-sel" id="audit-limit" style="width:110px;"><option value="20">Top 20</option><option value="40">Top 40</option><option value="60">Top 60</option><option value="100">Top 100</option></select>'
+    +'<select class="wos-filter-sel" id="audit-talent" style="width:110px;" onchange="updateAuditCountPreview()"><option value="1">Talent only</option><option value="">Everyone</option></select>'
+    +'<select class="wos-filter-sel" id="audit-rel" style="width:140px;" onchange="updateAuditCountPreview()"><option value="">All relationships</option><option value="Inner circle">Inner circle</option><option value="Contact">Contact</option><option value="Known">Known</option></select>'
+    +'<select class="wos-filter-sel" id="audit-kind" style="width:120px;" onchange="updateAuditCountPreview()"><option value="">All kinds</option><option value="PROD">PROD</option><option value="BIZ">BIZ</option><option value="CREATIVE">CREATIVE</option><option value="DESIGN">DESIGN</option><option value="TECH">TECH</option><option value="EVENTS">EVENTS</option><option value="AV">AV</option><option value="FILM">FILM</option><option value="STUDIO">STUDIO</option><option value="OTHER">OTHER</option></select>'
+    +'<select class="wos-filter-sel" id="audit-limit" style="width:120px;"><option value="20">20 at a time</option><option value="40">40 at a time</option><option value="60">60 at a time</option></select>'
     +'</div>'
-    +'<div style="font-size:11px;color:#888780;margin-bottom:12px;" id="audit-count-preview"></div>'
-    +'<button class="audit-run-btn" onclick="startCareerAudit()" id="audit-run-btn">&#x1F50D; Start Audit</button>'
-    +'<div style="font-size:10px;color:#b4b2a9;margin-top:8px;">Each lookup uses a web search — ~3-5 sec per person. Best for contacts with a company name on file.</div>'
+    +'<div style="font-size:11px;color:#888780;margin-bottom:10px;" id="audit-count-preview"></div>'
+    +'<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">'
+    +'<button class="audit-run-btn" onclick="startCareerAudit(false)">&#x1F50D; Start Audit</button>'
+    +'<span id="audit-offset-label" style="font-size:11px;color:#888780;"></span>'
+    +'</div>'
+    +'<div style="font-size:10px;color:#b4b2a9;margin-top:8px;">~3-5 sec per person. Results accumulate across batches.</div>'
     +'</div>'
     +'<div id="audit-progress" style="display:none;padding:12px 18px;">'
     +'<div class="audit-progress"><div class="audit-progress-label" id="audit-prog-label">Starting...</div><div class="audit-progress-bar-wrap"><div class="audit-progress-bar" id="audit-prog-bar" style="width:0%"></div></div><div class="audit-progress-sub" id="audit-prog-sub"></div></div>'
@@ -5959,18 +6003,20 @@ function renderCareerAuditView(el){
 }
 
 function updateAuditCountPreview(){
-  var rel   = document.getElementById('audit-rel') ? document.getElementById('audit-rel').value : '';
-  var kind  = document.getElementById('audit-kind') ? document.getElementById('audit-kind').value : '';
-  var limit = parseInt(document.getElementById('audit-limit') ? document.getElementById('audit-limit').value : '20');
-  var pool  = getAuditPool(rel, kind, limit);
-  var el    = document.getElementById('audit-count-preview');
-  if(el) el.textContent = pool.length + ' contacts selected';
+  var rel    = document.getElementById('audit-rel')    ? document.getElementById('audit-rel').value    : '';
+  var kind   = document.getElementById('audit-kind')   ? document.getElementById('audit-kind').value   : '';
+  var talent = document.getElementById('audit-talent') ? document.getElementById('audit-talent').value : '1';
+  var pool   = getAuditPool(rel, kind, talent, 9999);
+  var audited = _auditState.results.length;
+  var el = document.getElementById('audit-count-preview');
+  if(el) el.textContent = pool.length + ' contacts match' + (audited > 0 ? ' · ' + audited + ' checked so far' : '');
 }
 
-function getAuditPool(rel, kind, limit){
+function getAuditPool(rel, kind, talentOnly, limit){
   var relOrder = {'Inner circle':0,'Contact':1,'Known':2,'Cold':3};
   var pool = wosPeople.filter(function(p){
     if(!p.company && !p.role) return false;
+    if(talentOnly && !p.talent) return false;
     if(rel && p.relationship !== rel) return false;
     if(kind && p.kind !== kind) return false;
     return true;
@@ -5983,32 +6029,36 @@ function getAuditPool(rel, kind, limit){
   return pool.slice(0, limit);
 }
 
-async function startCareerAudit(){
+async function startCareerAudit(nextBatch){
   await loadWOSPeople(true);
-  var rel   = document.getElementById('audit-rel') ? document.getElementById('audit-rel').value : '';
-  var kind  = document.getElementById('audit-kind') ? document.getElementById('audit-kind').value : '';
-  var limit = parseInt(document.getElementById('audit-limit') ? document.getElementById('audit-limit').value : '20');
-  var pool  = getAuditPool(rel, kind, limit);
-  if(!pool.length){ alert('No contacts match these filters.'); return; }
-  _auditState = { results:[], running:true, processed:0, total:pool.length, currentName:'' };
+  var rel    = document.getElementById('audit-rel')    ? document.getElementById('audit-rel').value    : '';
+  var kind   = document.getElementById('audit-kind')   ? document.getElementById('audit-kind').value   : '';
+  var talent = document.getElementById('audit-talent') ? document.getElementById('audit-talent').value : '1';
+  var limit  = parseInt(document.getElementById('audit-limit') ? document.getElementById('audit-limit').value : '20');
+  var fullPool = getAuditPool(rel, kind, talent, 9999);
+  var auditedIds = _auditState.results.map(function(r){ return r.person.id; });
+  var remaining = fullPool.filter(function(p){ return !auditedIds.includes(p.id); });
+  var pool = remaining.slice(0, limit);
+  if(!pool.length){ alert('No more contacts to audit in this group!'); return; }
+  if(!nextBatch){ _auditState.results=[]; _auditState.offset=0; }
+  _auditState.running = true;
+  _auditState.total = pool.length;
   document.getElementById('audit-setup').style.display = 'none';
   document.getElementById('audit-progress').style.display = 'block';
-  document.getElementById('audit-results').innerHTML = '';
+  if(!nextBatch) document.getElementById('audit-results').innerHTML = '';
   for(var i=0; i<pool.length; i++){
     if(!_auditState.running) break;
     var person = pool[i];
-    var name = cleanName(person.name)||'';
+    var pname = cleanName(person.name)||'';
     _auditState.processed = i+1;
     var pct = Math.round(((i+1)/pool.length)*100);
-    var barEl = document.getElementById('audit-prog-bar');
-    var labelEl = document.getElementById('audit-prog-label');
-    var subEl = document.getElementById('audit-prog-sub');
-    if(barEl) barEl.style.width = pct+'%';
-    if(labelEl) labelEl.textContent = 'Looking up '+name+'... ('+(i+1)+'/'+pool.length+')';
-    if(subEl) subEl.textContent = _auditState.results.filter(function(r){return r.status==='changed';}).length+' potential updates found so far';
+    var barEl=document.getElementById('audit-prog-bar'),labelEl=document.getElementById('audit-prog-label'),subEl=document.getElementById('audit-prog-sub');
+    if(barEl) barEl.style.width=pct+'%';
+    if(labelEl) labelEl.textContent='Looking up '+pname+'... ('+(i+1)+'/'+pool.length+')';
+    if(subEl) subEl.textContent=_auditState.results.filter(function(r){return r.status==='changed';}).length+' potential updates found so far';
     try {
       var found = await auditOnePerson(person);
-      _auditState.results.push({ person:person, found:found, status: found.changed ? 'changed' : 'same' });
+      _auditState.results.push({ person:person, found:found, status:found.changed?'changed':'same' });
     } catch(e) {
       _auditState.results.push({ person:person, found:null, status:'error' });
     }
@@ -6016,11 +6066,26 @@ async function startCareerAudit(){
     await new Promise(function(r){ setTimeout(r, 800); });
   }
   _auditState.running = false;
+  _auditState.offset = _auditState.results.length;
   document.getElementById('audit-progress').style.display = 'none';
+  document.getElementById('audit-setup').style.display = 'block';
+  var auditedIds2 = _auditState.results.map(function(r){ return r.person.id; });
+  var remaining2 = fullPool.filter(function(p){ return !auditedIds2.includes(p.id); });
   var changedCount = _auditState.results.filter(function(r){return r.status==='changed';}).length;
-  if(changedCount===0){
-    document.getElementById('audit-results').innerHTML = '<div style="text-align:center;padding:40px 20px;color:#1D9E75;font-size:14px;font-weight:500;">\u2713 All done \u2014 no role changes found in this batch.</div>';
+  var doneArea = document.getElementById('audit-done-area');
+  if(!doneArea){
+    doneArea = document.createElement('div');
+    doneArea.id = 'audit-done-area';
+    doneArea.style.cssText = 'padding:12px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-top:0.5px solid #f0f0ee;margin-top:8px;';
+    document.getElementById('audit-results').appendChild(doneArea);
   }
+  var summary = changedCount > 0 ? changedCount+' update'+(changedCount>1?'s':'')+' found' : 'No changes in this batch';
+  var nextHtml = remaining2.length > 0
+    ? '<button class="audit-run-btn" style="padding:7px 16px;font-size:12px;" onclick="startCareerAudit(true)">Next '+Math.min(limit,remaining2.length)+' →</button>'
+      + '<span style="font-size:11px;color:#888780;">'+remaining2.length+' left to check</span>'
+    : '<span style="font-size:12px;color:#1D9E75;font-weight:500;">✓ All '+fullPool.length+' contacts in this group checked!</span>';
+  doneArea.innerHTML = '<span style="font-size:12px;color:#5f5e5a;">'+summary+' · </span>'+nextHtml;
+  updateAuditCountPreview();
 }
 
 function stopCareerAudit(){
@@ -6033,7 +6098,7 @@ async function auditOnePerson(person){
   var name = cleanName(person.name)||'';
   var company = person.company||'';
   var role = person.role||'';
-  var systemPrompt = 'You are a career researcher. Use web search to find the current job title and company for this person. Return ONLY a JSON object: {"currentRole":"job title or null","currentCompany":"company or null","confidence":"high|medium|low","source":"brief source","changed":true,"note":"brief note"}. Set changed=true only if clearly different. Person: Name="'+name+'", Known role="'+role+'", Known company="'+company+'". Be conservative.';
+  var systemPrompt = 'You are a career researcher. Use web search to find the current role and employer for this person. Return ONLY valid JSON, no markdown: {"currentRole":"their current title or null if not found","currentCompany":"their current employer or null if not found","confidence":"high|medium|low","changed":true or false,"note":"one line summary of what you found"}. Set changed=true if their role or company appears different from what is on file. Do not be overly conservative — if you find a clear LinkedIn or news result showing a different employer or title, flag it as changed. Person on file: Name="'+name+'", Role="'+role+'", Company="'+company+'".';
   var res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
@@ -6140,6 +6205,12 @@ function renderDashSearchResults(q){
   if(!el) return;
   var query = (q||'').toLowerCase().trim();
   if(!query){ el.innerHTML=''; return; }
+  // If people not loaded yet, load then re-run
+  if(!wosPeopleLoaded){
+    el.innerHTML='<div style="font-size:12px;color:#b4b2a9;padding:8px 4px;">Loading...</div>';
+    loadWOSPeople().then(function(){ renderDashSearchResults(q); });
+    return;
+  }
   var peopleHits = wosPeople.filter(function(p){
     return ((p.name||'')+' '+(p.company||'')+' '+(p.role||'')).toLowerCase().includes(query);
   }).slice(0,5);
@@ -6156,8 +6227,8 @@ function renderDashSearchResults(q){
     var sub = [(p.freelance_status==='Currently freelance'?'Freelance':p.company),p.role].filter(Boolean).join(' \u00b7 ');
     var kindBadge = p.kind ? '<span style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:4px;background:#F1EFE8;color:#444441;">'+p.kind+'</span>' : '';
     var talentBadge = p.talent ? '<span style="font-size:9px;font-weight:600;padding:1px 5px;border-radius:4px;background:#E1F5EE;color:#0F6E56;">Talent</span>' : '';
-    var pid = JSON.stringify(p.id);
-    return '<div onclick="dashSearchOpenPerson('+pid+')" style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;" onmouseover="this.style.background=\'#f5f5f3\'" onmouseout="this.style.background=\'transparent\'">'
+    var pid = p.id.toString().replace(/'/g, "\\'");
+    return '<div onclick="dashSearchOpenPerson(\''+pid+'\')" style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;" onmouseover="this.style.background=\'#f5f5f3\'" onmouseout="this.style.background=\'transparent\'">'
       +'<div style="width:26px;height:26px;border-radius:50%;background:'+colors[0]+';color:'+colors[1]+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:500;flex-shrink:0;">'+wosInitials(name)+'</div>'
       +'<div style="flex:1;min-width:0;"><div style="font-size:13px;font-weight:500;color:#2c2c2a;">'+name+'</div><div style="font-size:11px;color:#888780;">'+sub+'</div></div>'
       +'<div style="display:flex;gap:3px;">'+talentBadge+kindBadge+'</div></div>';
@@ -6165,8 +6236,8 @@ function renderDashSearchResults(q){
   var vendorRows = vendorHits.map(function(v){
     var isStudio = v.type==='studio';
     var vid = v.id;
-    var vtype = JSON.stringify(v.type);
-    return '<div onclick="dashSearchOpenVendor('+vid+','+vtype+')" style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;" onmouseover="this.style.background=\'#f5f5f3\'" onmouseout="this.style.background=\'transparent\'">'
+    var vtype = (v.type||'').replace(/'/g, "\\'");
+    return '<div onclick="dashSearchOpenVendor('+vid+',\''+vtype+'\')" style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;cursor:pointer;" onmouseover="this.style.background=\'#f5f5f3\'" onmouseout="this.style.background=\'transparent\'">'
       +'<div style="width:26px;height:26px;border-radius:50%;background:'+(isStudio?'#EEEDFE':'#FAEEDA')+';color:'+(isStudio?'#534AB7':'#854F0B')+';display:flex;align-items:center;justify-content:center;font-size:13px;">'+(isStudio?'\ud83c\udfa8':'\ud83c\udfe2')+'</div>'
       +'<div style="flex:1;"><div style="font-size:13px;font-weight:500;color:#2c2c2a;">'+(v.name||'\u2014')+'</div><div style="font-size:11px;color:#888780;">'+(isStudio?'Studio':'Vendor')+(v.kind?' \u00b7 '+v.kind:'')+(v.location?' \u00b7 '+v.location:'')+'</div></div></div>';
   }).join('');
@@ -6180,7 +6251,7 @@ async function dashSearchOpenPerson(id){
   var p = wosPeople.find(function(x){return x.id===id;});
   var isTalent = p && p.talent;
   setWorkView(isTalent ? 'wos-talent' : 'wos-network');
-  setTimeout(function(){openWOSPersonDetail(id);}, 150);
+  setTimeout(function(){openWOSPersonDetail(id);}, 300);
 }
 
 async function dashSearchOpenVendor(id, type){
