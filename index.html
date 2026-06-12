@@ -1492,9 +1492,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <span class="mobile-tab-icon" style="font-size:28px;color:#7F77DD;">+</span>
       <span class="mobile-tab-label" style="color:#7F77DD;">Add</span>
     </button>
-    <button class="mobile-tab" id="mtab-progress" onclick="mobileTab('progress')">
-      <span class="mobile-tab-icon">⚡</span>
-      <span class="mobile-tab-label">Progress</span>
+    <button class="mobile-tab" id="mtab-health" onclick="mobileTab('health')">
+      <span class="mobile-tab-icon">💊</span>
+      <span class="mobile-tab-label">Health</span>
     </button>
     <button class="mobile-tab" id="mtab-more" onclick="mobileTab('more')">
       <span class="mobile-tab-icon">≡</span>
@@ -4411,6 +4411,8 @@ function mobileTab(tab) {
     // Re-activate the tasks tab visually since add is transient
     document.querySelectorAll('.mobile-tab').forEach(t => t.classList.remove('active'));
     document.getElementById('mtab-tasks').classList.add('active');
+  } else if (tab === 'health') {
+    setView('health');
   } else if (tab === 'progress') {
     setView('progress');
   } else if (tab === 'more') {
@@ -4435,6 +4437,7 @@ function toggleMoreDrawer() {
           <button class="more-drawer-item" onclick="mobileNav('claude')">✦<span>Claude</span></button>
           <button class="more-drawer-item" onclick="mobileNav('done')">✅<span>Done</span></button>
           <button class="more-drawer-item" onclick="mobileNav('goals')">🎯<span>Goals</span></button>
+          <button class="more-drawer-item" onclick="mobileNav('progress')">⚡<span>Progress</span></button>
           <button class="more-drawer-item" onclick="mobileNav('thoughts')">💭<span>Thoughts</span></button>
           <button class="more-drawer-item" onclick="mobileNav('constitution')">📜<span>Identity</span></button>
           <button class="more-drawer-item" onclick="mobileNav('insights')">✨<span>Insights</span></button>
@@ -4491,9 +4494,11 @@ setView = function(v) {
     } else if (v === 'habits') {
       const el = document.getElementById('mtab-habits');
       if (el) el.classList.add('active');
-    } else if (v === 'progress') {
-      const el = document.getElementById('mtab-progress');
+    } else if (v === 'health') {
+      const el = document.getElementById('mtab-health');
       if (el) el.classList.add('active');
+    } else if (v === 'progress') {
+      // progress is now in More drawer — no tab to highlight
     }
   }
 };
