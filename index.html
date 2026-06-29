@@ -6539,12 +6539,14 @@ function renderBulkReview(){
       +'<option value="Cold">Cold</option>'
       +'</select></div>'
       +'</div>'
-      +'<div style="display:flex;gap:10px;margin-top:6px;align-items:center;">'
+      +'<div style="display:flex;gap:10px;margin-top:6px;align-items:center;flex-wrap:wrap;">'
       +'<label style="display:flex;align-items:center;gap:4px;font-size:11px;color:#5f5e5a;cursor:pointer;">'
       +'<input type="checkbox" style="accent-color:#1D9E75;cursor:pointer;" '+(e.talent?'checked':'')+' onchange="_bulkEntries['+i+'].talent=this.checked"> Talent</label>'
+      +'<label style="display:flex;align-items:center;gap:4px;font-size:11px;color:#534AB7;cursor:pointer;">'
+      +'<input type="checkbox" id="bulk-vendor-'+i+'" style="accent-color:#534AB7;cursor:pointer;" '+(e.asVendor?'checked':'')+' onchange="_bulkEntries['+i+'].asVendor=this.checked;bulkToggleVendorCard('+i+')"> Add as Vendor</label>'
       +'<label style="display:flex;align-items:center;gap:4px;font-size:11px;color:#5f5e5a;cursor:pointer;">'
-      +'<input type="checkbox" style="accent-color:#534AB7;cursor:pointer;" onchange="_bulkEntries['+i+'].skip=this.checked"> Skip this one</label>'
-      +(e.nameInferred?'<span style="font-size:10px;color:#b4b2a9;">name guessed from email</span>':'')
+      +'<input type="checkbox" style="accent-color:#E24B4A;cursor:pointer;" onchange="_bulkEntries['+i+'].skip=this.checked"> Skip</label>'
+      +(e.nameInferred?'<span style="font-size:10px;color:#b4b2a9;margin-left:auto;">name guessed from email</span>':'')
       +'</div>'
       +'</div>';
   }).join('');
@@ -6558,6 +6560,20 @@ function htmlEsc(str){
   return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+function bulkToggleVendorCard(i){
+  // When "Add as Vendor" is checked, visually highlight the card
+  var card = document.querySelector('#bulk-review-table > div:nth-child('+(i+1)+')');
+  if(!card) return;
+  var e = _bulkEntries[i];
+  if(e.asVendor){
+    card.style.borderColor = '#AFA9EC';
+    card.style.background  = '#f6f5ff';
+  } else {
+    card.style.borderColor = '#e8e8e4';
+    card.style.background  = '#fff';
+  }
+}
+
 async function bulkSaveAll(){
   var toSave = _bulkEntries.filter(function(e){ return !e.skip && e.email; });
   if(!toSave.length){ alert('Nothing to save.'); return; }
@@ -6566,58 +6582,93 @@ async function bulkSaveAll(){
   btn.disabled = true;
   btn.textContent = 'Saving...';
 
-  var saved = 0, skipped = 0, errors = 0;
+  var savedPeople = 0, savedVendors = 0, skipped = 0, errors = 0;
 
   for(var i=0; i<toSave.length; i++){
     var e = toSave[i];
-    var dup = wosPeople.find(function(p){ return (p.email||'').toLowerCase() === e.email.toLowerCase(); });
-    if(dup){ skipped++; continue; }
 
-    var name = (e.firstName + ' ' + e.lastName).trim() || e.email.split('@')[0];
-    var newPerson = {
-      name:         name,
-      email:        e.email,
-      company:      e.company      || null,
-      role:         e.role         || null,
-      kind:         e.kind         || null,
-      location:     e.location     || null,
-      known_from:   e.knownFrom    || null,
-      relationship: e.relationship || 'Contact',
-      talent:       !!e.talent,
-      on_radar:     false,
-      radar_score:  0,
-      created_at:   new Date().toISOString(),
-    };
+    if(e.asVendor){
+      // ── Save as Vendor ──
+      var vendorName = e.company || ((e.firstName + ' ' + e.lastName).trim()) || e.email.split('@')[0];
+      var newVendor = {
+        name:          vendorName,
+        type:          'vendor',
+        kind:          e.kind    || null,
+        location:      e.location || null,
+        contact_name:  (e.firstName + ' ' + e.lastName).trim() || null,
+        contact_email: e.email,
+        notes:         e.knownFrom ? 'Known from: ' + e.knownFrom : null,
+        trust:         'Unknown',
+        areas:         [],
+        updated_at:    new Date().toISOString(),
+      };
+      try {
+        var vres = await fetch(SUPABASE_URL + '/rest/v1/work_os_vendors', {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify(newVendor)
+        });
+        if(vres.ok){ savedVendors++; }
+        else { var vt = await vres.text(); console.error('Vendor save error', vres.status, vt); errors++; }
+      } catch(err) { console.error('Vendor save error:', err); errors++; }
 
-    try {
-      var res = await fetch(SUPABASE_URL + '/rest/v1/work_os_people', {
-        method: 'POST',
-        headers: {
-          'apikey': SUPABASE_KEY,
-          'Authorization': 'Bearer ' + SUPABASE_KEY,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=representation'
-        },
-        body: JSON.stringify(newPerson)
-      });
-      if(res.ok){ saved++; }
-      else { var t = await res.text(); console.error('Bulk save error', res.status, t); errors++; }
-    } catch(err) {
-      console.error('Bulk save error:', err); errors++;
+    } else {
+      // ── Save as Person ──
+      var dup = wosPeople.find(function(p){ return (p.email||'').toLowerCase() === e.email.toLowerCase(); });
+      if(dup){ skipped++; continue; }
+
+      var name = (e.firstName + ' ' + e.lastName).trim() || e.email.split('@')[0];
+      var newPerson = {
+        name:         name,
+        email:        e.email,
+        company:      e.company      || null,
+        role:         e.role         || null,
+        kind:         e.kind         || null,
+        location:     e.location     || null,
+        known_from:   e.knownFrom    || null,
+        relationship: e.relationship || 'Contact',
+        talent:       !!e.talent,
+        on_radar:     false,
+        radar_score:  0,
+        created_at:   new Date().toISOString(),
+      };
+      try {
+        var pres = await fetch(SUPABASE_URL + '/rest/v1/work_os_people', {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_KEY,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+          body: JSON.stringify(newPerson)
+        });
+        if(pres.ok){ savedPeople++; }
+        else { var pt = await pres.text(); console.error('Bulk save error', pres.status, pt); errors++; }
+      } catch(err) { console.error('Bulk save error:', err); errors++; }
     }
-    document.getElementById('bulk-save-status').textContent = 'Saved ' + saved + ' of ' + toSave.length + '...';
+
+    var doneCount = savedPeople + savedVendors;
+    document.getElementById('bulk-save-status').textContent = 'Saved ' + doneCount + ' of ' + toSave.length + '...';
   }
 
-  // Full reload — same as saveNewContact
   await reloadAndRender();
 
   btn.disabled = false;
-  var msg = saved + ' contact' + (saved!==1?'s':'') + ' added';
-  if(skipped) msg += ' \u00b7 ' + skipped + ' skipped (already in DB)';
-  if(errors)  msg += ' \u00b7 ' + errors + ' failed';
-  document.getElementById('bulk-save-status').textContent = msg;
+  var parts = [];
+  if(savedPeople) parts.push(savedPeople + ' contact' + (savedPeople!==1?'s':'') + ' added');
+  if(savedVendors) parts.push(savedVendors + ' vendor' + (savedVendors!==1?'s':'') + ' added');
+  if(skipped) parts.push(skipped + ' skipped (already in DB)');
+  if(errors)  parts.push(errors + ' failed');
+  document.getElementById('bulk-save-status').textContent = parts.join(' \u00b7 ') || 'Nothing saved.';
   btn.textContent = '\u2713 Done';
-  showXPFlash('\u26A1 ' + saved + ' contacts added!');
+  var total = savedPeople + savedVendors;
+  if(total) showXPFlash('\u26A1 ' + total + ' entries added!');
   setTimeout(closeBulkImport, 2000);
 }
 
